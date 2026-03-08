@@ -1,0 +1,184 @@
+{
+  "agent": {
+    "name": "灌汤",
+    "type": "ProjectManager",
+    "version": "2.0.0-lite",
+    "description": "轻量级产品经理兼项目经理 Agent，适用于个人博客项目"
+  },
+  "roles": {
+    "primary": "产品经理兼项目经理",
+    "secondary": ["需求分析师", "项目协调员", "进度监督官"]
+  },
+  "team_members": {
+    "酱肉": {
+      "role": "后端工程师/架构师",
+      "contact_method": "file_system_rpc",
+      "capabilities": ["技术架构", "后端开发", "系统设计"],
+      "resource_limit": {
+        "max_memory": "128MB",
+        "max_cpu": "25%"
+      }
+    },
+    "豆沙": {
+      "role": "UI/UX/前端工程师",
+      "contact_method": "file_system_rpc",
+      "capabilities": ["界面设计", "前端开发", "用户体验"],
+      "resource_limit": {
+        "max_memory": "128MB",
+        "max_cpu": "25%"
+      }
+    },
+    "酸菜": {
+      "role": "运维/测试工程师",
+      "contact_method": "file_system_rpc",
+      "capabilities": ["系统运维", "测试执行", "质量保证", "日志管理"],
+      "resource_limit": {
+        "max_memory": "64MB",
+        "max_cpu": "15%"
+      }
+    }
+  },
+  "working_directory": {
+    "code": "F:\\openclaw\\code",
+    "workspace": "F:\\openclaw\\workspace",
+    "permissions": {
+      "writable": [
+        "F:\\openclaw\\code\\*",
+        "F:\\openclaw\\workspace\\*"
+      ],
+      "readable": [
+        "F:\\openclaw\\code\\**",
+        "F:\\openclaw\\workspace\\**"
+      ],
+      "forbidden": [
+        "C:\\*",
+        "C:\\Windows\\*",
+        "C:\\Program Files\\*"
+      ]
+    }
+  },
+  "communication": {
+    "protocol": "File System RPC (Lightweight)",
+    "transport": "Local File Sharing",
+    "interfaces": [
+      "allocateTask",
+      "queryProgress",
+      "reportIssue",
+      "submitDeliverable"
+    ],
+    "timeout_seconds": {
+      "task_allocation": 5,
+      "progress_query": 3,
+      "issue_report": 2,
+      "deliverable_submit": 5
+    },
+    "retry_policy": {
+      "max_retries": 3,
+      "retry_intervals": [5, 10, 30]
+    },
+    "inbox_directory": "F:\\openclaw\\workspace\\communication\\inbox\\",
+    "outbox_directory": "F:\\openclaw\\workspace\\communication\\outbox\\"
+  },
+  "workflow": {
+    "stages": [
+      "requirement_analysis",
+      "project_design",
+      "work_breakdown",
+      "task_distribution",
+      "progress_tracking",
+      "delivery_verification"
+    ],
+    "mode": "lightweight"
+  },
+  "logging": {
+    "enabled": true,
+    "log_directory": "F:\\openclaw\\workspace\\logs\\",
+    "log_type": "unified_markdown",
+    "retention_days": 7,
+    "weekly_summary": true,
+    "monthly_archive": true,
+    "max_size_mb": 1,
+    "rotation": "daily",
+    "blog_integration": {
+      "enabled": false,
+      "auto_submit": false,
+      "submit_time": "18:00",
+      "status": "draft",
+      "api_url": "",
+      "api_token": ""
+    }
+  },
+  "progress_tracking": {
+    "enabled": true,
+    "data_directory": "F:\\openclaw\\workspace\\projects\\",
+    "collection_method": "active_report",
+    "report_frequency": {
+      "daily": "17:30",
+      "weekly": "Friday 17:00"
+    },
+    "metrics": {
+      "completion_rate": true,
+      "schedule_variance": true,
+      "quality_metrics": false
+    },
+    "simplified": true
+  },
+  "server_optimization": {
+    "enabled": true,
+    "server_type": "low_resource",
+    "limits": {
+      "cpu_cores": 2,
+      "memory_gb": 2,
+      "storage_gb": 40
+    },
+    "recommendations": {
+      "use_sqlite": true,
+      "lazy_loading": true,
+      "caching": true,
+      "async_operations": true
+    },
+    "monitoring": {
+      "cpu_threshold": 80,
+      "memory_threshold": 90,
+      "disk_threshold": 90,
+      "alert_email": ""
+    }
+  },
+  "commands": {
+    "enabled": true,
+    "command_directory": "F:\\openclaw\\code\\commands\\",
+    "security_validation": true,
+    "simplified": true
+  },
+  "file_naming": {
+    "project_id_format": "BLOG_YYYYMMDD_###",
+    "task_id_format": "TASK_YYYYMMDD_###",
+    "document_format": "{document_type}_{YYYYMMDD}.md",
+    "log_format": "{agent_name}_daily_{YYYYMMDD}.md",
+    "timestamp_format": "YYYY-MM-DD HH:mm:ss"
+  },
+  "integration": {
+    "version_control": {
+      "enabled": true,
+      "type": "git",
+      "repository": "https://github.com/baobaobaobaozijun/openclawPlayground"
+    },
+    "backup": {
+      "enabled": true,
+      "frequency": "weekly",
+      "location": "F:\\openclaw\\workspace\\backups\\",
+      "retention_count": 4
+    },
+    "blog": {
+      "enabled": false,
+      "phase": 1,
+      "phase2_trigger": "article_module_completed"
+    }
+  },
+  "metadata": {
+    "created_date": "2026-03-07",
+    "last_updated": "2026-03-07",
+    "configuration_version": "2.0.0-lite",
+    "optimized_for": "personal_blog_low_resource"
+  }
+}
