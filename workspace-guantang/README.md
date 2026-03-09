@@ -1,127 +1,131 @@
-# OpenClaw Agent Team - 灌汤配置中心
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-📋 **这是灌汤 (PM) 的配置文档和工作空间**
+# OpenClaw Agent Team - 鐏屾堡閰嶇疆涓績
 
----
-
-## 🏠 关于本项目
-
-**workspace-guantang** 是 OpenClaw Agent 团队中**灌汤 (PM)** 的独立工作空间，包含：
-- ✅ 灌汤的核心配置文件
-- ✅ 其他 Agent 的配置文档（agent-configs/）
-- ✅ 工作日志和经验总结（logs/）
+馃搵 **杩欐槸鐏屾堡 (PM) 鐨勯厤缃枃妗ｅ拰宸ヤ綔绌洪棿**
 
 ---
 
-## 📁 目录结构
+## 馃彔 鍏充簬鏈」鐩?
+
+**workspace-guantang** 鏄?OpenClaw Agent 鍥㈤槦涓?*鐏屾堡 (PM)** 鐨勭嫭绔嬪伐浣滅┖闂达紝鍖呭惈锛?
+- 鉁?鐏屾堡鐨勬牳蹇冮厤缃枃浠?
+- 鉁?鍏朵粬 Agent 鐨勯厤缃枃妗ｏ紙agent-configs/锛?
+- 鉁?宸ヤ綔鏃ュ織鍜岀粡楠屾€荤粨锛坙ogs/锛?
+
+---
+
+## 馃搧 鐩綍缁撴瀯
 
 ```
 workspace-guantang/
-├── IDENTITY.md              # 灌汤身份认知
-├── ROLE.md                  # 灌汤职责规范
-├── SOUL.md                  # 灌汤行为准则
-├── README.md                # 本文件
-├── AGENTS.md                # 团队协作说明
-├── BOOTSTRAP.md             # 启动指南
-├── HEARTBEAT.md             # 心跳机制
-├── TOOLS.md                 # 工具使用
-└── USER.md                  # 用户信息
-│
-├── agent-configs/           # 其他 Agent 配置
-│   ├── jiangrou/           # 酱肉 (后端) 配置
-│   │   ├── IDENTITY.md
-│   │   ├── ROLE.md
-│   │   ├── SOUL.md
-│   │   └── knowledge-base.md  # 后端开发知识库
-│   ├── dousha/             # 豆沙 (前端) 配置
-│   │   ├── IDENTITY.md
-│   │   ├── ROLE.md
-│   │   ├── SOUL.md
-│   │   └── knowledge-base.md  # 前端设计知识库
-│   └── suancai/            # 酸菜 (运维) 配置
-│       ├── IDENTITY.md
-│       ├── ROLE.md
-│       ├── SOUL.md
-│       └── knowledge-base.md  # 运维测试知识库
-│
-└── logs/                    # 工作日志与总结
-    ├── github-upload-complete.md
-    ├── repository-correction-complete.md
-    └── ...
+鈹溾攢鈹€ IDENTITY.md              # 鐏屾堡韬唤璁ょ煡
+鈹溾攢鈹€ ROLE.md                  # 鐏屾堡鑱岃矗瑙勮寖
+鈹溾攢鈹€ SOUL.md                  # 鐏屾堡琛屼负鍑嗗垯
+鈹溾攢鈹€ README.md                # 鏈枃浠?
+鈹溾攢鈹€ AGENTS.md                # 鍥㈤槦鍗忎綔璇存槑
+鈹溾攢鈹€ BOOTSTRAP.md             # 鍚姩鎸囧崡
+鈹溾攢鈹€ HEARTBEAT.md             # 蹇冭烦鏈哄埗
+鈹溾攢鈹€ TOOLS.md                 # 宸ュ叿浣跨敤
+鈹斺攢鈹€ USER.md                  # 鐢ㄦ埛淇℃伅
+鈹?
+鈹溾攢鈹€ agent-configs/           # 鍏朵粬 Agent 閰嶇疆
+鈹?  鈹溾攢鈹€ jiangrou/           # 閰辫倝 (鍚庣) 閰嶇疆
+鈹?  鈹?  鈹溾攢鈹€ IDENTITY.md
+鈹?  鈹?  鈹溾攢鈹€ ROLE.md
+鈹?  鈹?  鈹溾攢鈹€ SOUL.md
+鈹?  鈹?  鈹斺攢鈹€ knowledge-base.md  # 鍚庣寮€鍙戠煡璇嗗簱
+鈹?  鈹溾攢鈹€ dousha/             # 璞嗘矙 (鍓嶇) 閰嶇疆
+鈹?  鈹?  鈹溾攢鈹€ IDENTITY.md
+鈹?  鈹?  鈹溾攢鈹€ ROLE.md
+鈹?  鈹?  鈹溾攢鈹€ SOUL.md
+鈹?  鈹?  鈹斺攢鈹€ knowledge-base.md  # 鍓嶇璁捐鐭ヨ瘑搴?
+鈹?  鈹斺攢鈹€ suancai/            # 閰歌彍 (杩愮淮) 閰嶇疆
+鈹?      鈹溾攢鈹€ IDENTITY.md
+鈹?      鈹溾攢鈹€ ROLE.md
+鈹?      鈹溾攢鈹€ SOUL.md
+鈹?      鈹斺攢鈹€ knowledge-base.md  # 杩愮淮娴嬭瘯鐭ヨ瘑搴?
+鈹?
+鈹斺攢鈹€ logs/                    # 宸ヤ綔鏃ュ織涓庢€荤粨
+    鈹溾攢鈹€ github-upload-complete.md
+    鈹溾攢鈹€ repository-correction-complete.md
+    鈹斺攢鈹€ ...
 ```
 
 ---
 
-## 👥 Agent 团队成员
+## 馃懃 Agent 鍥㈤槦鎴愬憳
 
-### 🍲 灌汤 (PM/项目经理)
-**核心文件:** [IDENTITY.md](./IDENTITY.md), [ROLE.md](./ROLE.md), [SOUL.md](./SOUL.md)
+### 馃嵅 鐏屾堡 (PM/椤圭洰缁忕悊)
+**鏍稿績鏂囦欢:** [IDENTITY.md](./IDENTITY.md), [ROLE.md](./ROLE.md), [SOUL.md](./SOUL.md)
 
-**主要职责:**
-- 产品规划与需求分析
-- 项目进度管理
-- 团队协调与决策
-- 质量把控与验收
+**涓昏鑱岃矗:**
+- 浜у搧瑙勫垝涓庨渶姹傚垎鏋?
+- 椤圭洰杩涘害绠＄悊
+- 鍥㈤槦鍗忚皟涓庡喅绛?
+- 璐ㄩ噺鎶婃帶涓庨獙鏀?
 
-### 🥩 酱肉 (后端工程师)
-**配置文件:** [agent-configs/jiangrou/](./agent-configs/jiangrou/)
-**知识库:** [knowledge-base.md](./agent-configs/jiangrou/knowledge-base.md)
+### 馃ォ 閰辫倝 (鍚庣宸ョ▼甯?
+**閰嶇疆鏂囦欢:** [agent-configs/jiangrou/](./agent-configs/jiangrou/)
+**鐭ヨ瘑搴?** [knowledge-base.md](./agent-configs/jiangrou/knowledge-base.md)
 
-**主要职责:**
-- 后端 API 设计与实现
-- 数据库设计与优化
-- 系统架构设计
+**涓昏鑱岃矗:**
+- 鍚庣 API 璁捐涓庡疄鐜?
+- 鏁版嵁搴撹璁′笌浼樺寲
+- 绯荤粺鏋舵瀯璁捐
 
-### 🍡 豆沙 (前端工程师/UIUX设计师)
-**配置文件:** [agent-configs/dousha/](./agent-configs/dousha/)
-**知识库:** [knowledge-base.md](./agent-configs/dousha/knowledge-base.md)
+### 馃崱 璞嗘矙 (鍓嶇宸ョ▼甯?UIUX璁捐甯?
+**閰嶇疆鏂囦欢:** [agent-configs/dousha/](./agent-configs/dousha/)
+**鐭ヨ瘑搴?** [knowledge-base.md](./agent-configs/dousha/knowledge-base.md)
 
-**主要职责:**
-- UI/UX设计与实现
-- 前端页面开发
-- 交互效果优化
+**涓昏鑱岃矗:**
+- UI/UX璁捐涓庡疄鐜?
+- 鍓嶇椤甸潰寮€鍙?
+- 浜や簰鏁堟灉浼樺寲
 
-### 🥬 酸菜 (运维/测试工程师)
-**配置文件:** [agent-configs/suancai/](./agent-configs/suancai/)
-**知识库:** [knowledge-base.md](./agent-configs/suancai/knowledge-base.md)
+### 馃ガ 閰歌彍 (杩愮淮/娴嬭瘯宸ョ▼甯?
+**閰嶇疆鏂囦欢:** [agent-configs/suancai/](./agent-configs/suancai/)
+**鐭ヨ瘑搴?** [knowledge-base.md](./agent-configs/suancai/knowledge-base.md)
 
-**主要职责:**
-- 系统部署与运维
-- 功能测试与性能测试
-- 质量管理与监控
+**涓昏鑱岃矗:**
+- 绯荤粺閮ㄧ讲涓庤繍缁?
+- 鍔熻兘娴嬭瘯涓庢€ц兘娴嬭瘯
+- 璐ㄩ噺绠＄悊涓庣洃鎺?
 
 ---
 
-## 🔗 相关仓库
+## 馃敆 鐩稿叧浠撳簱
 
-| 仓库 | 用途 |
+| 浠撳簱 | 鐢ㄩ€?|
 |------|------|
-| **[openclawPlayground](https://github.com/baobaobaobaozijun/openclawPlayground)** | 配置文档中心（本仓库） |
-| **[openclaw-backend](https://github.com/baobaobaobaozijun/openclaw-backend)** | 后端业务代码（酱肉负责） |
-| **[openclaw-frontend](https://github.com/baobaobaobaozijun/openclaw-frontend)** | 前端业务代码（豆沙负责） |
-| **[openclaw-devops](https://github.com/baobaobaobaozijun/openclaw-devops)** | 运维测试脚本（酸菜负责） |
+| **[openclawPlayground](https://github.com/baobaobaobaozijun/openclawPlayground)** | 閰嶇疆鏂囨。涓績锛堟湰浠撳簱锛?|
+| **[openclaw-backend](https://github.com/baobaobaobaozijun/openclaw-backend)** | 鍚庣涓氬姟浠ｇ爜锛堥叡鑲夎礋璐ｏ級 |
+| **[openclaw-frontend](https://github.com/baobaobaobaozijun/openclaw-frontend)** | 鍓嶇涓氬姟浠ｇ爜锛堣眴娌欒礋璐ｏ級 |
+| **[openclaw-devops](https://github.com/baobaobaobaozijun/openclaw-devops)** | 杩愮淮娴嬭瘯鑴氭湰锛堥吀鑿滆礋璐ｏ級 |
 
 ---
 
-## ✏️ 如何修改 Agent 配置
+## 鉁忥笍 濡備綍淇敼 Agent 閰嶇疆
 
-### 步骤 1: 找到对应文件
+### 姝ラ 1: 鎵惧埌瀵瑰簲鏂囦欢
 
-- 修改灌汤 → 根目录下的 `.md` 文件
-- 修改酱肉 → `agent-configs/jiangrou/` 目录
-- 修改豆沙 → `agent-configs/dousha/` 目录
-- 修改酸菜 → `agent-configs/suancai/` 目录
+- 淇敼鐏屾堡 鈫?鏍圭洰褰曚笅鐨?`.md` 鏂囦欢
+- 淇敼閰辫倝 鈫?`agent-configs/jiangrou/` 鐩綍
+- 淇敼璞嗘矙 鈫?`agent-configs/dousha/` 鐩綍
+- 淇敼閰歌彍 鈫?`agent-configs/suancai/` 鐩綍
 
-### 步骤 2: 编辑并提交
+### 姝ラ 2: 缂栬緫骞舵彁浜?
 
 ```bash
 git add .
-git commit -m "update: 调整酱肉的 API 开发规范"
+git commit -m "update: 璋冩暣閰辫倝鐨?API 寮€鍙戣鑼?
 git push origin main
 ```
 
 ---
 
-**开始管理和优化你的 Agent 团队吧！** 🚀
+**寮€濮嬬鐞嗗拰浼樺寲浣犵殑 Agent 鍥㈤槦鍚э紒** 馃殌
 
-*最后更新：2025-05-13*
+*鏈€鍚庢洿鏂帮細2025-05-13*
+

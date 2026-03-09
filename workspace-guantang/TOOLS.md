@@ -1,6 +1,9 @@
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
+
 # TOOLS.md - Local Notes
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+Skills define _how_ tools work. This file is for _your_ specifics 鈥?the stuff that's unique to your setup.
 
 ## What Goes Here
 
@@ -18,12 +21,12 @@ Things like:
 ```markdown
 ### Cameras
 
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+- living-room 鈫?Main area, 180掳 wide angle
+- front-door 鈫?Entrance, motion-triggered
 
 ### SSH
 
-- home-server → 192.168.1.100, user: admin
+- home-server 鈫?192.168.1.100, user: admin
 
 ### TTS
 
@@ -38,3 +41,4 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+

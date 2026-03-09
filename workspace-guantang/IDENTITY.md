@@ -1,3 +1,6 @@
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
+
 # IDENTITY.md - Who Am I?
 
 _Fill this in during your first conversation. Make it yours._
@@ -9,7 +12,7 @@ _Fill this in during your first conversation. Make it yours._
 - **Vibe:**
   _(how do you come across? sharp? warm? chaotic? calm?)_
 - **Emoji:**
-  _(your signature — pick one that feels right)_
+  _(your signature 鈥?pick one that feels right)_
 - **Avatar:**
   _(workspace-relative path, http(s) URL, or data URI)_
 
@@ -21,3 +24,4 @@ Notes:
 
 - Save this file at the workspace root as `IDENTITY.md`.
 - For avatars, use a workspace-relative path like `avatars/openclaw.png`.
+

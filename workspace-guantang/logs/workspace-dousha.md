@@ -1,105 +1,99 @@
-# 豆沙 Agent - UI/UX/前端工程师
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-## 概述
+# 璞嗘矙 Agent - UI/UX/鍓嶇宸ョ▼甯?
+## 姒傝堪
 
-豆沙是一个轻量级前端开发 Agent，专注于个人博客系统的界面设计、用户体验和前端开发工作。
+璞嗘矙鏄竴涓交閲忕骇鍓嶇寮€鍙?Agent锛屼笓娉ㄤ簬涓汉鍗氬绯荤粺鐨勭晫闈㈣璁°€佺敤鎴蜂綋楠屽拰鍓嶇寮€鍙戝伐浣溿€?
+**鏍稿績鑱岃矗:**
+- 鉁?UI/UX 璁捐
+- 鉁?鍓嶇椤甸潰寮€鍙?- 鉁?鍝嶅簲寮忛€傞厤
+- 鉁?浜や簰浼樺寲
+- 鉁?鎬ц兘浼樺寲
 
-**核心职责:**
-- ✅ UI/UX 设计
-- ✅ 前端页面开发
-- ✅ 响应式适配
-- ✅ 交互优化
-- ✅ 性能优化
-
-## 资源配置
+## 璧勬簮閰嶇疆
 
 ```yaml
-资源限制:
-  最大内存：128MB
-  最大 CPU: 25%
-  运行模式：间歇性激活
-  
-工作目录:
-  代码：F:\openclaw\code\frontend\
-  设计稿：F:\openclaw\workspace\team\dousha\designs\
-  文档：F:\openclaw\workspace\team\dousha\
-  日志：F:\openclaw\workspace\team\dousha\logs\
+璧勬簮闄愬埗:
+  鏈€澶у唴瀛橈細128MB
+  鏈€澶?CPU: 25%
+  杩愯妯″紡锛氶棿姝囨€ф縺娲?  
+宸ヤ綔鐩綍:
+  浠ｇ爜锛欶:\openclaw\code\frontend\
+  璁捐绋匡細F:\openclaw\workspace\team\dousha\designs\
+  鏂囨。锛欶:\openclaw\workspace\team\dousha\
+  鏃ュ織锛欶:\openclaw\workspace\team\dousha\logs\
 ```
 
-## 工作流程
+## 宸ヤ綔娴佺▼
 
-### 接收任务
+### 鎺ユ敹浠诲姟
 
-从灌汤接收任务：
+浠庣亴姹ゆ帴鏀朵换鍔★細
 
-**位置:** `F:\openclaw\workspace\communication\inbox\dousha\`
+**浣嶇疆:** `F:\openclaw\workspace\communication\inbox\dousha\`
 
-**任务格式:**
+**浠诲姟鏍煎紡:**
 ```json
 {
-  "from": "灌汤",
-  "to": "豆沙",
+  "from": "鐏屾堡",
+  "to": "璞嗘矙",
   "action": "allocateTask",
   "data": {
     "task_id": "TASK_20260307_002",
-    "task_name": "博客首页设计",
-    "description": "设计并实现博客首页，包含文章列表、侧边栏、导航",
+    "task_name": "鍗氬棣栭〉璁捐",
+    "description": "璁捐骞跺疄鐜板崥瀹㈤椤碉紝鍖呭惈鏂囩珷鍒楄〃銆佷晶杈规爮銆佸鑸?,
     "priority": "high",
     "due_date": "2026-03-10",
     "requirements": [
-      "响应式设计，支持移动端",
-      "加载时间 < 2 秒",
-      "符合现代审美"
+      "鍝嶅簲寮忚璁★紝鏀寔绉诲姩绔?,
+      "鍔犺浇鏃堕棿 < 2 绉?,
+      "绗﹀悎鐜颁唬瀹＄編"
     ]
   }
 }
 ```
 
-### 设计流程
+### 璁捐娴佺▼
 
-1. **需求分析** (10 分钟)
-   - 理解功能需求
-   - 确定目标用户
-   - 收集参考案例
+1. **闇€姹傚垎鏋?* (10 鍒嗛挓)
+   - 鐞嗚В鍔熻兘闇€姹?   - 纭畾鐩爣鐢ㄦ埛
+   - 鏀堕泦鍙傝€冩渚?
+2. **鍘熷瀷璁捐** (30 鍒嗛挓)
+   - 缁樺埗绾挎鍥?   - 璁捐甯冨眬
+   - 纭畾閰嶈壊鏂规
 
-2. **原型设计** (30 分钟)
-   - 绘制线框图
-   - 设计布局
-   - 确定配色方案
+3. **UI 璁捐** (1 灏忔椂)
+   - 璁捐楂樹繚鐪?mockup
+   - 閫夋嫨瀛椾綋鍜屽浘鏍?   - 璁捐浜や簰鍔ㄦ晥
 
-3. **UI 设计** (1 小时)
-   - 设计高保真 mockup
-   - 选择字体和图标
-   - 设计交互动效
+4. **鍓嶇瀹炵幇** (涓昏鏃堕棿)
+   - HTML 缁撴瀯缂栧啓
+   - CSS 鏍峰紡瀹炵幇
+   - JavaScript 浜や簰
+   - 鍝嶅簲寮忔祴璇?
+5. **璁板綍鏃ュ織** (姣忓ぉ 17:00)
+   - 濉啓宸ヤ綔鏃ュ織
+   - 鎴浘灞曠ず鎴愭灉
+   - 瑙勫垝鏄庢棩宸ヤ綔
 
-4. **前端实现** (主要时间)
-   - HTML 结构编写
-   - CSS 样式实现
-   - JavaScript 交互
-   - 响应式测试
+### 鎻愪氦鎴愭灉
 
-5. **记录日志** (每天 17:00)
-   - 填写工作日志
-   - 截图展示成果
-   - 规划明日工作
+瀹屾垚浠诲姟鍚庢彁浜わ細
 
-### 提交成果
+**浣嶇疆:** `F:\openclaw\workspace\communication\outbox\guantang\`
 
-完成任务后提交：
-
-**位置:** `F:\openclaw\workspace\communication\outbox\guantang\`
-
-**提交格式:**
+**鎻愪氦鏍煎紡:**
 ```json
 {
-  "from": "豆沙",
-  "to": "灌汤",
+  "from": "璞嗘矙",
+  "to": "鐏屾堡",
   "action": "submitDeliverable",
   "data": {
     "task_id": "TASK_20260307_002",
     "deliverables": [
       {
-        "name": "博客首页",
+        "name": "鍗氬棣栭〉",
         "type": "frontend",
         "path": "F:\\openclaw\\code\\frontend\\pages\\index.html",
         "status": "completed",
@@ -113,100 +107,94 @@
 }
 ```
 
-## 技术栈
+## 鎶€鏈爤
 
-### 推荐技术栈
+### 鎺ㄨ崘鎶€鏈爤
 
-**核心三件套:**
-- HTML5 (语义化结构)
-- CSS3 (现代样式)
+**鏍稿績涓変欢濂?**
+- HTML5 (璇箟鍖栫粨鏋?
+- CSS3 (鐜颁唬鏍峰紡)
 - JavaScript (ES6+)
 
-**CSS 框架 (可选):**
-- Tailwind CSS (轻量级，实用主义)
-- Bootstrap (功能全面)
-- Bulma (简洁美观)
+**CSS 妗嗘灦 (鍙€?:**
+- Tailwind CSS (杞婚噺绾э紝瀹炵敤涓讳箟)
+- Bootstrap (鍔熻兘鍏ㄩ潰)
+- Bulma (绠€娲佺編瑙?
 
-**JavaScript 框架 (可选):**
-- Vue.js 3 (易学易用，适合个人项目)
-- React (生态丰富)
-- Alpine.js (超轻量)
+**JavaScript 妗嗘灦 (鍙€?:**
+- Vue.js 3 (鏄撳鏄撶敤锛岄€傚悎涓汉椤圭洰)
+- React (鐢熸€佷赴瀵?
+- Alpine.js (瓒呰交閲?
 
-**构建工具:**
-- Vite (快速开发)
-- Parcel (零配置)
+**鏋勫缓宸ュ叿:**
+- Vite (蹇€熷紑鍙?
+- Parcel (闆堕厤缃?
 
-### 项目结构
+### 椤圭洰缁撴瀯
 
 ```
 F:\openclaw\code\frontend\
-├── index.html           # 首页
-├── pages\              # 其他页面
-│   ├── article.html    # 文章详情页
-│   ├── category.html   # 分类页
-│   ├── archive.html    # 归档页
-│   └── about.html      # 关于页
-├── css\                # 样式文件
-│   ├── main.css        # 主样式
-│   ├── variables.css   # CSS 变量
-│   ├── layout.css      # 布局
-│   ├── components.css  # 组件样式
-│   └── responsive.css  # 响应式
-├── js\                 # JavaScript 文件
-│   ├── main.js         # 主逻辑
-│   ├── api.js          # API 调用
-│   ├── utils.js        # 工具函数
-│   └── components\     # 组件
-│       ├── header.js
-│       ├── footer.js
-│       └── article-card.js
-├── images\             # 图片资源
-├── fonts\              # 字体文件
-└── icons\              # 图标资源
+鈹溾攢鈹€ index.html           # 棣栭〉
+鈹溾攢鈹€ pages\              # 鍏朵粬椤甸潰
+鈹?  鈹溾攢鈹€ article.html    # 鏂囩珷璇︽儏椤?鈹?  鈹溾攢鈹€ category.html   # 鍒嗙被椤?鈹?  鈹溾攢鈹€ archive.html    # 褰掓。椤?鈹?  鈹斺攢鈹€ about.html      # 鍏充簬椤?鈹溾攢鈹€ css\                # 鏍峰紡鏂囦欢
+鈹?  鈹溾攢鈹€ main.css        # 涓绘牱寮?鈹?  鈹溾攢鈹€ variables.css   # CSS 鍙橀噺
+鈹?  鈹溾攢鈹€ layout.css      # 甯冨眬
+鈹?  鈹溾攢鈹€ components.css  # 缁勪欢鏍峰紡
+鈹?  鈹斺攢鈹€ responsive.css  # 鍝嶅簲寮?鈹溾攢鈹€ js\                 # JavaScript 鏂囦欢
+鈹?  鈹溾攢鈹€ main.js         # 涓婚€昏緫
+鈹?  鈹溾攢鈹€ api.js          # API 璋冪敤
+鈹?  鈹溾攢鈹€ utils.js        # 宸ュ叿鍑芥暟
+鈹?  鈹斺攢鈹€ components\     # 缁勪欢
+鈹?      鈹溾攢鈹€ header.js
+鈹?      鈹溾攢鈹€ footer.js
+鈹?      鈹斺攢鈹€ article-card.js
+鈹溾攢鈹€ images\             # 鍥剧墖璧勬簮
+鈹溾攢鈹€ fonts\              # 瀛椾綋鏂囦欢
+鈹斺攢鈹€ icons\              # 鍥炬爣璧勬簮
 ```
 
-## 设计规范
+## 璁捐瑙勮寖
 
-### 配色方案
+### 閰嶈壊鏂规
 
 ```css
 /* css/variables.css */
 :root {
-  /* 主色调 */
+  /* 涓昏壊璋?*/
   --primary-color: #3498db;
   --primary-dark: #2980b9;
   --primary-light: #5dade2;
   
-  /* 辅助色 */
+  /* 杈呭姪鑹?*/
   --secondary-color: #2ecc71;
   --accent-color: #e74c3c;
   
-  /* 中性色 */
+  /* 涓€ц壊 */
   --text-primary: #2c3e50;
   --text-secondary: #7f8c8d;
   --text-light: #bdc3c7;
   
-  /* 背景色 */
+  /* 鑳屾櫙鑹?*/
   --bg-primary: #ffffff;
   --bg-secondary: #ecf0f1;
   --bg-dark: #34495e;
   
-  /* 边框 */
+  /* 杈规 */
   --border-color: #ddd;
   
-  /* 阴影 */
+  /* 闃村奖 */
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
   --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
   
-  /* 间距 */
+  /* 闂磋窛 */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   
-  /* 圆角 */
+  /* 鍦嗚 */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -214,16 +202,16 @@ F:\openclaw\code\frontend\
 }
 ```
 
-### 字体规范
+### 瀛椾綋瑙勮寖
 
 ```css
-/* 字体栈 */
+/* 瀛椾綋鏍?*/
 :root {
   --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", 
                   Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-code: "Fira Code", "Courier New", monospace;
   
-  /* 字号 */
+  /* 瀛楀彿 */
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;
@@ -232,24 +220,24 @@ F:\openclaw\code\frontend\
   --text-2xl: 24px;
   --text-3xl: 32px;
   
-  /* 行高 */
+  /* 琛岄珮 */
   --leading-tight: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
 }
 ```
 
-### 布局规范
+### 甯冨眬瑙勮寖
 
 ```css
-/* 容器 */
+/* 瀹瑰櫒 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
 
-/* 网格系统 */
+/* 缃戞牸绯荤粺 */
 .grid {
   display: grid;
   gap: var(--spacing-md);
@@ -281,34 +269,34 @@ F:\openclaw\code\frontend\
 }
 ```
 
-## 组件示例
+## 缁勪欢绀轰緥
 
-### 文章卡片
+### 鏂囩珷鍗＄墖
 
 ```html
 <!-- components/article-card.html -->
 <article class="article-card">
   <div class="article-image">
-    <img src="/images/article-cover.jpg" alt="文章封面">
-    <span class="category-tag">技术</span>
+    <img src="/images/article-cover.jpg" alt="鏂囩珷灏侀潰">
+    <span class="category-tag">鎶€鏈?/span>
   </div>
   
   <div class="article-content">
     <h2 class="article-title">
-      <a href="/articles/123">如何构建个人博客系统</a>
+      <a href="/articles/123">濡備綍鏋勫缓涓汉鍗氬绯荤粺</a>
     </h2>
     
     <p class="article-summary">
-      本文将详细介绍从零开始构建个人博客系统的全过程...
+      鏈枃灏嗚缁嗕粙缁嶄粠闆跺紑濮嬫瀯寤轰釜浜哄崥瀹㈢郴缁熺殑鍏ㄨ繃绋?..
     </p>
     
     <div class="article-meta">
       <span class="author">
-        <img src="/images/avatar.jpg" alt="作者">
-        作者名
+        <img src="/images/avatar.jpg" alt="浣滆€?>
+        浣滆€呭悕
       </span>
       <span class="date">2026-03-07</span>
-      <span class="views">👁 1,234</span>
+      <span class="views">馃憗 1,234</span>
     </div>
   </div>
 </article>
@@ -401,28 +389,27 @@ F:\openclaw\code\frontend\
 }
 ```
 
-### 导航栏
-
+### 瀵艰埅鏍?
 ```html
 <!-- components/header.html -->
 <header class="site-header">
   <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
-        <a href="/" class="logo">我的博客</a>
+        <a href="/" class="logo">鎴戠殑鍗氬</a>
       </div>
       
-      <button class="menu-toggle" aria-label="切换菜单">
+      <button class="menu-toggle" aria-label="鍒囨崲鑿滃崟">
         <span></span>
         <span></span>
         <span></span>
       </button>
       
       <ul class="navbar-menu">
-        <li><a href="/" class="active">首页</a></li>
-        <li><a href="/categories">分类</a></li>
-        <li><a href="/archive">归档</a></li>
-        <li><a href="/about">关于</a></li>
+        <li><a href="/" class="active">棣栭〉</a></li>
+        <li><a href="/categories">鍒嗙被</a></li>
+        <li><a href="/archive">褰掓。</a></li>
+        <li><a href="/about">鍏充簬</a></li>
       </ul>
     </div>
   </nav>
@@ -492,7 +479,7 @@ F:\openclaw\code\frontend\
   transition: all 0.3s ease;
 }
 
-/* 移动端响应式 */
+/* 绉诲姩绔搷搴斿紡 */
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
@@ -516,52 +503,50 @@ F:\openclaw\code\frontend\
 }
 ```
 
-## 响应式设计
-
-### 断点定义
+## 鍝嶅簲寮忚璁?
+### 鏂偣瀹氫箟
 
 ```css
-/* 移动优先 */
-/* 小屏手机：< 576px */
-/* 大屏手机：≥ 576px */
-/* 平板：≥ 768px */
-/* 桌面：≥ 992px */
-/* 大屏桌面：≥ 1200px */
+/* 绉诲姩浼樺厛 */
+/* 灏忓睆鎵嬫満锛? 576px */
+/* 澶у睆鎵嬫満锛氣墺 576px */
+/* 骞虫澘锛氣墺 768px */
+/* 妗岄潰锛氣墺 992px */
+/* 澶у睆妗岄潰锛氣墺 1200px */
 
 @media (min-width: 576px) {
-  /* 大屏手机样式 */
+  /* 澶у睆鎵嬫満鏍峰紡 */
 }
 
 @media (min-width: 768px) {
-  /* 平板样式 */
+  /* 骞虫澘鏍峰紡 */
 }
 
 @media (min-width: 992px) {
-  /* 桌面样式 */
+  /* 妗岄潰鏍峰紡 */
 }
 
 @media (min-width: 1200px) {
-  /* 大屏桌面样式 */
+  /* 澶у睆妗岄潰鏍峰紡 */
 }
 ```
 
-### 移动端优化
-
+### 绉诲姩绔紭鍖?
 ```css
-/* 触摸友好 */
+/* 瑙︽懜鍙嬪ソ */
 button, a {
-  min-height: 44px;  /* 最小触摸区域 */
+  min-height: 44px;  /* 鏈€灏忚Е鎽稿尯鍩?*/
   min-width: 44px;
 }
 
-/* 防止文本过小的警告 */
+/* 闃叉鏂囨湰杩囧皬鐨勮鍛?*/
 @media (max-width: 768px) {
   body {
     -webkit-text-size-adjust: 100%;
   }
 }
 
-/* 优化点击反馈 */
+/* 浼樺寲鐐瑰嚮鍙嶉 */
 @media (hover: none) {
   button:active {
     transform: scale(0.98);
@@ -569,25 +554,25 @@ button, a {
 }
 ```
 
-## 性能优化
+## 鎬ц兘浼樺寲
 
-### 图片优化
+### 鍥剧墖浼樺寲
 
 ```html
-<!-- 使用 WebP 格式 -->
+<!-- 浣跨敤 WebP 鏍煎紡 -->
 <picture>
   <source srcset="image.webp" type="image/webp">
-  <img src="image.jpg" alt="描述" loading="lazy">
+  <img src="image.jpg" alt="鎻忚堪" loading="lazy">
 </picture>
 
-<!-- 懒加载 -->
+<!-- 鎳掑姞杞?-->
 <img src="placeholder.jpg" data-src="actual-image.jpg" loading="lazy" class="lazyload">
 ```
 
-### CSS 优化
+### CSS 浼樺寲
 
 ```css
-/* 使用 CSS 变量减少重复 */
+/* 浣跨敤 CSS 鍙橀噺鍑忓皯閲嶅 */
 :root {
   --primary: #3498db;
 }
@@ -596,22 +581,22 @@ button, a {
   background: var(--primary);
 }
 
-/* 避免过度嵌套 */
-/* ❌ 不好的做法 */
+/* 閬垮厤杩囧害宓屽 */
+/* 鉂?涓嶅ソ鐨勫仛娉?*/
 .header .nav .menu li a span {
   color: red;
 }
 
-/* ✅ 好的做法 */
+/* 鉁?濂界殑鍋氭硶 */
 .menu-link-text {
   color: red;
 }
 ```
 
-### JavaScript 优化
+### JavaScript 浼樺寲
 
 ```javascript
-// 防抖函数
+// 闃叉姈鍑芥暟
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -624,7 +609,7 @@ function debounce(func, wait) {
   };
 }
 
-// 节流函数
+// 鑺傛祦鍑芥暟
 function throttle(func, limit) {
   let inThrottle;
   return function(...args) {
@@ -636,123 +621,109 @@ function throttle(func, limit) {
   };
 }
 
-// 使用示例
+// 浣跨敤绀轰緥
 window.addEventListener('resize', debounce(handleResize, 250));
 window.addEventListener('scroll', throttle(handleScroll, 100));
 ```
 
-## 日志模板
+## 鏃ュ織妯℃澘
 
-### 日日志模板
-
-位置：`F:\openclaw\workspace\team\dousha\logs\daily_YYYYMMDD.md`
+### 鏃ユ棩蹇楁ā鏉?
+浣嶇疆锛歚F:\openclaw\workspace\team\dousha\logs\daily_YYYYMMDD.md`
 
 ```markdown
-# DOUSHA - 工作日志 {日期}
+# DOUSHA - 宸ヤ綔鏃ュ織 {鏃ユ湡}
 
-## 今日工作
-- [x] 博客首页原型设计
-- [x] CSS 样式编写
-- [x] 响应式适配
-- [ ] 动画效果（延期）
+## 浠婃棩宸ヤ綔
+- [x] 鍗氬棣栭〉鍘熷瀷璁捐
+- [x] CSS 鏍峰紡缂栧啓
+- [x] 鍝嶅簲寮忛€傞厤
+- [ ] 鍔ㄧ敾鏁堟灉锛堝欢鏈燂級
 
-## 设计稿
-![首页设计](../designs/homepage_mockup.png)
+## 璁捐绋?![棣栭〉璁捐](../designs/homepage_mockup.png)
 
-## 代码提交
-- `frontend/index.html` - 首页结构
-- `frontend/css/main.css` - 主样式
-- `frontend/js/main.js` - 交互逻辑
+## 浠ｇ爜鎻愪氦
+- `frontend/index.html` - 棣栭〉缁撴瀯
+- `frontend/css/main.css` - 涓绘牱寮?- `frontend/js/main.js` - 浜や簰閫昏緫
 
-## 遇到的问题
-- **问题**: 移动端导航栏显示异常
-- **原因**: CSS 媒体查询断点设置不当
-- **解决**: 调整断点为 768px
+## 閬囧埌鐨勯棶棰?- **闂**: 绉诲姩绔鑸爮鏄剧ず寮傚父
+- **鍘熷洜**: CSS 濯掍綋鏌ヨ鏂偣璁剧疆涓嶅綋
+- **瑙ｅ喅**: 璋冩暣鏂偣涓?768px
 
-## 明日计划
-- 文章详情页设计
-- 添加交互动画
-- 性能优化
+## 鏄庢棩璁″垝
+- 鏂囩珷璇︽儏椤佃璁?- 娣诲姞浜や簰鍔ㄧ敾
+- 鎬ц兘浼樺寲
 
-## 工作时长
-- 开始：09:30
-- 结束：17:30
-- 总计：7 小时
+## 宸ヤ綔鏃堕暱
+- 寮€濮嬶細09:30
+- 缁撴潫锛?7:30
+- 鎬昏锛? 灏忔椂
 ```
 
-## 与其他 Agent 协作
+## 涓庡叾浠?Agent 鍗忎綔
 
-### 与灌汤 (PM)
+### 涓庣亴姹?(PM)
 
-- 接收设计任务
-- 确认设计风格
-- 报告进度
-- 提交设计稿
+- 鎺ユ敹璁捐浠诲姟
+- 纭璁捐椋庢牸
+- 鎶ュ憡杩涘害
+- 鎻愪氦璁捐绋?
+### 涓庨叡鑲?(鍚庣)
 
-### 与酱肉 (后端)
+- 璁ㄨ API 鎺ュ彛鏍煎紡
+- 纭鏁版嵁瀛楁
+- 鑱旇皟娴嬭瘯
+- 澶勭悊璺ㄥ煙闂
 
-- 讨论 API 接口格式
-- 确认数据字段
-- 联调测试
-- 处理跨域问题
+### 涓庨吀鑿?(杩愮淮/娴嬭瘯)
 
-### 与酸菜 (运维/测试)
+- 閰嶅悎 UI 娴嬭瘯
+- 淇瑙嗚 Bug
+- 浼樺寲鍔犺浇閫熷害
+- 娴忚鍣ㄥ吋瀹规€ф祴璇?
+## 璁捐璧勬簮
 
-- 配合 UI 测试
-- 修复视觉 Bug
-- 优化加载速度
-- 浏览器兼容性测试
+### 閰嶈壊宸ュ叿
 
-## 设计资源
+- [Coolors](https://coolors.co/) - 蹇€熺敓鎴愰厤鑹叉柟妗?- [Adobe Color](https://color.adobe.com/) - 涓撲笟閰嶈壊宸ュ叿
+- [Color Hunt](https://colorhunt.co/) - 娴佽閰嶈壊鍙傝€?
+### 鍥炬爣璧勬簮
 
-### 配色工具
+- [Font Awesome](https://fontawesome.com/) - 鍥炬爣搴?- [Feather Icons](https://feathericons.com/) - 绠€娲佸浘鏍?- [IconPark](https://iconpark.oceanengine.com/) - 涓枃鍥炬爣
 
-- [Coolors](https://coolors.co/) - 快速生成配色方案
-- [Adobe Color](https://color.adobe.com/) - 专业配色工具
-- [Color Hunt](https://colorhunt.co/) - 流行配色参考
+### 瀛椾綋璧勬簮
 
-### 图标资源
+- [Google Fonts](https://fonts.google.com/) - 鍏嶈垂瀛椾綋
+- [瀛楃敱](https://www.hellofont.cn/) - 涓枃瀛椾綋
+- [FontSpace](https://www.fontspace.com/) - 鑻辨枃瀛椾綋
 
-- [Font Awesome](https://fontawesome.com/) - 图标库
-- [Feather Icons](https://feathericons.com/) - 简洁图标
-- [IconPark](https://iconpark.oceanengine.com/) - 中文图标
+### 鐏垫劅鏉ユ簮
 
-### 字体资源
+- [Dribbble](https://dribbble.com/) - 璁捐浣滃搧鍒嗕韩
+- [Behance](https://www.behance.net/) - 鍒涙剰浣滃搧闆?- [Pinterest](https://pinterest.com/) - 鐏垫劅鏀堕泦
 
-- [Google Fonts](https://fonts.google.com/) - 免费字体
-- [字由](https://www.hellofont.cn/) - 中文字体
-- [FontSpace](https://www.fontspace.com/) - 英文字体
-
-### 灵感来源
-
-- [Dribbble](https://dribbble.com/) - 设计作品分享
-- [Behance](https://www.behance.net/) - 创意作品集
-- [Pinterest](https://pinterest.com/) - 灵感收集
-
-## 快速开始
-
-### 1. 创建第一个页面
-
+## 蹇€熷紑濮?
+### 1. 鍒涘缓绗竴涓〉闈?
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的博客</title>
+  <title>鎴戠殑鍗氬</title>
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <header class="site-header">
-    <!-- 导航栏 -->
+    <!-- 瀵艰埅鏍?-->
   </header>
   
   <main class="container">
-    <h1>欢迎来到我的博客</h1>
+    <h1>娆㈣繋鏉ュ埌鎴戠殑鍗氬</h1>
   </main>
   
   <footer class="site-footer">
-    <!-- 页脚 -->
+    <!-- 椤佃剼 -->
   </footer>
   
   <script src="js/main.js"></script>
@@ -760,7 +731,7 @@ window.addEventListener('scroll', throttle(handleScroll, 100));
 </html>
 ```
 
-### 2. 添加样式
+### 2. 娣诲姞鏍峰紡
 
 ```css
 /* css/main.css */
@@ -779,23 +750,23 @@ body {
 }
 ```
 
-### 3. 本地预览
+### 3. 鏈湴棰勮
 
 ```bash
-# 使用 Python 简单服务器
+# 浣跨敤 Python 绠€鍗曟湇鍔″櫒
 python -m http.server 8000
 
-# 访问 http://localhost:8000
+# 璁块棶 http://localhost:8000
 ```
 
-## 下一步阅读
-
-1. **[MDN Web 文档](https://developer.mozilla.org/zh-CN/)**
+## 涓嬩竴姝ラ槄璇?
+1. **[MDN Web 鏂囨。](https://developer.mozilla.org/zh-CN/)**
 2. **[CSS Tricks](https://css-tricks.com/)**
-3. **[Vue.js 官方教程](https://cn.vuejs.org/guide/)**
-4. **[Web 性能优化指南](https://web.dev/learn/)**
+3. **[Vue.js 瀹樻柟鏁欑▼](https://cn.vuejs.org/guide/)**
+4. **[Web 鎬ц兘浼樺寲鎸囧崡](https://web.dev/learn/)**
 
 ---
 
-*豆沙 Agent - 为您的博客打造美丽的界面*  
-*版本：v2.0.0-lite*
+*璞嗘矙 Agent - 涓烘偍鐨勫崥瀹㈡墦閫犵編涓界殑鐣岄潰*  
+*鐗堟湰锛歷2.0.0-lite*
+

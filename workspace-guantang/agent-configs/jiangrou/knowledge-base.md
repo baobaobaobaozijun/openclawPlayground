@@ -1,69 +1,67 @@
-# 酱肉 (后端) - 完整知识库
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-## 📚 知识库目录
-
-- [身份认知](./IDENTITY.md)
-- [职责规范](./ROLE.md)
-- [行为准则](./SOUL.md)
-- [后端开发最佳实践](./backend-best-practices.md)
-- [API 设计规范](./api-design-guidelines.md)
-- [数据库设计原则](./database-design-principles.md)
-- [技术栈选型指南](./tech-stack-selection.md)
-- [常见问题与解决方案](./common-issues-solutions.md)
+# 閰辫倝 (鍚庣) - 瀹屾暣鐭ヨ瘑搴?
+## 馃摎 鐭ヨ瘑搴撶洰褰?
+- [韬唤璁ょ煡](./IDENTITY.md)
+- [鑱岃矗瑙勮寖](./ROLE.md)
+- [琛屼负鍑嗗垯](./SOUL.md)
+- [鍚庣寮€鍙戞渶浣冲疄璺礭(./backend-best-practices.md)
+- [API 璁捐瑙勮寖](./api-design-guidelines.md)
+- [鏁版嵁搴撹璁″師鍒橾(./database-design-principles.md)
+- [鎶€鏈爤閫夊瀷鎸囧崡](./tech-stack-selection.md)
+- [甯歌闂涓庤В鍐虫柟妗圿(./common-issues-solutions.md)
 
 ---
 
-## 🔧 后端开发最佳实践
+## 馃敡 鍚庣寮€鍙戞渶浣冲疄璺?
+### 1. RESTful API 璁捐瑙勮寖
 
-### 1. RESTful API 设计规范
-
-#### URL 命名规范
+#### URL 鍛藉悕瑙勮寖
 ```
-GET    /api/articles          # 获取文章列表
-POST   /api/articles          # 创建文章
-GET    /api/articles/{id}     # 获取单篇文章
-PUT    /api/articles/{id}     # 更新文章
-DELETE /api/articles/{id}     # 删除文章
+GET    /api/articles          # 鑾峰彇鏂囩珷鍒楄〃
+POST   /api/articles          # 鍒涘缓鏂囩珷
+GET    /api/articles/{id}     # 鑾峰彇鍗曠瘒鏂囩珷
+PUT    /api/articles/{id}     # 鏇存柊鏂囩珷
+DELETE /api/articles/{id}     # 鍒犻櫎鏂囩珷
 ```
 
-#### 响应格式标准
+#### 鍝嶅簲鏍煎紡鏍囧噯
 ```json
 {
   "success": true,
   "data": {
     "id": 1,
-    "title": "文章标题",
-    "content": "文章内容"
+    "title": "鏂囩珷鏍囬",
+    "content": "鏂囩珷鍐呭"
   },
-  "message": "操作成功",
+  "message": "鎿嶄綔鎴愬姛",
   "timestamp": "2026-03-08T10:00:00Z"
 }
 ```
 
-#### 错误处理
+#### 閿欒澶勭悊
 ```json
 {
   "success": false,
   "error": {
     "code": "ARTICLE_NOT_FOUND",
-    "message": "文章不存在",
-    "details": "请求的文章 ID 为 1，但未找到对应记录"
+    "message": "鏂囩珷涓嶅瓨鍦?,
+    "details": "璇锋眰鐨勬枃绔?ID 涓?1锛屼絾鏈壘鍒板搴旇褰?
   },
   "timestamp": "2026-03-08T10:00:00Z"
 }
 ```
 
-### 2. 数据库设计原则
+### 2. 鏁版嵁搴撹璁″師鍒?
+#### 琛ㄥ懡鍚嶈鑼?- 鉁?浣跨敤澶嶆暟鍚嶈瘝锛歚articles`, `users`, `comments`
+- 鉁?缁熶竴灏忓啓锛屼笅鍒掔嚎鍒嗛殧锛歚user_profiles`
+- 鉂?閬垮厤鍗曟暟锛歚article`, `user`
+- 鉂?閬垮厤椹煎嘲锛歚UserProfiles`
 
-#### 表命名规范
-- ✅ 使用复数名词：`articles`, `users`, `comments`
-- ✅ 统一小写，下划线分隔：`user_profiles`
-- ❌ 避免单数：`article`, `user`
-- ❌ 避免驼峰：`UserProfiles`
-
-#### 字段设计
+#### 瀛楁璁捐
 ```sql
--- 标准字段
+-- 鏍囧噯瀛楁
 CREATE TABLE articles (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(200) NOT NULL,
@@ -77,123 +75,94 @@ CREATE TABLE articles (
 );
 ```
 
-### 3. 性能优化建议
+### 3. 鎬ц兘浼樺寲寤鸿
 
-#### 数据库查询优化
-- 使用索引覆盖常用查询
-- 避免 N+1 查询问题
-- 合理使用缓存（Redis）
-- 分页查询限制返回数量
+#### 鏁版嵁搴撴煡璇紭鍖?- 浣跨敤绱㈠紩瑕嗙洊甯哥敤鏌ヨ
+- 閬垮厤 N+1 鏌ヨ闂
+- 鍚堢悊浣跨敤缂撳瓨锛圧edis锛?- 鍒嗛〉鏌ヨ闄愬埗杩斿洖鏁伴噺
 
-#### 代码层面优化
+#### 浠ｇ爜灞傞潰浼樺寲
 ```python
-# ❌ 慢查询 - N+1 问题
+# 鉂?鎱㈡煡璇?- N+1 闂
 articles = Article.query.all()
 for article in articles:
-    author = User.query.get(article.author_id)  # 每次都查询数据库
+    author = User.query.get(article.author_id)  # 姣忔閮芥煡璇㈡暟鎹簱
 
-# ✅ 使用 JOIN 预加载
-articles = Article.query.options(joinedload(Article.author)).all()
+# 鉁?浣跨敤 JOIN 棰勫姞杞?articles = Article.query.options(joinedload(Article.author)).all()
 ```
 
-### 4. 安全最佳实践
-
-#### SQL 注入防护
+### 4. 瀹夊叏鏈€浣冲疄璺?
+#### SQL 娉ㄥ叆闃叉姢
 ```python
-# ❌ 危险写法
+# 鉂?鍗遍櫓鍐欐硶
 query = f"SELECT * FROM users WHERE username = '{username}'"
 
-# ✅ 参数化查询
-query = "SELECT * FROM users WHERE username = %s"
+# 鉁?鍙傛暟鍖栨煡璇?query = "SELECT * FROM users WHERE username = %s"
 cursor.execute(query, (username,))
 ```
 
-#### 认证与授权
-- 使用 JWT 进行无状态认证
-- 密码必须加盐哈希存储（bcrypt/argon2）
-- 实现基于角色的访问控制（RBAC）
-- API 限流防止暴力攻击
+#### 璁よ瘉涓庢巿鏉?- 浣跨敤 JWT 杩涜鏃犵姸鎬佽璇?- 瀵嗙爜蹇呴』鍔犵洂鍝堝笇瀛樺偍锛坆crypt/argon2锛?- 瀹炵幇鍩轰簬瑙掕壊鐨勮闂帶鍒讹紙RBAC锛?- API 闄愭祦闃叉鏆村姏鏀诲嚮
 
-### 5. 日志与监控
-
-#### 日志级别使用
+### 5. 鏃ュ織涓庣洃鎺?
+#### 鏃ュ織绾у埆浣跨敤
 ```python
 import logging
 
-logging.debug("调试信息 - 详细的技术细节")
-logging.info("信息 - 正常的运行日志")
-logging.warning("警告 - 可能有问题但不影响运行")
-logging.error("错误 - 某个操作失败")
-logging.critical("严重错误 - 系统可能无法继续运行")
+logging.debug("璋冭瘯淇℃伅 - 璇︾粏鐨勬妧鏈粏鑺?)
+logging.info("淇℃伅 - 姝ｅ父鐨勮繍琛屾棩蹇?)
+logging.warning("璀﹀憡 - 鍙兘鏈夐棶棰樹絾涓嶅奖鍝嶈繍琛?)
+logging.error("閿欒 - 鏌愪釜鎿嶄綔澶辫触")
+logging.critical("涓ラ噸閿欒 - 绯荤粺鍙兘鏃犳硶缁х画杩愯")
 ```
 
-#### 关键指标监控
-- API 响应时间（P95, P99）
-- 数据库查询耗时
-- 缓存命中率
-- 错误率统计
-- QPS（每秒查询数）
-
+#### 鍏抽敭鎸囨爣鐩戞帶
+- API 鍝嶅簲鏃堕棿锛圥95, P99锛?- 鏁版嵁搴撴煡璇㈣€楁椂
+- 缂撳瓨鍛戒腑鐜?- 閿欒鐜囩粺璁?- QPS锛堟瘡绉掓煡璇㈡暟锛?
 ---
 
-## 🛠️ 技术栈选型指南
+## 馃洜锔?鎶€鏈爤閫夊瀷鎸囧崡
 
-### 推荐技术栈
+### 鎺ㄨ崘鎶€鏈爤
 
-#### Web 框架
-- **FastAPI** (首选) - 现代、高性能、自动文档
-- Flask - 轻量级、灵活
-- Django - 全功能、成熟生态
-
-#### 数据库
-- **MySQL 8.0** - 关系型数据库
-- PostgreSQL - 高级特性支持
-- Redis - 缓存和会话存储
-
+#### Web 妗嗘灦
+- **FastAPI** (棣栭€? - 鐜颁唬銆侀珮鎬ц兘銆佽嚜鍔ㄦ枃妗?- Flask - 杞婚噺绾с€佺伒娲?- Django - 鍏ㄥ姛鑳姐€佹垚鐔熺敓鎬?
+#### 鏁版嵁搴?- **MySQL 8.0** - 鍏崇郴鍨嬫暟鎹簱
+- PostgreSQL - 楂樼骇鐗规€ф敮鎸?- Redis - 缂撳瓨鍜屼細璇濆瓨鍌?
 #### ORM
-- **SQLAlchemy** - Python 最强大的 ORM
-- Peewee - 轻量级 ORM
+- **SQLAlchemy** - Python 鏈€寮哄ぇ鐨?ORM
+- Peewee - 杞婚噺绾?ORM
 
-#### 认证
-- **PyJWT** - JWT 实现
-- python-jose - JWS/JWE 支持
+#### 璁よ瘉
+- **PyJWT** - JWT 瀹炵幇
+- python-jose - JWS/JWE 鏀寔
 
-#### 测试
-- **pytest** - 现代化测试框架
-- pytest-cov - 覆盖率统计
-- httpx - API 测试客户端
-
+#### 娴嬭瘯
+- **pytest** - 鐜颁唬鍖栨祴璇曟鏋?- pytest-cov - 瑕嗙洊鐜囩粺璁?- httpx - API 娴嬭瘯瀹㈡埛绔?
 ---
 
-## ⚠️ 常见错误与解决方案
+## 鈿狅笍 甯歌閿欒涓庤В鍐虫柟妗?
+### 閿欒 1: 鏁版嵁搴撹繛鎺ユ睜鑰楀敖
 
-### 错误 1: 数据库连接池耗尽
-
-**现象:**
+**鐜拌薄:**
 ```
 sqlalchemy.exc.TimeoutError: QueuePool limit of size X overflow Y reached
 ```
 
-**解决方案:**
+**瑙ｅ喅鏂规:**
 ```python
-# 调整连接池大小
-engine = create_engine(
+# 璋冩暣杩炴帴姹犲ぇ灏?engine = create_engine(
     DATABASE_URL,
-    pool_size=20,        # 增加连接数
-    max_overflow=40,     # 增加溢出量
-    pool_recycle=3600    # 定期回收连接
+    pool_size=20,        # 澧炲姞杩炴帴鏁?    max_overflow=40,     # 澧炲姞婧㈠嚭閲?    pool_recycle=3600    # 瀹氭湡鍥炴敹杩炴帴
 )
 ```
 
-### 错误 2: API 响应过慢
+### 閿欒 2: API 鍝嶅簲杩囨參
 
-**排查步骤:**
-1. 检查慢查询日志
-2. 分析执行计划（EXPLAIN）
-3. 添加缺失的索引
-4. 考虑缓存热点数据
+**鎺掓煡姝ラ:**
+1. 妫€鏌ユ參鏌ヨ鏃ュ織
+2. 鍒嗘瀽鎵ц璁″垝锛圗XPLAIN锛?3. 娣诲姞缂哄け鐨勭储寮?4. 鑰冭檻缂撳瓨鐑偣鏁版嵁
 
-**解决方案:**
+**瑙ｅ喅鏂规:**
 ```python
 from functools import lru_cache
 from datetime import timedelta
@@ -202,45 +171,41 @@ from datetime import timedelta
 def get_article_by_id(article_id: int):
     return Article.query.get(article_id)
 
-# 或使用 Redis 缓存
+# 鎴栦娇鐢?Redis 缂撳瓨
 @cache.cached(timeout=timedelta(minutes=10))
 def get_popular_articles():
     return Article.query.filter_by(status='published').limit(10).all()
 ```
 
-### 错误 3: 内存泄漏
+### 閿欒 3: 鍐呭瓨娉勬紡
 
-**常见原因:**
-- 循环引用未释放
-- 大量数据一次性加载
-- 全局变量累积
+**甯歌鍘熷洜:**
+- 寰幆寮曠敤鏈噴鏀?- 澶ч噺鏁版嵁涓€娆℃€у姞杞?- 鍏ㄥ眬鍙橀噺绱Н
 
-**解决方案:**
+**瑙ｅ喅鏂规:**
 ```python
-# ❌ 内存占用大
-all_data = list(large_queryset)
+# 鉂?鍐呭瓨鍗犵敤澶?all_data = list(large_queryset)
 
-# ✅ 使用生成器
-def iter_queryset(queryset, chunk_size=100):
+# 鉁?浣跨敤鐢熸垚鍣?def iter_queryset(queryset, chunk_size=100):
     for i in range(0, queryset.count(), chunk_size):
         yield from queryset[i:i+chunk_size]
 ```
 
 ---
 
-## 📖 学习资源
+## 馃摉 瀛︿範璧勬簮
 
-### 官方文档
-- [FastAPI 官方文档](https://fastapi.tiangolo.com/)
-- [SQLAlchemy 文档](https://docs.sqlalchemy.org/)
-- [MySQL 8.0 参考手册](https://dev.mysql.com/doc/refman/8.0/en/)
+### 瀹樻柟鏂囨。
+- [FastAPI 瀹樻柟鏂囨。](https://fastapi.tiangolo.com/)
+- [SQLAlchemy 鏂囨。](https://docs.sqlalchemy.org/)
+- [MySQL 8.0 鍙傝€冩墜鍐宂(https://dev.mysql.com/doc/refman/8.0/en/)
 
-### 最佳实践
-- [RESTful API 设计指南](https://restfulapi.net/)
+### 鏈€浣冲疄璺?- [RESTful API 璁捐鎸囧崡](https://restfulapi.net/)
 - [12-Factor App](https://12factor.net/zh_cn/)
-- [Python 编码规范](https://pep8.org/)
+- [Python 缂栫爜瑙勮寖](https://pep8.org/)
 
 ---
 
-*最后更新：2026-03-08*  
-*维护者：酱肉Agent*
+*鏈€鍚庢洿鏂帮細2026-03-08*  
+*缁存姢鑰咃細閰辫倝Agent*
+

@@ -1,35 +1,38 @@
-# 命令规范（轻量版）
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-## 命令分类
+# 鍛戒护瑙勮寖锛堣交閲忕増锛?
 
-### 1. 项目管理命令
+## 鍛戒护鍒嗙被
 
-#### 创建新项目
+### 1. 椤圭洰绠＄悊鍛戒护
+
+#### 鍒涘缓鏂伴」鐩?
 
 **COMMAND:** `CreateProject`  
 **SYNTAX:** 
 ``bash
-create_project --name "项目名称" --description "描述"
+create_project --name "椤圭洰鍚嶇О" --description "鎻忚堪"
 ```
 
-**参数说明:**
-- `--name` 项目名称 (必需)
-- `--description` 项目描述 (必需)
-- `--start_date` 开始日期 (可选，默认今天)
+**鍙傛暟璇存槑:**
+- `--name` 椤圭洰鍚嶇О (蹇呴渶)
+- `--description` 椤圭洰鎻忚堪 (蹇呴渶)
+- `--start_date` 寮€濮嬫棩鏈?(鍙€夛紝榛樿浠婂ぉ)
 
-**示例:**
+**绀轰緥:**
 ```bash
-create_project --name "个人博客系统" --description "基于 Python 的个人博客"
+create_project --name "涓汉鍗氬绯荤粺" --description "鍩轰簬 Python 鐨勪釜浜哄崥瀹?
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Project created successfully
 Project ID: BLOG_20260307_001
 Location: F:\openclaw\workspace\projects\BLOG_20260307_001\
 ```
 
-#### 查看项目信息
+#### 鏌ョ湅椤圭洰淇℃伅
 
 **COMMAND:** `ViewProject`  
 **SYNTAX:** 
@@ -37,24 +40,24 @@ Location: F:\openclaw\workspace\projects\BLOG_20260307_001\
 view_project --project_id "PROJECT_ID"
 ```
 
-**参数说明:**
-- `--project_id` 项目 ID (必需)
+**鍙傛暟璇存槑:**
+- `--project_id` 椤圭洰 ID (蹇呴渶)
 
-**示例:**
+**绀轰緥:**
 ```bash
 view_project --project_id "BLOG_20260307_001"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
-项目名称：个人博客系统
-项目 ID: BLOG_20260307_001
-状态：Active
-开始日期：2026-03-07
-当前进度：32%
+椤圭洰鍚嶇О锛氫釜浜哄崥瀹㈢郴缁?
+椤圭洰 ID: BLOG_20260307_001
+鐘舵€侊細Active
+寮€濮嬫棩鏈燂細2026-03-07
+褰撳墠杩涘害锛?2%
 ```
 
-#### 列表项目
+#### 鍒楄〃椤圭洰
 
 **COMMAND:** `ListProjects`  
 **SYNTAX:** 
@@ -62,57 +65,57 @@ view_project --project_id "BLOG_20260307_001"
 list_projects [--status "status"] [--limit number]
 ```
 
-**参数说明:**
-- `--status` 项目状态：active|completed (可选)
-- `--limit` 最多显示数量 (可选，默认 10)
+**鍙傛暟璇存槑:**
+- `--status` 椤圭洰鐘舵€侊細active|completed (鍙€?
+- `--limit` 鏈€澶氭樉绀烘暟閲?(鍙€夛紝榛樿 10)
 
-**示例:**
+**绀轰緥:**
 ```bash
 list_projects --status "active" --limit 5
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Project List (1 projects):
 
-BLOG_20260307_001 | 个人博客系统 | Active | 32%
+BLOG_20260307_001 | 涓汉鍗氬绯荤粺 | Active | 32%
 ```
 
-### 2. 任务管理命令
+### 2. 浠诲姟绠＄悊鍛戒护
 
-#### 创建任务
+#### 鍒涘缓浠诲姟
 
 **COMMAND:** `CreateTask`  
 **SYNTAX:** 
 ```bash
-create_task --project_id "PROJECT_ID" --task_name "名称" --assignee "Agent 名称"
+create_task --project_id "PROJECT_ID" --task_name "鍚嶇О" --assignee "Agent 鍚嶇О"
 ```
 
-**参数说明:**
-- `--project_id` 项目 ID (必需)
-- `--task_name` 任务名称 (必需)
-- `--assignee` 分配给 (必需：酱肉 | 豆沙 | 酸菜)
-- `--priority` 优先级 (可选：high|medium|low，默认 medium)
-- `--due_date` 截止日期 (可选)
+**鍙傛暟璇存槑:**
+- `--project_id` 椤圭洰 ID (蹇呴渶)
+- `--task_name` 浠诲姟鍚嶇О (蹇呴渶)
+- `--assignee` 鍒嗛厤缁?(蹇呴渶锛氶叡鑲?| 璞嗘矙 | 閰歌彍)
+- `--priority` 浼樺厛绾?(鍙€夛細high|medium|low锛岄粯璁?medium)
+- `--due_date` 鎴鏃ユ湡 (鍙€?
 
-**示例:**
+**绀轰緥:**
 ```bash
 create_task --project_id "BLOG_20260307_001" \
-            --task_name "用户认证 API" \
-            --assignee "酱肉" \
+            --task_name "鐢ㄦ埛璁よ瘉 API" \
+            --assignee "閰辫倝" \
             --priority "high" \
             --due_date "2026-03-09"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Task created successfully
 Task ID: TASK_20260307_001
-Assigned to: 酱肉
+Assigned to: 閰辫倝
 Status: pending_assignment
 ```
 
-#### 更新任务状态
+#### 鏇存柊浠诲姟鐘舵€?
 
 **COMMAND:** `UpdateTaskStatus`  
 **SYNTAX:** 
@@ -120,44 +123,44 @@ Status: pending_assignment
 update_task_status --task_id "TASK_ID" --status "new_status"
 ```
 
-**参数说明:**
-- `--task_id` 任务 ID (必需)
-- `--status` 新状态 (必需：pending|in_progress|completed|blocked)
+**鍙傛暟璇存槑:**
+- `--task_id` 浠诲姟 ID (蹇呴渶)
+- `--status` 鏂扮姸鎬?(蹇呴渶锛歱ending|in_progress|completed|blocked)
 
-**示例:**
+**绀轰緥:**
 ```bash
 update_task_status --task_id "TASK_20260307_001" --status "in_progress"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Task status updated successfully
 TASK_20260307_001: in_progress
 Updated at: 2026-03-07T10:35:00Z
 ```
 
-#### 查询任务进度
+#### 鏌ヨ浠诲姟杩涘害
 
 **COMMAND:** `QueryTaskProgress`  
 **SYNTAX:** 
 ```bash
-query_task_progress --project_id "PROJECT_ID" [--assignee "Agent 名称"]
+query_task_progress --project_id "PROJECT_ID" [--assignee "Agent 鍚嶇О"]
 ```
 
-**参数说明:**
-- `--project_id` 项目 ID (必需)
-- `--assignee` Agent 名称过滤 (可选)
+**鍙傛暟璇存槑:**
+- `--project_id` 椤圭洰 ID (蹇呴渶)
+- `--assignee` Agent 鍚嶇О杩囨护 (鍙€?
 
-**示例:**
+**绀轰緥:**
 ```bash
-query_task_progress --project_id "BLOG_20260307_001" --assignee "酱肉"
+query_task_progress --project_id "BLOG_20260307_001" --assignee "閰辫倝"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Task Progress Report:
 Project: BLOG_20260307_001
-Agent: 酱肉
+Agent: 閰辫倝
 Total Tasks: 4
 Completed: 1
 In Progress: 2
@@ -165,9 +168,9 @@ Blocked: 1
 Progress: 50%
 ```
 
-### 3. 日志和报告命令
+### 3. 鏃ュ織鍜屾姤鍛婂懡浠?
 
-#### 生成日报
+#### 鐢熸垚鏃ユ姤
 
 **COMMAND:** `GenerateDailyReport`  
 **SYNTAX:** 
@@ -175,22 +178,22 @@ Progress: 50%
 generate_daily_report --project_id "PROJECT_ID" [--date "YYYY-MM-DD"]
 ```
 
-**参数说明:**
-- `--project_id` 项目 ID (必需)
-- `--date` 报告日期 (可选，默认今天)
+**鍙傛暟璇存槑:**
+- `--project_id` 椤圭洰 ID (蹇呴渶)
+- `--date` 鎶ュ憡鏃ユ湡 (鍙€夛紝榛樿浠婂ぉ)
 
-**示例:**
+**绀轰緥:**
 ```bash
 generate_daily_report --project_id "BLOG_20260307_001"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Daily Report Generated
 File: F:\openclaw\workspace\projects\BLOG_20260307_001\progress\daily_reports\daily_20260307.md
 ```
 
-#### 生成周报
+#### 鐢熸垚鍛ㄦ姤
 
 **COMMAND:** `GenerateWeeklyReport`  
 **SYNTAX:** 
@@ -198,42 +201,42 @@ File: F:\openclaw\workspace\projects\BLOG_20260307_001\progress\daily_reports\da
 generate_weekly_report --project_id "PROJECT_ID"
 ```
 
-**参数说明:**
-- `--project_id` 项目 ID (必需)
+**鍙傛暟璇存槑:**
+- `--project_id` 椤圭洰 ID (蹇呴渶)
 
-**示例:**
+**绀轰緥:**
 ```bash
 generate_weekly_report --project_id "BLOG_20260307_001"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Weekly Report Generated
 File: F:\openclaw\workspace\projects\BLOG_20260307_001\progress\weekly_summaries\weekly_W10.md
 ```
 
-### 4. Agent 通信命令
+### 4. Agent 閫氫俊鍛戒护
 
-#### 调用 Agent
+#### 璋冪敤 Agent
 
 **COMMAND:** `InvokeAgent`  
 **SYNTAX:** 
 ```bash
-invoke_agent --agent_name "Agent 名称" --action "操作" --data "JSON 数据"
+invoke_agent --agent_name "Agent 鍚嶇О" --action "鎿嶄綔" --data "JSON 鏁版嵁"
 ```
 
-**参数说明:**
-- `--agent_name` Agent 名称 (必需：酱肉 | 豆沙 | 酸菜)
-- `--action` 操作类型 (必需：allocateTask|queryProgress|reportIssue 等)
-- `--data` 操作数据 (JSON 格式，必需)
+**鍙傛暟璇存槑:**
+- `--agent_name` Agent 鍚嶇О (蹇呴渶锛氶叡鑲?| 璞嗘矙 | 閰歌彍)
+- `--action` 鎿嶄綔绫诲瀷 (蹇呴渶锛歛llocateTask|queryProgress|reportIssue 绛?
+- `--data` 鎿嶄綔鏁版嵁 (JSON 鏍煎紡锛屽繀闇€)
 
-**示例:**
+**绀轰緥:**
 ```bash
-invoke_agent --agent_name "酱肉" --action "allocateTask" \
+invoke_agent --agent_name "閰辫倝" --action "allocateTask" \
              --data '{"task_id":"TASK_001","priority":"high"}'
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Agent invocation sent
 Request ID: req_20260307_001
@@ -241,35 +244,35 @@ Status: pending
 Timeout: 5 seconds
 ```
 
-#### 查询 Agent 状态
+#### 鏌ヨ Agent 鐘舵€?
 
 **COMMAND:** `QueryAgentStatus`  
 **SYNTAX:** 
 ```bash
-query_agent_status --agent_name "Agent 名称"
+query_agent_status --agent_name "Agent 鍚嶇О"
 ```
 
-**参数说明:**
-- `--agent_name` Agent 名称 (必需)
+**鍙傛暟璇存槑:**
+- `--agent_name` Agent 鍚嶇О (蹇呴渶)
 
-**示例:**
+**绀轰緥:**
 ```bash
-query_agent_status --agent_name "酱肉"
+query_agent_status --agent_name "閰辫倝"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Agent Status:
-Name: 酱肉
+Name: 閰辫倝
 Status: online
 Last Activity: 2026-03-07T14:00:00Z
 Active Tasks: 2
 Load: 60%
 ```
 
-### 5. 博客集成命令
+### 5. 鍗氬闆嗘垚鍛戒护
 
-#### 提交日志到博客
+#### 鎻愪氦鏃ュ織鍒板崥瀹?
 
 **COMMAND:** `SubmitLogToBlog`  
 **SYNTAX:** 
@@ -277,16 +280,16 @@ Load: 60%
 submit_log_to_blog --date "YYYY-MM-DD" --status "draft|published"
 ```
 
-**参数说明:**
-- `--date` 日志日期 (必需)
-- `--status` 发布状态 (可选，默认 draft)
+**鍙傛暟璇存槑:**
+- `--date` 鏃ュ織鏃ユ湡 (蹇呴渶)
+- `--status` 鍙戝竷鐘舵€?(鍙€夛紝榛樿 draft)
 
-**示例:**
+**绀轰緥:**
 ```bash
 submit_log_to_blog --date "2026-03-07" --status "published"
 ```
 
-**输出:**
+**杈撳嚭:**
 ```
 Log submitted to blog
 Article ID: ART_20260307_001
@@ -294,30 +297,31 @@ URL: https://yourblog.com/posts/ART_20260307_001
 Status: published
 ```
 
-## 命令执行规范
+## 鍛戒护鎵ц瑙勮寖
 
-### 执行流程
+### 鎵ц娴佺▼
 
 ``yaml
-输入命令:
-  1. 验证命令语法
-  2. 验证参数有效性
-  3. 检查权限
-  4. 执行操作
-  5. 记录日志
-  6. 返回结果
+杈撳叆鍛戒护:
+  1. 楠岃瘉鍛戒护璇硶
+  2. 楠岃瘉鍙傛暟鏈夋晥鎬?
+  3. 妫€鏌ユ潈闄?
+  4. 鎵ц鎿嶄綔
+  5. 璁板綍鏃ュ織
+  6. 杩斿洖缁撴灉
 ```
 
-### 错误处理
+### 閿欒澶勭悊
 
-**错误分类:**
-- 语法错误：命令格式不正确
-- 参数错误：参数无效或缺失
-- 权限错误：无执行权限
-- 执行错误：操作失败
+**閿欒鍒嗙被:**
+- 璇硶閿欒锛氬懡浠ゆ牸寮忎笉姝ｇ‘
+- 鍙傛暟閿欒锛氬弬鏁版棤鏁堟垨缂哄け
+- 鏉冮檺閿欒锛氭棤鎵ц鏉冮檺
+- 鎵ц閿欒锛氭搷浣滃け璐?
 
-**处理方式:**
-- 语法错误 → 显示正确的命令格式
-- 参数错误 → 提示正确的参数格式
-- 权限错误 → 建议申请权限
-- 执行错误 → 显示详细错误信息
+**澶勭悊鏂瑰紡:**
+- 璇硶閿欒 鈫?鏄剧ず姝ｇ‘鐨勫懡浠ゆ牸寮?
+- 鍙傛暟閿欒 鈫?鎻愮ず姝ｇ‘鐨勫弬鏁版牸寮?
+- 鏉冮檺閿欒 鈫?寤鸿鐢宠鏉冮檺
+- 鎵ц閿欒 鈫?鏄剧ず璇︾粏閿欒淇℃伅
+

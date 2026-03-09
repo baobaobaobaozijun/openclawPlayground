@@ -1,25 +1,21 @@
-# 快速启动指南
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-## 🚀 5 分钟快速开始
+# 蹇€熷惎鍔ㄦ寚鍗?
+## 馃殌 5 鍒嗛挓蹇€熷紑濮?
+### 姝ラ 1: 纭閰嶇疆 (1 鍒嗛挓)
 
-### 步骤 1: 确认配置 (1 分钟)
+妫€鏌ユ偍鐨勭幆澧冩槸鍚︽弧瓒宠姹傦細
 
-检查您的环境是否满足要求：
+**鏈嶅姟鍣ㄨ姹?**
+- 鉁?CPU: 2 鏍稿績鎴栨洿楂?- 鉁?鍐呭瓨锛?GB 鎴栨洿楂?- 鉁?瀛樺偍锛?0GB 鎴栨洿楂?- 鉁?Python 3.8+
 
-**服务器要求:**
-- ✅ CPU: 2 核心或更高
-- ✅ 内存：2GB 或更高
-- ✅ 存储：40GB 或更高
-- ✅ Python 3.8+
+**鏈湴寮€鍙戠幆澧?**
+- 鉁?Windows/Linux/Mac
+- 鉁?鍏呰冻鐨勫瓨鍌ㄧ┖闂?- 鉁?Git 宸插畨瑁?
+### 姝ラ 2: 鍒涘缓鐩綍缁撴瀯 (1 鍒嗛挓)
 
-**本地开发环境:**
-- ✅ Windows/Linux/Mac
-- ✅ 充足的存储空间
-- ✅ Git 已安装
-
-### 步骤 2: 创建目录结构 (1 分钟)
-
-执行以下命令创建必要的目录：
+鎵ц浠ヤ笅鍛戒护鍒涘缓蹇呰鐨勭洰褰曪細
 
 ```bash
 # Windows PowerShell
@@ -42,7 +38,7 @@ foreach ($dir in $directories) {
     }
 }
 
-Write-Host "目录结构创建完成！" -ForegroundColor Green
+Write-Host "鐩綍缁撴瀯鍒涘缓瀹屾垚锛? -ForegroundColor Green
 ```
 
 **Linux/Mac:**
@@ -50,17 +46,17 @@ Write-Host "目录结构创建完成！" -ForegroundColor Green
 mkdir -p /opt/openclaw/workspace/team/{guantang,jiangrou,dousha,suancai}/logs
 mkdir -p /opt/openclaw/workspace/communication/{inbox,outbox,archive}
 mkdir -p /opt/openclaw/workspace/{logs,projects,backups}
-echo "目录结构创建完成！"
+echo "鐩綍缁撴瀯鍒涘缓瀹屾垚锛?
 ```
 
-### 步骤 3: 初始化配置文件 (1 分钟)
+### 姝ラ 3: 鍒濆鍖栭厤缃枃浠?(1 鍒嗛挓)
 
-`config.json` 已经优化完成，位于：
+`config.json` 宸茬粡浼樺寲瀹屾垚锛屼綅浜庯細
 ```
 f:\openclaw\workspace-programmer\config.json
 ```
 
-**关键配置检查:**
+**鍏抽敭閰嶇疆妫€鏌?**
 ```json
 {
   "server_optimization": {
@@ -83,34 +79,31 @@ f:\openclaw\workspace-programmer\config.json
 }
 ```
 
-### 步骤 4: 安装依赖 (1 分钟)
+### 姝ラ 4: 瀹夎渚濊禆 (1 鍒嗛挓)
 
-创建 `requirements.txt`:
+鍒涘缓 `requirements.txt`:
 
 ```txt
-# 核心依赖
+# 鏍稿績渚濊禆
 requests==2.31.0
 APScheduler==3.10.4
 python-dotenv==1.0.0
 
-# 数据库（可选，如果使用 SQLite 则不需要额外安装）
-# sqlite3  # Python 内置
+# 鏁版嵁搴擄紙鍙€夛紝濡傛灉浣跨敤 SQLite 鍒欎笉闇€瑕侀澶栧畨瑁咃級
+# sqlite3  # Python 鍐呯疆
 
-# 监控（可选）
+# 鐩戞帶锛堝彲閫夛級
 psutil==5.9.6
 
-# 博客集成（阶段 2）
-# flask==3.0.0  # 如果需要运行博客后端
-```
+# 鍗氬闆嗘垚锛堥樁娈?2锛?# flask==3.0.0  # 濡傛灉闇€瑕佽繍琛屽崥瀹㈠悗绔?```
 
-安装：
-```bash
+瀹夎锛?```bash
 pip install -r requirements.txt
 ```
 
-### 步骤 5: 创建 Agent 日志模板 (1 分钟)
+### 姝ラ 5: 鍒涘缓 Agent 鏃ュ織妯℃澘 (1 鍒嗛挓)
 
-为每个 Agent 创建今日的工作日志文件：
+涓烘瘡涓?Agent 鍒涘缓浠婃棩鐨勫伐浣滄棩蹇楁枃浠讹細
 
 **PowerShell:**
 ```powershell
@@ -121,39 +114,36 @@ foreach ($agent in $agents) {
     $logPath = "F:\openclaw\workspace\team\$agent\logs\daily_$today.md"
     
     $template = @"
-# $($agent.ToUpper()) - 工作日志 $(Get-Date -Format "yyyy-MM-dd")
+# $($agent.ToUpper()) - 宸ヤ綔鏃ュ織 $(Get-Date -Format "yyyy-MM-dd")
 
-## 今日工作
-- [ ] 任务 1
-- [ ] 任务 2
+## 浠婃棩宸ヤ綔
+- [ ] 浠诲姟 1
+- [ ] 浠诲姟 2
 
-## 代码提交
-- \`文件路径\` - 修改说明
+## 浠ｇ爜鎻愪氦
+- \`鏂囦欢璺緞\` - 淇敼璇存槑
 
-## 遇到的问题
+## 閬囧埌鐨勯棶棰?- 
+
+## 鏄庢棩璁″垝
 - 
 
-## 明日计划
-- 
-
-## 工作时长
-- 开始时间：
-- 结束时间：
-- 总计：
-"@
+## 宸ヤ綔鏃堕暱
+- 寮€濮嬫椂闂达細
+- 缁撴潫鏃堕棿锛?- 鎬昏锛?"@
     
     $template | Out-File -FilePath $logPath -Encoding utf8
-    Write-Host "已创建 $agent 的日志模板" -ForegroundColor Green
+    Write-Host "宸插垱寤?$agent 鐨勬棩蹇楁ā鏉? -ForegroundColor Green
 }
 ```
 
 ---
 
-## 📋 第一个工作日流程
+## 馃搵 绗竴涓伐浣滄棩娴佺▼
 
-### 早上 9:00 - 启动 Agent
+### 鏃╀笂 9:00 - 鍚姩 Agent
 
-创建启动脚本 `start_agents.py`:
+鍒涘缓鍚姩鑴氭湰 `start_agents.py`:
 
 ```python
 #!/usr/bin/env python
@@ -164,84 +154,81 @@ import sys
 from datetime import datetime
 
 def start_agent(agent_name):
-    """启动单个 Agent"""
-    print(f"[{datetime.now()}] 启动 {agent_name}...")
+    """鍚姩鍗曚釜 Agent"""
+    print(f"[{datetime.now()}] 鍚姩 {agent_name}...")
     
-    # 这里将来会实例化 Agent
-    # 目前只是打印日志
-    print(f"[{datetime.now()}] ✓ {agent_name} 就绪")
+    # 杩欓噷灏嗘潵浼氬疄渚嬪寲 Agent
+    # 鐩墠鍙槸鎵撳嵃鏃ュ織
+    print(f"[{datetime.now()}] 鉁?{agent_name} 灏辩华")
 
 def main():
-    agents = ['灌汤', '酱肉', '豆沙', '酸菜']
+    agents = ['鐏屾堡', '閰辫倝', '璞嗘矙', '閰歌彍']
     
     print("=" * 50)
-    print("OpenClaw Agent 团队 - 轻量级模式")
+    print("OpenClaw Agent 鍥㈤槦 - 杞婚噺绾фā寮?)
     print("=" * 50)
     
     for agent in agents:
         try:
             start_agent(agent)
         except Exception as e:
-            print(f"[ERROR] {agent} 启动失败：{e}")
+            print(f"[ERROR] {agent} 鍚姩澶辫触锛歿e}")
     
-    print("\n所有 Agent 启动完成！")
-    print("按 Ctrl+C 退出")
+    print("\n鎵€鏈?Agent 鍚姩瀹屾垚锛?)
+    print("鎸?Ctrl+C 閫€鍑?)
     
     try:
         while True:
-            pass  # 保持运行
+            pass  # 淇濇寔杩愯
     except KeyboardInterrupt:
-        print("\n正在关闭 Agent...")
-        print("再见！")
+        print("\n姝ｅ湪鍏抽棴 Agent...")
+        print("鍐嶈锛?)
 
 if __name__ == "__main__":
     main()
 ```
 
-运行：
-```bash
+杩愯锛?```bash
 python start_agents.py
 ```
 
-### 上午工作 - 任务分发
+### 涓婂崍宸ヤ綔 - 浠诲姟鍒嗗彂
 
-**灌汤的工作:**
+**鐏屾堡鐨勫伐浣?**
 
-1. 读取项目需求
-2. 分解任务
-3. 创建任务文件
+1. 璇诲彇椤圭洰闇€姹?2. 鍒嗚В浠诲姟
+3. 鍒涘缓浠诲姟鏂囦欢
 
-示例任务文件 `task_001.json`:
+绀轰緥浠诲姟鏂囦欢 `task_001.json`:
 ```json
 {
   "task_id": "TASK_20260307_001",
   "project_id": "BLOG_20260307_001",
-  "task_name": "博客后端 API 开发",
-  "assignee": "酱肉",
+  "task_name": "鍗氬鍚庣 API 寮€鍙?,
+  "assignee": "閰辫倝",
   "priority": "high",
-  "description": "实现用户认证和文章管理 API",
+  "description": "瀹炵幇鐢ㄦ埛璁よ瘉鍜屾枃绔犵鐞?API",
   "due_date": "2026-03-09",
   "deliverables": [
     {
-      "name": "用户认证 API",
+      "name": "鐢ㄦ埛璁よ瘉 API",
       "path": "backend/api/auth.py"
     }
   ]
 }
 ```
 
-将任务放到酱肉的收件箱：
+灏嗕换鍔℃斁鍒伴叡鑲夌殑鏀朵欢绠憋細
 ```
 F:\openclaw\workspace\communication\inbox\jiangrou\task_001.json
 ```
 
-### 中午 12:00 - 进度检查
-
-**灌汤检查各 Agent 进度:**
+### 涓崍 12:00 - 杩涘害妫€鏌?
+**鐏屾堡妫€鏌ュ悇 Agent 杩涘害:**
 
 ```python
 def check_progress():
-    """检查所有 Agent 的进度"""
+    """妫€鏌ユ墍鏈?Agent 鐨勮繘搴?""
     today = datetime.now().strftime("%Y%m%d")
     
     for agent in ['guantang', 'jiangrou', 'dousha', 'suancai']:
@@ -250,147 +237,127 @@ def check_progress():
         if os.path.exists(log_path):
             with open(log_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-                # 简单分析完成情况
-                completed = content.count('[x]')
+                # 绠€鍗曞垎鏋愬畬鎴愭儏鍐?                completed = content.count('[x]')
                 pending = content.count('[ ]')
-                print(f"{agent}: 完成 {completed} 个任务，待完成 {pending} 个")
+                print(f"{agent}: 瀹屾垚 {completed} 涓换鍔★紝寰呭畬鎴?{pending} 涓?)
         else:
-            print(f"{agent}: 今日日志不存在")
+            print(f"{agent}: 浠婃棩鏃ュ織涓嶅瓨鍦?)
 ```
 
-### 下午 17:00 - 填写日志
+### 涓嬪崍 17:00 - 濉啓鏃ュ織
 
-每个 Agent 更新自己的工作日志：
+姣忎釜 Agent 鏇存柊鑷繁鐨勫伐浣滄棩蹇楋細
 
-**酱肉的日志示例:**
+**閰辫倝鐨勬棩蹇楃ず渚?**
 ```markdown
-# JIANGROU - 工作日志 2026-03-07
+# JIANGROU - 宸ヤ綔鏃ュ織 2026-03-07
 
-## 今日工作
-- [x] 用户认证 API 开发完成
-- [x] 数据库模型设计
-- [x] JWT Token 管理实现
-- [ ] 性能优化（延期到明天）
+## 浠婃棩宸ヤ綔
+- [x] 鐢ㄦ埛璁よ瘉 API 寮€鍙戝畬鎴?- [x] 鏁版嵁搴撴ā鍨嬭璁?- [x] JWT Token 绠＄悊瀹炵幇
+- [ ] 鎬ц兘浼樺寲锛堝欢鏈熷埌鏄庡ぉ锛?
+## 浠ｇ爜鎻愪氦
+- `backend/api/auth.py` - 鏂板鐢ㄦ埛鐧诲綍銆佹敞鍐屾帴鍙?- `backend/models/user.py` - 鐢ㄦ埛鏁版嵁妯″瀷
+- `backend/config.py` - 閰嶇疆鏂囦欢
 
-## 代码提交
-- `backend/api/auth.py` - 新增用户登录、注册接口
-- `backend/models/user.py` - 用户数据模型
-- `backend/config.py` - 配置文件
+## 閬囧埌鐨勯棶棰?- JWT 搴撶増鏈笌 Flask 涓嶅吋瀹?- **瑙ｅ喅鏂规**: 闄嶇骇 PyJWT 鍒?2.6.0
 
-## 遇到的问题
-- JWT 库版本与 Flask 不兼容
-- **解决方案**: 降级 PyJWT 到 2.6.0
+## 鏄庢棩璁″垝
+- 鏂囩珷绠＄悊 API 寮€鍙?- 鏁版嵁搴撴煡璇紭鍖?- 鍗曞厓娴嬭瘯缂栧啓
 
-## 明日计划
-- 文章管理 API 开发
-- 数据库查询优化
-- 单元测试编写
+## 宸ヤ綔鏃堕暱
+- 寮€濮嬫椂闂达細09:30
+- 缁撴潫鏃堕棿锛?7:30
+- 鎬昏锛? 灏忔椂锛堝崍浼?1 灏忔椂锛?```
 
-## 工作时长
-- 开始时间：09:30
-- 结束时间：17:30
-- 总计：7 小时（午休 1 小时）
-```
+### 涓嬪崍 18:00 - 鐢熸垚鏃ユ姤
 
-### 下午 18:00 - 生成日报
-
-**灌汤自动生成项目日报:**
+**鐏屾堡鑷姩鐢熸垚椤圭洰鏃ユ姤:**
 
 ```python
 def generate_daily_report():
-    """生成项目日报"""
+    """鐢熸垚椤圭洰鏃ユ姤"""
     today = datetime.now().strftime("%Y-%m-%d")
     
-    report = f"""# 项目日报 - {today}
+    report = f"""# 椤圭洰鏃ユ姤 - {today}
 
-## 项目信息
-- 项目：个人博客系统
-- 项目 ID: BLOG_{datetime.now().strftime('%Y%m%d')}_001
-- 日期：{today}
-- 整体状态：✅ 正常进行
+## 椤圭洰淇℃伅
+- 椤圭洰锛氫釜浜哄崥瀹㈢郴缁?- 椤圭洰 ID: BLOG_{datetime.now().strftime('%Y%m%d')}_001
+- 鏃ユ湡锛歿today}
+- 鏁翠綋鐘舵€侊細鉁?姝ｅ父杩涜
 
-## 今日概览
+## 浠婃棩姒傝
 """
     
-    # 收集各 Agent 数据
+    # 鏀堕泦鍚?Agent 鏁版嵁
     agents_data = {}
     for agent in ['guantang', 'jiangrou', 'dousha', 'suancai']:
-        # 读取并分析日志
-        # ... 省略具体分析代码
+        # 璇诲彇骞跺垎鏋愭棩蹇?        # ... 鐪佺暐鍏蜂綋鍒嗘瀽浠ｇ爜
         agents_data[agent] = {
             'completed': 3,
             'in_progress': 1,
             'issues': 0
         }
     
-    # 生成表格
-    report += "| Agent | 完成任务 | 进行中 | 遇到问题 |\n"
+    # 鐢熸垚琛ㄦ牸
+    report += "| Agent | 瀹屾垚浠诲姟 | 杩涜涓?| 閬囧埌闂 |\n"
     report += "|-------|---------|--------|----------|\n"
     for agent, data in agents_data.items():
         report += f"| {agent} | {data['completed']} | {data['in_progress']} | {data['issues']} |\n"
     
-    # 保存到文件
-    report_path = f"F:\\openclaw\\workspace\\projects\\BLOG_{datetime.now().strftime('%Y%m%d')}_001\\progress\\daily_{today}.md"
+    # 淇濆瓨鍒版枃浠?    report_path = f"F:\\openclaw\\workspace\\projects\\BLOG_{datetime.now().strftime('%Y%m%d')}_001\\progress\\daily_{today}.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
     
-    print(f"日报已生成：{report_path}")
+    print(f"鏃ユ姤宸茬敓鎴愶細{report_path}")
 ```
 
 ---
 
-## 📅 第一周总结
+## 馃搮 绗竴鍛ㄦ€荤粨
 
-### 周五 17:00 - 生成周报
+### 鍛ㄤ簲 17:00 - 鐢熸垚鍛ㄦ姤
 
 ```python
 def generate_weekly_report():
-    """生成周报"""
+    """鐢熸垚鍛ㄦ姤"""
     week_start = get_week_start_date()
     week_end = get_week_end_date()
     
-    report = f"""# 周报 - {week_start} 至 {week_end}
+    report = f"""# 鍛ㄦ姤 - {week_start} 鑷?{week_end}
 
-## 本周统计
-- 工作天数：5 天
-- 总工作时长：XX 小时
-- 完成任务：XX 个
-- 遇到问题：XX 个
+## 鏈懆缁熻
+- 宸ヤ綔澶╂暟锛? 澶?- 鎬诲伐浣滄椂闀匡細XX 灏忔椂
+- 瀹屾垚浠诲姟锛歑X 涓?- 閬囧埌闂锛歑X 涓?
+## 閲岀▼纰戣揪鎴?鉁?椤圭洰鍚姩
+鉁?鐜鎼缓
+鈴?鍚庣寮€鍙戜腑
 
-## 里程碑达成
-✅ 项目启动
-✅ 环境搭建
-⏳ 后端开发中
-
-## 下周计划
-- 完成后端 API
-- 开始前端开发
-- 准备测试用例
+## 涓嬪懆璁″垝
+- 瀹屾垚鍚庣 API
+- 寮€濮嬪墠绔紑鍙?- 鍑嗗娴嬭瘯鐢ㄤ緥
 """
     
-    # 保存报告
+    # 淇濆瓨鎶ュ憡
     # ...
 ```
 
 ---
 
-## 🎯 阶段 2: 博客集成（未来）
+## 馃幆 闃舵 2: 鍗氬闆嗘垚锛堟湭鏉ワ級
 
-当博客文章模块完成后：
+褰撳崥瀹㈡枃绔犳ā鍧楀畬鎴愬悗锛?
+### 閰嶇疆鍗氬 API
 
-### 配置博客 API
-
-编辑 `.env` 文件：
-```bash
+缂栬緫 `.env` 鏂囦欢锛?```bash
 BLOG_API_URL=https://yourblog.com/api
 BLOG_API_TOKEN=your_secret_token_here
 LOG_SUBMIT_TIME=18:00
 AUTO_PUBLISH=false
 ```
 
-### 启用自动提交
+### 鍚敤鑷姩鎻愪氦
 
-修改 `config.json`:
+淇敼 `config.json`:
 ```json
 {
   "integration": {
@@ -404,7 +371,7 @@ AUTO_PUBLISH=false
 }
 ```
 
-### 运行定时任务
+### 杩愯瀹氭椂浠诲姟
 
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -417,63 +384,54 @@ scheduler.start()
 
 ---
 
-## ❓ 常见问题
+## 鉂?甯歌闂
 
-### Q1: Agent 没有响应怎么办？
+### Q1: Agent 娌℃湁鍝嶅簲鎬庝箞鍔烇紵
 
 **A:** 
-1. 检查收件箱是否有未读消息
-2. 查看日志文件定位错误
-3. 重启对应 Agent
-4. 检查资源使用是否超限
-
-### Q2: 日志文件太大怎么办？
+1. 妫€鏌ユ敹浠剁鏄惁鏈夋湭璇绘秷鎭?2. 鏌ョ湅鏃ュ織鏂囦欢瀹氫綅閿欒
+3. 閲嶅惎瀵瑰簲 Agent
+4. 妫€鏌ヨ祫婧愪娇鐢ㄦ槸鍚﹁秴闄?
+### Q2: 鏃ュ織鏂囦欢澶ぇ鎬庝箞鍔烇紵
 
 **A:**
-1. 检查是否记录了过多调试信息
-2. 确认轮转策略是否生效
-3. 手动归档旧日志
-4. 增加磁盘空间或清理无用文件
-
-### Q3: 如何查看 Agent 的工作状态？
+1. 妫€鏌ユ槸鍚﹁褰曚簡杩囧璋冭瘯淇℃伅
+2. 纭杞浆绛栫暐鏄惁鐢熸晥
+3. 鎵嬪姩褰掓。鏃ф棩蹇?4. 澧炲姞纾佺洏绌洪棿鎴栨竻鐞嗘棤鐢ㄦ枃浠?
+### Q3: 濡備綍鏌ョ湅 Agent 鐨勫伐浣滅姸鎬侊紵
 
 **A:**
-1. 读取当日日志文件
-2. 查看任务完成标记 `[x]` 数量
-3. 检查工作时长记录
-4. 阅读遇到的问题和明日计划
+1. 璇诲彇褰撴棩鏃ュ織鏂囦欢
+2. 鏌ョ湅浠诲姟瀹屾垚鏍囪 `[x]` 鏁伴噺
+3. 妫€鏌ュ伐浣滄椂闀胯褰?4. 闃呰閬囧埌鐨勯棶棰樺拰鏄庢棩璁″垝
 
-### Q4: 服务器内存不足怎么办？
+### Q4: 鏈嶅姟鍣ㄥ唴瀛樹笉瓒虫€庝箞鍔烇紵
 
 **A:**
-1. 停止非必要的服务
-2. 减少 Agent 并发数
-3. 使用 swap 空间（临时方案）
-4. 考虑升级到本地开发
+1. 鍋滄闈炲繀瑕佺殑鏈嶅姟
+2. 鍑忓皯 Agent 骞跺彂鏁?3. 浣跨敤 swap 绌洪棿锛堜复鏃舵柟妗堬級
+4. 鑰冭檻鍗囩骇鍒版湰鍦板紑鍙?
+---
+
+## 馃摎 涓嬩竴姝ラ槄璇?
+瀹屾垚蹇€熷紑濮嬪悗锛屽缓璁槄璇伙細
+
+1. **[杞婚噺绾фā寮忔寚鍗梋(./lightweight-mode.md)** - 娣卞叆浜嗚В浣庨厤鏈嶅姟鍣ㄤ紭鍖?2. **[Agent 閫氫俊鍗忚](./agent-protocol.md)** - 鐞嗚В鏂囦欢鍏变韩閫氫俊
+3. **[鏃ュ織瑙勮寖](./logging-audit.md)** - 瀛︿範鏃ュ織缂栧啓鏍煎紡
+4. **[鍗氬闆嗘垚](./blog-integration.md)** - 鍑嗗闃舵 2 闆嗘垚
 
 ---
 
-## 📚 下一步阅读
+## 馃啒 鑾峰彇甯姪
 
-完成快速开始后，建议阅读：
+濡傞亣鍒伴棶棰橈細
 
-1. **[轻量级模式指南](./lightweight-mode.md)** - 深入了解低配服务器优化
-2. **[Agent 通信协议](./agent-protocol.md)** - 理解文件共享通信
-3. **[日志规范](./logging-audit.md)** - 学习日志编写格式
-4. **[博客集成](./blog-integration.md)** - 准备阶段 2 集成
-
+1. 鏌ョ湅 [optimization-summary.md](./optimization-summary.md) 浜嗚В浼樺寲缁嗚妭
+2. 妫€鏌ユ棩蹇楁枃浠?`F:\openclaw\workspace\logs\`
+3. 鍙傝€?GitHub Issues
+4. 鑱旂郴椤圭洰缁存姢鑰?
 ---
 
-## 🆘 获取帮助
+*绁濇偍浣跨敤鎰夊揩锛?  
+*OpenClaw 鍥㈤槦 - 杞婚噺鐗?v2.0.0*
 
-如遇到问题：
-
-1. 查看 [optimization-summary.md](./optimization-summary.md) 了解优化细节
-2. 检查日志文件 `F:\openclaw\workspace\logs\`
-3. 参考 GitHub Issues
-4. 联系项目维护者
-
----
-
-*祝您使用愉快！*  
-*OpenClaw 团队 - 轻量版 v2.0.0*

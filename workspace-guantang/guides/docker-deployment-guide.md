@@ -1,30 +1,16 @@
-# OpenClaw Agent 团队 - Docker 部署指南
+﻿<!-- Last Modified: 2026-03-08 -->
+<!-- Last Modified (CN): 2026-03-08 -->
 
-## 架构说明
+# OpenClaw Agent 鍥㈤槦 - Docker 閮ㄧ讲鎸囧崡
 
-### 运行环境分布
+## 鏋舵瀯璇存槑
+
+### 杩愯鐜鍒嗗竷
 
 ```
-┌─────────────────────────────────────────────┐
-│  Windows Host (F:\openclaw)                 │
-│  ┌─────────────────────────────────────┐   │
-│  │ 灌汤 (PM)                            │   │
-│  │ 运行：原生 Python/Node.js            │   │
-│  │ 位置：f:\openclaw\workspace          │   │
-│  └─────────────────────────────────────┘   │
-│                                             │
-│  ┌─────────────────────────────────────┐   │
-│  │ Docker Desktop for Windows           │   │
-│  │  ┌───────┐ ┌───────┐ ┌───────┐     │   │
-│  │  │酱肉   │ │豆沙   │ │酸菜   │     │   │
-│  │  │后端   │ │前端   │ │运维   │     │   │
-│  │  │🥩    │ │🍡    │ │🥬    │     │   │
-│  │  └───────┘ └───────┘ └───────┘     │   │
-│  └─────────────────────────────────────┘   │
-└─────────────────────────────────────────────┘
-```
+鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?鈹? Windows Host (F:\openclaw)                 鈹?鈹? 鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?  鈹?鈹? 鈹?鐏屾堡 (PM)                            鈹?  鈹?鈹? 鈹?杩愯锛氬師鐢?Python/Node.js            鈹?  鈹?鈹? 鈹?浣嶇疆锛歠:\openclaw\workspace          鈹?  鈹?鈹? 鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?  鈹?鈹?                                            鈹?鈹? 鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?  鈹?鈹? 鈹?Docker Desktop for Windows           鈹?  鈹?鈹? 鈹? 鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?鈹屸攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?    鈹?  鈹?鈹? 鈹? 鈹傞叡鑲?  鈹?鈹傝眴娌?  鈹?鈹傞吀鑿?  鈹?    鈹?  鈹?鈹? 鈹? 鈹傚悗绔?  鈹?鈹傚墠绔?  鈹?鈹傝繍缁?  鈹?    鈹?  鈹?鈹? 鈹? 鈹傪煡?   鈹?鈹傪煃?   鈹?鈹傪煡?   鈹?    鈹?  鈹?鈹? 鈹? 鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹?    鈹?  鈹?鈹? 鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?  鈹?鈹斺攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹?```
 
-## Docker Compose 配置
+## Docker Compose 閰嶇疆
 
 ### docker-compose.yml
 
@@ -32,23 +18,22 @@
 version: '3.8'
 
 services:
-  # 酱肉 - 后端工程师
-  jiangrou:
+  # 閰辫倝 - 鍚庣宸ョ▼甯?  jiangrou:
     build:
       context: ./jiangrou
       dockerfile: Dockerfile
     container_name: openclaw-jiangrou
     volumes:
-      # 工作日志
+      # 宸ヤ綔鏃ュ織
       - ../workspace/team/jiangrou/logs:/workspace/logs
-      # 任务管理
+      # 浠诲姟绠＄悊
       - ../workspace/team/jiangrou/tasks:/workspace/tasks
-      # 通信目录
+      # 閫氫俊鐩綍
       - ../workspace/communication:/workspace/communication
-      # 代码目录 (可选)
+      # 浠ｇ爜鐩綍 (鍙€?
       - ../code/backend:/workspace/code
     environment:
-      - AGENT_NAME=酱肉
+      - AGENT_NAME=閰辫倝
       - AGENT_ROLE=backend
       - WORKSPACE=/workspace
       - TZ=Asia/Shanghai
@@ -57,32 +42,30 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    # 资源限制
+    # 璧勬簮闄愬埗
     deploy:
       resources:
         limits:
           cpus: '1.0'
           memory: 256M
 
-  # 豆沙 - 前端工程师
-  dousha:
+  # 璞嗘矙 - 鍓嶇宸ョ▼甯?  dousha:
     build:
       context: ./dousha
       dockerfile: Dockerfile
     container_name: openclaw-dousha
     volumes:
-      # 工作日志
+      # 宸ヤ綔鏃ュ織
       - ../workspace/team/dousha/logs:/workspace/logs
-      # 任务管理
+      # 浠诲姟绠＄悊
       - ../workspace/team/dousha/tasks:/workspace/tasks
-      # 设计稿
-      - ../workspace/team/dousha/designs:/workspace/designs
-      # 通信目录
+      # 璁捐绋?      - ../workspace/team/dousha/designs:/workspace/designs
+      # 閫氫俊鐩綍
       - ../workspace/communication:/workspace/communication
-      # 前端代码 (可选)
+      # 鍓嶇浠ｇ爜 (鍙€?
       - ../code/frontend:/workspace/code
     environment:
-      - AGENT_NAME=豆沙
+      - AGENT_NAME=璞嗘矙
       - AGENT_ROLE=frontend
       - WORKSPACE=/workspace
       - TZ=Asia/Shanghai
@@ -97,27 +80,26 @@ services:
           cpus: '1.0'
           memory: 256M
 
-  # 酸菜 - 运维/测试工程师
-  suancai:
+  # 閰歌彍 - 杩愮淮/娴嬭瘯宸ョ▼甯?  suancai:
     build:
       context: ./suancai
       dockerfile: Dockerfile
     container_name: openclaw-suancai
     volumes:
-      # 工作日志
+      # 宸ヤ綔鏃ュ織
       - ../workspace/team/suancai/logs:/workspace/logs
-      # 任务管理
+      # 浠诲姟绠＄悊
       - ../workspace/team/suancai/tasks:/workspace/tasks
-      # 测试脚本
+      # 娴嬭瘯鑴氭湰
       - ../workspace/team/suancai/tests:/workspace/tests
-      # 测试报告
+      # 娴嬭瘯鎶ュ憡
       - ../workspace/team/suancai/reports:/workspace/reports
-      # 通信目录
+      # 閫氫俊鐩綍
       - ../workspace/communication:/workspace/communication
-      # 测试代码
+      # 娴嬭瘯浠ｇ爜
       - ../code/tests:/workspace/tests
     environment:
-      - AGENT_NAME=酸菜
+      - AGENT_NAME=閰歌彍
       - AGENT_ROLE=devops
       - WORKSPACE=/workspace
       - TZ=Asia/Shanghai
@@ -137,56 +119,55 @@ networks:
     driver: bridge
 ```
 
-## 各 Agent 的 Dockerfile
+## 鍚?Agent 鐨?Dockerfile
 
-### 酱肉的 Dockerfile (jiangrou/Dockerfile)
+### 閰辫倝鐨?Dockerfile (jiangrou/Dockerfile)
 
 ```dockerfile
 FROM python:3.9-slim
 
 WORKDIR /workspace
 
-# 安装系统依赖
+# 瀹夎绯荤粺渚濊禆
 RUN apt-get update && apt-get install -y \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 安装 Python 依赖
+# 瀹夎 Python 渚濊禆
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 复制 Agent 代码
+# 澶嶅埗 Agent 浠ｇ爜
 COPY agent.py .
 
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+# 鍋ュ悍妫€鏌?HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "print('OK')" || exit 1
 
 CMD ["python", "agent.py"]
 ```
 
-### 豆沙的 Dockerfile (dousha/Dockerfile)
+### 璞嗘矙鐨?Dockerfile (dousha/Dockerfile)
 
 ```dockerfile
 FROM node:18-alpine
 
 WORKDIR /workspace
 
-# 安装系统依赖
+# 瀹夎绯荤粺渚濊禆
 RUN apk add --no-cache \
     git \
     python3 \
     py3-pip
 
-# 安装前端工具
+# 瀹夎鍓嶇宸ュ叿
 RUN npm install -g npm latest
 
-# 安装 Python 依赖 (用于 Agent 运行时)
+# 瀹夎 Python 渚濊禆 (鐢ㄤ簬 Agent 杩愯鏃?
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# 复制 Agent 代码
+# 澶嶅埗 Agent 浠ｇ爜
 COPY agent.py .
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -195,31 +176,31 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 CMD ["python3", "agent.py"]
 ```
 
-### 酸菜的 Dockerfile (suancai/Dockerfile)
+### 閰歌彍鐨?Dockerfile (suancai/Dockerfile)
 
 ```dockerfile
 FROM python:3.9-alpine
 
 WORKDIR /workspace
 
-# 安装系统依赖
+# 瀹夎绯荤粺渚濊禆
 RUN apk add --no-cache \
     git \
     curl \
     bash
 
-# 安装测试工具
+# 瀹夎娴嬭瘯宸ュ叿
 RUN pip install --no-cache-dir \
     pytest \
     pytest-cov \
     locust \
     requests
 
-# 安装 Python 依赖
+# 瀹夎 Python 渚濊禆
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 复制 Agent 代码
+# 澶嶅埗 Agent 浠ｇ爜
 COPY agent.py .
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -228,133 +209,116 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 CMD ["python", "agent.py"]
 ```
 
-## 快速开始
-
-### 1. 构建所有容器
-
+## 蹇€熷紑濮?
+### 1. 鏋勫缓鎵€鏈夊鍣?
 ```bash
 cd f:\openclaw\workspace-programmer
 
-# 构建所有服务
-docker-compose build
+# 鏋勫缓鎵€鏈夋湇鍔?docker-compose build
 
-# 或单独构建某个服务
-docker-compose build jiangrou
+# 鎴栧崟鐙瀯寤烘煇涓湇鍔?docker-compose build jiangrou
 docker-compose build dousha
 docker-compose build suancai
 ```
 
-### 2. 启动所有服务
-
+### 2. 鍚姩鎵€鏈夋湇鍔?
 ```bash
-# 后台运行
+# 鍚庡彴杩愯
 docker-compose up -d
 
-# 查看日志
+# 鏌ョ湅鏃ュ織
 docker-compose logs -f
 
-# 查看特定服务日志
+# 鏌ョ湅鐗瑰畾鏈嶅姟鏃ュ織
 docker-compose logs -f jiangrou
 ```
 
-### 3. 停止服务
+### 3. 鍋滄鏈嶅姟
 
 ```bash
-# 停止所有
-docker-compose stop
+# 鍋滄鎵€鏈?docker-compose stop
 
-# 停止特定服务
+# 鍋滄鐗瑰畾鏈嶅姟
 docker-compose stop jiangrou
 
-# 删除容器 (数据不会丢失，因为使用了挂载卷)
+# 鍒犻櫎瀹瑰櫒 (鏁版嵁涓嶄細涓㈠け锛屽洜涓轰娇鐢ㄤ簡鎸傝浇鍗?
 docker-compose down
 ```
 
-### 4. 重启服务
+### 4. 閲嶅惎鏈嶅姟
 
 ```bash
-# 重启所有
-docker-compose restart
+# 閲嶅惎鎵€鏈?docker-compose restart
 
-# 重启特定服务
+# 閲嶅惎鐗瑰畾鏈嶅姟
 docker-compose restart dousha
 ```
 
-## 日常管理
+## 鏃ュ父绠＄悊
 
-### 查看容器状态
-
+### 鏌ョ湅瀹瑰櫒鐘舵€?
 ```bash
-# 查看所有容器
-docker-compose ps
+# 鏌ョ湅鎵€鏈夊鍣?docker-compose ps
 
-# 查看详细信息
+# 鏌ョ湅璇︾粏淇℃伅
 docker inspect openclaw-jiangrou
 ```
 
-### 进入容器
+### 杩涘叆瀹瑰櫒
 
 ```bash
-# 进入酱肉的容器
-docker exec -it openclaw-jiangrou /bin/bash
+# 杩涘叆閰辫倝鐨勫鍣?docker exec -it openclaw-jiangrou /bin/bash
 
-# 进入豆沙的容器
-docker exec -it openclaw-dousha /bin/sh
+# 杩涘叆璞嗘矙鐨勫鍣?docker exec -it openclaw-dousha /bin/sh
 
-# 进入酸菜的容器
-docker exec -it openclaw-suancai /bin/bash
+# 杩涘叆閰歌彍鐨勫鍣?docker exec -it openclaw-suancai /bin/bash
 ```
 
-### 资源监控
+### 璧勬簮鐩戞帶
 
 ```bash
-# 查看资源使用
+# 鏌ョ湅璧勬簮浣跨敤
 docker stats
 
-# 查看特定容器
+# 鏌ョ湅鐗瑰畾瀹瑰櫒
 docker stats openclaw-jiangrou
 ```
 
-### 日志管理
+### 鏃ュ織绠＄悊
 
 ```bash
-# 查看所有日志
-docker-compose logs
+# 鏌ョ湅鎵€鏈夋棩蹇?docker-compose logs
 
-# 查看最近 100 行
-docker-compose logs --tail=100
+# 鏌ョ湅鏈€杩?100 琛?docker-compose logs --tail=100
 
-# 实时查看
+# 瀹炴椂鏌ョ湅
 docker-compose logs -f
 
-# 查看特定服务
+# 鏌ョ湅鐗瑰畾鏈嶅姟
 docker-compose logs jiangrou
 ```
 
-## 数据持久化
+## 鏁版嵁鎸佷箙鍖?
+### 鎸傝浇鍗疯鏄?
+鎵€鏈夐噸瑕佹暟鎹兘閫氳繃鎸傝浇鍗蜂繚瀛樺湪涓绘満涓?
 
-### 挂载卷说明
+**閰辫倝:**
+- `F:\openclaw\workspace\team\jiangrou\logs` 鈫?`/workspace/logs`
+- `F:\openclaw\workspace\team\jiangrou\tasks` 鈫?`/workspace/tasks`
 
-所有重要数据都通过挂载卷保存在主机上:
+**璞嗘矙:**
+- `F:\openclaw\workspace\team\dousha\logs` 鈫?`/workspace/logs`
+- `F:\openclaw\workspace\team\dousha\designs` 鈫?`/workspace/designs`
 
-**酱肉:**
-- `F:\openclaw\workspace\team\jiangrou\logs` → `/workspace/logs`
-- `F:\openclaw\workspace\team\jiangrou\tasks` → `/workspace/tasks`
+**閰歌彍:**
+- `F:\openclaw\workspace\team\suancai\logs` 鈫?`/workspace/logs`
+- `F:\openclaw\workspace\team\suancai\tests` 鈫?`/workspace/tests`
+- `F:\openclaw\workspace\team\suancai\reports` 鈫?`/workspace/reports`
 
-**豆沙:**
-- `F:\openclaw\workspace\team\dousha\logs` → `/workspace/logs`
-- `F:\openclaw\workspace\team\dousha\designs` → `/workspace/designs`
-
-**酸菜:**
-- `F:\openclaw\workspace\team\suancai\logs` → `/workspace/logs`
-- `F:\openclaw\workspace\team\suancai\tests` → `/workspace/tests`
-- `F:\openclaw\workspace\team\suancai\reports` → `/workspace/reports`
-
-### 备份策略
+### 澶囦唤绛栫暐
 
 ```bash
-# 备份所有数据
-tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz \
+# 澶囦唤鎵€鏈夋暟鎹?tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz \
     workspace/team/*/logs \
     workspace/team/*/tasks \
     workspace/team/dousha/designs \
@@ -362,67 +326,61 @@ tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz \
     workspace/team/suancai/reports
 ```
 
-## 故障排除
+## 鏁呴殰鎺掗櫎
 
-### 容器无法启动
+### 瀹瑰櫒鏃犳硶鍚姩
 
 ```bash
-# 查看详细错误
+# 鏌ョ湅璇︾粏閿欒
 docker-compose up jiangrou
 
-# 检查 Dockerfile
+# 妫€鏌?Dockerfile
 cat jiangrou/Dockerfile
 
-# 重新构建
+# 閲嶆柊鏋勫缓
 docker-compose build --no-cache jianghou
 ```
 
-### 容器间通信问题
+### 瀹瑰櫒闂撮€氫俊闂
 
 ```bash
-# 检查网络
-docker network ls
+# 妫€鏌ョ綉缁?docker network ls
 
-# 检查容器是否在同一网络
+# 妫€鏌ュ鍣ㄦ槸鍚﹀湪鍚屼竴缃戠粶
 docker network inspect openclaw-network
 ```
 
-### 挂载卷权限问题
-
-**Windows 主机:**
+### 鎸傝浇鍗锋潈闄愰棶棰?
+**Windows 涓绘満:**
 ```powershell
-# 确保目录存在
+# 纭繚鐩綍瀛樺湪
 New-Item -ItemType Directory -Path "F:\openclaw\workspace\team\jiangrou\logs" -Force
 
-# 检查权限
-Get-Acl "F:\openclaw\workspace\team\jiangrou\logs" | Format-List
+# 妫€鏌ユ潈闄?Get-Acl "F:\openclaw\workspace\team\jiangrou\logs" | Format-List
 ```
 
-### 资源不足
+### 璧勬簮涓嶈冻
 
 ```bash
-# 调整资源限制
-# 编辑 docker-compose.yml，修改 deploy.resources.limits
+# 璋冩暣璧勬簮闄愬埗
+# 缂栬緫 docker-compose.yml锛屼慨鏀?deploy.resources.limits
 ```
 
-## 性能优化
+## 鎬ц兘浼樺寲
 
-### 镜像大小优化
+### 闀滃儚澶у皬浼樺寲
 
 ```dockerfile
-# 使用多阶段构建
-FROM python:3.9 as builder
-# ... 构建步骤 ...
+# 浣跨敤澶氶樁娈垫瀯寤?FROM python:3.9 as builder
+# ... 鏋勫缓姝ラ ...
 
 FROM python:3.9-slim
-# 只复制必要文件
-```
+# 鍙鍒跺繀瑕佹枃浠?```
 
-### 启动速度优化
+### 鍚姩閫熷害浼樺寲
 
 ```yaml
-# 使用命名卷而不是绑定挂载
-volumes:
+# 浣跨敤鍛藉悕鍗疯€屼笉鏄粦瀹氭寕杞?volumes:
   jiangrou_logs:
   
 services:
@@ -431,16 +389,15 @@ services:
       - jiangrou_logs:/workspace/logs
 ```
 
-### 内存优化
+### 鍐呭瓨浼樺寲
 
 ```yaml
-# 根据实际需要调整内存限制
-deploy:
+# 鏍规嵁瀹為檯闇€瑕佽皟鏁村唴瀛橀檺鍒?deploy:
   resources:
     limits:
-      memory: 128M  # 降低到实际需要
-```
+      memory: 128M  # 闄嶄綆鍒板疄闄呴渶瑕?```
 
 ---
 
-_Docker 让你的 Agent 团队在隔离、可移植的环境中运行。保持整洁，保持高效。_
+_Docker 璁╀綘鐨?Agent 鍥㈤槦鍦ㄩ殧绂汇€佸彲绉绘鐨勭幆澧冧腑杩愯銆備繚鎸佹暣娲侊紝淇濇寔楂樻晥銆俖
+
