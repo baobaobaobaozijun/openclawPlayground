@@ -16,6 +16,46 @@
 
 ---
 
+## 🏢 Agent 工作空间配置
+
+### 灌汤 (PM)
+- **Workspace**: `F:\openclaw\agent\workspace-guantang`
+- **Code**: `F:\openclaw\code` (共享)
+- **Docker 挂载**: `/app/workspace`
+- **职责**: 产品规划、需求分析、任务分配、进度跟踪
+
+### 酱肉 (后端工程师) 🍖
+- **Workspace**: `F:\openclaw\agent\workspace-jiangrou`
+- **Code**: `F:\openclaw\code\backend`
+- **Docker 挂载**: `/app/workspace` + `/app/backend`
+- **技术栈**: Java 21 + Spring Boot 3.2+ + MySQL 8.0+ + Redis 7.0+
+- **核心职责**:
+  - RESTful API 设计与实现
+  - 数据库架构设计与优化
+  - JWT 认证与权限管理（RBAC）
+  - 性能优化（API < 200ms, DB < 50ms）
+  - 安全加固（SQL 注入防护、XSS/CSRF 防范）
+  - 单元测试覆盖率 ≥ 80%
+- **交付标准**:
+  - API 文档（OpenAPI/Swagger）
+  - 数据库 ER 图和数据字典
+  - 通过 SonarQube 扫描（无 Blocker/Critical 问题）
+  - 方法复杂度 < 10
+
+### 豆沙 (前端工程师) 🍡
+- **Workspace**: `F:\openclaw\agent\workspace-dousha`
+- **Code**: `F:\openclaw\code\frontend`
+- **Docker 挂载**: `/app/workspace` + `/app/frontend`
+- **职责**: Vue 3 开发、TypeScript、UI/UX设计
+
+### 酸菜 (运维工程师) 🥬
+- **Workspace**: `F:\openclaw\agent\workspace-suancai`
+- **Code**: `F:\openclaw\code\deploy` + `F:\openclaw\code\tests`
+- **Docker 挂载**: `/app/workspace` + `/app/deploy` + `/app/tests`
+- **职责**: Docker 部署、CI/CD、监控告警、自动化测试
+
+---
+
 ## 🛠️ 我的 Skills
 
 ### 1. working-logger 📝
