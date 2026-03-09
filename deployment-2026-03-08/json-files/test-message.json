@@ -1,0 +1,9 @@
+{
+  "from": "guantang",
+  "to": "all",
+  "action": "testMessage",
+  "data": {
+    "message": "测试消息",
+    "timestamp": "2026-03-08T12:00:00Z"
+  }
+}

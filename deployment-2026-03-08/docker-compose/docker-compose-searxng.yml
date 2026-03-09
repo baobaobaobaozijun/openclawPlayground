@@ -1,0 +1,46 @@
+services:
+  searxng-jiangrou:
+    image: searxng/searxng:latest
+    container_name: searxng-jiangrou
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./searxng/jiangrou:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8081/
+      - INSTANCE_NAME=jiangrou-tech-search
+    restart: unless-stopped
+    networks:
+      - openclaw-network
+
+  searxng-dousha:
+    image: searxng/searxng:latest
+    container_name: searxng-dousha
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./searxng/dousha:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8082/
+      - INSTANCE_NAME=dousha-design-search
+    restart: unless-stopped
+    networks:
+      - openclaw-network
+
+  searxng-suancai:
+    image: searxng/searxng:latest
+    container_name: searxng-suancai
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./searxng/suancai:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8083/
+      - INSTANCE_NAME=suancai-devops-search
+    restart: unless-stopped
+    networks:
+      - openclaw-network
+
+networks:
+  openclaw-network:
+    driver: bridge

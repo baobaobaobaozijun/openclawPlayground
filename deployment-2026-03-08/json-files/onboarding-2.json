@@ -1,0 +1,12 @@
+{
+  "from": "guantang",
+  "to": "dousha",
+  "action": "allocateTask",
+  "data": {
+    "task_id": "TASK_002",
+    "task_name": "示例任务",
+    "description": "这是一个示例任务",
+    "priority": "medium",
+    "due_date": "2026-03-15"
+  }
+}

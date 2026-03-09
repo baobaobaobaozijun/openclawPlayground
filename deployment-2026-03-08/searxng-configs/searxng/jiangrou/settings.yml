@@ -1,0 +1,22 @@
+# 简化的 SearXNG 配置 - 酱肉技术调研搜索引擎
+use_default_settings: true
+
+general:
+  debug: false
+  instance_name: "Jiangrou Tech Search"
+  enable_metrics: true
+
+search:
+  safe_search: 0
+  autocomplete: 'google'
+  default_lang: ''
+
+server:
+  secret_key: "jiangrou-tech-search-secret-key-2026"
+  limiter: false
+  image_proxy: false
+
+ui:
+  default_theme: simple
+  default_locale: ''
+  infinite_scroll: true
