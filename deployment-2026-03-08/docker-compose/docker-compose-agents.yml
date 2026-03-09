@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    command: openclaw gateway run
+    command: openclaw gateway run --allow-unconfigured
 
   dousha:
     image: ghcr.io/openclaw/openclaw:latest
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    command: openclaw gateway run
+    command: openclaw gateway run --allow-unconfigured
 
   suancai:
     image: ghcr.io/openclaw/openclaw:latest
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    command: openclaw gateway run
+    command: openclaw gateway run --allow-unconfigured
 
 volumes:
   openclaw-data-1:
