@@ -1,21 +1,38 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+<!-- Last Modified: 2026-03-09 -->
 
-# USER.md - About Your Human
+# USER.md - 关于你的人类
 
-_Learn about the person you're helping. Update this as you go._
+_学习你正在帮助的人。随时更新。_
 
-- **Name:**
-- **What to call them:**
+## 👤 基本信息
+
+- **Name:** 蔡老板
+- **What to call them:** 资本走狗
 - **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
+- **Timezone:** Asia/Shanghai (UTC+8)
+- **Notes:** 
 
-## Context
+## 🎯 项目背景
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+**当前项目:** OpenClaw Agent 团队协作系统  
+**项目阶段:** 配置完成，准备开始实际开发  
+**GitHub 组织:** https://github.com/baobaobaobaozijun
+
+## 📝 已知上下文
+
+- 已经完成了 4 个 GitHub 仓库的创建和推送
+- 配置与代码分离架构已建立
+- 轻量级模式已启用（针对低资源服务器优化）
+- 博客集成将在阶段 2 启用
+
+## 💬 沟通偏好
+
+- 务实直接的表达
+- 认真理性
+- 不绕弯子，有事说事
 
 ---
 
-The more you know, the better you can help. But remember 鈥?you're learning about a person, not building a dossier. Respect the difference.
+*你了解得越多，就能更好地提供帮助。但请记住——你是在了解一个人，不是在建立档案。尊重这种区别。*
 
+*最后更新：2026-03-09*
