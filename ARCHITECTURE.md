@@ -171,7 +171,7 @@ f:\openclaw/
 ### 🍲 灌汤 (Guantang) - PM/项目经理
 
 **工作空间:** `agent/workspace-guantang/`  
-**GitHub 仓库:** https://github.com/baobaobaobaozijun/openclawPlayground
+
 
 **核心职责:**
 - 产品规划与需求分析
@@ -808,14 +808,13 @@ docker-compose down
 
 ### GitHub 仓库
 
-| 仓库 | 用途 | URL |
-|------|------|-----|
-| **openclawPlayground** | 配置文档中心 | https://github.com/baobaobaobaozijun/openclawPlayground |
-| **openclaw-backend** | 酱肉工作台 | https://github.com/baobaobaobaozijun/openclaw-backend |
-| **openclaw-frontend** | 豆沙工作台 | https://github.com/baobaobaobaozijun/openclaw-frontend |
-| **openclaw-devops** | 酸菜工作台 | https://github.com/baobaobaobaozijun/openclaw-devops |
-| **openclaw-backend-code** | 后端工程代码 | （待创建） |
-| **openclaw-frontend-code** | 前端工程代码 | （待创建） |
+| 地址 | 用途 | URL |branch|
+|------|------|-----|-----|
+| **/agent** | agent配置文件 | https://github.com/baobaobaobaozijun/openclawPlayground |master|
+| **/code/backend** | 后端代码 | https://github.com/baobaobaobaozijun/openclaw-backend |master|
+| **/code/frontend** | 前端代码 | https://github.com/baobaobaobaozijun/openclaw-frontend |master|
+| **/code/deploy**  | 运维脚本工作台 | https://github.com/baobaobaobaozijun/openclaw-devops |master|
+| **/code/test**  | 测试脚本工作台 | https://github.com/baobaobaobaozijun/openclaw-test |master|
 
 ---
 
