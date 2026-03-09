@@ -1,396 +1,607 @@
 ﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
-# 璞嗘矙 (Dousha) - 瀹屾暣鎶€鏈枃妗?
+# 豆沙 (Dousha) - 完整技术文档
 
-馃崱 **鍓嶇宸ョ▼甯?/ UI/UX璁捐甯?*
-
----
-
-## 馃摎 蹇€熷鑸?
-
-- [韬唤璁ょ煡](./IDENTITY.md) - 鎴戞槸璋?
-- [鑱岃矗瑙勮寖](./ROLE.md) - 鎴戝仛浠€涔?
-- [琛屼负鍑嗗垯](./SOUL.md) - 鎴戝浣曞伐浣?
-- [鎶€鏈爤瑙勮寖](#鎶€鏈爤瑙勮寖) - 浣跨敤浠€涔堟妧鏈?
-- [璁捐鍘熷垯](#uiux-璁捐鍘熷垯) - 璁捐瑙勮寖
-- [寮€鍙戞渶浣冲疄璺礭(#鍓嶇寮€鍙戞渶浣冲疄璺? - 寮€鍙戞寚鍗?
-- [甯歌闂瑙ｅ喅](#甯歌闂涓庤В鍐虫柟妗? - 闂鎺掓煡
+🍡 **前端工程师 / UI/UX 设计师**
 
 ---
 
-## 馃懁 Agent 韬唤
+## 📎 快速导航
 
-**鍚嶇О:** 璞嗘矙  
-**瑙掕壊:** 鍓嶇宸ョ▼甯?/ UI/UX璁捐甯? 
-**鑱岃矗:** 璐熻矗鎵€鏈夊墠绔晫闈㈢殑瀹炵幇銆乁I/UX璁捐銆佷氦浜掍紭鍖?
-
-**鏍稿績閰嶇疆鏂囦欢:**
-- [IDENTITY.md](./IDENTITY.md) - 韬唤璁ょ煡
-- [ROLE.md](./ROLE.md) - 鑱岃矗瑙勮寖
-- [SOUL.md](./SOUL.md) - 琛屼负鍑嗗垯
+- [身份认知](./IDENTITY.md) - 我是谁？
+- [职责规范](./ROLE.md) - 我做什么？
+- [行为准则](./SOUL.md) - 我如何工作？
+- [技术栈规范](#技术栈规范) - 使用什么技术？
+- [开发最佳实践](#开发最佳实践) - 如何做？
+- [常见问题与解决方案](#常见问题与解决) - 问题排查
 
 ---
 
-## 馃捇 鎶€鏈爤瑙勮寖
+## 🏢 Agent 身份
 
-### 鏍稿績鎶€鏈爤
+**名称:** 豆沙  
+**角色:** 前端工程师 / UI/UX 设计师  
+**职责:** 负责所有前端界面开发、UI/UX 设计、用户体验优化
 
-```
-妗嗘灦锛歏ue 3.4+ (Composition API)
-鏋勫缓宸ュ叿锛歏ite 5.x
-璇█锛歍ypeScript 5.x
-鏍峰紡锛歋CSS + Tailwind CSS
-鐘舵€佺鐞嗭細Pinia 2.x
-UI 缁勪欢搴擄細Element Plus / Ant Design Vue
-HTTP 瀹㈡埛绔細Axios
-```
-
-### 瀹屾暣鎶€鏈竻鍗?
-
-| 绫诲埆 | 鎶€鏈€夊瀷 | 鐗堟湰 |
-|------|---------|------|
-| **鍓嶇妗嗘灦** | Vue.js | 3.4+ |
-| **寮€鍙戣瑷€** | TypeScript | 5.x |
-| **鏋勫缓宸ュ叿** | Vite | 5.x |
-| **鐘舵€佺鐞?* | Pinia | 2.x |
-| **璺敱** | Vue Router | 4.x |
-| **UI 妗嗘灦** | Element Plus | 2.x |
-| **CSS 妗嗘灦** | Tailwind CSS | 3.x |
-| **HTTP 搴?* | Axios | 1.x |
-| **浠ｇ爜瑙勮寖** | ESLint, Prettier | - |
-| **娴嬭瘯** | Vitest, Vue Test Utils | - |
+**核心配置文件:**
+- [IDENTITY.md](./IDENTITY.md) - 身份认知
+- [ROLE.md](./ROLE.md) - 职责规范
+- [SOUL.md](./SOUL.md) - 行为准则
 
 ---
 
-## 馃帹 UI/UX璁捐鍘熷垯
+## 💻 技术栈规范
 
-### 1. 鑹插僵瑙勮寖
+### 核心框架
 
-```css
-:root {
-  /* 涓昏壊璋?*/
-  --primary-50: #e3f2fd;
-  --primary-500: #2196f3;
-  --primary-700: #1976d2;
-  
-  /* 鍔熻兘鑹?*/
-  --success: #4caf50;
-  --warning: #ff9800;
-  --error: #f44336;
-  --info: #2196f3;
-}
+| 技术 | 版本 | 用途 | 说明 |
+|------|------|------|------|
+| **Vue.js** | 3.4+ | 前端框架 | Composition API |
+| **TypeScript** | 5.3+ | 编程语言 | 类型安全 |
+| **Vite** | 5.0+ | 构建工具 | 极速开发体验 |
+| **Pinia** | 2.1+ | 状态管理 | Vue 3 官方推荐 |
+
+### UI 框架与组件库
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **Element Plus** | 2.5+ | PC 端组件库 |
+| **Vant** | 4.7+ | 移动端组件库 |
+| **Tailwind CSS** | 3.4+ | 原子化 CSS |
+
+### 工具链
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **Vue Router** | 4.2+ | 路由管理 |
+| **Axios** | 1.6+ | HTTP 客户端 |
+| **ECharts** | 5.4+ | 数据可视化 |
+| **Day.js** | 1.11+ | 日期处理 |
+
+### 设计与协作工具
+
+- **Figma** - UI 设计和原型
+- **UnDraw** - 免费插图资源
+- **IconFont** - 图标库
+- **ColorHunt** - 配色方案
+
+---
+
+## 🏗️ 项目结构规范
+
+```
+frontend/
+├── public/                 # 静态资源
+│   ├── favicon.ico
+│   └── logo.png
+├── src/
+│   ├── assets/            # 项目资源
+│   │   ├── images/
+│   │   ├── fonts/
+│   │   └── styles/       # 全局样式
+│   ├── components/        # 公共组件
+│   │   ├── common/       # 通用组件
+│   │   └── business/     # 业务组件
+│   ├── views/            # 页面组件
+│   │   ├── home/
+│   │   ├── article/
+│   │   └── user/
+│   ├── router/           # 路由配置
+│   │   └── index.ts
+│   ├── stores/           # Pinia 状态管理
+│   │   ├── user.ts
+│   │   └── article.ts
+│   ├── api/              # API 接口
+│   │   ├── article.ts
+│   │   └── user.ts
+│   ├── utils/            # 工具函数
+│   │   ├── request.ts    # Axios 封装
+│   │   └── validate.ts
+│   ├── types/            # TypeScript 类型定义
+│   │   └── index.ts
+│   ├── App.vue          # 根组件
+│   └── main.ts          # 入口文件
+├── .env.development     # 开发环境变量
+├── .env.production      # 生产环境变量
+├── vite.config.ts       # Vite 配置
+├── tsconfig.json        # TypeScript 配置
+└── package.json         # 依赖配置
 ```
 
-### 2. 鍝嶅簲寮忔柇鐐?
+---
 
-```scss
-// 绉诲姩浼樺厛
-$breakpoints: (
-  'sm': 640px,   // 灏忓钩鏉?
-  'md': 768px,   // 骞虫澘
-  'lg': 1024px,  // 妗岄潰
-  'xl': 1280px   // 澶у睆
-);
+## 🔧 开发最佳实践
 
-@mixin respond-to($breakpoint) {
-  @media (min-width: map-get($breakpoints, $breakpoint)) {
-    @content;
-  }
-}
-```
+### 1. Vue 3 Composition API 规范
 
-### 3. 缁勪欢璁捐瑙勮寖
-
-#### 鍗曟枃浠剁粍浠剁粨鏋?
-
-```vue
-<template>
-  <div class="article-card">
-    <h2>{{ article.title }}</h2>
-    <p>{{ article.summary }}</p>
-  </div>
-</template>
-
+**✅ 好的写法:**
+```typescript
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useArticleStore } from '@/stores/article'
+import type { Article } from '@/types'
 
-interface Article {
-  id: number
-  title: string
-  summary: string
-}
-
+// Props
 const props = defineProps<{
-  article: Article
+  articleId: number
 }>()
 
-const formattedDate = computed(() => {
-  return new Date(props.article.createdAt).toLocaleDateString('zh-CN')
+// Emits
+const emit = defineEmits<{
+  (e: 'update', value: Article): void
+}>()
+
+// 响应式数据
+const loading = ref(false)
+const article = ref<Article | null>(null)
+
+// Store
+const articleStore = useArticleStore()
+
+// 计算属性
+const articleTitle = computed(() => {
+ return article.value?.title || '未命名'
+})
+
+// 方法
+async function fetchArticle() {
+  loading.value = true
+  try {
+    article.value = await articleStore.getById(props.articleId)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 生命周期
+onMounted(() => {
+  fetchArticle()
 })
 </script>
 
-<style scoped lang="scss">
-.article-card {
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+<template>
+  <div class="article-detail">
+    <h1>{{ articleTitle }}</h1>
+  </div>
+</template>
+```
+
+### 2. 组件设计规范
+
+**基础组件示例:**
+```vue
+<!-- src/components/common/BaseButton.vue -->
+<script setup lang="ts">
+import type { ButtonType } from '@/types'
+
+interface Props {
+  type?: ButtonType // 'primary' | 'success' | 'warning' | 'danger'
+  size?: 'small' | 'medium' | 'large'
+  disabled?: boolean
+  loading?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'primary',
+  size: 'medium',
+  disabled: false,
+  loading: false
+})
+
+defineEmits<{
+  click: [event: MouseEvent]
+}>()
+</script>
+
+<template>
+  <button
+    :class="['base-button', type, size]"
+    :disabled="disabled || loading"
+    @click="$emit('click', $event)"
+  >
+    <span v-if="loading" class="loading-spinner">Loading...</span>
+    <slot />
+  </button>
+</template>
+
+<style scoped>
+.base-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+ font-weight: 500;
+  transition: all 0.3s;
+}
+
+.primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: #0056b3;
 }
 </style>
 ```
 
----
+### 3. API 调用规范
 
-## 馃捇 鍓嶇寮€鍙戞渶浣冲疄璺?
-
-### 1. Composition API 绀轰緥
-
+**API 封装:**
 ```typescript
-// composables/useArticles.ts
-import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
-import api from '@/api'
+// src/api/article.ts
+import request from '@/utils/request'
+import type { Article, CreateArticleRequest, UpdateArticleRequest } from '@/types'
 
-interface Article {
-  id: number
-  title: string
-  content: string
+export const articleApi = {
+  // 获取文章列表
+  getList(params: { page: number; size: number }) {
+   return request.get<Article[]>('/api/v1/articles', { params })
+  },
+
+  // 获取单篇文章
+  getById(id: number) {
+   return request.get<Article>(`/api/v1/articles/${id}`)
+  },
+
+  // 创建文章
+ create(data: CreateArticleRequest) {
+   return request.post<Article>('/api/v1/articles', data)
+  },
+
+  // 更新文章
+  update(id: number, data: UpdateArticleRequest) {
+   return request.put<Article>(`/api/v1/articles/${id}`, data)
+  },
+
+  // 删除文章
+  delete(id: number) {
+   return request.delete(`/api/v1/articles/${id}`)
+  }
+}
+```
+
+**使用示例:**
+```vue
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { articleApi } from '@/api/article'
+import type { Article } from '@/types'
+
+const articles = ref<Article[]>([])
+const loading = ref(false)
+
+async function loadArticles() {
+  loading.value = true
+  try {
+   const response = await articleApi.getList({ page: 1, size: 10 })
+    articles.value = response.data
+  } catch (error) {
+   console.error('加载文章失败:', error)
+  } finally {
+    loading.value = false
+  }
 }
 
-export function useArticles() {
-  const articles: Ref<Article[]> = ref([])
+onMounted(() => {
+  loadArticles()
+})
+</script>
+```
+
+### 4. 状态管理规范 (Pinia)
+
+```typescript
+// src/stores/article.ts
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import type { Article } from '@/types'
+import { articleApi } from '@/api/article'
+
+export const useArticleStore = defineStore('article', () => {
+  // State
+  const articles = ref<Article[]>([])
+  const currentArticle = ref<Article | null>(null)
   const loading = ref(false)
-  const error = ref<string | null>(null)
-  
-  const fetchArticles = async () => {
+
+  // Actions
+  async function fetchAll() {
     loading.value = true
     try {
-      const response = await api.getArticles()
+     const response = await articleApi.getList({ page: 1, size: 100 })
       articles.value = response.data
-    } catch (e) {
-      error.value = e instanceof Error ? e.message : '鍔犺浇澶辫触'
     } finally {
       loading.value = false
     }
   }
-  
-  const publishedArticles = computed(() => 
-    articles.value.filter(a => a.status === 'published')
-  )
-  
-  return {
-    articles,
-    loading,
-    error,
-    fetchArticles,
-    publishedArticles
+
+  async function fetchById(id: number) {
+    loading.value = true
+    try {
+     const article = await articleApi.getById(id)
+      currentArticle.value = article
+     return article
+    } finally {
+      loading.value = false
+    }
   }
-}
+
+  async function createArticle(data: CreateArticleRequest) {
+   const article = await articleApi.create(data)
+    articles.value.unshift(article)
+   return article
+  }
+
+  // Reset
+  function reset() {
+    articles.value = []
+    currentArticle.value = null
+    loading.value = false
+  }
+
+ return {
+    // State
+    articles,
+    currentArticle,
+    loading,
+    // Actions
+    fetchAll,
+    fetchById,
+   createArticle,
+   reset
+  }
+})
 ```
 
-### 2. Pinia Store
+### 5. 路由配置规范
 
 ```typescript
-// stores/article.ts
-import { defineStore } from 'pinia'
+// src/router/index.ts
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
-interface ArticleState {
-  articles: Article[]
-  loading: boolean
-  error: string | null
-}
-
-export const useArticleStore = defineStore('article', {
-  state: (): ArticleState => ({
-    articles: [],
-    loading: false,
-    error: null
-  }),
-  
-  getters: {
-    articleCount: (state) => state.articles.length,
-    publishedArticles: (state) => 
-      state.articles.filter(a => a.status === 'published')
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'Home',
+   component: () => import('@/views/home/HomeView.vue'),
+    meta: { title: '首页' }
   },
+  {
+    path: '/articles',
+    name: 'ArticleList',
+   component: () => import('@/views/article/ArticleList.vue'),
+    meta: { title: '文章列表' }
+  },
+  {
+    path: '/articles/:id',
+    name: 'ArticleDetail',
+   component: () => import('@/views/article/ArticleDetail.vue'),
+    meta: { title: '文章详情' }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+   component: () => import('@/views/user/LoginView.vue'),
+    meta: { requiresAuth: false }
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
   
-  actions: {
-    async fetchArticles() {
-      this.loading = true
-      try {
-        const response = await api.getArticles()
-        this.articles = response.data
-      } catch (error) {
-        this.error = error instanceof Error ? error.message : '鍔犺浇澶辫触'
-      } finally {
-        this.loading = false
+  if (to.meta.requiresAuth && !token) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
+})
+
+export default router
+```
+
+---
+
+## 🎨 UI/UX 设计规范
+
+### 颜色系统
+
+```css
+/* 主色调 */
+--color-primary: #007bff;
+--color-primary-light: #3395ff;
+--color-primary-dark: #0056b3;
+
+/* 功能色 */
+--color-success: #28a745;
+--color-warning: #ffc107;
+--color-danger: #dc3545;
+--color-info: #17a2b8;
+
+/* 中性色 */
+--color-text-primary: #333333;
+--color-text-secondary: #666666;
+--color-text-disabled: #999999;
+--color-border: #e0e0e0;
+--color-background: #f5f5f5;
+```
+
+### 间距系统
+
+```css
+/* 基于 4px 的倍数 */
+--spacing-xs: 4px;
+--spacing-sm: 8px;
+--spacing-md: 16px;
+--spacing-lg: 24px;
+--spacing-xl: 32px;
+--spacing-2xl: 48px;
+```
+
+### 字体系统
+
+```css
+/* 字号 */
+--font-size-xs: 12px;
+--font-size-sm: 14px;
+--font-size-md: 16px;
+--font-size-lg: 18px;
+--font-size-xl: 20px;
+--font-size-2xl: 24px;
+
+/* 字重 */
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--font-weight-bold: 700;
+```
+
+---
+
+## 📊 常见问题与解决
+
+### Q1: 如何处理跨域问题？
+
+**解决方案:**
+
+在 `vite.config.ts` 中配置代理：
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  server: {
+   port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+       rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   }
 })
 ```
 
-### 3. API 灏佽
+### Q2: 如何实现权限控制？
+
+**解决方案:**
 
 ```typescript
-// api/index.ts
-import axios from 'axios'
-
-const api = axios.create({
-  baseURL: '/api',
-  timeout: 10000
-})
-
-// 璇锋眰鎷︽埅鍣?
-api.interceptors.request.use(config => {
+// 路由守卫
+router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+  const userStore = useUserStore()
+  
+  // 需要登录的路由
+  if (to.meta.requiresAuth && !token) {
+    next({ name: 'Login' })
+   return
   }
-  return config
-})
-
-// 鍝嶅簲鎷︽埅鍣?
-api.interceptors.response.use(
-  response => response.data,
-  error => {
-    if (error.response?.status === 401) {
-      // 鏈巿鏉冿紝璺宠浆鐧诲綍
-      router.push('/login')
+  
+  // 已有 token，获取用户信息
+  if (token && !userStore.user) {
+    try {
+      await userStore.fetchUserInfo()
+    } catch (error) {
+      localStorage.removeItem('token')
+      next({ name: 'Login' })
+     return
     }
-    return Promise.reject(error)
   }
-)
-
-export default api
+  
+  // 检查角色权限
+  if (to.meta.roles && !to.meta.roles.includes(userStore.user?.role)) {
+    next({ name: '403' })
+   return
+  }
+  
+  next()
+})
 ```
 
----
+### Q3: 如何优化首屏加载速度？
 
-## 鈿?鎬ц兘浼樺寲
+**解决方案:**
 
-### 1. 鎳掑姞杞借矾鐢?
-
+1. **路由懒加载:**
 ```typescript
-// router/index.ts
 const routes = [
   {
     path: '/articles',
-    component: () => import('@/views/Articles.vue')
-  },
-  {
-    path: '/about',
-    component: () => import('@/views/About.vue')
+    name: 'ArticleList',
+   component: () => import('@/views/article/ArticleList.vue')
   }
 ]
 ```
 
-### 2. 铏氭嫙鍒楄〃
-
-```vue
-<template>
-  <VirtualList
-    :data-key="'id'"
-    :data-sources="articles"
-    :estimate-size="100"
-  >
-    <template #item="{ source }">
-      <ArticleItem :article="source" />
-    </template>
-  </VirtualList>
-</template>
-```
-
-### 3. 闃叉姈鑺傛祦
-
-```typescript
-import { debounce } from 'lodash-es'
-
-// 鎼滅储妗嗛槻鎶?
-const handleSearch = debounce((query: string) => {
-  api.search(query)
-}, 300)
-
-// 婊氬姩鑺傛祦
-const handleScroll = throttle(() => {
-  loadMore()
-}, 200)
-```
-
----
-
-## 鈿狅笍 甯歌闂涓庤В鍐虫柟妗?
-
-### 闂 1: 璺ㄥ煙闂 (CORS)
-
-**寮€鍙戠幆澧冭В鍐虫柟妗?**
-```typescript
-// vite.config.ts
-export default {
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      }
-    }
-  }
-}
-```
-
-### 闂 2: 鍐呭瓨娉勬紡
-
-**瑙ｅ喅鏂规:**
+2. **组件懒加载:**
 ```vue
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
 
-onMounted(() => {
-  const timer = setInterval(updateData, 1000)
-  window.addEventListener('resize', handleResize)
-  
-  onUnmounted(() => {
-    clearInterval(timer)
-    window.removeEventListener('resize', handleResize)
-  })
-})
+const ChartComponent = defineAsyncComponent(
+  () => import('@/components/ChartComponent.vue')
+)
 </script>
 ```
 
-### 闂 3: 鏍峰紡鍐茬獊
-
-**瑙ｅ喅鏂规:**
+3. **图片懒加载:**
 ```vue
-<!-- 浣跨敤 scoped -->
-<style scoped lang="scss">
-.title {
-  color: blue;
-}
-</style>
+<img 
+  v-lazy="article.coverImage" 
+  :alt="article.title"
+  loading="lazy"
+/>
+```
 
-<!-- 鎴栦娇鐢?CSS Modules -->
-<style module>
-.title {
-  color: blue;
-}
-</style>
+4. **Gzip 压缩:**
+```typescript
+// vite.config.ts
+import compressionPlugin from 'vite-plugin-compression'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+   compressionPlugin({
+      algorithm: 'gzip',
+      threshold: 10240
+    })
+  ]
+})
 ```
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## ✅ 检查清单
 
-### 瀹樻柟鏂囨。
-- [Vue 3 瀹樻柟鏂囨。](https://vuejs.org/)
-- [TypeScript 鏂囨。](https://www.typescriptlang.org/)
-- [Vite 鏂囨。](https://vitejs.dev/)
-- [Pinia 鏂囨。](https://pinia.vuejs.org/)
+### 代码提交前检查
 
-### 璁捐瑙勮寖
-- [Material Design](https://material.io/design)
-- [Ant Design 瑙勮寖](https://ant.design/)
+- [ ] TypeScript 类型检查通过（无编译错误）
+- [ ] ESLint 检查通过
+- [ ] Prettier 格式化完成
+- [ ] 组件都有 Prop 类型定义
+- [ ] 使用了 Composition API（不是 Options API）
+- [ ] 没有 console.log（生产环境）
+- [ ] 关键逻辑有单元测试
+
+### 发布前检查
+
+- [ ] 构建成功且无警告
+- [ ] Bundle 体积分析完成
+- [ ] Lighthouse 性能测试通过
+- [ ] 跨浏览器测试通过
+- [ ] 移动端适配测试通过
+- [ ] 无障碍访问测试通过
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-09*  
-*缁存姢鑰咃細璞嗘矙Agent*
-
+*最后更新：2026-03-09*  
+*维护者：豆沙 (Dousha)*  
+*版本：1.0*

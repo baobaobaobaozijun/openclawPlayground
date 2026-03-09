@@ -1,0 +1,10 @@
+{
+  "from": "guantang",
+  "to": "jiangrou",
+  "action": "testMessage",
+  "data": {
+    "message": "通信测试 - 灌汤检查三位成员在线状态，请回复确认",
+    "timestamp": "2026-03-09T23:15:00+08:00"
+  },
+  "timestamp": "2026-03-09T23:15:00+08:00"
+}

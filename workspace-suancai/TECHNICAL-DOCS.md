@@ -1,457 +1,848 @@
 ﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
-# 閰歌彍 (Suancai) - 瀹屾暣鎶€鏈枃妗?
+# 酸菜 (Suancai) - 完整技术文档
 
-馃ガ **杩愮淮宸ョ▼甯?/ 娴嬭瘯涓撳**
-
----
-
-## 馃摎 蹇€熷鑸?
-
-- [韬唤璁ょ煡](./IDENTITY.md) - 鎴戞槸璋?
-- [鑱岃矗瑙勮寖](./ROLE.md) - 鎴戝仛浠€涔?
-- [琛屼负鍑嗗垯](./SOUL.md) - 鎴戝浣曞伐浣?
-- [DevOps鏈€浣冲疄璺礭(#devops-鏈€浣冲疄璺? - 閮ㄧ讲杩愮淮
-- [鑷姩鍖栨祴璇昡(#鑷姩鍖栨祴璇曟寚鍗? - 娴嬭瘯绛栫暐
-- [鐩戞帶鍛婅](#鐩戞帶涓庡憡璀﹂厤缃? - 绯荤粺鐩戞帶
-- [甯歌闂瑙ｅ喅](#鏁呴殰鎺掓煡鎵嬪唽) - 鏁呴殰澶勭悊
+🥬 **运维工程师 / 测试专家**
 
 ---
 
-## 馃懁 Agent 韬唤
+## 📎 快速导航
 
-**鍚嶇О:** 閰歌彍  
-**瑙掕壊:** 杩愮淮宸ョ▼甯?/ 娴嬭瘯涓撳  
-**鑱岃矗:** 璐熻矗绯荤粺閮ㄧ讲銆丆I/CD銆佺洃鎺у憡璀︺€佽嚜鍔ㄥ寲娴嬭瘯銆佽川閲忕鐞?
-
-**鏍稿績閰嶇疆鏂囦欢:**
-- [IDENTITY.md](./IDENTITY.md) - 韬唤璁ょ煡
-- [ROLE.md](./ROLE.md) - 鑱岃矗瑙勮寖
-- [SOUL.md](./SOUL.md) - 琛屼负鍑嗗垯
+- [身份认知](./IDENTITY.md) - 我是谁？
+- [职责规范](./ROLE.md) - 我做什么？
+- [行为准则](./SOUL.md) - 我如何工作？
+- [技术栈规范](#技术栈规范) - 使用什么技术？
+- [运维最佳实践](#运维最佳实践) - 如何做？
+- [测试最佳实践](#测试最佳实践) - 如何保证质量？
+- [常见问题与解决方案](#常见问题与解决) - 问题排查
 
 ---
 
-## 馃洜锔?DevOps鏈€浣冲疄璺?
+## 🏢 Agent 身份
 
-### 1. Docker瀹瑰櫒鍖栭儴缃?
+**名称:** 酸菜  
+**角色:** 运维工程师 / 测试专家  
+**职责:** 负责 CI/CD、系统监控、自动化测试、质量保障
 
-#### Dockerfile绀轰緥
+**核心配置文件:**
+- [IDENTITY.md](./IDENTITY.md) - 身份认知
+- [ROLE.md](./ROLE.md) - 职责规范
+- [SOUL.md](./SOUL.md) - 行为准则
 
+---
+
+## 💻 技术栈规范
+
+### DevOps 工具链
+
+| 技术 | 版本 | 用途 | 说明 |
+|------|------|------|------|
+| **Docker** | latest | 容器化 | 应用打包和部署 |
+| **Docker Compose** | 2.x | 容器编排 | 多容器应用管理 |
+| **Kubernetes** | 1.29+ | 容器编排 | 生产环境（可选） |
+| **Jenkins** | 2.x | CI/CD | 持续集成和部署 |
+| **GitHub Actions** | latest | CI/CD | GitHub 原生 CI/CD |
+
+### 监控与日志
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **Prometheus** | 2.x | 指标监控 |
+| **Grafana** | 10.x | 可视化面板 |
+| **ELK Stack** | 8.x | 日志收集和分析 |
+| **Alertmanager** | latest | 告警管理 |
+
+### 测试框架
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **JUnit 5** | 5.10+ | Java 单元测试 |
+| **Testcontainers** | 1.19+ | 集成测试 |
+| **Mockito** | 5.x | Mock 框架 |
+| **Gatling** | 3.10+ | 性能测试 |
+| **Playwright** | latest | E2E 测试 |
+
+### 基础设施即代码
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **Terraform** | 1.6+ | 基础设施管理 |
+| **Ansible** | 2.15+ | 配置管理 |
+| **Helm** | 3.x | K8s 包管理 |
+
+---
+
+## 🏗️ 项目结构规范
+
+### 运维目录结构
+
+```
+deploy/
+├── docker/
+│   ├── Dockerfile.backend      # 后端 Docker 镜像
+│   ├── Dockerfile.frontend     # 前端 Docker 镜像
+│   └── docker-compose.yml     # Docker Compose 配置
+├── kubernetes/
+│   ├── namespace.yaml         # 命名空间定义
+│   ├── deployments/
+│   │   ├── backend.yaml
+│   │   └── frontend.yaml
+│   ├── services/
+│   │   ├── backend-svc.yaml
+│   │   └── frontend-svc.yaml
+│   ├── configmaps/
+│   │   └── app-config.yaml
+│   └── secrets/
+│       └── db-secret.yaml
+├── jenkins/
+│   ├── Jenkinsfile             # Jenkins 流水线
+│   └── scripts/
+│       └── deploy.sh
+├── monitoring/
+│   ├── prometheus.yml         # Prometheus 配置
+│   ├── alert-rules.yml        # 告警规则
+│   └── grafana-dashboards/    # Grafana 仪表板
+└── ansible/
+    ├── inventory.ini           # 主机清单
+    ├── playbooks/
+    │   ├── deploy.yml
+    │   └── backup.yml
+    └── roles/
+        ├── webserver/
+        └── database/
+```
+
+### 测试目录结构
+
+```
+tests/
+├── unit/                      # 单元测试
+│   ├── backend/
+│   │   ├── controller/
+│   │   ├── service/
+│   │   └── repository/
+│   └── frontend/
+│       ├── components/
+│       └── utils/
+├── integration/               # 集成测试
+│   ├── api/
+│   │   ├── ArticleApiTest.java
+│   │   └── UserApiTest.java
+│   └── database/
+│       └── DatabaseMigrationTest.java
+├── e2e/                       # E2E 测试
+│   ├── specs/
+│   │   ├── login.spec.ts
+│   │   └── article-management.spec.ts
+│   └── fixtures/
+│       └── test-data.json
+├── performance/               # 性能测试
+│   ├── gatling/
+│   │   └── simulations/
+│   │       └── BlogLoadSimulation.scala
+│   └── jmeter/
+│       └── blog-test-plan.jmx
+└── common/                    # 公共测试工具
+    ├── TestDataFactory.java
+    └── TestBase.java
+```
+
+---
+
+## 🔧 运维最佳实践
+
+### 1. Docker 镜像构建规范
+
+**Dockerfile 示例:**
 ```dockerfile
-# 鍚庣鏈嶅姟 Dockerfile
-FROM eclipse-temurin:21-jdk-alpine as builder
+# backend/Dockerfile
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /app
+
+# 复制 Maven 配置，利用缓存
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# 复制源代码并构建
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -B
 
+# 运行阶段
 FROM eclipse-temurin:21-jre-alpine
+
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
 
+# 安装必要工具
+RUN apk add --no-cache curl jq
+
+# 从构建阶段复制 jar 包
+COPY --from=builder /app/target/blog-backend.jar app.jar
+
+# 创建非 root 用户
+RUN addgroup -g 1001 appgroup && \
+    adduser -u 1001 -G appgroup -D appuser
+USER appuser
+
+# 暴露端口
 EXPOSE 8080
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget -qO- http://localhost:8080/actuator/health || exit 1
 
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+  CMD curl -f http://localhost:8080/actuator/health || exit 1
+
+# 启动应用
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
-#### Docker Compose閰嶇疆
+### 2. Docker Compose 配置规范
 
 ```yaml
+# docker-compose.yml
 version: '3.8'
 
 services:
-  backend:
-    build: ./backend
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - DB_HOST=mysql
-      - REDIS_HOST=redis
-    depends_on:
-      mysql:
-        condition: service_healthy
-      redis:
-        condition: service_started
-    volumes:
-      - ./logs:/app/logs
-    restart: unless-stopped
-    networks:
-      - openclaw-net
-
   mysql:
     image: mysql:8.0
+  container_name: blog-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: openclaw
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: blog
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+      - mysql-data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - blog-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 5s
-      retries: 3
-    networks:
-      - openclaw-net
+     timeout: 5s
+     retries: 5
 
-  redis:
+ redis:
     image: redis:7-alpine
+  container_name: blog-redis
+   command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
+      - redis-data:/data
     networks:
-      - openclaw-net
+      - blog-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+     timeout: 5s
+     retries: 5
+
+  backend:
+    build:
+     context: ../code/backend
+      dockerfile: ../../deploy/docker/Dockerfile.backend
+  container_name: blog-backend
+   ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: blog
+      DB_USERNAME: blog_user
+      DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    depends_on:
+      mysql:
+       condition: service_healthy
+     redis:
+       condition: service_healthy
+    networks:
+      - blog-network
+   restart: unless-stopped
+
+  frontend:
+    build:
+     context: ../code/frontend
+      dockerfile: ../../deploy/docker/Dockerfile.frontend
+  container_name: blog-frontend
+   ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - blog-network
+   restart: unless-stopped
 
 volumes:
-  mysql_data:
-  redis_data:
+  mysql-data:
+ redis-data:
 
 networks:
-  openclaw-net:
+  blog-network:
     driver: bridge
 ```
 
-### 2. CI/CD娴佺▼璁捐
+### 3. Jenkins Pipeline 配置
 
-#### GitHub Actions宸ヤ綔娴?
-
-```yaml
-name: Java CI/CD Pipeline
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+```groovy
+// Jenkinsfile
+pipeline {
+   agent any
     
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: test_password
-          MYSQL_DATABASE: test_db
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-        ports:
-          - 3306:3306
-      
-      redis:
-        image: redis:7-alpine
-        options: >-
-          --health-cmd="redis-cli ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-        ports:
-          - 6379:6379
-
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
-    
-    - name: Build with Maven
-      run: mvn clean compile
-    
-    - name: Run tests
-      run: mvn test
-    
-    - name: Code coverage
-      run: mvn jacoco:report
-    
-    - name: Upload coverage
-      uses: codecov/codecov-action@v3
-      with:
-        file: target/site/jacoco/jacoco.xml
-
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Deploy to server
-      run: |
-        ssh user@server "cd /app && docker-compose pull && docker-compose up -d"
-```
-
----
-
-## 馃И 鑷姩鍖栨祴璇曟寚鍗?
-
-### 1. 鍗曞厓娴嬭瘯 (JUnit 5)
-
-```java
-@SpringBootTest
-class ArticleServiceTest {
-    
-    @Autowired
-    private ArticleService articleService;
-    
-    @MockBean
-    private ArticleRepository articleRepository;
-    
-    @Test
-    void shouldCreateArticle() {
-        // Given
-        ArticleCreateRequest request = new ArticleCreateRequest();
-        request.setTitle("娴嬭瘯鏂囩珷");
-        request.setContent("鍐呭");
-        
-        when(articleRepository.save(any(Article.class)))
-            .thenAnswer(invocation -> {
-                Article a = invocation.getArgument(0);
-                a.setId(1L);
-                return a;
-            });
-        
-        // When
-        ArticleResponse response = articleService.create(request);
-        
-        // Then
-        assertThat(response.getId()).isEqualTo(1L);
-        assertThat(response.getTitle()).isEqualTo("娴嬭瘯鏂囩珷");
+    environment {
+        DOCKER_REGISTRY = 'registry.example.com'
+        IMAGE_VERSION = "${BUILD_NUMBER}"
     }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+               git branch: 'main', 
+                    url: 'https://github.com/your-repo/blog.git'
+            }
+        }
+        
+        stage('Build Backend') {
+            steps {
+                dir('code/backend') {
+                    sh 'mvn clean package -DskipTests'
+                }
+            }
+        }
+        
+        stage('Unit Tests') {
+            steps {
+                dir('code/backend') {
+                   sh'mvn test'
+                }
+            }
+          post {
+               always {
+                   junit 'code/backend/target/surefire-reports/*.xml'
+               }
+           }
+        }
+        
+        stage('Integration Tests') {
+            steps {
+                script {
+                   // 启动测试环境
+                    dockerCompose.build()
+                   dockerCompose.up()
+                }
+            }
+          post {
+               always {
+                   dockerCompose.down()
+               }
+           }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                   docker.build("${DOCKER_REGISTRY}/blog-backend:${IMAGE_VERSION}", 
+                               "deploy/docker")
+                }
+            }
+        }
+        
+        stage('Push to Registry') {
+            steps {
+                script {
+                   docker.withRegistry("https://${DOCKER_REGISTRY}", 'docker-credentials') {
+                       docker.image("${DOCKER_REGISTRY}/blog-backend:${IMAGE_VERSION}").push()
+                   }
+                }
+            }
+        }
+        
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                sh '''
+                    kubectl set image deployment/blog-backend \
+                        blog-backend=${DOCKER_REGISTRY}/blog-backend:${IMAGE_VERSION}
+                '''
+            }
+        }
+    }
+    
+  post {
+       success {
+          echo 'Pipeline completed successfully!'
+       }
+       failure {
+          echo 'Pipeline failed! Sending notification...'
+           // 发送通知逻辑
+       }
+   }
 }
 ```
 
-### 2. 闆嗘垚娴嬭瘯 (Testcontainers)
-
-```java
-@Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ArticleApiIntegrationTest {
-    
-    @Container
-    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test");
-    
-    @Container
-    static RedisContainer<?> redis = new RedisContainer<>("redis:7-alpine");
-    
-    @DynamicPropertySource
-    static void configureTestProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mysql::getJdbcUrl);
-        registry.add("spring.datasource.username", mysql::getUsername);
-        registry.add("spring.datasource.password", mysql::getPassword);
-        registry.add("spring.data.redis.host", redis::getHost);
-        registry.add("spring.data.redis.port", () -> redis.getMappedPort(6379).toString());
-    }
-    
-    @Autowired
-    private TestRestTemplate restTemplate;
-    
-    @Test
-    void shouldCreateAndRetrieveArticle() {
-        // Given
-        ArticleCreateRequest request = new ArticleCreateRequest();
-        request.setTitle("闆嗘垚娴嬭瘯鏂囩珷");
-        
-        // When
-        ResponseEntity<ArticleResponse> createResponse = restTemplate.postForEntity(
-            "/api/articles", request, ArticleResponse.class);
-        
-        Long articleId = createResponse.getBody().getId();
-        
-        // Then
-        ResponseEntity<ArticleResponse> getResponse = restTemplate.getForEntity(
-            "/api/articles/" + articleId, ArticleResponse.class);
-        
-        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(getResponse.getBody().getTitle()).isEqualTo("闆嗘垚娴嬭瘯鏂囩珷");
-    }
-}
-```
-
-### 3. 鎬ц兘娴嬭瘯 (JMeter/Gatling)
-
-```scala
-// Gatling 鎬ц兘娴嬭瘯鑴氭湰
-class ArticleSimulation extends Simulation {
-  
-  val httpProtocol = http
-    .baseUrl("http://localhost:8080")
-    .acceptHeader("application/json")
-    .contentTypeHeader("application/json")
-  
-  val scn = scenario("Article API Load Test")
-    .exec(http("Get Articles")
-      .get("/api/articles"))
-    .pause(1)
-    .exec(http("Create Article")
-      .post("/api/articles")
-      .body(StringBody("""{"title": "娴嬭瘯", "content": "鍐呭"}"""))
-      .asJson)
-  
-  setUp(
-    scn.inject(
-      rampUsersPerSec(1).to(10).during(2.minutes),
-      constantUsersPerSec(10).during(5.minutes)
-    ).protocols(httpProtocol)
-  ).assertions(
-    global.responseTime.percentile3.lte(500),
-    global.successfulRequests.percent.is(100)
-  )
-}
-```
-
----
-
-## 馃搳 鐩戞帶涓庡憡璀﹂厤缃?
-
-### 1. Spring Boot Actuator
-
-```yaml
-# application.yml
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-  endpoint:
-    health:
-      show-details: always
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-```
-
-### 2. Prometheus鐩戞帶鎸囨爣
+### 4. Prometheus 监控配置
 
 ```yaml
 # prometheus.yml
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+rule_files:
+  - alert-rules.yml
 
 scrape_configs:
-  - job_name: 'spring-boot'
-    metrics_path: '/actuator/prometheus'
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'backend'
+   metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['backend:8080']
+
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['mysqld-exporter:9104']
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
 ```
 
-### 3. Grafana浠〃鏉?
-
-鍏抽敭鐩戞帶闈㈡澘:
-- **JVM 鎸囨爣**: 鍐呭瓨浣跨敤銆丟C 娆℃暟銆佺嚎绋嬫暟
-- **HTTP 璇锋眰**: QPS銆佸搷搴旀椂闂淬€侀敊璇巼
-- **鏁版嵁搴?*: 杩炴帴姹犵姸鎬併€佹煡璇㈣€楁椂
-- **缂撳瓨**: Redis 鍛戒腑鐜囥€佸唴瀛樹娇鐢?
-
-### 4. 鍛婅瑙勫垯
+### 5. Grafana 告警规则
 
 ```yaml
-# alerting-rules.yml
+# alert-rules.yml
 groups:
-  - name: application_alerts
+  - name: blog-alerts
     rules:
+      - alert: BackendDown
+       expr: up{job="backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "后端服务宕机"
+          description: "后端服务 {{ $labels.instance }} 已宕机超过 1 分钟"
+
       - alert: HighErrorRate
-        expr: sum(rate(http_server_requests_seconds_count{status=~"5.."}[5m])) 
-              / sum(rate(http_server_requests_seconds_count[5m])) > 0.05
+       expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "错误率过高"
+          description: "API 错误率超过 5% (当前值：{{ $value }})"
+
+      - alert: HighResponseTime
+       expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
         for: 5m
+        labels:
+          severity: warning
         annotations:
-          summary: "閿欒鐜囪繃楂?({{ $value | humanizePercentage }})"
-      
-      - alert: SlowResponse
-        expr: histogram_quantile(0.95, rate(http_server_requests_seconds_bucket[5m])) > 2
-        for: 10m
+          summary: "响应时间过长"
+          description: "P95 响应时间超过 1 秒 (当前值：{{ $value }}s)"
+
+      - alert: DatabaseConnectionPoolExhausted
+       expr: hikaricp_connections_active / hikaricp_connections_max > 0.9
+        for: 2m
+        labels:
+          severity: critical
         annotations:
-          summary: "P95 鍝嶅簲鏃堕棿瓒呰繃 2 绉?
+          summary: "数据库连接池即将耗尽"
+          description: "数据库连接池使用率超过 90% (当前值：{{ $value | humanizePercentage }})"
 ```
 
 ---
 
-## 馃攳 鏁呴殰鎺掓煡鎵嬪唽
+## 🧪 测试最佳实践
 
-### 鎺掓煡娴佺▼
+### 1. 单元测试规范 (JUnit 5)
 
+```java
+// ArticleServiceTest.java
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+class ArticleServiceTest {
+
+    @Mock
+    private ArticleRepository articleRepository;
+
+    @InjectMocks
+    private ArticleServiceImpl articleService;
+
+    @Test
+    @DisplayName("创建文章 - 成功场景")
+    void createArticle_Success() {
+        // Given
+        CreateArticleRequest request = new CreateArticleRequest(
+            "测试标题", 
+            "测试内容", 
+            1L
+        );
+        
+        Article savedArticle = Article.builder()
+           .id(1L)
+           .title(request.getTitle())
+           .content(request.getContent())
+           .authorId(request.getAuthorId())
+           .build();
+
+        when(articleRepository.save(any(Article.class)))
+           .thenReturn(savedArticle);
+
+        // When
+        ArticleVO result = articleService.create(request);
+
+        // Then
+        assertNotNull(result);
+       assertEquals(1L, result.getId());
+       assertEquals("测试标题", result.getTitle());
+       verify(articleRepository, times(1)).save(any(Article.class));
+    }
+
+    @Test
+    @DisplayName("获取文章 - 文章不存在")
+    void getById_NotFound() {
+        // Given
+        Long articleId = 999L;
+        when(articleRepository.findById(articleId))
+           .thenThrow(new ResourceNotFoundException("文章不存在"));
+
+        // When & Then
+        assertThrows(ResourceNotFoundException.class, () -> {
+          articleService.getById(articleId);
+        });
+    }
+
+    @Test
+    @DisplayName("更新文章 - 乐观锁冲突")
+    void updateArticle_OptimisticLockConflict() {
+        // Given
+       UpdateArticleRequest request = new UpdateArticleRequest(
+            "新标题", 
+            "新内容", 
+           1
+        );
+        
+        when(articleRepository.findById(1L))
+           .thenReturn(Optional.of(createArticle()));
+        when(articleRepository.save(any()))
+           .thenThrow(new OptimisticLockingFailureException("版本冲突"));
+
+        // When & Then
+        assertThrows(OptimisticLockingFailureException.class, () -> {
+          articleService.update(1L, request);
+        });
+    }
+}
 ```
-1. 鐜拌薄纭 鈫?2. 鏌ョ湅鐩戞帶 鈫?3. 妫€鏌ユ棩蹇?鈫?4. 瀹氫綅闂 鈫?5. 瀹炴柦淇 鈫?6. 楠岃瘉缁撴灉
+
+### 2. 集成测试规范 (Testcontainers)
+
+```java
+// ArticleApiIntegrationTest.java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@ActiveProfiles("test")
+class ArticleApiIntegrationTest {
+
+    @Container
+    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0")
+       .withDatabaseName("test_db")
+       .withUsername("test")
+       .withPassword("test");
+
+    @Container
+    static RedisContainer<?> redis = new RedisContainer<>("redis:7-alpine");
+
+    @DynamicPropertySource
+    static void configureTestProperties(DynamicPropertyRegistry registry) {
+      registry.add("spring.datasource.url", mysql::getJdbcUrl);
+      registry.add("spring.datasource.username", mysql::getUsername);
+      registry.add("spring.datasource.password", mysql::getPassword);
+      registry.add("spring.redis.host", redis::getHost);
+      registry.add("spring.redis.port", () -> redis.getMappedPort(6379).toString());
+    }
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    @DisplayName("文章 CRUD 集成测试")
+    void articleCRUD_IntegrationTest() {
+        // Create
+        CreateArticleRequest createRequest = new CreateArticleRequest(
+           "集成测试文章", 
+           "这是测试内容", 
+           1L
+        );
+        
+        ResponseEntity<ArticleVO> createResponse = restTemplate.postForEntity(
+           "/api/v1/articles", 
+          createRequest, 
+           ArticleVO.class
+        );
+        
+       assertEquals(HttpStatus.CREATED, createResponse.getStatusCode());
+       assertNotNull(createResponse.getBody());
+       Long articleId = createResponse.getBody().getId();
+
+        // Read
+        ResponseEntity<ArticleVO> getResponse = restTemplate.getForEntity(
+           "/api/v1/articles/" + articleId, 
+           ArticleVO.class
+        );
+        
+       assertEquals(HttpStatus.OK, getResponse.getStatusCode());
+       assertEquals("集成测试文章", getResponse.getBody().getTitle());
+
+        // Update
+       UpdateArticleRequest updateRequest = new UpdateArticleRequest(
+           "更新后的标题", 
+           "更新后的内容", 
+           1
+        );
+        
+      restTemplate.put("/api/v1/articles/" + articleId, updateRequest);
+
+        // Verify update
+        ResponseEntity<ArticleVO> getAfterUpdate = restTemplate.getForEntity(
+           "/api/v1/articles/" + articleId, 
+           ArticleVO.class
+        );
+        
+       assertEquals("更新后的标题", getAfterUpdate.getBody().getTitle());
+
+        // Delete
+      restTemplate.delete("/api/v1/articles/" + articleId);
+
+        // Verify delete
+        ResponseEntity<ArticleVO> getAfterDelete = restTemplate.getForEntity(
+           "/api/v1/articles/" + articleId, 
+           ArticleVO.class
+        );
+        
+       assertEquals(HttpStatus.NOT_FOUND, getAfterDelete.getStatusCode());
+    }
+}
 ```
 
-### 甯歌闂
+### 3. 性能测试规范 (Gatling)
 
-#### 闂 1: 搴旂敤鍚姩澶辫触
+```scala
+// BlogLoadSimulation.scala
+class BlogLoadSimulation extends Simulation {
 
-**鎺掓煡姝ラ:**
-```bash
-# 1. 鏌ョ湅瀹瑰櫒鏃ュ織
-docker-compose logs backend
+  val httpProtocol = http
+    .baseUrl("http://localhost:8080")
+    .acceptHeader("application/json")
+    .contentTypeHeader("application/json")
 
-# 2. 妫€鏌ョ鍙ｅ崰鐢?
-netstat -tlnp | grep 8080
+  val headers = Map(
+    "Authorization" -> "Bearer ${token}"
+  )
 
-# 3. 楠岃瘉鏁版嵁搴撹繛鎺?
-docker-compose exec backend java -jar app.jar --debug
+  // 场景 1: 浏览文章列表
+  val browseArticles = scenario("Browse Articles")
+    .exec(
+      http("Get Articles")
+        .get("/api/v1/articles?page=0&size=10")
+        .headers(headers)
+        .check(status.is(200))
+    )
 
-# 4. 妫€鏌?JVM 鍐呭瓨
-docker stats
+  // 场景 2: 查看文章详情
+  val viewArticleDetail = scenario("View Article Detail")
+    .exec(
+      http("Get Article")
+        .get("/api/v1/articles/${articleId}")
+        .headers(headers)
+        .check(status.is(200))
+    )
+   .feed(feeder)
+
+  // 场景 3: 创建文章
+  val createArticle = scenario("Create Article")
+    .exec(
+      http("Create Article")
+        .post("/api/v1/articles")
+        .headers(headers)
+        .body(StringBody("""{"title": "${title}", "content": "${content}", "authorId": 1}"""))
+        .asJson
+        .check(status.is(201))
+    )
+   .feed(articleFeeder)
+
+  // 负载配置
+  setUp(
+    browseArticles.inject(
+     constantUsersPerSec(10).during(60),
+      rampUsersPerSec(10).to(50).during(120)
+    ),
+    viewArticleDetail.inject(
+     constantUsersPerSec(5).during(60),
+      rampUsersPerSec(5).to(20).during(120)
+    ),
+  createArticle.inject(
+     constantUsersPerSec(1).during(60),
+      rampUsersPerSec(1).to(5).during(120)
+    )
+  ).protocols(httpProtocol)
+   .assertions(
+     global.responseTime.max.lt(500),
+     global.successfulRequests.percent.lte(99)
+   )
+}
 ```
 
-#### 闂 2: 鏁版嵁搴撹繛鎺ヨ秴鏃?
+---
 
-**瑙ｅ喅鏂规:**
+## 📊 常见问题与解决
+
+### Q1: 如何实现蓝绿部署？
+
+**解决方案:**
+
 ```yaml
+# Kubernetes 蓝绿部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-backend-blue
+spec:
+ replicas: 3
+  selector:
+   matchLabels:
+      app: blog-backend
+      version: blue
+  template:
+   metadata:
+      labels:
+        app: blog-backend
+        version: blue
+    spec:
+     containers:
+        - name: backend
+          image: registry.example.com/blog-backend:v1.0.0
+         ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-backend
+spec:
+  selector:
+    app: blog-backend
+    version: blue  # 切换到 green 即可完成蓝绿切换
+  ports:
+    - port: 80
+      targetPort: 8080
+```
+
+### Q2: 如何处理数据库迁移？
+
+**解决方案:**
+
+使用 Flyway 进行数据库版本管理：
+
+```xml
+<!-- pom.xml -->
+<dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-core</artifactId>
+</dependency>
+```
+
+```properties
 # application.yml
 spring:
-  datasource:
-    hikari:
-      connection-timeout: 30000
-      maximum-pool-size: 20
-      idle-timeout: 600000
+ flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
 ```
 
-#### 闂 3: 鍐呭瓨娉勬紡
+```sql
+-- V1__create_articles_table.sql
+CREATE TABLE article (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   title VARCHAR(200) NOT NULL,
+   content TEXT NOT NULL,
+    author_id BIGINT NOT NULL,
+   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-**璇婃柇鏂规硶:**
+-- V2__add_view_count.sql
+ALTER TABLE article ADD COLUMN view_count INT DEFAULT 0;
+```
+
+### Q3: 如何配置分布式链路追踪？
+
+**解决方案:**
+
+添加 SkyWalking 或 Jaeger：
+
+```xml
+<!-- SkyWalking Agent -->
+<dependency>
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>apm-toolkit-trace</artifactId>
+    <version>9.0.0</version>
+</dependency>
+```
+
+启动时添加 Agent：
 ```bash
-# 瀵煎嚭鍫嗚浆鍌?
-jmap -dump:format=b,file=heap.hprof <pid>
-
-# 浣跨敤 MAT 鍒嗘瀽
-# 鏌ユ壘鍐呭瓨娉勬紡鐐?
+java -javaagent:/path/to/skywalking-agent.jar \
+     -Dskywalking.agent.service_name=blog-backend \
+     -Dskywalking.collector.backend_service=skywalking-oap:11800 \
+     -jar app.jar
 ```
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## ✅ 检查清单
 
-### 瀹樻柟鏂囨。
-- [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
-- [Prometheus 鏂囨。](https://prometheus.io/docs/)
-- [Docker 鏂囨。](https://docs.docker.com/)
-- [JUnit 5 鐢ㄦ埛鎸囧崡](https://junit.org/junit5/docs/current/user-guide/)
+### 发布前检查
 
-### 鏈€浣冲疄璺?
-- [The Twelve-Factor App](https://12factor.net/)
-- [Google SRE Handbook](https://sre.google/sre-book/)
+- [ ] 所有单元测试通过
+- [ ] 集成测试通过
+- [ ] 性能测试达标（P95 < 500ms）
+- [ ] Docker 镜像构建成功
+- [ ] 健康检查端点正常
+- [ ] 监控告警配置完成
+- [ ] 回滚方案已准备
+- [ ] 数据库备份已完成
+
+### 日常巡检
+
+- [ ] CPU 使用率 < 70%
+- [ ] 内存使用率 < 80%
+- [ ] 磁盘使用率 < 85%
+- [ ] 错误日志无异常增长
+- [ ] API 响应时间正常
+- [ ] 数据库连接池使用正常
+- [ ] Redis 缓存命中率正常
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-09*  
-*缁存姢鑰咃細閰歌彍Agent*
-
+*最后更新：2026-03-09*  
+*维护者：酸菜 (Suancai)*  
+*版本：1.0*

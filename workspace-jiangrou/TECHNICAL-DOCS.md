@@ -1,307 +1,391 @@
 ﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
-# 閰辫倝 (Jiangrou) - 瀹屾暣鎶€鏈枃妗?
+# 酱肉 (Jiangrou) - 完整技术文档
 
-馃ォ **鍚庣宸ョ▼甯?/ 绯荤粺鏋舵瀯甯?*
-
----
-
-## 馃摎 蹇€熷鑸?
-
-- [韬唤璁ょ煡](./IDENTITY.md) - 鎴戞槸璋?
-- [鑱岃矗瑙勮寖](./ROLE.md) - 鎴戝仛浠€涔?
-- [琛屼负鍑嗗垯](./SOUL.md) - 鎴戝浣曞伐浣?
-- [鎶€鏈爤瑙勮寖](#鎶€鏈爤瑙勮寖) - 浣跨敤浠€涔堟妧鏈?
-- [寮€鍙戞渶浣冲疄璺礭(#寮€鍙戞渶浣冲疄璺? - 濡備綍鍋?
-- [甯歌闂瑙ｅ喅](#甯歌闂涓庤В鍐虫柟妗? - 闂鎺掓煡
+🍖 **后端工程师 / 系统架构师**
 
 ---
 
-## 馃懁 Agent 韬唤
+## 📎 快速导航
 
-**鍚嶇О:** 閰辫倝  
-**瑙掕壊:** 鍚庣宸ョ▼甯?/ 绯荤粺鏋舵瀯甯? 
-**鑱岃矗:** 璐熻矗鎵€鏈夊悗绔笟鍔′唬鐮佺殑瀹炵幇銆佹暟鎹簱璁捐銆佺郴缁熸灦鏋?
-
-**鏍稿績閰嶇疆鏂囦欢:**
-- [IDENTITY.md](./IDENTITY.md) - 韬唤璁ょ煡
-- [ROLE.md](./ROLE.md) - 鑱岃矗瑙勮寖
-- [SOUL.md](./SOUL.md) - 琛屼负鍑嗗垯
+- [身份认知](./IDENTITY.md) - 我是谁？
+- [职责规范](./ROLE.md) - 我做什么？
+- [行为准则](./SOUL.md) - 我如何工作？
+- [技术栈规范](#技术栈规范) - 使用什么技术？
+- [开发最佳实践](#开发最佳实践) - 如何做？
+- [常见问题与解决方案](#常见问题与解决) - 问题排查
 
 ---
 
-## 馃捇 鎶€鏈爤瑙勮寖
+## 🏢 Agent 身份
 
-### 鏍稿績鎶€鏈爤
+**名称:** 酱肉  
+**角色:** 后端工程师 / 系统架构师  
+**职责:** 负责所有后端业务代码的实现、数据库设计、系统架构
+
+**核心配置文件:**
+- [IDENTITY.md](./IDENTITY.md) - 身份认知
+- [ROLE.md](./ROLE.md) - 职责规范
+- [SOUL.md](./SOUL.md) - 行为准则
+
+---
+
+## 💻 技术栈规范
+
+### 语言与框架
+
+| 技术 | 版本 | 用途 | 说明 |
+|------|------|------|------|
+| **Java** | 21 (LTS) | 主要编程语言 | 必须使用 LTS 版本 |
+| **Spring Boot** | 3.2+ | Web 框架 | 提供 RESTful API |
+| **Spring Security** | 6.x | 安全框架 | JWT 认证、权限管理 |
+| **MyBatis-Plus** | 3.5+ | ORM 框架 | 数据访问层 |
+
+### 数据库
+
+| 技术 | 版本 | 用途 | 说明 |
+|------|------|------|------|
+| **MySQL** | 8.0+ | 主数据库 | InnoDB 引擎 |
+| **Redis** | 7.0+ | 缓存/会话存储 | 支持集群模式 |
+
+### 工具链
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **Maven** | 3.9+ | 构建工具 |
+| **Git** | latest | 版本控制 |
+| **Docker** | latest | 容器化部署 |
+| **SonarQube** | latest | 代码质量扫描 |
+
+---
+
+## 🏗️ 项目结构规范
 
 ```
-璇█锛欽ava 21 (LTS)
-妗嗘灦锛歋pring Boot 3.2+
-鏋勫缓宸ュ叿锛歁aven 3.9+ / Gradle 8+
-JVM: OpenJDK 21 (HotSpot)
+backend/
+├── src/main/java/com/example/blog/
+│   ├── controller/           # REST API 控制器层
+│   ├── service/              # 业务逻辑层
+│   │   └── impl/            # 服务实现
+│   ├── repository/          # 数据访问层（DAO）
+│   ├── entity/              # 实体类（数据库表映射）
+│   ├── dto/                 # 数据传输对象
+│   ├── vo/                  # 视图对象（返回给前端）
+│   ├── config/              # 配置类
+│   ├── security/            # 安全相关（JWT、认证）
+│   ├── exception/           # 自定义异常
+│   ├── util/                # 工具类
+│   └── BlogApplication.java # 启动类
+├── src/main/resources/
+│   ├── application.yml     # 主配置文件
+│   ├── application-dev.yml  # 开发环境配置
+│   ├── application-prod.yml # 生产环境配置
+│   └── mapper/              # MyBatis XML 映射文件
+└── pom.xml                 # Maven 依赖配置
 ```
-
-### 瀹屾暣鎶€鏈竻鍗?
-
-| 绫诲埆 | 鎶€鏈€夊瀷 | 鐗堟湰 |
-|------|---------|------|
-| **缂栫▼璇█** | Java | 21 (LTS) |
-| **Web 妗嗘灦** | Spring Boot | 3.2+ |
-| **Spring 鐢熸€?* | Spring MVC, Spring Data JPA, Spring Security | 6.x |
-| **鏁版嵁搴?* | MySQL | 8.0+ |
-| **缂撳瓨** | Redis | 7.0+ |
-| **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ |
-| **璁よ瘉** | Spring Security + JWT | - |
-| **API 鏂囨。** | SpringDoc OpenAPI (Swagger) | 2.x |
-| **娴嬭瘯** | JUnit 5, Mockito, Testcontainers | 5.10+ |
-| **鏋勫缓宸ュ叿** | Maven | 3.9+ |
-| **瀹瑰櫒鍖?* | Docker, Docker Compose | - |
 
 ---
 
-## 馃彈锔?寮€鍙戞渶浣冲疄璺?
+## 🔧 开发最佳实践
 
-### 1. RESTful API 璁捐瑙勮寖
+### 1. RESTful API 设计规范
 
-#### Controller 绀轰緥
+**URL 命名:**
+```java
+// ✅ 好的设计
+GET    /api/v1/articles          // 获取文章列表
+POST   /api/v1/articles          // 创建文章
+GET    /api/v1/articles/{id}     // 获取单篇文章
+PUT    /api/v1/articles/{id}     // 更新文章
+DELETE /api/v1/articles/{id}     // 删除文章
 
+// ❌ 差的设计
+GET    /api/v1/getArticles       // 动词出现在 URL 中
+POST   /api/v1/createArticle     
+```
+
+**Controller 示例:**
 ```java
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping("/api/v1/articles")
 @RequiredArgsConstructor
 public class ArticleController {
     
     private final ArticleService articleService;
     
     @GetMapping
-    public ResponseEntity<Page<ArticleResponse>> getArticles(Pageable pageable) {
-        return ResponseEntity.ok(articleService.findAll(pageable));
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<ArticleResponse> getArticle(@PathVariable Long id) {
-        return ResponseEntity.ok(articleService.findById(id));
+    public ResponseEntity<Page<ArticleVO>> getArticles(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+       return ResponseEntity.ok(articleService.findAll(page, size));
     }
     
     @PostMapping
-    public ResponseEntity<ArticleResponse> createArticle(
-            @Valid @RequestBody ArticleCreateRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(articleService.create(request));
+    public ResponseEntity<ArticleVO> createArticle(
+        @RequestBody @Validated CreateArticleRequest request
+    ) {
+       return ResponseEntity.status(HttpStatus.CREATED)
+            .body(articleService.create(request));
     }
 }
 ```
 
-#### 缁熶竴鍝嶅簲鏍煎紡
+### 2. 统一响应格式
 
 ```java
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponse<T> {
-    private boolean success;
+    private Integer code;
     private String message;
     private T data;
-    private LocalDateTime timestamp;
     
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(true, "鎿嶄綔鎴愬姛", data, LocalDateTime.now());
+       return new ApiResponse<>(200, "success", data);
     }
     
     public static <T> ApiResponse<T> error(String message) {
-        return new ApiResponse<>(false, message, null, LocalDateTime.now());
+       return new ApiResponse<>(500, message, null);
     }
 }
 ```
 
-### 2. 鏁版嵁搴撹璁″師鍒?
-
-#### Entity 绀轰緥
+### 3. 异常处理规范
 
 ```java
-@Entity
-@Table(name = "articles")
-@Data
-@EntityListeners(AuditingEntityListener.class)
-public class Article {
+@RestControllerAdvice
+public class GlobalExceptionHandler {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handleNotFound(ResourceNotFoundException e) {
+       return ApiResponse.error(e.getMessage());
+    }
     
-    @Column(nullable = false, length = 200)
-    private String title;
-    
-    @Column(columnDefinition = "TEXT")
-    private String content;
-    
-    @Enumerated(EnumType.STRING)
-    private ArticleStatus status = ArticleStatus.DRAFT;
-    
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-    
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-}
-
-public enum ArticleStatus {
-    DRAFT, PUBLISHED, ARCHIVED
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResponse<Map<String, String>> handleValidationErrors(
+        MethodArgumentNotValidException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+       ex.getBindingResult().getFieldErrors().forEach(error -> 
+            errors.put(error.getField(), error.getDefaultMessage())
+        );
+       return ApiResponse.error("验证失败");
+    }
 }
 ```
 
-### 3. Service 灞傚疄鐜?
+### 4. 数据库设计规范
+
+**表命名:**
+- ✅ `user`, `article`, `comment` (单数)
+- ❌ `users`, `articles`, `comments` (复数)
+
+**必填字段:**
+```sql
+CREATE TABLE article (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键 ID',
+   title VARCHAR(200) NOT NULL COMMENT '标题',
+   content TEXT NOT NULL COMMENT '内容',
+    author_id BIGINT NOT NULL COMMENT '作者 ID',
+    status TINYINT DEFAULT 1 COMMENT '状态：0-草稿，1-发布',
+    view_count INT DEFAULT 0 COMMENT '浏览量',
+   created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    INDEX idx_author (author_id),
+    INDEX idx_status_created (status, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章表';
+```
+
+### 5. 日志规范
 
 ```java
+@Slf4j
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ArticleService {
+public class ArticleServiceImpl implements ArticleService {
     
-    private final ArticleRepository articleRepository;
-    
-    public Page<ArticleResponse> findAll(Pageable pageable) {
-        return articleRepository.findByStatus(ArticleStatus.PUBLISHED, pageable)
-                .map(this::toResponse);
-    }
-    
+    @Override
     @Transactional
-    public ArticleResponse create(ArticleCreateRequest request) {
-        Article article = new Article();
-        article.setTitle(request.getTitle());
-        article.setContent(request.getContent());
-        return toResponse(articleRepository.save(article));
+    public ArticleVO create(CreateArticleRequest request) {
+        log.info("开始创建文章，标题：{}", request.getTitle());
+        
+       try {
+            Article article = convertToEntity(request);
+            articleRepository.save(article);
+            
+            log.info("文章创建成功，ID: {}", article.getId());
+           return convertToVO(article);
+        } catch (Exception e) {
+            log.error("创建文章失败", e);
+            throw new BusinessException("创建文章失败");
+        }
     }
 }
 ```
 
-### 4. 鎬ц兘浼樺寲
+---
 
-#### 缂撳瓨閰嶇疆
+## 📊 常见问题与解决
 
+### Q1: JWT Token 如何实现？
+
+**解决方案:**
+
+1. **添加依赖:**
+```xml
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+</dependency>
+```
+
+2. **JWT 工具类:**
 ```java
-@Service
-public class ArticleService {
+@Component
+public class JwtUtil {
     
-    @Cacheable(value = "articles", key = "#id")
-    public ArticleResponse findById(Long id) {
-        // ...
+    @Value("${jwt.secret}")
+    private String secretKey;
+    
+    @Value("${jwt.expiration}")
+    private Long expiration;
+    
+    public String generateToken(UserDetails userDetails) {
+       return Jwts.builder()
+            .setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + expiration))
+            .signWith(SignatureAlgorithm.HS256, secretKey)
+            .compact();
     }
     
-    @CacheEvict(value = "articles", key = "#id")
-    @Transactional
-    public void delete(Long id) {
-        // ...
+    public Boolean validateToken(String token) {
+       try {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+           return true;
+        } catch (Exception e) {
+           return false;
+        }
     }
 }
 ```
 
-### 5. 瀹夊叏閰嶇疆
+### Q2: 如何处理跨域问题？
+
+**解决方案:**
 
 ```java
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+public class CorsConfig {
     
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .build();
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+       config.addAllowedOriginPattern("*");
+       config.addAllowedHeader("*");
+       config.addAllowedMethod("*");
+       config.setAllowCredentials(true);
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+       source.registerCorsConfiguration("/**", config);
+        
+       return new CorsFilter(source);
     }
 }
 ```
 
----
+### Q3: 如何实现 Redis 缓存？
 
-## 鈿狅笍 甯歌闂涓庤В鍐虫柟妗?
+**解决方案:**
 
-### 闂 1: 鏁版嵁搴撹繛鎺ユ睜鑰楀敖
-
-**閿欒淇℃伅:**
+1. **添加依赖:**
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
 ```
-HikariPool-1 - Connection is not available, request timed out after 30000ms
-```
 
-**瑙ｅ喅鏂规:**
+2. **配置 Redis:**
 ```yaml
-# application.yml
 spring:
-  datasource:
-    hikari:
-      maximum-pool-size: 20
-      minimum-idle: 10
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
+ redis:
+    host: localhost
+   port: 6379
+    password: your_password
+    database: 0
+    lettuce:
+     pool:
+       max-active: 8
+       max-idle: 8
+        min-idle: 0
 ```
 
-### 闂 2: N+1 鏌ヨ闂
-
-**閿欒绀轰緥:**
-```java
-// 鉂?浼氬鑷?N+1 鏌ヨ
-List<Article> articles = articleRepository.findAll();
-for (Article article : articles) {
-    User author = article.getAuthor(); // 姣忔閮芥煡璇㈡暟鎹簱
-}
-```
-
-**姝ｇ‘鍋氭硶:**
-```java
-// 鉁?浣跨敤 JOIN FETCH
-@Query("SELECT a FROM Article a JOIN FETCH a.author")
-List<Article> findAllWithAuthor();
-```
-
-### 闂 3: 浜嬪姟澶辨晥
-
-**甯歌鍘熷洜:**
-- 鍚岀被涓柟娉曡皟鐢ㄧ粫杩囦簨鍔′唬鐞?
-- 寮傚父琚崟鑾锋湭閲嶆柊鎶涘嚭
-
-**瑙ｅ喅鏂规:**
+3. **使用缓存:**
 ```java
 @Service
-public class ArticleService {
+public class ArticleServiceImpl implements ArticleService {
     
     @Autowired
-    private ArticleService self; // 娉ㄥ叆鑷韩
+    private RedisTemplate<String, Object> redisTemplate;
     
-    public void createArticle() {
-        // ...
-        self.notifyAuthor(); // 閫氳繃浠ｇ悊璋冪敤锛岀‘淇濅簨鍔＄敓鏁?
-    }
-    
-    @Transactional
-    public void notifyAuthor() {
-        // ...
+    @Override
+    public ArticleVO getById(Long id) {
+        // 先查缓存
+        String key = "article:" + id;
+        ArticleVO cached = (ArticleVO) redisTemplate.opsForValue().get(key);
+       if (cached != null) {
+           return cached;
+        }
+        
+        // 缓存未命中，查数据库
+        Article article = articleRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("文章不存在"));
+        ArticleVO vo = convertToVO(article);
+        
+        // 写入缓存（30 分钟过期）
+       redisTemplate.opsForValue().set(key, vo, 30, TimeUnit.MINUTES);
+        
+       return vo;
     }
 }
 ```
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## 📝 检查清单
 
-### 瀹樻柟鏂囨。
-- [Spring Boot 瀹樻柟鏂囨。](https://spring.io/projects/spring-boot)
-- [Spring Framework 鍙傝€冩枃妗(https://docs.spring.io/spring-framework/docs/current/reference/html/)
-- [Hibernate ORM 鎸囧崡](https://hibernate.org/orm/documentation/)
+### 代码提交前检查
 
-### 鏈€浣冲疄璺?
-- [Spring Boot 鏈€浣冲疄璺礭(https://github.com/spring-projects/spring-boot/wiki)
-- [RESTful API 璁捐鎸囧崡](https://restfulapi.net/)
+- [ ] 代码通过 SonarQube 扫描（无 Blocker/Critical 问题）
+- [ ] 单元测试覆盖率 > 80%
+- [ ] 所有 API 都有对应的测试用例
+- [ ] 代码格式化（使用 IDEA 默认格式）
+- [ ] 没有 System.out.println，使用 Logger
+- [ ] 敏感信息（密码、密钥）已移除
+
+### 发布前检查
+
+- [ ] 数据库迁移脚本已准备
+- [ ] 配置文件已更新（生产环境）
+- [ ] API 文档已更新（Swagger）
+- [ ] 性能测试通过（响应时间 < 200ms）
+- [ ] 回滚方案已准备
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-09*  
-*缁存姢鑰咃細閰辫倝Agent*
-
+*最后更新：2026-03-09*  
+*维护者：酱肉 (Jiangrou)*  
+*版本：1.0*
