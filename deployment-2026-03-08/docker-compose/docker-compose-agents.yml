@@ -13,7 +13,7 @@ services:
     volumes:
       - openclaw-data-1:/home/node
       - F:\openclaw\code\backend:/app/backend
-      - F:\openclaw\workspace-jiangrou:/app/workspace
+      - F:\openclaw\agent\workspace-jiangrou:/app/workspace
     restart: unless-stopped
     networks:
       - openclaw-network
@@ -33,7 +33,7 @@ services:
     volumes:
       - openclaw-data-2:/home/node
       - F:\openclaw\code\frontend:/app/frontend
-      - F:\openclaw\workspace-dousha:/app/workspace
+      - F:\openclaw\agent\workspace-dousha:/app/workspace
     restart: unless-stopped
     networks:
       - openclaw-network
@@ -54,7 +54,7 @@ services:
       - openclaw-data-3:/home/node
       - F:\openclaw\code\deploy:/app/deploy
       - F:\openclaw\code\tests:/app/tests
-      - F:\openclaw\workspace-suancai:/app/workspace
+      - F:\openclaw\agent\workspace-suancai:/app/workspace
     restart: unless-stopped
     networks:
       - openclaw-network
