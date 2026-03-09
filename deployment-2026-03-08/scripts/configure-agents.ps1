@@ -1,5 +1,5 @@
-# OpenClaw Agent API 密钥配置脚本
-# 功能：为三个 Agent 容器配置阿里云 API 密钥
+# OpenClaw Agent API Key Configuration Script
+# Configure API keys for three Agent containers
 
 $ErrorActionPreference = "Stop"
 
@@ -33,12 +33,12 @@ function Write-Header {
 
 function Write-Success {
     param([string]$Text)
-    Write-Host "✅ $Text" -ForegroundColor Green
+    Write-Host "[OK] $Text" -ForegroundColor Green
 }
 
-function Write-Error-Custom {
+function Write-Fail {
     param([string]$Text)
-    Write-Host "❌ $Text" -ForegroundColor Red
+    Write-Host "[FAIL] $Text" -ForegroundColor Red
 }
 
 function Configure-Agent {
@@ -49,39 +49,34 @@ function Configure-Agent {
         [string]$BaseUrl
     )
     
-    Write-Host "配置 $ContainerName ..." -ForegroundColor Yellow
+    Write-Host "Configuring $ContainerName ..." -ForegroundColor Yellow
     
     try {
-        # 创建配置目录
+        # Create config directory
         docker exec $ContainerName mkdir -p /home/node/.openclaw/agents/main/agent | Out-Null
         
-        # 创建 auth-profiles.json
+        # Create auth-profiles.json
         $configJson = @"
-{
-  "model": "$Model",
-  "provider": "bailian",
-  "apiKey": "$ApiKey",
-  "baseUrl": "$BaseUrl"
-}
+{"model":"$Model","provider":"bailian","apiKey":"$ApiKey","baseUrl":"$BaseUrl"}
 "@
         
-        # 使用 base64 编码避免转义问题
+        # Use base64 encoding to avoid escape issues
         $bytes = [System.Text.Encoding]::UTF8.GetBytes($configJson)
         $base64 = [Convert]::ToBase64String($bytes)
         
         docker exec $ContainerName bash -c "echo '$base64' | base64 -d > /home/node/.openclaw/agents/main/agent/auth-profiles.json" | Out-Null
         
-        # 验证配置
+        # Verify configuration
         $result = docker exec $ContainerName cat /home/node/.openclaw/agents/main/agent/auth-profiles.json
         if ($result -and $result -match $Model) {
-            Write-Success "$ContainerName 配置成功"
+            Write-Success "$ContainerName configured successfully"
             return $true
         } else {
-            Write-Error-Custom "$ContainerName 配置验证失败"
+            Write-Fail "$ContainerName configuration verification failed"
             return $false
         }
     } catch {
-        Write-Error-Custom "$ContainerName 配置失败：$_"
+        Write-Fail "$ContainerName configuration failed: $_"
         return $false
     }
 }
@@ -89,39 +84,39 @@ function Configure-Agent {
 function Restart-Agent {
     param([string]$ContainerName)
     
-    Write-Host "重启 $ContainerName ..." -ForegroundColor Yellow
+    Write-Host "Restarting $ContainerName ..." -ForegroundColor Yellow
     try {
         docker restart $ContainerName | Out-Null
-        Write-Success "$ContainerName 重启成功"
+        Write-Success "$ContainerName restarted"
         return $true
     } catch {
-        Write-Error-Custom "$ContainerName 重启失败：$_"
+        Write-Fail "$ContainerName restart failed: $_"
         return $false
     }
 }
 
-# 主流程
-Write-Header "OpenClaw Agent API 密钥配置"
+# Main
+Write-Header "OpenClaw Agent API Key Configuration"
 
-# 检查容器是否运行
-Write-Host "检查容器状态..." -ForegroundColor Cyan
+# Check if containers are running
+Write-Host "Checking container status..." -ForegroundColor Cyan
 $runningContainers = docker ps --format "{{.Names}}"
 
 $allOk = $true
 foreach ($agent in $Agents) {
     if ($runningContainers -notcontains $agent.Name) {
-        Write-Error-Custom "$($agent.Name) 未运行，请先启动容器"
+        Write-Fail "$($agent.Name) is not running. Please start containers first."
         $allOk = $false
     }
 }
 
 if (-not $allOk) {
-    Write-Host "`n请先运行：docker-compose -f docker-compose-agents.yml up -d" -ForegroundColor Yellow
+    Write-Host "`nPlease run: docker-compose -f docker-compose-agents.yml up -d" -ForegroundColor Yellow
     exit 1
 }
 
-# 配置每个 Agent
-Write-Header "配置 API 密钥"
+# Configure each Agent
+Write-Header "Configure API Keys"
 
 foreach ($agent in $Agents) {
     $result = Configure-Agent -ContainerName $agent.Name `
@@ -134,39 +129,39 @@ foreach ($agent in $Agents) {
     }
 }
 
-# 重启容器使配置生效
-Write-Header "重启容器使配置生效"
+# Restart containers to apply configuration
+Write-Header "Restart containers to apply configuration"
 
 foreach ($agent in $Agents) {
     Restart-Agent -ContainerName $agent.Name | Out-Null
 }
 
-# 等待容器启动
-Write-Host "`n等待容器启动..." -ForegroundColor Cyan
+# Wait for containers to start
+Write-Host "`nWaiting for containers to start..." -ForegroundColor Cyan
 Start-Sleep -Seconds 15
 
-# 验证配置
-Write-Header "验证配置"
+# Verify configuration
+Write-Header "Verify configuration"
 
 foreach ($agent in $Agents) {
-    Write-Host "检查 $($agent.Name) 日志..." -ForegroundColor Cyan
+    Write-Host "Checking $($agent.Name) logs..." -ForegroundColor Cyan
     $logs = docker logs $agent.Name --tail 5 2>&1
     
     if ($logs -match $agent.Model) {
-        Write-Success "$($agent.Name) 使用模型：$($agent.Model)"
+        Write-Success "$($agent.Name) using model: $($agent.Model)"
     } else {
-        Write-Error-Custom "$($agent.Name) 配置可能未生效"
+        Write-Fail "$($agent.Name) configuration may not be effective"
         $allOk = $false
     }
 }
 
-# 总结
-Write-Header "配置完成"
+# Summary
+Write-Header "Configuration Complete"
 
 if ($allOk) {
-    Write-Success "所有 Agent 配置成功！"
+    Write-Success "All Agents configured successfully!"
     exit 0
 } else {
-    Write-Error-Custom "部分 Agent 配置失败，请检查日志"
+    Write-Fail "Some Agents failed to configure. Please check logs."
     exit 1
 }
