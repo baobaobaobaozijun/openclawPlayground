@@ -1,203 +1,202 @@
 ﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
-# Auto Push Agent - 蹇€熷弬鑰?
+# Auto Push Agent - 快速参考
 
-## 馃殌 鎶€鑳藉凡灏辩华
+## 🎌 技能已就绪
 
-鉁?**鎶€鑳芥枃浠?*: `.lingma/skills/auto-push-agent/SKILL.md`  
-鉁?**Git 浠撳簱**: 宸插垵濮嬪寲  
-鉁?**閰嶇疆鏂囦欢**: `.openclaw/auto-push-config.json`  
-鉁?**蹇界暐瑙勫垯**: `.gitignore`  
+✅**技能文件**: `.lingma/skills/auto-push-agent/SKILL.md`  
+✅**Git 仓库**: 已初始化  
+✅**配置文件**: `.openclaw/auto-push-config.json`  
+✅**忽略规则**: `.gitignore`  
 
-## 馃搵 涓嬩竴姝ユ搷浣滐紙蹇呴』瀹屾垚锛?
+## 📋 下一步操作（必须完成）
 
-### 1锔忊儯 閫夋嫨 Git 骞冲彴骞跺垱寤轰粨搴?
+### 1️⃣ 选择 Git 平台并创建仓库
 
-**GitHub** (鎺ㄨ崘):
-- 璁块棶锛歨ttps://github.com/new
-- 鍒涘缓鏂颁粨搴?
-- 澶嶅埗浠撳簱鍦板潃锛歚https://github.com/{鐢ㄦ埛鍚峿/{浠撳簱鍚峿.git`
+**GitHub** (推荐):
+- 访问：https://github.com/new
+- 创建新仓库
+- 复制仓库地址：`https://github.com/{用户名}/{仓库名}.git`
 
-**Gitee** (鍥藉唴鎺ㄨ崘):
-- 璁块棶锛歨ttps://gitee.com/new
-- 鍒涘缓鏂颁粨搴?
-- 澶嶅埗浠撳簱鍦板潃锛歚https://gitee.com/{鐢ㄦ埛鍚峿/{浠撳簱鍚峿.git`
+**Gitee** (国内推荐):
+- 访问：https://gitee.com/new
+- 创建新仓库
+- 复制仓库地址：`https://gitee.com/{用户名}/{仓库名}.git`
 
 **LabCode**:
-- 璁块棶鐩稿簲骞冲彴鍒涘缓浠撳簱
-- 澶嶅埗浠撳簱鍦板潃
+- 访问相应平台创建仓库
+- 复制仓库地址
 
-### 2锔忊儯 閰嶇疆杩滅▼浠撳簱
+### 2️⃣ 配置远程仓库
 
 ```bash
-# 鏇挎崲 <浠撳簱鍦板潃> 涓轰綘鍒氭墠澶嶅埗鐨勫湴鍧€
-git remote add origin <浠撳簱鍦板潃>
+# 替换 <仓库地址> 为你刚才复制的地址
+git remote add origin <仓库地址>
 
-# 楠岃瘉閰嶇疆
+# 验证配置
 git remote -v
 ```
 
-### 3锔忊儯 鎵ц棣栨鎻愪氦鍜屾帹閫?
+### 3️⃣ 执行首次提交和推送
 
 ```bash
-# 娣诲姞鎵€鏈夋枃浠?
+# 添加所有文件
 git add .
 
-# 鎻愪氦
-git commit -m "init: 椤圭洰鍒濆鍖?
+# 提交
+git commit -m "init: 项目初始化"
 
-# 鎺ㄩ€佸埌杩滅▼锛堝鏋滄槸 main 鍒嗘敮锛屾浛鎹?master 涓?main锛?
+# 推送到远程（如果是 main 分支，替换 master 为 main）
 git push -u origin master
 ```
 
-### 4锔忊儯 锛堟帹鑽愶級閰嶇疆 SSH Key
+### 4️⃣ （推荐）配置 SSH Key
 
-閬垮厤姣忔閮借緭鍏ョ敤鎴峰悕瀵嗙爜锛?
+避免每次都输入用户名密码：
 
 ```bash
-# 鐢熸垚 SSH key锛堜竴璺洖杞﹀嵆鍙級
+# 生成 SSH key（一路回车即可）
 ssh-keygen -t ed25519 -C "your_email@example.com"
 
-# 鏌ョ湅鍏挜鍐呭
+# 查看公钥内容
 cat ~/.ssh/id_ed25519.pub
 
-# 灏嗗叕閽ユ坊鍔犲埌 Git 骞冲彴鐨?SSH Keys 璁剧疆涓?
+# 将公钥添加到 Git 平台的 SSH Keys 设置中
 ```
 
-鐒跺悗浣跨敤 SSH 鍦板潃锛?
+然后使用 SSH 地址：
 ```bash
 # GitHub
-git remote set-url origin git@github.com:{鐢ㄦ埛鍚峿/{浠撳簱鍚峿.git
+git remote set-url origin git@github.com:{用户名}/{仓库名}.git
 
 # Gitee
-git remote set-url origin git@gitee.com:{鐢ㄦ埛鍚峿/{浠撳簱鍚峿.git
+git remote set-url origin git@gitee.com:{用户名}/{仓库名}.git
 ```
 
-## 馃幆 鎶€鑳借嚜鍔ㄨЕ鍙戞潯浠?
+## 🛡️ 技能自动触发条件
 
-姣忔淇敼 `agent/` 鐩綍涓嬬殑鏂囦欢鍚庯紝浼氳嚜鍔ㄦ墽琛岋細
+每次修改 `agent/` 目录下的文件后，会自动执行：
 
-1. 鉁?`git add agent/` - 娣诲姞鏇存敼
-2. 鉁?`git commit -m "{瑙勮寖鐨勬彁浜や俊鎭瘆"` - 鎻愪氦鏇存敼
-3. 鉁?`git pull --rebase` - 鎷夊彇鏈€鏂颁唬鐮?
-4. 鉁?`git push` - 鎺ㄩ€佸埌杩滅▼
-5. 鉁?鐢熸垚鏃ュ織鍒?`agent/workinglog/`
+1. ✅ `git add agent/` - 添加更改
+2. ✅ `git commit -m "{规范的提交信息}"` - 提交更改
+3. ✅ `git pull --rebase` - 拉取最新代码
+4. ✅ `git push` - 推送到远程
+5. ✅ 生成日志到 `agent/workinglog/`
 
-## 馃摑 鎻愪氦淇℃伅鏍煎紡
+## 📝 提交信息格式
 
 ```
-{绫诲瀷} ({鑼冨洿}): {绠€鐭弿杩皚
+{类型} ({范围}): {简短描述}
 
-- 淇敼鏃堕棿锛歿yyyyMMdd-HHmmss}
-- 娑夊強鏂囦欢锛?
-  - 鏂囦欢 1
-  - 鏂囦欢 2
-- 鍙樻洿鎽樿锛歿绠€瑕佽鏄庝富瑕佸彉鏇磢
+- 修改时间：{yyyyMMdd-HHmmss}
+- 涉及文件：
+  - 文件 1
+  - 文件 2
+- 变更摘要：{简要说明主要变更}
 ```
 
-**甯哥敤绫诲瀷**:
-- `feat`: 鏂板姛鑳?
-- `fix`: 淇闂
-- `docs`: 鏂囨。鏇存柊
-- `refactor`: 閲嶆瀯
-- `config`: 閰嶇疆鍙樻洿
+**常用类型**:
+- `feat`: 新功能
+- `fix`: 修复问题
+- `docs`: 文档更新
+- `refactor`: 重构
+- `config`: 配置变更
 
-**甯哥敤鑼冨洿**:
-- `agent`: 閫氱敤 agent
-- `workspace`: 宸ヤ綔绌洪棿
-- `docker`: Docker 閰嶇疆
-- `skill`: 鎶€鑳界浉鍏?
+**常用范围**:
+- `agent`: 通用 agent
+- `workspace`: 工作空间
+- `docker`: Docker 配置
+- `skill`: 技能相关
 
-## 馃敡 閰嶇疆鏂囦欢璇存槑
+## 🛠️ 配置文件说明
 
 `.openclaw/auto-push-config.json`:
 
 ```json
 {
   "autoPush": {
-    "enabled": true,              // 鏄惁鍚敤
-    "remoteUrl": "",              // 杩滅▼浠撳簱鍦板潃锛堝彲鐣欑┖鎵嬪姩閰嶇疆锛?
-    "branch": "main",             // 鍒嗘敮鍚嶇О
-    "autoInit": true,             // 鑷姩鍒濆鍖?
-    "generateLogs": true,         // 鐢熸垚鏃ュ織
-    "logPath": "agent/workinglog/", // 鏃ュ織璺緞
-    "retryCount": 3               // 澶辫触閲嶈瘯娆℃暟
+    "enabled": true,              // 是否启用
+    "remoteUrl": "",              // 远程仓库地址（可留空手动配置）
+    "branch": "main",             // 分支名称
+    "autoInit": true,             // 自动初始化
+    "generateLogs": true,         // 生成日志
+    "logPath": "agent/workinglog/", // 日志路径
+    "retryCount": 3               // 失败重试次数
   }
 }
 ```
 
-## 馃洝锔?瀹夊叏鐗规€?
+## 🔒 安全特性
 
-- 鉁?**鏁忔劅淇℃伅妫€娴?*: 鑷姩妫€娴?password=, secret=, api_key= 绛?
-- 鉁?**鎻愪氦鍓嶆鏌?*: 纭繚鍙寘鍚?agent 鐩綍鐨勬枃浠?
-- 鉁?**鍥炴粴鏈哄埗**: 璁板綍姣忎釜 commit hash锛屾敮鎸佸揩閫熷洖婊?
-- 鉁?**鍐茬獊澶勭悊**: 閬囧埌鍐茬獊绔嬪嵆鍋滄骞剁敓鎴愭姤鍛?
-- 鉁?**澶ф枃浠惰鍛?*: 瓒呰繃 50MB 鐨勬枃浠朵細鍙戝嚭璀﹀憡
+- ✅ **敏感信息检测**: 自动检测 password=, secret=, api_key= 等
+- ✅ **提交前检查**: 确保只包含 agent 目录的文件
+- ✅ **回滚机制**: 记录每个 commit hash，支持快速回滚
+- ✅ **冲突处理**: 遇到冲突立即停止并生成报告
+- ✅ **大文件警告**: 超过 50MB 的文件会发出警告
 
-## 鈿狅笍 娉ㄦ剰浜嬮」
+## ⚠️ 注意事项
 
-1. **棣栨浣跨敤鍓嶅繀椤诲厛鎺ㄩ€?*: 閰嶇疆濂借繙绋嬩粨搴撳悗锛屽厛鎵嬪姩鎵ц涓€娆?`git push`
-2. **淇濇寔缃戠粶鐣呴€?*: 鎺ㄩ€佽繃绋嬮渶瑕佺綉缁滆繛鎺?
-3. **瀹氭湡妫€鏌?*: 鍋跺皵妫€鏌ヤ竴涓嬭繙绋嬩粨搴擄紝纭繚鎺ㄩ€佹甯?
-4. **鏁忔劅鏁版嵁**: 涓嶈鍦?agent 鐩綍瀛樻斁瀵嗙爜銆佸瘑閽ョ瓑鏁忔劅淇℃伅
-5. **澶ф枃浠?*: 鍗曚釜鏂囦欢涓嶈瓒呰繃 50MB
+1. **首次使用前必须先推送**: 配置好远程仓库后，先手动执行一次 `git push`
+2. **保持网络畅通**: 推送过程需要网络连接
+3. **定期检查**: 偶尔检查一下远程仓库，确保推送正常
+4. **敏感数据**: 不要在 agent 目录存放密码、密钥等敏感信息
+5. **大文件**: 单个文件不要超过 50MB
 
-## 馃悰 甯歌闂
+## 🐶 常见问题
 
-### Q1: 鎻愮ず "Permission denied"
-**瑙ｅ喅**: 閰嶇疆 SSH key 鎴栦娇鐢?HTTPS + 鐢ㄦ埛鍚嶅瘑鐮?
+### Q1: 提示 "Permission denied"
+**解决**: 配置 SSH key 或使用 HTTPS + 用户名密码
 
-### Q2: 鎻愮ず "repository not found"
-**瑙ｅ喅**: 妫€鏌ヨ繙绋嬩粨搴撳湴鍧€鏄惁姝ｇ‘锛岀‘璁や粨搴撳凡鍒涘缓
+### Q2: 提示 "repository not found"
+**解决**: 检查远程仓库地址是否正确，确认仓库已创建
 
-### Q3: Push 澶辫触锛岀綉缁滈敊璇?
-**瑙ｅ喅**: 
-- 妫€鏌ョ綉缁滆繛鎺?
-- 鎶€鑳戒細鑷姩閲嶈瘯 3 娆?
-- 绋嶅悗鎵嬪姩鎵ц `git push`
+### Q3: Push 失败，网络错误
+**解决**: 
+- 检查网络连接
+- 技能会自动重试 3 次
+- 稍后手动执行 `git push`
 
-### Q4: 鏈夊啿绐?
-**瑙ｅ喅**:
-- 鎶€鑳戒細鍋滄鑷姩娴佺▼
-- 鎵嬪姩瑙ｅ喅鍐茬獊
-- 鎵ц `git add .; git commit; git push`
+### Q4: 有冲突
+**解决**:
+- 技能会停止自动流程
+- 手动解决冲突
+- 执行 `git add .; git commit; git push`
 
-## 馃搳 鏃ュ織浣嶇疆
+## 📍 日志位置
 
-鎵€鏈夎嚜鍔ㄦ帹閫佺殑鏃ュ織閮戒繚瀛樺湪锛?
+所有自动推送的日志都保存在：
 ```
 agent/workinglog/auto-push_{yyyyMMdd-HHmmss}.md
 ```
 
-姣忕瘒鏃ュ織鍖呭惈锛?
-- 鎵ц鏃堕棿鍜岃Е鍙戝師鍥?
+每篇日志包含：
+- 执行时间和触发原因
 - Commit hash
-- 娑夊強鏂囦欢鍒楄〃
-- 鍙樻洿缁熻
-- Push 鐘舵€?
-- 杩滅▼浠撳簱淇℃伅
+- 涉及文件列表
+- 变更统计
+- Push 状态
+- 远程仓库信息
 
-## 馃挕 娴嬭瘯鎶€鑳?
+## 🎯 测试技能
 
-淇敼 agent 鐩綍涓嬬殑浠绘剰鏂囦欢锛屼緥濡傦細
+修改 agent 目录下的任意文件，例如：
 
 ```bash
-# 淇敼鏌愪釜鏂囦欢
+# 修改某个文件
 notepad agent\README.md
 
-# 淇濆瓨鍚庯紝鎶€鑳戒細鑷姩瑙﹀彂
-# 瑙傚療缁堢杈撳嚭
-# 妫€鏌?agent\workinglog\ 鐩綍涓嬫槸鍚︾敓鎴愭柊鏃ュ織
+# 保存后，技能会自动触发
+# 观察终端输出
+# 检查 agent\workinglog\ 目录下是否生成新日志
 ```
 
-## 馃摓 闇€瑕佸府鍔╋紵
+## 📞 需要帮助？
 
-鏌ョ湅璇︾粏鎶€鑳芥枃妗ｏ細`.lingma/skills/auto-push-agent/SKILL.md`
+查看详细技能文档：`.lingma/skills/auto-push-agent/SKILL.md`
 
 ---
 
-**鏈€鍚庢洿鏂?*: 2026-03-09 21:30  
-**鎶€鑳界増鏈?*: 1.0  
-**Git 鐘舵€?*: 鉁?宸插垵濮嬪寲锛屽緟閰嶇疆杩滅▼
-
+**最后更新**: 2026-03-09 21:30  
+**技能版本**: 1.0  
+**Git 状态**: ✅ 已初始化，待配置远程
