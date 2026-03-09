@@ -42,9 +42,9 @@
 
 | Agent | 收件箱 |
 |-------|--------|
-| 酱肉 | `F:\openclaw\workspace\communication\inbox\jiangrou\` |
-| 豆沙 | `F:\openclaw\workspace\communication\inbox\dousha\` |
-| 酸菜 | `F:\openclaw\workspace\communication\inbox\suancai\` |
+| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\inbox\jiangrou\` |
+| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\inbox\dousha\` |
+| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\inbox\suancai\` |
 
 ### 消息格式
 
