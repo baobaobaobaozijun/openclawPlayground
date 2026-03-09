@@ -5,11 +5,12 @@ services:
     ports:
       - "18791:18789"
     environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
+      - OPENCLAW_MODEL=bailian/qwen3-coder-plus
       - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
       - OPENCLAW_API_KEY=sk-0101b7d3672245ac8cd15d454198b4db
       - INSTANCE_NAME=jiangrou
       - INSTANCE_ROLE=backend-engineer
+      - OPENCLAW_AGENT_DIR=/home/node/.openclaw/agents/main
     volumes:
       - openclaw-data-1:/home/node
       - F:\openclaw\code\backend:/app/backend
@@ -26,11 +27,12 @@ services:
     ports:
       - "18792:18789"
     environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
+      - OPENCLAW_MODEL=bailian/qwen3-coder-plus
       - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
       - OPENCLAW_API_KEY=sk-dc74719ea21348f183cbabb87f01999c
       - INSTANCE_NAME=dousha
       - INSTANCE_ROLE=frontend-engineer
+      - OPENCLAW_AGENT_DIR=/home/node/.openclaw/agents/main
     volumes:
       - openclaw-data-2:/home/node
       - F:\openclaw\code\frontend:/app/frontend
@@ -47,11 +49,12 @@ services:
     ports:
       - "18793:18789"
     environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
+      - OPENCLAW_MODEL=bailian/qwen3-coder-plus
       - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
       - OPENCLAW_API_KEY=sk-1edeed01f7104f75b0c4c69237b7f577
       - INSTANCE_NAME=suancai
       - INSTANCE_ROLE=devops-engineer
+      - OPENCLAW_AGENT_DIR=/home/node/.openclaw/agents/main
     volumes:
       - openclaw-data-3:/home/node
       - F:\openclaw\code\deploy:/app/deploy
