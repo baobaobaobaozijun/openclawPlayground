@@ -10,8 +10,7 @@ services:
       - OPENCLAW_API_KEY=sk-0101b7d3672245ac8cd15d454198b4db
       - INSTANCE_NAME=jiangrou
       - INSTANCE_ROLE=backend-engineer
-      - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
-      - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
+      - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
       - openclaw-data-1:/home/node
       - F:\openclaw\code\backend:/app/backend
