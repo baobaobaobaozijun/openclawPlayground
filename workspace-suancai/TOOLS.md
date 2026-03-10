@@ -211,7 +211,7 @@ done
 ### 监控策略
 
 ```yaml
-监控指标:
+监控指标：
   - Gateway 可用性
   - Agent 响应时间
   - 消息队列长度
@@ -222,6 +222,14 @@ done
   - Agent 无响应 > 5 分钟 → P1 告警
   - 错误率 > 5% → P2 告警
 ```
+
+---
+
+## 📖 详细文档
+
+**完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
+
+**架构说明:** [ARCHITECTURE.md](../ARCHITECTURE.md)
 
 ---
 
