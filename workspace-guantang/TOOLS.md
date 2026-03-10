@@ -128,7 +128,7 @@ extra_hosts:
 
 ### 共享通信目录
 
-**路径:** `F:\openclaw\workspace\communication\`
+**路径:** `F:\openclaw\agent\communication\`
 
 ```
 communication/
