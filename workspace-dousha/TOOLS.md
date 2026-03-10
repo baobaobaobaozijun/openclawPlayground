@@ -197,5 +197,13 @@ catch {
 
 ---
 
+## 📖 详细文档
+
+**完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
+
+**架构说明:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+
+---
+
 **最后更新:** 2026-03-10  
 **维护者:**豆沙 (Dousha)
