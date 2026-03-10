@@ -1,28 +1,26 @@
-﻿<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+﻿# 豆沙 (Dousha) - 完整技术文档
 
-# 豆沙 (Dousha) - 完整技术文档
-
-🍡 **前端工程师 / UI/UX 设计师**
+🍡 **前端工程师 / UI/UX设计师**
 
 ---
 
-## 📎 快速导航
+## 📚 快速导航
 
-- [身份认知](./IDENTITY.md) - 我是谁？
-- [职责规范](./ROLE.md) - 我做什么？
-- [行为准则](./SOUL.md) - 我如何工作？
-- [技术栈规范](#技术栈规范) - 使用什么技术？
-- [开发最佳实践](#开发最佳实践) - 如何做？
-- [常见问题与解决方案](#常见问题与解决) - 问题排查
+- [身份认知](./IDENTITY.md) - 我是谁
+- [职责规范](./ROLE.md) - 我做什么
+- [行为准则](./SOUL.md) - 我如何工作
+- [技术栈规范](#技术栈规范) - 使用什么技术
+- [设计原则](#uiux-设计原则) - 设计规范
+- [开发最佳实践](#前端开发最佳实践) - 开发指南
+- [常见问题解决](#常见问题与解决方案) - 问题排查
 
 ---
 
-## 🏢 Agent 身份
+## 👤 Agent 身份
 
 **名称:** 豆沙  
-**角色:** 前端工程师 / UI/UX 设计师  
-**职责:** 负责所有前端界面开发、UI/UX 设计、用户体验优化
+**角色:** 前端工程师 / UI/UX设计师  
+**职责:** 负责所有前端界面的实现、UI/UX设计、交互优化
 
 **核心配置文件:**
 - [IDENTITY.md](./IDENTITY.md) - 身份认知
@@ -224,7 +222,11 @@ defineEmits<{
 </style>
 ```
 
-### 3. API 调用规范
+---
+
+## 💻 前端开发最佳实践
+
+### 1. Composition API 示例
 
 **API 封装:**
 ```typescript
@@ -309,6 +311,8 @@ export const useArticleStore = defineStore('article', () => {
     try {
      const response = await articleApi.getList({ page: 1, size: 100 })
       articles.value = response.data
+    } catch (e) {
+      error.value = e instanceof Error ? e.message : '加载失败'
     } finally {
       loading.value = false
     }
@@ -395,107 +399,35 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   
-  if (to.meta.requiresAuth && !token) {
-    next({ name: 'Login' })
-  } else {
-    next()
-  }
-})
-
-export default router
-```
-
----
-
-## 🎨 UI/UX 设计规范
-
-### 颜色系统
-
-```css
-/* 主色调 */
---color-primary: #007bff;
---color-primary-light: #3395ff;
---color-primary-dark: #0056b3;
-
-/* 功能色 */
---color-success: #28a745;
---color-warning: #ffc107;
---color-danger: #dc3545;
---color-info: #17a2b8;
-
-/* 中性色 */
---color-text-primary: #333333;
---color-text-secondary: #666666;
---color-text-disabled: #999999;
---color-border: #e0e0e0;
---color-background: #f5f5f5;
-```
-
-### 间距系统
-
-```css
-/* 基于 4px 的倍数 */
---spacing-xs: 4px;
---spacing-sm: 8px;
---spacing-md: 16px;
---spacing-lg: 24px;
---spacing-xl: 32px;
---spacing-2xl: 48px;
-```
-
-### 字体系统
-
-```css
-/* 字号 */
---font-size-xs: 12px;
---font-size-sm: 14px;
---font-size-md: 16px;
---font-size-lg: 18px;
---font-size-xl: 20px;
---font-size-2xl: 24px;
-
-/* 字重 */
---font-weight-normal: 400;
---font-weight-medium: 500;
---font-weight-bold: 700;
-```
-
----
-
-## 📊 常见问题与解决
-
-### Q1: 如何处理跨域问题？
-
-**解决方案:**
-
-在 `vite.config.ts` 中配置代理：
-
-```typescript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-
-export default defineConfig({
-  plugins: [vue()],
-  server: {
-   port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-       rewrite: (path) => path.replace(/^\/api/, '')
+  actions: {
+    async fetchArticles() {
+      this.loading = true
+      try {
+        const response = await api.getArticles()
+        this.articles = response.data
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : '加载失败'
+      } finally {
+        this.loading = false
       }
     }
   }
 })
 ```
 
-### Q2: 如何实现权限控制？
-
-**解决方案:**
+### 3. API 封装
 
 ```typescript
-// 路由守卫
-router.beforeEach(async (to, from, next) => {
+// api/index.ts
+import axios from 'axios'
+
+const api = axios.create({
+  baseURL: '/api',
+  timeout: 10000
+})
+
+// 请求拦截器
+api.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   const userStore = useUserStore()
   
@@ -504,15 +436,16 @@ router.beforeEach(async (to, from, next) => {
     next({ name: 'Login' })
    return
   }
-  
-  // 已有 token，获取用户信息
-  if (token && !userStore.user) {
-    try {
-      await userStore.fetchUserInfo()
-    } catch (error) {
-      localStorage.removeItem('token')
-      next({ name: 'Login' })
-     return
+  return config
+})
+
+// 响应拦截器
+api.interceptors.response.use(
+  response => response.data,
+  error => {
+    if (error.response?.status === 401) {
+      // 未授权，跳转登录
+      router.push('/login')
     }
   }
   
@@ -528,7 +461,9 @@ router.beforeEach(async (to, from, next) => {
 
 ### Q3: 如何优化首屏加载速度？
 
-**解决方案:**
+## ⚡ 性能优化
+
+### 1. 懒加载路由
 
 1. **路由懒加载:**
 ```typescript
@@ -541,7 +476,62 @@ const routes = [
 ]
 ```
 
-2. **组件懒加载:**
+### 2. 虚拟列表
+
+```vue
+<template>
+  <VirtualList
+    :data-key="'id'"
+    :data-sources="articles"
+    :estimate-size="100"
+  >
+    <template #item="{ source }">
+      <ArticleItem :article="source" />
+    </template>
+  </VirtualList>
+</template>
+```
+
+### 3. 防抖节流
+
+```typescript
+import { debounce } from 'lodash-es'
+
+// 搜索框防抖
+const handleSearch = debounce((query: string) => {
+  api.search(query)
+}, 300)
+
+// 滚动节流
+const handleScroll = throttle(() => {
+  loadMore()
+}, 200)
+```
+
+---
+
+## ⚠️ 常见问题与解决方案
+
+### 问题 1: 跨域问题 (CORS)
+
+**开发环境解决方案:**
+```typescript
+// vite.config.ts
+export default {
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      }
+    }
+  }
+}
+```
+
+### 问题 2: 内存泄漏
+
+**解决方案:**
 ```vue
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
@@ -552,29 +542,23 @@ const ChartComponent = defineAsyncComponent(
 </script>
 ```
 
-3. **图片懒加载:**
+### 问题 3: 样式冲突
+
+**解决方案:**
 ```vue
-<img 
-  v-lazy="article.coverImage" 
-  :alt="article.title"
-  loading="lazy"
-/>
-```
+<!-- 使用 scoped -->
+<style scoped lang="scss">
+.title {
+  color: blue;
+}
+</style>
 
-4. **Gzip 压缩:**
-```typescript
-// vite.config.ts
-import compressionPlugin from 'vite-plugin-compression'
-
-export default defineConfig({
-  plugins: [
-    vue(),
-   compressionPlugin({
-      algorithm: 'gzip',
-      threshold: 10240
-    })
-  ]
-})
+<!-- 或使用 CSS Modules -->
+<style module>
+.title {
+  color: blue;
+}
+</style>
 ```
 
 ---
@@ -599,6 +583,17 @@ export default defineConfig({
 - [ ] 跨浏览器测试通过
 - [ ] 移动端适配测试通过
 - [ ] 无障碍访问测试通过
+## 📖 学习资源
+
+### 官方文档
+- [Vue 3 官方文档](https://vuejs.org/)
+- [TypeScript 文档](https://www.typescriptlang.org/)
+- [Vite 文档](https://vitejs.dev/)
+- [Pinia 文档](https://pinia.vuejs.org/)
+
+### 设计规范
+- [Material Design](https://material.io/design)
+- [Ant Design 规范](https://ant.design/)
 
 ---
 

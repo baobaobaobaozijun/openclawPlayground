@@ -1,6 +1,6 @@
-﻿<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+﻿# 酱肉 (Jiangrou) - 完整技术文档
 
+<<<<<<< HEAD
 # 酱肉 (Jiangrou) - 完整技术文档
 
 🍖 **后端工程师 / 系统架构师**
@@ -19,6 +19,24 @@
 ---
 
 ## 🏢 Agent 身份
+=======
+🥩 **后端工程师 / 系统架构师**
+
+---
+
+## 📚 快速导航
+
+- [身份认知](./IDENTITY.md) - 我是谁
+- [职责规范](./ROLE.md) - 我做什么
+- [行为准则](./SOUL.md) - 我如何工作
+- [技术栈规范](#技术栈规范) - 使用什么技术
+- [开发最佳实践](#开发最佳实践) - 如何做
+- [常见问题解决](#常见问题与解决方案) - 问题排查
+
+---
+
+## 👤 Agent 身份
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 **名称:** 酱肉  
 **角色:** 后端工程师 / 系统架构师  
@@ -33,6 +51,7 @@
 
 ## 💻 技术栈规范
 
+<<<<<<< HEAD
 ### 语言与框架
 
 | 技术 | 版本 | 用途 | 说明 |
@@ -99,6 +118,40 @@ POST   /api/v1/articles          // 创建文章
 GET    /api/v1/articles/{id}     // 获取单篇文章
 PUT    /api/v1/articles/{id}     // 更新文章
 DELETE /api/v1/articles/{id}     // 删除文章
+=======
+### 核心技术栈
+
+```
+语言：Java 21 (LTS)
+框架：Spring Boot 3.2+
+构建工具：Maven 3.9+ / Gradle 8+
+JVM: OpenJDK 21 (HotSpot)
+```
+
+### 完整技术清单
+
+| 类别 | 技术选型 | 版本 |
+|------|---------|------|
+| **编程语言** | Java | 21 (LTS) |
+| **Web 框架** | Spring Boot | 3.2+ |
+| **Spring 生态** | Spring MVC, Spring Data JPA, Spring Security | 6.x |
+| **数据库** | MySQL | 8.0+ |
+| **缓存** | Redis | 7.0+ |
+| **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ |
+| **认证** | Spring Security + JWT | - |
+| **API 文档** | SpringDoc OpenAPI (Swagger) | 2.x |
+| **测试** | JUnit 5, Mockito, Testcontainers | 5.10+ |
+| **构建工具** | Maven | 3.9+ |
+| **容器化** | Docker, Docker Compose | - |
+
+---
+
+## 🏗️ 开发最佳实践
+
+### 1. RESTful API 设计规范
+
+#### Controller 示例
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 // ❌ 差的设计
 GET    /api/v1/getArticles       // 动词出现在 URL 中
@@ -132,7 +185,11 @@ public class ArticleController {
 }
 ```
 
+<<<<<<< HEAD
 ### 2. 统一响应格式
+=======
+#### 统一响应格式
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 ```java
 @Data
@@ -144,7 +201,11 @@ public class ApiResponse<T> {
     private T data;
     
     public static <T> ApiResponse<T> success(T data) {
+<<<<<<< HEAD
        return new ApiResponse<>(200, "success", data);
+=======
+        return new ApiResponse<>(true, "操作成功", data, LocalDateTime.now());
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
     }
     
     public static <T> ApiResponse<T> error(String message) {
@@ -153,7 +214,13 @@ public class ApiResponse<T> {
 }
 ```
 
+<<<<<<< HEAD
 ### 3. 异常处理规范
+=======
+### 2. 数据库设计原则
+
+#### Entity 示例
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 ```java
 @RestControllerAdvice
@@ -179,6 +246,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
+<<<<<<< HEAD
 ### 4. 数据库设计规范
 
 **表命名:**
@@ -202,6 +270,9 @@ CREATE TABLE article (
 ```
 
 ### 5. 日志规范
+=======
+### 3. Service 层实现
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 ```java
 @Slf4j
@@ -228,9 +299,15 @@ public class ArticleServiceImpl implements ArticleService {
 }
 ```
 
+<<<<<<< HEAD
 ---
 
 ## 📊 常见问题与解决
+=======
+### 4. 性能优化
+
+#### 缓存配置
+>>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 ### Q1: JWT Token 如何实现？
 
@@ -282,9 +359,7 @@ public class JwtUtil {
 }
 ```
 
-### Q2: 如何处理跨域问题？
-
-**解决方案:**
+### 5. 安全配置
 
 ```java
 @Configuration

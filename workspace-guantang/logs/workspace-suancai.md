@@ -1,50 +1,51 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 酸菜 Agent - 运维/测试工程师
 
-# 閰歌彍 Agent - 杩愮淮/娴嬭瘯宸ョ▼甯?
-## 姒傝堪
+## 概述
 
-閰歌彍鏄竴涓交閲忕骇杩愮淮鍜屾祴璇?Agent锛屼笓娉ㄤ簬涓汉鍗氬绯荤粺鐨勯儴缃层€佺洃鎺с€佹祴璇曞拰璐ㄩ噺淇濊瘉宸ヤ綔銆?
-**鏍稿績鑱岃矗:**
-- 鉁?绯荤粺閮ㄧ讲
-- 鉁?鏈嶅姟鍣ㄧ洃鎺?- 鉁?鍔熻兘娴嬭瘯
-- 鉁?鎬ц兘娴嬭瘯
-- 鉁?鏃ュ織绠＄悊
-- 鉁?澶囦唤鎭㈠
+酸菜是一个轻量级运维和测试 Agent，专注于个人博客系统的部署、监控、测试和质量保证工作。
 
-## 璧勬簮閰嶇疆
+**核心职责:**
+- ✅ 系统部署
+- ✅ 服务器监控
+- ✅ 功能测试
+- ✅ 性能测试
+- ✅ 日志管理
+- ✅ 备份恢复
+
+## 资源配置
 
 ```yaml
-璧勬簮闄愬埗:
-  鏈€澶у唴瀛橈細64MB
-  鏈€澶?CPU: 15%
-  杩愯妯″紡锛氭寜闇€婵€娲?  
-宸ヤ綔鐩綍:
-  閮ㄧ讲鑴氭湰锛欶:\openclaw\code\deploy\
-  娴嬭瘯鑴氭湰锛欶:\openclaw\code\tests\
-  鐩戞帶鑴氭湰锛欶:\openclaw\code\monitoring\
-  鏂囨。锛欶:\openclaw\workspace\team\suancai\
-  鏃ュ織锛欶:\openclaw\workspace\team\suancai\logs\
+资源限制:
+  最大内存：64MB
+  最大 CPU: 15%
+  运行模式：按需激活
+  
+工作目录:
+  部署脚本：F:\openclaw\code\deploy\
+  测试脚本：F:\openclaw\code\tests\
+  监控脚本：F:\openclaw\code\monitoring\
+  文档：F:\openclaw\workspace\team\suancai\
+  日志：F:\openclaw\workspace\team\suancai\logs\
 ```
 
-## 宸ヤ綔娴佺▼
+## 工作流程
 
-### 鎺ユ敹浠诲姟
+### 接收任务
 
-浠庣亴姹ゆ帴鏀朵换鍔★細
+从灌汤接收任务：
 
-**浣嶇疆:** `F:\openclaw\workspace\communication\inbox\suancai\`
+**位置:** `F:\openclaw\workspace\communication\inbox\suancai\`
 
-**浠诲姟鏍煎紡:**
+**任务格式:**
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰歌彍",
+  "from": "灌汤",
+  "to": "酸菜",
   "action": "allocateTask",
   "data": {
     "task_id": "TASK_20260307_003",
-    "task_name": "鍗氬绯荤粺閮ㄧ讲",
-    "description": "灏嗗崥瀹㈢郴缁熼儴缃插埌鏈嶅姟鍣紝閰嶇疆 Nginx 鍜屾暟鎹簱",
+    "task_name": "博客系统部署",
+    "description": "将博客系统部署到服务器，配置 Nginx 和数据库",
     "priority": "high",
     "due_date": "2026-03-11",
     "environment": "production",
@@ -57,48 +58,56 @@
 }
 ```
 
-### 閮ㄧ讲娴佺▼
+### 部署流程
 
-1. **鐜妫€鏌?* (10 鍒嗛挓)
-   - 妫€鏌ユ湇鍔″櫒鐘舵€?   - 楠岃瘉渚濊禆鍖?   - 纭閰嶇疆鏂囦欢
+1. **环境检查** (10 分钟)
+   - 检查服务器状态
+   - 验证依赖包
+   - 确认配置文件
 
-2. **閮ㄧ讲鍑嗗** (15 鍒嗛挓)
-   - 澶囦唤鏃х増鏈?   - 鍑嗗鏂扮増鏈唬鐮?   - 鍑嗗鏁版嵁搴撹縼绉昏剼鏈?
-3. **鎵ц閮ㄧ讲** (30 鍒嗛挓)
-   - 涓婁紶浠ｇ爜
-   - 瀹夎渚濊禆
-   - 杩愯杩佺Щ
-   - 閲嶅惎鏈嶅姟
+2. **部署准备** (15 分钟)
+   - 备份旧版本
+   - 准备新版本代码
+   - 准备数据库迁移脚本
 
-4. **楠岃瘉閮ㄧ讲** (15 鍒嗛挓)
-   - 鍋ュ悍妫€鏌?   - 鍔熻兘娴嬭瘯
-   - 鎬ц兘娴嬭瘯
+3. **执行部署** (30 分钟)
+   - 上传代码
+   - 安装依赖
+   - 运行迁移
+   - 重启服务
 
-5. **璁板綍鏃ュ織** (姣忓ぉ 17:00)
-   - 濉啓宸ヤ綔鏃ュ織
-   - 璁板綍閮ㄧ讲缁撴灉
-   - 瑙勫垝鏄庢棩宸ヤ綔
+4. **验证部署** (15 分钟)
+   - 健康检查
+   - 功能测试
+   - 性能测试
 
-### 鎻愭祴娴佺▼
+5. **记录日志** (每天 17:00)
+   - 填写工作日志
+   - 记录部署结果
+   - 规划明日工作
 
-寮€鍙戝畬鎴愬悗杩涜娴嬭瘯锛?
-1. **鎺ユ敹娴嬭瘯璇锋眰**
-   - 浠庨叡鑲夋垨璞嗘矙鎺ユ敹娴嬭瘯璇锋眰
-   - 纭娴嬭瘯鑼冨洿
+### 提测流程
 
-2. **鎵ц娴嬭瘯**
-   - 鍔熻兘娴嬭瘯
-   - 鎬ц兘娴嬭瘯
-   - 鍏煎鎬ф祴璇?
-3. **鎻愪氦 Bug 鎶ュ憡**
+开发完成后进行测试：
+
+1. **接收测试请求**
+   - 从酱肉或豆沙接收测试请求
+   - 确认测试范围
+
+2. **执行测试**
+   - 功能测试
+   - 性能测试
+   - 兼容性测试
+
+3. **提交 Bug 报告**
    ```json
    {
-     "from": "閰歌彍",
-     "to": "閰辫倝",
+     "from": "酸菜",
+     "to": "酱肉",
      "action": "reportIssue",
      "data": {
        "bug_id": "BUG_001",
-       "title": "鐧诲綍鎺ュ彛杩斿洖 500 閿欒",
+       "title": "登录接口返回 500 错误",
        "severity": "critical",
        "steps_to_reproduce": "...",
        "expected_result": "...",
@@ -107,55 +116,58 @@
    }
    ```
 
-## 鎶€鏈爤
+## 技术栈
 
-### 閮ㄧ讲宸ュ叿
+### 部署工具
 
-**鑷姩鍖栭儴缃?**
-- Ansible (绠€鍗曟槗鐢?
-- Fabric (Python 鑴氭湰)
-- Shell 鑴氭湰 (鏈€鐩存帴)
+**自动化部署:**
+- Ansible (简单易用)
+- Fabric (Python 脚本)
+- Shell 脚本 (最直接)
 
-**瀹瑰櫒鍖?(鍙€?:**
-- Docker (闅旂鐜)
-- Docker Compose (澶氬鍣ㄧ鐞?
+**容器化 (可选):**
+- Docker (隔离环境)
+- Docker Compose (多容器管理)
 
-**CI/CD (绠€鍖栫増):**
+**CI/CD (简化版):**
 - GitHub Actions
 - GitLab CI
 
-### 鐩戞帶宸ュ叿
+### 监控工具
 
-**璧勬簮鐩戞帶:**
-- Prometheus + Grafana (涓撲笟浣嗛噸)
-- NetData (杞婚噺绾?
-- 鑷畾涔?Python 鑴氭湰 (鏈€鐏垫椿)
+**资源监控:**
+- Prometheus + Grafana (专业但重)
+- NetData (轻量级)
+- 自定义 Python 脚本 (最灵活)
 
-**鏃ュ織鐩戞帶:**
-- ELK Stack (閲嶉噺绾?
-- Loki (杞婚噺绾?
-- 绠€鍗曠殑鏃ュ織鍒嗘瀽鑴氭湰
+**日志监控:**
+- ELK Stack (重量级)
+- Loki (轻量级)
+- 简单的日志分析脚本
 
-### 娴嬭瘯宸ュ叿
+### 测试工具
 
-**鍔熻兘娴嬭瘯:**
-- pytest (Python 娴嬭瘯妗嗘灦)
-- Selenium (娴忚鍣ㄨ嚜鍔ㄥ寲)
-- Postman (API 娴嬭瘯)
+**功能测试:**
+- pytest (Python 测试框架)
+- Selenium (浏览器自动化)
+- Postman (API 测试)
 
-**鎬ц兘娴嬭瘯:**
+**性能测试:**
 - Apache Bench (ab)
-- wrk (HTTP 鍩哄噯娴嬭瘯)
-- Locust (璐熻浇娴嬭瘯)
+- wrk (HTTP 基准测试)
+- Locust (负载测试)
 
-## 閮ㄧ讲鑴氭湰绀轰緥
+## 部署脚本示例
 
-### 涓€閿儴缃茶剼鏈?
+### 一键部署脚本
+
 ```bash
 #!/bin/bash
-# deploy.sh - 鍗氬绯荤粺涓€閿儴缃茶剼鏈?
-set -e  # 閬囧埌閿欒绔嬪嵆閫€鍑?
-# 閰嶇疆鍙橀噺
+# deploy.sh - 博客系统一键部署脚本
+
+set -e  # 遇到错误立即退出
+
+# 配置变量
 APP_NAME="blog"
 APP_DIR="/opt/blog"
 BACKUP_DIR="/backup/blog"
@@ -163,53 +175,55 @@ PYTHON_VERSION="3.9"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 echo "======================================"
-echo "寮€濮嬮儴缃?$APP_NAME"
-echo "鏃堕棿锛?TIMESTAMP"
+echo "开始部署 $APP_NAME"
+echo "时间：$TIMESTAMP"
 echo "======================================"
 
-# 1. 鍒涘缓澶囦唤
-echo "[1/6] 鍒涘缓澶囦唤..."
+# 1. 创建备份
+echo "[1/6] 创建备份..."
 if [ -d "$APP_DIR" ]; then
     mkdir -p $BACKUP_DIR
     cp -r $APP_DIR $BACKUP_DIR/${APP_NAME}_backup_$TIMESTAMP
-    echo "鉁?澶囦唤瀹屾垚锛?BACKUP_DIR/${APP_NAME}_backup_$TIMESTAMP"
+    echo "✓ 备份完成：$BACKUP_DIR/${APP_NAME}_backup_$TIMESTAMP"
 fi
 
-# 2. 鎷夊彇鏈€鏂颁唬鐮?echo "[2/6] 鎷夊彇鏈€鏂颁唬鐮?.."
+# 2. 拉取最新代码
+echo "[2/6] 拉取最新代码..."
 cd $APP_DIR || exit 1
 git pull origin main
-echo "鉁?浠ｇ爜鏇存柊瀹屾垚"
+echo "✓ 代码更新完成"
 
-# 3. 鍒涘缓铏氭嫙鐜
-echo "[3/6] 閰嶇疆 Python 鐜..."
+# 3. 创建虚拟环境
+echo "[3/6] 配置 Python 环境..."
 python3 -m venv venv
 source venv/bin/activate
-echo "鉁?铏氭嫙鐜鍒涘缓瀹屾垚"
+echo "✓ 虚拟环境创建完成"
 
-# 4. 瀹夎渚濊禆
-echo "[4/6] 瀹夎渚濊禆..."
+# 4. 安装依赖
+echo "[4/6] 安装依赖..."
 pip install -r requirements.txt
-echo "鉁?渚濊禆瀹夎瀹屾垚"
+echo "✓ 依赖安装完成"
 
-# 5. 鏁版嵁搴撹縼绉?echo "[5/6] 鏁版嵁搴撹縼绉?.."
+# 5. 数据库迁移
+echo "[5/6] 数据库迁移..."
 python manage.py migrate
-echo "鉁?鏁版嵁搴撹縼绉诲畬鎴?
+echo "✓ 数据库迁移完成"
 
-# 6. 閲嶅惎鏈嶅姟
-echo "[6/6] 閲嶅惎鏈嶅姟..."
+# 6. 重启服务
+echo "[6/6] 重启服务..."
 sudo systemctl restart blog.service
 sudo systemctl status blog.service
-echo "鉁?鏈嶅姟閲嶅惎瀹屾垚"
+echo "✓ 服务重启完成"
 
 echo ""
 echo "======================================"
-echo "馃帀 閮ㄧ讲鎴愬姛锛?
+echo "🎉 部署成功！"
 echo "======================================"
-echo "璁块棶鍦板潃锛歨ttp://your-server.com"
-echo "鏃ュ織鏌ョ湅锛歵ail -f /var/log/blog/app.log"
+echo "访问地址：http://your-server.com"
+echo "日志查看：tail -f /var/log/blog/app.log"
 ```
 
-### Docker 閮ㄧ讲
+### Docker 部署
 
 ```dockerfile
 # Dockerfile
@@ -217,26 +231,26 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# 瀹夎绯荤粺渚濊禆
+# 安装系统依赖
 RUN apt-get update && apt-get install -y \
     gcc \
     default-libmysqlclient-dev \
     pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
-# 澶嶅埗渚濊禆鏂囦欢
+# 复制依赖文件
 COPY requirements.txt .
 
-# 瀹夎 Python 渚濊禆
+# 安装 Python 依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 澶嶅埗搴旂敤浠ｇ爜
+# 复制应用代码
 COPY . .
 
-# 鏆撮湶绔彛
+# 暴露端口
 EXPOSE 5000
 
-# 鍚姩鍛戒护
+# 启动命令
 CMD ["python", "manage.py", "run", "--host", "0.0.0.0"]
 ```
 
@@ -272,14 +286,14 @@ volumes:
   static_volume:
 ```
 
-## 鐩戞帶鑴氭湰
+## 监控脚本
 
-### 璧勬簮鐩戞帶
+### 资源监控
 
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# monitor.py - 璧勬簮鐩戞帶鑴氭湰
+# monitor.py - 资源监控脚本
 
 import psutil
 import smtplib
@@ -293,36 +307,37 @@ class ResourceMonitor:
         self.disk_threshold = 90
         
     def check_cpu(self):
-        """妫€鏌?CPU 浣跨敤鐜?""
+        """检查 CPU 使用率"""
         cpu_percent = psutil.cpu_percent(interval=1)
         if cpu_percent > self.cpu_threshold:
-            self.send_alert(f"CPU 浣跨敤鐜囪繃楂橈細{cpu_percent}%")
+            self.send_alert(f"CPU 使用率过高：{cpu_percent}%")
         return cpu_percent
     
     def check_memory(self):
-        """妫€鏌ュ唴瀛樹娇鐢ㄧ巼"""
+        """检查内存使用率"""
         memory = psutil.virtual_memory()
         if memory.percent > self.memory_threshold:
-            self.send_alert(f"鍐呭瓨浣跨敤鐜囪繃楂橈細{memory.percent}%")
+            self.send_alert(f"内存使用率过高：{memory.percent}%")
         return memory.percent
     
     def check_disk(self):
-        """妫€鏌ョ鐩樹娇鐢ㄧ巼"""
+        """检查磁盘使用率"""
         disk = psutil.disk_usage('/')
         if disk.percent > self.disk_threshold:
-            self.send_alert(f"纾佺洏绌洪棿涓嶈冻锛歿disk.percent}%")
+            self.send_alert(f"磁盘空间不足：{disk.percent}%")
         return disk.percent
     
     def send_alert(self, message):
-        """鍙戦€佸憡璀﹂偖浠?""
-        # 閰嶇疆閭欢鏈嶅姟鍣?        smtp_server = "smtp.example.com"
+        """发送告警邮件"""
+        # 配置邮件服务器
+        smtp_server = "smtp.example.com"
         smtp_port = 587
         sender = "alert@example.com"
         receiver = "admin@example.com"
         password = "your_password"
         
         msg = MIMEText(message)
-        msg['Subject'] = f'鏈嶅姟鍣ㄥ憡璀?- {datetime.now()}'
+        msg['Subject'] = f'服务器告警 - {datetime.now()}'
         msg['From'] = sender
         msg['To'] = receiver
         
@@ -332,39 +347,41 @@ class ResourceMonitor:
             server.login(sender, password)
             server.send_message(msg)
             server.quit()
-            print(f"鉁?鍛婅閭欢宸插彂閫侊細{message}")
+            print(f"✓ 告警邮件已发送：{message}")
         except Exception as e:
-            print(f"鉁?閭欢鍙戦€佸け璐ワ細{e}")
+            print(f"✗ 邮件发送失败：{e}")
     
     def run(self):
-        """杩愯鐩戞帶"""
-        print("寮€濮嬬洃鎺ф湇鍔″櫒璧勬簮...")
+        """运行监控"""
+        print("开始监控服务器资源...")
         print(f"CPU: {self.check_cpu()}%")
-        print(f"鍐呭瓨锛歿self.check_memory().percent}%")
-        print(f"纾佺洏锛歿self.check_disk().percent}%")
+        print(f"内存：{self.check_memory().percent}%")
+        print(f"磁盘：{self.check_disk().percent}%")
 
 if __name__ == "__main__":
     monitor = ResourceMonitor()
     monitor.run()
 ```
 
-### 鏈嶅姟鍋ュ悍妫€鏌?
+### 服务健康检查
+
 ```python
 #!/usr/bin/env python
-# health_check.py - 鏈嶅姟鍋ュ悍妫€鏌?
+# health_check.py - 服务健康检查
+
 import requests
 import time
 
 def check_service_health():
-    """妫€鏌ユ湇鍔″仴搴风姸鎬?""
+    """检查服务健康状态"""
     services = [
         {
-            'name': '鍗氬 Web 鏈嶅姟',
+            'name': '博客 Web 服务',
             'url': 'http://localhost:5000/api/health',
             'timeout': 5
         },
         {
-            'name': '鏁版嵁搴?,
+            'name': '数据库',
             'url': 'http://localhost:5000/api/db/status',
             'timeout': 5
         }
@@ -376,37 +393,38 @@ def check_service_health():
         try:
             response = requests.get(service['url'], timeout=service['timeout'])
             if response.status_code == 200:
-                status = '鉁?姝ｅ父'
+                status = '✅ 正常'
             else:
-                status = '鈿狅笍 寮傚父'
+                status = '⚠️ 异常'
         except requests.exceptions.Timeout:
-            status = '鉂?瓒呮椂'
+            status = '❌ 超时'
         except requests.exceptions.ConnectionError:
-            status = '鉂?鏃犳硶杩炴帴'
+            status = '❌ 无法连接'
         except Exception as e:
-            status = f'鉂?閿欒锛歿e}'
+            status = f'❌ 错误：{e}'
         
         result = f"{service['name']}: {status}"
         results.append(result)
         print(result)
     
-    return all('鉁? in r for r in results)
+    return all('✅' in r for r in results)
 
 if __name__ == "__main__":
     while True:
-        print(f"\n鍋ュ悍妫€鏌?- {time.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"\n健康检查 - {time.strftime('%Y-%m-%d %H:%M:%S')}")
         print("=" * 50)
         is_healthy = check_service_health()
         
         if not is_healthy:
-            print("\n鈿狅笍 鍙戠幇鏈嶅姟寮傚父锛?)
-            # 鍙互娣诲姞鍛婅閫氱煡
+            print("\n⚠️ 发现服务异常！")
+            # 可以添加告警通知
         
-        time.sleep(60)  # 姣忓垎閽熸鏌ヤ竴娆?```
+        time.sleep(60)  # 每分钟检查一次
+```
 
-## 娴嬭瘯鑴氭湰
+## 测试脚本
 
-### API 鍔熻兘娴嬭瘯
+### API 功能测试
 
 ```python
 # tests/test_api.py
@@ -416,10 +434,10 @@ import requests
 BASE_URL = "http://localhost:5000/api"
 
 class TestUserAPI:
-    """鐢ㄦ埛 API 娴嬭瘯"""
+    """用户 API 测试"""
     
     def test_register_success(self):
-        """娴嬭瘯鐢ㄦ埛娉ㄥ唽鎴愬姛"""
+        """测试用户注册成功"""
         data = {
             'username': 'testuser',
             'email': 'test@example.com',
@@ -431,7 +449,7 @@ class TestUserAPI:
         assert 'user' in response.json()
     
     def test_login_success(self):
-        """娴嬭瘯鐢ㄦ埛鐧诲綍鎴愬姛"""
+        """测试用户登录成功"""
         data = {
             'username': 'testuser',
             'password': 'Test123456'
@@ -442,7 +460,7 @@ class TestUserAPI:
         assert 'token' in response.json()
     
     def test_login_wrong_password(self):
-        """娴嬭瘯瀵嗙爜閿欒"""
+        """测试密码错误"""
         data = {
             'username': 'testuser',
             'password': 'WrongPassword'
@@ -452,56 +470,59 @@ class TestUserAPI:
         assert response.status_code == 401
 
 class TestArticleAPI:
-    """鏂囩珷 API 娴嬭瘯"""
+    """文章 API 测试"""
     
     def test_get_articles(self):
-        """娴嬭瘯鑾峰彇鏂囩珷鍒楄〃"""
+        """测试获取文章列表"""
         response = requests.get(f"{BASE_URL}/articles")
         assert response.status_code == 200
         assert 'articles' in response.json()
     
     def test_get_article_not_found(self):
-        """娴嬭瘯鑾峰彇涓嶅瓨鍦ㄧ殑鏂囩珷"""
+        """测试获取不存在的文章"""
         response = requests.get(f"{BASE_URL}/articles/999999")
         assert response.status_code == 404
 ```
 
-### 鎬ц兘娴嬭瘯
+### 性能测试
 
 ```python
 # tests/performance_test.py
 from locust import HttpUser, task, between
 
 class BlogUser(HttpUser):
-    """妯℃嫙鍗氬鐢ㄦ埛琛屼负"""
+    """模拟博客用户行为"""
     
-    wait_time = between(1, 3)  # 鐢ㄦ埛鎿嶄綔闂撮殧 1-3 绉?    
+    wait_time = between(1, 3)  # 用户操作间隔 1-3 秒
+    
     @task(3)
     def view_homepage(self):
-        """娴忚棣栭〉锛堟潈閲?3锛?""
+        """浏览首页（权重 3）"""
         self.client.get("/")
     
     @task(2)
     def view_article(self):
-        """娴忚鏂囩珷锛堟潈閲?2锛?""
+        """浏览文章（权重 2）"""
         self.client.get("/articles/1")
     
     @task(1)
     def search(self):
-        """鎼滅储鏂囩珷锛堟潈閲?1锛?""
+        """搜索文章（权重 1）"""
         self.client.get("/search?q=python")
 
-# 杩愯鍛戒护锛?# locust -f performance_test.py --host=http://localhost:5000
-# 鐒跺悗璁块棶 http://localhost:8089 鏌ョ湅娴嬭瘯缁撴灉
+# 运行命令：
+# locust -f performance_test.py --host=http://localhost:5000
+# 然后访问 http://localhost:8089 查看测试结果
 ```
 
-## 鏃ュ織绠＄悊
+## 日志管理
 
-### 鏃ュ織鏀堕泦鑴氭湰
+### 日志收集脚本
 
 ```python
 #!/usr/bin/env python
-# log_collector.py - 鏃ュ織鏀堕泦鍜岀鐞?
+# log_collector.py - 日志收集和管理
+
 import os
 import gzip
 import shutil
@@ -513,38 +534,40 @@ class LogCollector:
         self.retention_days = 30
     
     def rotate_logs(self):
-        """杞浆鏃ュ織"""
+        """轮转日志"""
         today = datetime.now()
         log_file = os.path.join(self.log_dir, "app.log")
         
         if os.path.exists(log_file):
-            # 閲嶅懡鍚嶅綋鍓嶆棩蹇?            backup_name = f"{log_file}.{today.strftime('%Y%m%d')}"
+            # 重命名当前日志
+            backup_name = f"{log_file}.{today.strftime('%Y%m%d')}"
             shutil.move(log_file, backup_name)
             
-            # 鍘嬬缉鏃ф棩蹇?            with open(backup_name, 'rb') as f_in:
+            # 压缩旧日志
+            with open(backup_name, 'rb') as f_in:
                 with gzip.open(f"{backup_name}.gz", 'wb') as f_out:
                     shutil.copyfileobj(f_in, f_out)
             
             os.remove(backup_name)
-            print(f"鉁?鏃ュ織杞浆瀹屾垚锛歿backup_name}.gz")
+            print(f"✓ 日志轮转完成：{backup_name}.gz")
     
     def cleanup_old_logs(self):
-        """娓呯悊杩囨湡鏃ュ織"""
+        """清理过期日志"""
         cutoff_date = datetime.now() - timedelta(days=self.retention_days)
         
         for filename in os.listdir(self.log_dir):
             filepath = os.path.join(self.log_dir, filename)
             
-            # 妫€鏌ユ槸鍚︽槸鏃ュ織澶囦唤鏂囦欢
+            # 检查是否是日志备份文件
             if filename.endswith('.log.gz'):
                 file_mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
                 
                 if file_mtime < cutoff_date:
                     os.remove(filepath)
-                    print(f"鉁?鍒犻櫎杩囨湡鏃ュ織锛歿filename}")
+                    print(f"✓ 删除过期日志：{filename}")
     
     def analyze_logs(self):
-        """鍒嗘瀽鏃ュ織"""
+        """分析日志"""
         errors = []
         warnings = []
         
@@ -558,13 +581,14 @@ class LogCollector:
                     elif 'WARNING' in line:
                         warnings.append(line.strip())
         
-        print(f"\n鏃ュ織鍒嗘瀽:")
-        print(f"閿欒鏁帮細{len(errors)}")
-        print(f"璀﹀憡鏁帮細{len(warnings)}")
+        print(f"\n日志分析:")
+        print(f"错误数：{len(errors)}")
+        print(f"警告数：{len(warnings)}")
         
         if errors:
-            print("\n鏈€杩戦敊璇?")
-            for error in errors[-5:]:  # 鏄剧ず鏈€杩?5 涓敊璇?                print(f"  {error}")
+            print("\n最近错误:")
+            for error in errors[-5:]:  # 显示最近 5 个错误
+                print(f"  {error}")
 
 if __name__ == "__main__":
     collector = LogCollector()
@@ -573,183 +597,199 @@ if __name__ == "__main__":
     collector.analyze_logs()
 ```
 
-## 鏃ュ織妯℃澘
+## 日志模板
 
-### 鏃ユ棩蹇楁ā鏉?
-浣嶇疆锛歚F:\openclaw\workspace\team\suancai\logs\daily_YYYYMMDD.md`
+### 日日志模板
+
+位置：`F:\openclaw\workspace\team\suancai\logs\daily_YYYYMMDD.md`
 
 ```markdown
-# SUANCAI - 宸ヤ綔鏃ュ織 {鏃ユ湡}
+# SUANCAI - 工作日志 {日期}
 
-## 浠婃棩宸ヤ綔
-- [x] 鐢熶骇鐜閮ㄧ讲
-- [x] 鏈嶅姟鍋ュ悍妫€鏌?- [x] 鎬ц兘鍩哄噯娴嬭瘯
-- [ ] 鑷姩鍖栨祴璇曡剼鏈紙寤舵湡锛?
-## 閮ㄧ讲璁板綍
-- **搴旂敤**: 鍗氬绯荤粺 v1.0.0
-- **鐜**: production
-- **鏈嶅姟鍣?*: your-server.com
-- **鐘舵€?*: 鉁?鎴愬姛
-- **鍥炴粴璁″垝**: 宸插噯澶?
-## 鐩戞帶鏁版嵁
-- CPU 骞冲潎锛?5%
-- 鍐呭瓨浣跨敤锛?2%
-- 纾佺洏鍓╀綑锛?8GB
-- 鍝嶅簲鏃堕棿锛?20ms
+## 今日工作
+- [x] 生产环境部署
+- [x] 服务健康检查
+- [x] 性能基准测试
+- [ ] 自动化测试脚本（延期）
 
-## 娴嬭瘯缁撴灉
-- 鍔熻兘娴嬭瘯锛氶€氳繃 45/45
-- 鎬ц兘娴嬭瘯锛歈PS 150锛孭95 200ms
-- 鍙戠幇闂锛? 涓?
-## 鏄庢棩璁″垝
-- 閰嶇疆鑷姩澶囦唤
-- 浼樺寲 Nginx 閰嶇疆
-- 缂栧啓杩愮淮鏂囨。
+## 部署记录
+- **应用**: 博客系统 v1.0.0
+- **环境**: production
+- **服务器**: your-server.com
+- **状态**: ✅ 成功
+- **回滚计划**: 已准备
 
-## 宸ヤ綔鏃堕暱
-- 寮€濮嬶細09:30
-- 缁撴潫锛?7:30
-- 鎬昏锛? 灏忔椂
+## 监控数据
+- CPU 平均：35%
+- 内存使用：62%
+- 磁盘剩余：28GB
+- 响应时间：120ms
+
+## 测试结果
+- 功能测试：通过 45/45
+- 性能测试：QPS 150，P95 200ms
+- 发现问题：0 个
+
+## 明日计划
+- 配置自动备份
+- 优化 Nginx 配置
+- 编写运维文档
+
+## 工作时长
+- 开始：09:30
+- 结束：17:30
+- 总计：7 小时
 ```
 
-## 涓庡叾浠?Agent 鍗忎綔
+## 与其他 Agent 协作
 
-### 涓庣亴姹?(PM)
+### 与灌汤 (PM)
 
-- 鎺ユ敹閮ㄧ讲浠诲姟
-- 鎶ュ憡杩愮淮鐘舵€?- 鍙嶉璧勬簮浣跨敤鎯呭喌
+- 接收部署任务
+- 报告运维状态
+- 反馈资源使用情况
 
-### 涓庨叡鑲?(鍚庣)
+### 与酱肉 (后端)
 
-- 閰嶅悎閮ㄧ讲鍚庣鏈嶅姟
-- 鎶ュ憡鎬ц兘鐡堕
-- 鍗忓姪鎺掓煡闂
-- 鎻愪緵杩愮淮寤鸿
+- 配合部署后端服务
+- 报告性能瓶颈
+- 协助排查问题
+- 提供运维建议
 
-### 涓庤眴娌?(鍓嶇)
+### 与豆沙 (前端)
 
-- 閰嶅悎鍓嶇閮ㄧ讲
-- 娴嬭瘯椤甸潰鍔犺浇閫熷害
-- 浼樺寲闈欐€佽祫婧?- CDN 閰嶇疆
+- 配合前端部署
+- 测试页面加载速度
+- 优化静态资源
+- CDN 配置
 
-## 澶囦唤绛栫暐
+## 备份策略
 
-### 鏈湴澶囦唤鑴氭湰
+### 本地备份脚本
 
 ```bash
 #!/bin/bash
-# backup.sh - 鑷姩澶囦唤鑴氭湰
+# backup.sh - 自动备份脚本
 
 BACKUP_DIR="/backup/blog"
 DATE=$(date +%Y%m%d)
 APP_DIR="/opt/blog"
 DB_FILE="/opt/blog/blog.db"
 
-# 鍒涘缓澶囦唤鐩綍
+# 创建备份目录
 mkdir -p $BACKUP_DIR/$DATE
 
-# 澶囦唤鏁版嵁搴?cp $DB_FILE $BACKUP_DIR/$DATE/blog.db
+# 备份数据库
+cp $DB_FILE $BACKUP_DIR/$DATE/blog.db
 
-# 澶囦唤浠ｇ爜
+# 备份代码
 tar -czf $BACKUP_DIR/$DATE/code.tar.gz $APP_DIR
 
-# 鍘嬬缉澶囦唤
+# 压缩备份
 cd $BACKUP_DIR
 tar -czf blog_backup_$DATE.tar.gz $DATE/
 
-# 鍒犻櫎涓存椂鏂囦欢
+# 删除临时文件
 rm -rf $BACKUP_DIR/$DATE
 
-# 娓呯悊鏃у浠斤紙淇濈暀鏈€杩?7 澶╋級
+# 清理旧备份（保留最近 7 天）
 find $BACKUP_DIR -name "*.tar.gz" -mtime +7 -delete
 
-echo "鉁?澶囦唤瀹屾垚锛歜log_backup_$DATE.tar.gz"
+echo "✓ 备份完成：blog_backup_$DATE.tar.gz"
 ```
 
-## 蹇€熷紑濮?
-### 1. 棣栨閮ㄧ讲
+## 快速开始
+
+### 1. 首次部署
 
 ```bash
-# 鍏嬮殕浠ｇ爜
+# 克隆代码
 git clone https://github.com/your-repo/blog.git /opt/blog
 
-# 杩涘叆鐩綍
+# 进入目录
 cd /opt/blog
 
-# 杩愯閮ㄧ讲鑴氭湰
+# 运行部署脚本
 chmod +x deploy.sh
 ./deploy.sh
 ```
 
-### 2. 閰嶇疆鐩戞帶
+### 2. 配置监控
 
 ```bash
-# 璁剧疆瀹氭椂浠诲姟
+# 设置定时任务
 crontab -e
 
-# 娣诲姞浠ヤ笅鍐呭锛堟瘡鍒嗛挓妫€鏌ヤ竴娆★級
+# 添加以下内容（每分钟检查一次）
 * * * * * /opt/blog/monitoring/health_check.py >> /var/log/blog/health.log 2>&1
 ```
 
-### 3. 杩愯娴嬭瘯
+### 3. 运行测试
 
 ```bash
-# 瀹夎娴嬭瘯渚濊禆
+# 安装测试依赖
 pip install pytest requests locust
 
-# 杩愯鍔熻兘娴嬭瘯
+# 运行功能测试
 pytest tests/test_api.py -v
 
-# 杩愯鎬ц兘娴嬭瘯
+# 运行性能测试
 locust -f tests/performance_test.py --host=http://localhost:5000
 ```
 
-## 甯歌闂
+## 常见问题
 
-### Q1: 閮ㄧ讲澶辫触濡備綍鍥炴粴锛?
+### Q1: 部署失败如何回滚？
+
 **A:**
 ```bash
-# 1. 鍋滄鏈嶅姟
+# 1. 停止服务
 sudo systemctl stop blog.service
 
-# 2. 鎭㈠澶囦唤
+# 2. 恢复备份
 BACKUP_DATE="20260307_120000"
 rm -rf /opt/blog
 cp -r /backup/blog/blog_backup_$BACKUP_DATE /opt/blog
 
-# 3. 閲嶅惎鏈嶅姟
+# 3. 重启服务
 sudo systemctl start blog.service
 ```
 
-### Q2: 鏈嶅姟鍣ㄥ搷搴斿彉鎱㈡€庝箞鍔烇紵
+### Q2: 服务器响应变慢怎么办？
 
 **A:**
-1. 妫€鏌?CPU 鍜屽唴瀛樹娇鐢ㄧ巼
-2. 鏌ョ湅鏃ュ織瀹氫綅鎱㈡煡璇?3. 浼樺寲鏁版嵁搴撶储寮?4. 澧炲姞缂撳瓨
-5. 鑰冭檻鍗囩骇鏈嶅姟鍣ㄩ厤缃?
-### Q3: 纾佺洏绌洪棿涓嶈冻濡備綍澶勭悊锛?
+1. 检查 CPU 和内存使用率
+2. 查看日志定位慢查询
+3. 优化数据库索引
+4. 增加缓存
+5. 考虑升级服务器配置
+
+### Q3: 磁盘空间不足如何处理？
+
 **A:**
 ```bash
-# 1. 鏌ユ壘澶ф枃浠?find / -type f -size +100M -exec ls -lh {} \;
+# 1. 查找大文件
+find / -type f -size +100M -exec ls -lh {} \;
 
-# 2. 娓呯悊鏃ュ織
+# 2. 清理日志
 journalctl --vacuum-time=7d
 
-# 3. 娓呯悊缂撳瓨
+# 3. 清理缓存
 apt-get clean
 rm -rf /tmp/*
 
-# 4. 鍒犻櫎鏃у浠?find /backup -mtime +30 -delete
+# 4. 删除旧备份
+find /backup -mtime +30 -delete
 ```
 
-## 涓嬩竴姝ラ槄璇?
-1. **[Linux 杩愮淮鏈€浣冲疄璺礭(https://linuxhandbook.com/)**
-2. **[pytest 瀹樻柟鏂囨。](https://docs.pytest.org/)**
-3. **[Docker 鏁欑▼](https://docs.docker.com/get-started/)**
-4. **[Nginx 閰嶇疆鎸囧崡](https://www.nginx.com/resources/wiki/start/)**
+## 下一步阅读
+
+1. **[Linux 运维最佳实践](https://linuxhandbook.com/)**
+2. **[pytest 官方文档](https://docs.pytest.org/)**
+3. **[Docker 教程](https://docs.docker.com/get-started/)**
+4. **[Nginx 配置指南](https://www.nginx.com/resources/wiki/start/)**
 
 ---
 
-*閰歌彍 Agent - 涓烘偍鐨勫崥瀹繚椹炬姢鑸?  
-*鐗堟湰锛歷2.0.0-lite*
-
+*酸菜 Agent - 为您的博客保驾护航*  
+*版本：v2.0.0-lite*

@@ -1,72 +1,77 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 豆沙 (前端工程师/UIUX设计师) - 完整配置与知识库
 
-# 璞嗘矙 (鍓嶇宸ョ▼甯?UIUX璁捐甯? - 瀹屾暣閰嶇疆涓庣煡璇嗗簱
-
-馃崱 **OpenClaw 鍓嶇璐熻矗浜?/ UI/UX璁捐甯?*
+🍡 **OpenClaw 前端负责人 / UI/UX设计师**
 
 ---
 
-## 馃摎 蹇€熷鑸?
-- [韬唤璁ょ煡](./IDENTITY.md) - 鎴戞槸璋?- [鑱岃矗瑙勮寖](./ROLE.md) - 鎴戝仛浠€涔?- [琛屼负鍑嗗垯](./SOUL.md) - 鎴戝浣曞伐浣?- [鎶€鏈爤瑙勮寖](#鎶€鏈爤瑙勮寖) - 浣跨敤浠€涔堟妧鏈?- [璁捐鍘熷垯](#uiux-璁捐鍘熷垯) - 璁捐瑙勮寖
-- [寮€鍙戞渶浣冲疄璺礭(#鍓嶇寮€鍙戞渶浣冲疄璺? - 寮€鍙戞寚鍗?- [甯歌闂瑙ｅ喅](#甯歌闂涓庤В鍐虫柟妗? - 闂鎺掓煡
+## 📚 快速导航
+
+- [身份认知](./IDENTITY.md) - 我是谁
+- [职责规范](./ROLE.md) - 我做什么
+- [行为准则](./SOUL.md) - 我如何工作
+- [技术栈规范](#技术栈规范) - 使用什么技术
+- [设计原则](#uiux-设计原则) - 设计规范
+- [开发最佳实践](#前端开发最佳实践) - 开发指南
+- [常见问题解决](#常见问题与解决方案) - 问题排查
 
 ---
 
-## 馃懁 Agent 韬唤
+## 👤 Agent 身份
 
-**鍚嶇О:** 璞嗘矙  
-**瑙掕壊:** 鍓嶇宸ョ▼甯?/ UI/UX璁捐甯? 
-**鑱岃矗:** 璐熻矗鎵€鏈夊墠绔晫闈㈢殑瀹炵幇銆乁I/UX璁捐銆佷氦浜掍紭鍖?
-**鏍稿績閰嶇疆鏂囦欢:**
-- [IDENTITY.md](./IDENTITY.md) - 韬唤璁ょ煡
-- [ROLE.md](./ROLE.md) - 鑱岃矗瑙勮寖
-- [SOUL.md](./SOUL.md) - 琛屼负鍑嗗垯
+**名称:** 豆沙  
+**角色:** 前端工程师 / UI/UX设计师  
+**职责:** 负责所有前端界面的实现、UI/UX设计、交互优化
+
+**核心配置文件:**
+- [IDENTITY.md](./IDENTITY.md) - 身份认知
+- [ROLE.md](./ROLE.md) - 职责规范
+- [SOUL.md](./SOUL.md) - 行为准则
 
 ---
 
-## 馃捇 鎶€鏈爤瑙勮寖
+## 💻 技术栈规范
 
-### 鏍稿績鎶€鏈爤
+### 核心技术栈
 
 ```
-妗嗘灦锛歏ue 3.4+ (Composition API)
-鏋勫缓宸ュ叿锛歏ite 5.x
-璇█锛歍ypeScript 5.x
-鏍峰紡锛歋CSS + Tailwind CSS
-鐘舵€佺鐞嗭細Pinia 2.x
-UI 缁勪欢搴擄細Element Plus / Ant Design Vue
-HTTP 瀹㈡埛绔細Axios
+框架：Vue 3.4+ (Composition API)
+构建工具：Vite 5.x
+语言：TypeScript 5.x
+样式：SCSS + Tailwind CSS
+状态管理：Pinia 2.x
+UI 组件库：Element Plus / Ant Design Vue
+HTTP 客户端：Axios
 ```
 
-### 瀹屾暣鎶€鏈竻鍗?
-| 绫诲埆 | 鎶€鏈€夊瀷 | 鐗堟湰 |
+### 完整技术清单
+
+| 类别 | 技术选型 | 版本 |
 |------|---------|------|
-| **鍓嶇妗嗘灦** | Vue.js | 3.4+ |
-| **寮€鍙戣瑷€** | TypeScript | 5.x |
-| **鏋勫缓宸ュ叿** | Vite | 5.x |
-| **鐘舵€佺鐞?* | Pinia | 2.x |
-| **璺敱** | Vue Router | 4.x |
-| **UI 妗嗘灦** | Element Plus | 2.x |
-| **CSS 妗嗘灦** | Tailwind CSS | 3.x |
-| **HTTP 搴?* | Axios | 1.x |
-| **浠ｇ爜瑙勮寖** | ESLint, Prettier | - |
-| **娴嬭瘯** | Vitest, Vue Test Utils | - |
+| **前端框架** | Vue.js | 3.4+ |
+| **开发语言** | TypeScript | 5.x |
+| **构建工具** | Vite | 5.x |
+| **状态管理** | Pinia | 2.x |
+| **路由** | Vue Router | 4.x |
+| **UI 框架** | Element Plus | 2.x |
+| **CSS 框架** | Tailwind CSS | 3.x |
+| **HTTP 库** | Axios | 1.x |
+| **代码规范** | ESLint, Prettier | - |
+| **测试** | Vitest, Vue Test Utils | - |
 
 ---
 
-## 馃帹 UI/UX璁捐鍘熷垯
+## 🎨 UI/UX设计原则
 
-### 1. 鑹插僵瑙勮寖
+### 1. 色彩规范
 
 ```css
 :root {
-  /* 涓昏壊璋?*/
+  /* 主色调 */
   --primary-50: #e3f2fd;
   --primary-500: #2196f3;
   --primary-700: #1976d2;
   
-  /* 鍔熻兘鑹?*/
+  /* 功能色 */
   --success: #4caf50;
   --warning: #ff9800;
   --error: #f44336;
@@ -74,13 +79,15 @@ HTTP 瀹㈡埛绔細Axios
 }
 ```
 
-### 2. 鍝嶅簲寮忔柇鐐?
+### 2. 响应式断点
+
 ```scss
-// 绉诲姩浼樺厛
+// 移动优先
 $breakpoints: (
-  'sm': 640px,   // 灏忓钩鏉?  'md': 768px,   // 骞虫澘
-  'lg': 1024px,  // 妗岄潰
-  'xl': 1280px   // 澶у睆
+  'sm': 640px,   // 小平板
+  'md': 768px,   // 平板
+  'lg': 1024px,  // 桌面
+  'xl': 1280px   // 大屏
 );
 
 @mixin respond-to($breakpoint) {
@@ -90,9 +97,10 @@ $breakpoints: (
 }
 ```
 
-### 3. 缁勪欢璁捐瑙勮寖
+### 3. 组件设计规范
 
-#### 鍗曟枃浠剁粍浠剁粨鏋?
+#### 单文件组件结构
+
 ```vue
 <template>
   <div class="article-card">
@@ -130,8 +138,9 @@ const formattedDate = computed(() => {
 
 ---
 
-## 馃捇 鍓嶇寮€鍙戞渶浣冲疄璺?
-### 1. Composition API 绀轰緥
+## 💻 前端开发最佳实践
+
+### 1. Composition API 示例
 
 ```typescript
 // composables/useArticles.ts
@@ -156,7 +165,7 @@ export function useArticles() {
       const response = await api.getArticles()
       articles.value = response.data
     } catch (e) {
-      error.value = e instanceof Error ? e.message : '鍔犺浇澶辫触'
+      error.value = e instanceof Error ? e.message : '加载失败'
     } finally {
       loading.value = false
     }
@@ -208,7 +217,7 @@ export const useArticleStore = defineStore('article', {
         const response = await api.getArticles()
         this.articles = response.data
       } catch (error) {
-        this.error = error instanceof Error ? error.message : '鍔犺浇澶辫触'
+        this.error = error instanceof Error ? error.message : '加载失败'
       } finally {
         this.loading = false
       }
@@ -217,7 +226,7 @@ export const useArticleStore = defineStore('article', {
 })
 ```
 
-### 3. API 灏佽
+### 3. API 封装
 
 ```typescript
 // api/index.ts
@@ -228,7 +237,8 @@ const api = axios.create({
   timeout: 10000
 })
 
-// 璇锋眰鎷︽埅鍣?api.interceptors.request.use(config => {
+// 请求拦截器
+api.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
@@ -236,11 +246,12 @@ const api = axios.create({
   return config
 })
 
-// 鍝嶅簲鎷︽埅鍣?api.interceptors.response.use(
+// 响应拦截器
+api.interceptors.response.use(
   response => response.data,
   error => {
     if (error.response?.status === 401) {
-      // 鏈巿鏉冿紝璺宠浆鐧诲綍
+      // 未授权，跳转登录
       router.push('/login')
     }
     return Promise.reject(error)
@@ -252,9 +263,10 @@ export default api
 
 ---
 
-## 鈿?鎬ц兘浼樺寲
+## ⚡ 性能优化
 
-### 1. 鎳掑姞杞借矾鐢?
+### 1. 懒加载路由
+
 ```typescript
 // router/index.ts
 const routes = [
@@ -269,7 +281,7 @@ const routes = [
 ]
 ```
 
-### 2. 铏氭嫙鍒楄〃
+### 2. 虚拟列表
 
 ```vue
 <template>
@@ -285,16 +297,17 @@ const routes = [
 </template>
 ```
 
-### 3. 闃叉姈鑺傛祦
+### 3. 防抖节流
 
 ```typescript
 import { debounce } from 'lodash-es'
 
-// 鎼滅储妗嗛槻鎶?const handleSearch = debounce((query: string) => {
+// 搜索框防抖
+const handleSearch = debounce((query: string) => {
   api.search(query)
 }, 300)
 
-// 婊氬姩鑺傛祦
+// 滚动节流
 const handleScroll = throttle(() => {
   loadMore()
 }, 200)
@@ -302,10 +315,11 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 鈿狅笍 甯歌闂涓庤В鍐虫柟妗?
-### 闂 1: 璺ㄥ煙闂 (CORS)
+## ⚠️ 常见问题与解决方案
 
-**寮€鍙戠幆澧冭В鍐虫柟妗?**
+### 问题 1: 跨域问题 (CORS)
+
+**开发环境解决方案:**
 ```typescript
 // vite.config.ts
 export default {
@@ -320,9 +334,9 @@ export default {
 }
 ```
 
-### 闂 2: 鍐呭瓨娉勬紡
+### 问题 2: 内存泄漏
 
-**瑙ｅ喅鏂规:**
+**解决方案:**
 ```vue
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
@@ -339,18 +353,18 @@ onMounted(() => {
 </script>
 ```
 
-### 闂 3: 鏍峰紡鍐茬獊
+### 问题 3: 样式冲突
 
-**瑙ｅ喅鏂规:**
+**解决方案:**
 ```vue
-<!-- 浣跨敤 scoped -->
+<!-- 使用 scoped -->
 <style scoped lang="scss">
 .title {
   color: blue;
 }
 </style>
 
-<!-- 鎴栦娇鐢?CSS Modules -->
+<!-- 或使用 CSS Modules -->
 <style module>
 .title {
   color: blue;
@@ -360,20 +374,19 @@ onMounted(() => {
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## 📖 学习资源
 
-### 瀹樻柟鏂囨。
-- [Vue 3 瀹樻柟鏂囨。](https://vuejs.org/)
-- [TypeScript 鏂囨。](https://www.typescriptlang.org/)
-- [Vite 鏂囨。](https://vitejs.dev/)
-- [Pinia 鏂囨。](https://pinia.vuejs.org/)
+### 官方文档
+- [Vue 3 官方文档](https://vuejs.org/)
+- [TypeScript 文档](https://www.typescriptlang.org/)
+- [Vite 文档](https://vitejs.dev/)
+- [Pinia 文档](https://pinia.vuejs.org/)
 
-### 璁捐瑙勮寖
+### 设计规范
 - [Material Design](https://material.io/design)
-- [Ant Design 瑙勮寖](https://ant.design/)
+- [Ant Design 规范](https://ant.design/)
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-08*  
-*缁存姢鑰咃細璞嗘矙Agent*
-
+*最后更新：2026-03-08*  
+*维护者：豆沙Agent*

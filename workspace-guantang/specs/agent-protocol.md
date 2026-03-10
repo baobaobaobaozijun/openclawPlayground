@@ -1,58 +1,55 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# Agent-to-Agent 通信协议（轻量版）
 
-# Agent-to-Agent 閫氫俊鍗忚锛堣交閲忕増锛?
+## 协议概述
 
-## 鍗忚姒傝堪
+针对个人博客项目的轻量级 Agent 协作协议。采用简化的函数调用方式，避免重量级的 JSON-RPC 2.0。
 
-閽堝涓汉鍗氬椤圭洰鐨勮交閲忕骇 Agent 鍗忎綔鍗忚銆傞噰鐢ㄧ畝鍖栫殑鍑芥暟璋冪敤鏂瑰紡锛岄伩鍏嶉噸閲忕骇鐨?JSON-RPC 2.0銆?
+## 通信方式
 
-## 閫氫俊鏂瑰紡
+### 传输层
+- **协议**: 简化 RPC（基于文件系统）
+- **传输**: 本地文件共享
+- **认证**: Agent 身份标识
+- **加密**: 不需要（本地通信）
 
-### 浼犺緭灞?
-- **鍗忚**: 绠€鍖?RPC锛堝熀浜庢枃浠剁郴缁燂級
-- **浼犺緭**: 鏈湴鏂囦欢鍏变韩
-- **璁よ瘉**: Agent 韬唤鏍囪瘑
-- **鍔犲瘑**: 涓嶉渶瑕侊紙鏈湴閫氫俊锛?
-
-### 娑堟伅鏍煎紡
+### 消息格式
 
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "allocateTask",
   "data": {},
   "timestamp": "2026-03-07T10:30:00Z"
 }
 ```
 
-## 鏍稿績鎺ュ彛瀹氫箟
+## 核心接口定义
 
-### 1. 浠诲姟鍒嗗彂鎺ュ彛
+### 1. 任务分发接口
 
-**鎺ュ彛鍚嶇О:** `allocateTask`
+**接口名称:** `allocateTask`
 
-**鐢ㄩ€?** 鐏屾堡鍚戝叾浠?Agent 鍒嗛厤宸ヤ綔浠诲姟
+**用途:** 灌汤向其他 Agent 分配工作任务
 
-**璇锋眰鏍煎紡:**
+**请求格式:**
 
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "allocateTask",
   "data": {
     "project_id": "BLOG_20260307_001",
     "task_id": "TASK_20260307_001",
-    "task_name": "鍗氬鍚庣 API 寮€鍙?,
-    "description": "瀹炵幇鐢ㄦ埛璁よ瘉鍜屾枃绔犵鐞?API",
+    "task_name": "博客后端 API 开发",
+    "description": "实现用户认证和文章管理 API",
     "priority": "high",
-    "estimated_effort": "2 浜郝峰ぉ",
+    "estimated_effort": "2 人·天",
     "due_date": "2026-03-09",
     "deliverables": [
       {
-        "name": "API 浠ｇ爜",
+        "name": "API 代码",
         "path": "F:\\openclaw\\code\\backend\\api\\"
       }
     ]
@@ -61,35 +58,35 @@
 }
 ```
 
-**鍝嶅簲鏍煎紡:**
+**响应格式:**
 
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "acknowledgeTask",
   "data": {
     "task_id": "TASK_20260307_001",
     "status": "accepted",
     "estimated_start": "2026-03-07",
-    "notes": "宸叉帴鏀朵换鍔★紝鎸夋椂寮€濮?
+    "notes": "已接收任务，按时开始"
   },
   "timestamp": "2026-03-07T10:35:00Z"
 }
 ```
 
-### 2. 杩涘害鏌ヨ鎺ュ彛
+### 2. 进度查询接口
 
-**鎺ュ彛鍚嶇О:** `queryProgress`
+**接口名称:** `queryProgress`
 
-**鐢ㄩ€?** 鐏屾堡鏌ヨ鍏朵粬 Agent 鐨勪换鍔¤繘搴?
+**用途:** 灌汤查询其他 Agent 的任务进度
 
-**璇锋眰鏍煎紡:**
+**请求格式:**
 
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "queryProgress",
   "data": {
     "project_id": "BLOG_20260307_001",
@@ -99,19 +96,19 @@
 }
 ```
 
-**鍝嶅簲鏍煎紡:**
+**响应格式:**
 
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "progressReport",
   "data": {
     "task_id": "TASK_20260307_001",
     "current_status": "in_progress",
     "progress_percentage": 60,
-    "completed_work": "瀹屾垚鐢ㄦ埛璁よ瘉妯″潡",
-    "remaining_work": "鏂囩珷绠＄悊妯″潡寮€鍙戜腑",
+    "completed_work": "完成用户认证模块",
+    "remaining_work": "文章管理模块开发中",
     "blockers": [],
     "last_update": "2026-03-07T14:00:00Z"
   },
@@ -119,66 +116,66 @@
 }
 ```
 
-### 3. 闂鎶ュ憡鎺ュ彛
+### 3. 问题报告接口
 
-**鎺ュ彛鍚嶇О:** `reportIssue`
+**接口名称:** `reportIssue`
 
-**鐢ㄩ€?** 鍏朵粬 Agent 鍚戠亴姹ゆ姤鍛婇亣鍒扮殑闂
+**用途:** 其他 Agent 向灌汤报告遇到的问题
 
-**璇锋眰鏍煎紡:**
+**请求格式:**
 
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "reportIssue",
   "data": {
     "task_id": "TASK_20260307_001",
     "issue_type": "technical",
     "severity": "medium",
-    "title": "绗笁鏂逛緷璧栧啿绐?,
-    "description": "JWT 搴撶増鏈笌鐜版湁妗嗘灦涓嶅吋瀹?,
-    "proposed_solution": "闄嶇骇 JWT 搴撴垨鍗囩骇妗嗘灦",
+    "title": "第三方依赖冲突",
+    "description": "JWT 库版本与现有框架不兼容",
+    "proposed_solution": "降级 JWT 库或升级框架",
     "requires_action": true
   },
   "timestamp": "2026-03-07T15:00:00Z"
 }
 ```
 
-**鍝嶅簲鏍煎紡:**
+**响应格式:**
 
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "issueAcknowledged",
   "data": {
     "issue_id": "ISSUE_20260307_001",
-    "action_plan": "宸茶褰曪紝鏄庡ぉ璁ㄨ瑙ｅ喅鏂规",
+    "action_plan": "已记录，明天讨论解决方案",
     "next_review": "2026-03-08T10:00:00Z"
   },
   "timestamp": "2026-03-07T15:10:00Z"
 }
 ```
 
-### 4. 浜や粯鐗╂彁浜ゆ帴鍙?
+### 4. 交付物提交接口
 
-**鎺ュ彛鍚嶇О:** `submitDeliverable`
+**接口名称:** `submitDeliverable`
 
-**鐢ㄩ€?** 鍏朵粬 Agent 鍚戠亴姹ゆ彁浜ゅ畬鎴愮殑浜や粯鐗?
+**用途:** 其他 Agent 向灌汤提交完成的交付物
 
-**璇锋眰鏍煎紡:**
+**请求格式:**
 
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "submitDeliverable",
   "data": {
     "task_id": "TASK_20260307_001",
     "deliverables": [
       {
-        "name": "鐢ㄦ埛璁よ瘉 API",
+        "name": "用户认证 API",
         "type": "code",
         "path": "F:\\openclaw\\code\\backend\\api\\auth.py",
         "version": "1.0.0",
@@ -192,45 +189,44 @@
 }
 ```
 
-**鍝嶅簲鏍煎紡:**
+**响应格式:**
 
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "deliverableReceived",
   "data": {
     "deliverable_id": "DEL_20260307_001",
     "status": "accepted",
-    "next_step": "杞氦閰歌彍娴嬭瘯",
-    "feedback": "浠ｇ爜璐ㄩ噺鑹ソ"
+    "next_step": "转交酸菜测试",
+    "feedback": "代码质量良好"
   },
   "timestamp": "2026-03-07T17:10:00Z"
 }
 ```
 
-## 閿欒澶勭悊
+## 错误处理
 
-| 閿欒鐮?| 璇存槑 |
+| 错误码 | 说明 |
 |--------|------|
-| ERR_001 | Agent 涓嶅彲鐢?|
-| ERR_002 | 浠诲姟涓嶅瓨鍦?|
-| ERR_003 | 鏉冮檺涓嶈冻 |
-| ERR_004 | 璧勬簮涓嶈冻 |
-| ERR_005 | 鏂囦欢鏍煎紡閿欒 |
+| ERR_001 | Agent 不可用 |
+| ERR_002 | 任务不存在 |
+| ERR_003 | 权限不足 |
+| ERR_004 | 资源不足 |
+| ERR_005 | 文件格式错误 |
 
-## 瓒呮椂璁剧疆
+## 超时设置
 
-- **浠诲姟鍒嗗彂璇锋眰瓒呮椂:** 5 绉?
-- **杩涘害鏌ヨ璇锋眰瓒呮椂:** 3 绉?
-- **闂鎶ュ憡璇锋眰瓒呮椂:** 2 绉?
-- **浜や粯鐗╂彁浜よ姹傝秴鏃?** 5 绉?
+- **任务分发请求超时:** 5 秒
+- **进度查询请求超时:** 3 秒
+- **问题报告请求超时:** 2 秒
+- **交付物提交请求超时:** 5 秒
 
-## 閲嶈瘯鏈哄埗
+## 重试机制
 
-濡傛灉 Agent 鏃犲搷搴旓細
-- 绗竴娆￠噸璇曪細5 绉掑悗
-- 绗簩娆￠噸璇曪細10 绉掑悗
-- 绗笁娆￠噸璇曪細30 绉掑悗
-- 濡備粛澶辫触锛岃褰曟棩蹇楀苟绛夊緟涓嬫蹇冭烦
-
+如果 Agent 无响应：
+- 第一次重试：5 秒后
+- 第二次重试：10 秒后
+- 第三次重试：30 秒后
+- 如仍失败，记录日志并等待下次心跳

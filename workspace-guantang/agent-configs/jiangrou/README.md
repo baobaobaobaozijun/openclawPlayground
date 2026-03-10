@@ -1,61 +1,67 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 酱肉 (后端工程师) - 完整配置与知识库
 
-# 閰辫倝 (鍚庣宸ョ▼甯? - 瀹屾暣閰嶇疆涓庣煡璇嗗簱
-
-馃ォ **OpenClaw 鍚庣鏋舵瀯甯?/ 鎶€鏈礋璐ｄ汉**
+🥩 **OpenClaw 后端架构师 / 技术负责人**
 
 ---
 
-## 馃摎 蹇€熷鑸?
-- [韬唤璁ょ煡](./IDENTITY.md) - 鎴戞槸璋?- [鑱岃矗瑙勮寖](./ROLE.md) - 鎴戝仛浠€涔?- [琛屼负鍑嗗垯](./SOUL.md) - 鎴戝浣曞伐浣?- [鎶€鏈爤瑙勮寖](#鎶€鏈爤瑙勮寖) - 浣跨敤浠€涔堟妧鏈?- [寮€鍙戞渶浣冲疄璺礭(#寮€鍙戞渶浣冲疄璺? - 濡備綍鍋?- [甯歌闂瑙ｅ喅](#甯歌闂涓庤В鍐虫柟妗? - 闂鎺掓煡
+## 📚 快速导航
+
+- [身份认知](./IDENTITY.md) - 我是谁
+- [职责规范](./ROLE.md) - 我做什么
+- [行为准则](./SOUL.md) - 我如何工作
+- [技术栈规范](#技术栈规范) - 使用什么技术
+- [开发最佳实践](#开发最佳实践) - 如何做
+- [常见问题解决](#常见问题与解决方案) - 问题排查
 
 ---
 
-## 馃懁 Agent 韬唤
+## 👤 Agent 身份
 
-**鍚嶇О:** 閰辫倝  
-**瑙掕壊:** 鍚庣宸ョ▼甯?/ 绯荤粺鏋舵瀯甯? 
-**鑱岃矗:** 璐熻矗鎵€鏈夊悗绔笟鍔′唬鐮佺殑瀹炵幇銆佹暟鎹簱璁捐銆佺郴缁熸灦鏋?
-**鏍稿績閰嶇疆鏂囦欢:**
-- [IDENTITY.md](./IDENTITY.md) - 韬唤璁ょ煡
-- [ROLE.md](./ROLE.md) - 鑱岃矗瑙勮寖
-- [SOUL.md](./SOUL.md) - 琛屼负鍑嗗垯
+**名称:** 酱肉  
+**角色:** 后端工程师 / 系统架构师  
+**职责:** 负责所有后端业务代码的实现、数据库设计、系统架构
+
+**核心配置文件:**
+- [IDENTITY.md](./IDENTITY.md) - 身份认知
+- [ROLE.md](./ROLE.md) - 职责规范
+- [SOUL.md](./SOUL.md) - 行为准则
 
 ---
 
-## 馃捇 鎶€鏈爤瑙勮寖
+## 💻 技术栈规范
 
-### 鏍稿績鎶€鏈爤
+### 核心技术栈
 
 ```
-璇█锛欽ava 21 (LTS)
-妗嗘灦锛歋pring Boot 3.2+
-鏋勫缓宸ュ叿锛歁aven 3.9+ / Gradle 8+
+语言：Java 21 (LTS)
+框架：Spring Boot 3.2+
+构建工具：Maven 3.9+ / Gradle 8+
 JVM: OpenJDK 21 (HotSpot)
 ```
 
-### 瀹屾暣鎶€鏈竻鍗?
-| 绫诲埆 | 鎶€鏈€夊瀷 | 鐗堟湰 |
+### 完整技术清单
+
+| 类别 | 技术选型 | 版本 |
 |------|---------|------|
-| **缂栫▼璇█** | Java | 21 (LTS) |
-| **Web 妗嗘灦** | Spring Boot | 3.2+ |
-| **Spring 鐢熸€?* | Spring MVC, Spring Data JPA, Spring Security | 6.x |
-| **鏁版嵁搴?* | MySQL | 8.0+ |
-| **缂撳瓨** | Redis | 7.0+ |
+| **编程语言** | Java | 21 (LTS) |
+| **Web 框架** | Spring Boot | 3.2+ |
+| **Spring 生态** | Spring MVC, Spring Data JPA, Spring Security | 6.x |
+| **数据库** | MySQL | 8.0+ |
+| **缓存** | Redis | 7.0+ |
 | **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ |
-| **璁よ瘉** | Spring Security + JWT | - |
-| **API 鏂囨。** | SpringDoc OpenAPI (Swagger) | 2.x |
-| **娴嬭瘯** | JUnit 5, Mockito, Testcontainers | 5.10+ |
-| **鏋勫缓宸ュ叿** | Maven | 3.9+ |
-| **瀹瑰櫒鍖?* | Docker, Docker Compose | - |
+| **认证** | Spring Security + JWT | - |
+| **API 文档** | SpringDoc OpenAPI (Swagger) | 2.x |
+| **测试** | JUnit 5, Mockito, Testcontainers | 5.10+ |
+| **构建工具** | Maven | 3.9+ |
+| **容器化** | Docker, Docker Compose | - |
 
 ---
 
-## 馃彈锔?寮€鍙戞渶浣冲疄璺?
-### 1. RESTful API 璁捐瑙勮寖
+## 🏗️ 开发最佳实践
 
-#### Controller 绀轰緥
+### 1. RESTful API 设计规范
+
+#### Controller 示例
 
 ```java
 @RestController
@@ -84,7 +90,7 @@ public class ArticleController {
 }
 ```
 
-#### 缁熶竴鍝嶅簲鏍煎紡
+#### 统一响应格式
 
 ```java
 @Data
@@ -97,7 +103,7 @@ public class ApiResponse<T> {
     private LocalDateTime timestamp;
     
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(true, "鎿嶄綔鎴愬姛", data, LocalDateTime.now());
+        return new ApiResponse<>(true, "操作成功", data, LocalDateTime.now());
     }
     
     public static <T> ApiResponse<T> error(String message) {
@@ -106,8 +112,9 @@ public class ApiResponse<T> {
 }
 ```
 
-### 2. 鏁版嵁搴撹璁″師鍒?
-#### Entity 绀轰緥
+### 2. 数据库设计原则
+
+#### Entity 示例
 
 ```java
 @Entity
@@ -142,7 +149,8 @@ public enum ArticleStatus {
 }
 ```
 
-### 3. Service 灞傚疄鐜?
+### 3. Service 层实现
+
 ```java
 @Service
 @Transactional(readOnly = true)
@@ -166,9 +174,9 @@ public class ArticleService {
 }
 ```
 
-### 4. 鎬ц兘浼樺寲
+### 4. 性能优化
 
-#### 缂撳瓨閰嶇疆
+#### 缓存配置
 
 ```java
 @Service
@@ -187,7 +195,7 @@ public class ArticleService {
 }
 ```
 
-### 5. 瀹夊叏閰嶇疆
+### 5. 安全配置
 
 ```java
 @Configuration
@@ -210,15 +218,16 @@ public class SecurityConfig {
 
 ---
 
-## 鈿狅笍 甯歌闂涓庤В鍐虫柟妗?
-### 闂 1: 鏁版嵁搴撹繛鎺ユ睜鑰楀敖
+## ⚠️ 常见问题与解决方案
 
-**閿欒淇℃伅:**
+### 问题 1: 数据库连接池耗尽
+
+**错误信息:**
 ```
 HikariPool-1 - Connection is not available, request timed out after 30000ms
 ```
 
-**瑙ｅ喅鏂规:**
+**解决方案:**
 ```yaml
 # application.yml
 spring:
@@ -231,40 +240,42 @@ spring:
       max-lifetime: 1800000
 ```
 
-### 闂 2: N+1 鏌ヨ闂
+### 问题 2: N+1 查询问题
 
-**閿欒绀轰緥:**
+**错误示例:**
 ```java
-// 鉂?浼氬鑷?N+1 鏌ヨ
+// ❌ 会导致 N+1 查询
 List<Article> articles = articleRepository.findAll();
 for (Article article : articles) {
-    User author = article.getAuthor(); // 姣忔閮芥煡璇㈡暟鎹簱
+    User author = article.getAuthor(); // 每次都查询数据库
 }
 ```
 
-**姝ｇ‘鍋氭硶:**
+**正确做法:**
 ```java
-// 鉁?浣跨敤 JOIN FETCH
+// ✅ 使用 JOIN FETCH
 @Query("SELECT a FROM Article a JOIN FETCH a.author")
 List<Article> findAllWithAuthor();
 ```
 
-### 闂 3: 浜嬪姟澶辨晥
+### 问题 3: 事务失效
 
-**甯歌鍘熷洜:**
-- 鍚岀被涓柟娉曡皟鐢ㄧ粫杩囦簨鍔′唬鐞?- 寮傚父琚崟鑾锋湭閲嶆柊鎶涘嚭
+**常见原因:**
+- 同类中方法调用绕过事务代理
+- 异常被捕获未重新抛出
 
-**瑙ｅ喅鏂规:**
+**解决方案:**
 ```java
 @Service
 public class ArticleService {
     
     @Autowired
-    private ArticleService self; // 娉ㄥ叆鑷韩
+    private ArticleService self; // 注入自身
     
     public void createArticle() {
         // ...
-        self.notifyAuthor(); // 閫氳繃浠ｇ悊璋冪敤锛岀‘淇濅簨鍔＄敓鏁?    }
+        self.notifyAuthor(); // 通过代理调用，确保事务生效
+    }
     
     @Transactional
     public void notifyAuthor() {
@@ -275,18 +286,18 @@ public class ArticleService {
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## 📖 学习资源
 
-### 瀹樻柟鏂囨。
-- [Spring Boot 瀹樻柟鏂囨。](https://spring.io/projects/spring-boot)
-- [Spring Framework 鍙傝€冩枃妗(https://docs.spring.io/spring-framework/docs/current/reference/html/)
-- [Hibernate ORM 鎸囧崡](https://hibernate.org/orm/documentation/)
+### 官方文档
+- [Spring Boot 官方文档](https://spring.io/projects/spring-boot)
+- [Spring Framework 参考文档](https://docs.spring.io/spring-framework/docs/current/reference/html/)
+- [Hibernate ORM 指南](https://hibernate.org/orm/documentation/)
 
-### 鏈€浣冲疄璺?- [Spring Boot 鏈€浣冲疄璺礭(https://github.com/spring-projects/spring-boot/wiki)
-- [RESTful API 璁捐鎸囧崡](https://restfulapi.net/)
+### 最佳实践
+- [Spring Boot 最佳实践](https://github.com/spring-projects/spring-boot/wiki)
+- [RESTful API 设计指南](https://restfulapi.net/)
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-08*  
-*缁存姢鑰咃細閰辫倝Agent*
-
+*最后更新：2026-03-08*  
+*维护者：酱肉Agent*

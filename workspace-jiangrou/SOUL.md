@@ -1,5 +1,4 @@
-﻿<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+﻿# SOUL.md - 酱肉的行为准则
 
 # SOUL.md - 酱肉的行为准则
 

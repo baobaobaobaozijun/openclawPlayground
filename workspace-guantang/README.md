@@ -1,4 +1,4 @@
-﻿<!-- Last Modified: 2026-03-09 -->
+﻿﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
 # OpenClaw Agent Team - 灌汤配置中心
@@ -7,16 +7,16 @@
 
 ---
 
-## 📍 关于本项目
+## 🏠 关于本项目
 
-**workspace-guantang** 是 OpenClaw Agent 团队中 **灌汤 (PM)** 的独立工作空间，包含：
+**workspace-guantang** 是 OpenClaw Agent 团队中**灌汤 (PM)** 的独立工作空间，包含：
 - ✅ 灌汤的核心配置文件
 - ✅ 其他 Agent 的配置文档（agent-configs/）
 - ✅ 工作日志和经验总结（logs/）
 
 ---
 
-## 🗂️ 目录结构
+## 📁 目录结构
 
 ```
 workspace-guantang/

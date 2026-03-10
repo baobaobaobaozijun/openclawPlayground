@@ -1,151 +1,161 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# OpenClaw Agent 团队 - 完整配置指南
 
-# OpenClaw Agent 鍥㈤槦 - 瀹屾暣閰嶇疆鎸囧崡
+## 📚 文档导航
 
-## 馃摎 鏂囨。瀵艰埅
+本目录包含完整的 Agent 团队协作配置，针对个人博客项目和低资源服务器环境进行了优化。
 
-鏈洰褰曞寘鍚畬鏁寸殑 Agent 鍥㈤槦鍗忎綔閰嶇疆锛岄拡瀵逛釜浜哄崥瀹㈤」鐩拰浣庤祫婧愭湇鍔″櫒鐜杩涜浜嗕紭鍖栥€?
-### 鏍稿績鏂囨。
+### 核心文档
 
-| 鏂囨。 | 璇存槑 | 閫傜敤瀵硅薄 |
+| 文档 | 说明 | 适用对象 |
 |------|------|---------|
-| [README.md](./README.md) | 鐏屾堡 Agent 涓绘枃妗?| 鎵€鏈変汉 |
-| [config.json](./config.json) | 鍏ㄥ眬閰嶇疆鏂囦欢 | 绯荤粺閰嶇疆 |
-| [quick-start.md](./quick-start.md) | 5 鍒嗛挓蹇€熷紑濮?| 鏂版墜 |
-| [optimization-summary.md](./optimization-summary.md) | 浼樺寲鎬荤粨 | 鏋舵瀯甯?|
+| [README.md](./README.md) | 灌汤 Agent 主文档 | 所有人 |
+| [config.json](./config.json) | 全局配置文件 | 系统配置 |
+| [quick-start.md](./quick-start.md) | 5 分钟快速开始 | 新手 |
+| [optimization-summary.md](./optimization-summary.md) | 优化总结 | 架构师 |
 
-### Agent 涓撶敤鏂囨。
+### Agent 专用文档
 
-| 鏂囨。 | 鑱岃矗 | 璧勬簮闄愬埗 |
+| 文档 | 职责 | 资源限制 |
 |------|------|---------|
-| [workspace-programmer.md](./README.md) | 浜у搧缁忕悊/椤圭洰缁忕悊 | 128MB / 25% CPU |
-| [workspace-jiangrou.md](./workspace-jiangrou.md) | 鍚庣宸ョ▼甯?鏋舵瀯甯?| 128MB / 25% CPU |
-| [workspace-dousha.md](./workspace-dousha.md) | UI/UX/鍓嶇宸ョ▼甯?| 128MB / 25% CPU |
-| [workspace-suancai.md](./workspace-suancai.md) | 杩愮淮/娴嬭瘯宸ョ▼甯?| 64MB / 15% CPU |
+| [workspace-programmer.md](./README.md) | 产品经理/项目经理 | 128MB / 25% CPU |
+| [workspace-jiangrou.md](./workspace-jiangrou.md) | 后端工程师/架构师 | 128MB / 25% CPU |
+| [workspace-dousha.md](./workspace-dousha.md) | UI/UX/前端工程师 | 128MB / 25% CPU |
+| [workspace-suancai.md](./workspace-suancai.md) | 运维/测试工程师 | 64MB / 15% CPU |
 
-### 鎶€鏈鑼冩枃妗?
-| 鏂囨。 | 鍐呭 | 閲嶈鎬?|
+### 技术规范文档
+
+| 文档 | 内容 | 重要性 |
 |------|------|-------|
-| [agent-protocol.md](./agent-protocol.md) | Agent 閫氫俊鍗忚 | 猸愨瓙猸愨瓙猸?|
-| [logging-audit.md](./logging-audit.md) | 鏃ュ織鍜屽璁¤鑼?| 猸愨瓙猸愨瓙 |
-| [progress-tracking.md](./progress-tracking.md) | 杩涘害杩借釜鏂规硶 | 猸愨瓙猸愨瓙 |
-| [command-specification.md](./command-specification.md) | 鍛戒护浣跨敤瑙勮寖 | 猸愨瓙猸?|
+| [agent-protocol.md](./agent-protocol.md) | Agent 通信协议 | ⭐⭐⭐⭐⭐ |
+| [logging-audit.md](./logging-audit.md) | 日志和审计规范 | ⭐⭐⭐⭐ |
+| [progress-tracking.md](./progress-tracking.md) | 进度追踪方法 | ⭐⭐⭐⭐ |
+| [command-specification.md](./command-specification.md) | 命令使用规范 | ⭐⭐⭐ |
 
-### 楂樼骇涓婚
+### 高级主题
 
-| 鏂囨。 | 鍐呭 | 闃舵 |
+| 文档 | 内容 | 阶段 |
 |------|------|------|
-| [lightweight-mode.md](./lightweight-mode.md) | 浣庨厤鏈嶅姟鍣ㄨ繍琛屾寚鍗?| 闃舵 1 |
-| [blog-integration.md](./blog-integration.md) | 鍗氬绯荤粺闆嗘垚 | 闃舵 2 |
+| [lightweight-mode.md](./lightweight-mode.md) | 低配服务器运行指南 | 阶段 1 |
+| [blog-integration.md](./blog-integration.md) | 博客系统集成 | 阶段 2 |
 
 ---
 
-## 馃幆 蹇€熼€夋嫨浣犵殑瑙掕壊
+## 🎯 快速选择你的角色
 
-### 鎴戞槸鐏屾堡 (PM/椤圭洰缁忕悊)
+### 我是灌汤 (PM/项目经理)
 
-**浣犻渶瑕侀槄璇?**
-1. [README.md](./README.md) - 浜嗚В浣犵殑鏍稿績鑱岃矗
-2. [agent-protocol.md](./agent-protocol.md) - 瀛︿範濡備綍鍒嗛厤浠诲姟
-3. [progress-tracking.md](./progress-tracking.md) - 鎺屾彙杩涘害杩借釜鏂规硶
-4. [blog-integration.md](./blog-integration.md) - 鍑嗗鍗氬闆嗘垚
+**你需要阅读:**
+1. [README.md](./README.md) - 了解你的核心职责
+2. [agent-protocol.md](./agent-protocol.md) - 学习如何分配任务
+3. [progress-tracking.md](./progress-tracking.md) - 掌握进度追踪方法
+4. [blog-integration.md](./blog-integration.md) - 准备博客集成
 
-**鏃ュ父宸ヤ綔:**
-- 鎺ユ敹鐢ㄦ埛闇€姹?- 鍒嗚В宸ヤ綔浠诲姟
-- 鍒嗛厤缁欏叾浠?Agent
-- 璺熻釜鏁翠綋杩涘害
-- 鐢熸垚鍚勭被鎶ュ憡
+**日常工作:**
+- 接收用户需求
+- 分解工作任务
+- 分配给其他 Agent
+- 跟踪整体进度
+- 生成各类报告
 
-### 鎴戞槸閰辫倝 (鍚庣宸ョ▼甯?
+### 我是酱肉 (后端工程师)
 
-**浣犻渶瑕侀槄璇?**
-1. [workspace-jiangrou.md](./workspace-jiangrou.md) - 鍚庣寮€鍙戝畬鏁存寚鍗?2. [agent-protocol.md](./agent-protocol.md) - 鐞嗚В浠诲姟鎺ユ敹娴佺▼
-3. [logging-audit.md](./logging-audit.md) - 濉啓宸ヤ綔鏃ュ織
+**你需要阅读:**
+1. [workspace-jiangrou.md](./workspace-jiangrou.md) - 后端开发完整指南
+2. [agent-protocol.md](./agent-protocol.md) - 理解任务接收流程
+3. [logging-audit.md](./logging-audit.md) - 填写工作日志
 
-**鏃ュ父宸ヤ綔:**
-- 璁捐鎶€鏈灦鏋?- 寮€鍙戝悗绔?API
-- 缂栧啓鏁版嵁搴撴ā鍨?- 鎬ц兘浼樺寲
-- 閰嶅悎閮ㄧ讲
+**日常工作:**
+- 设计技术架构
+- 开发后端 API
+- 编写数据库模型
+- 性能优化
+- 配合部署
 
-### 鎴戞槸璞嗘矙 (鍓嶇宸ョ▼甯?
+### 我是豆沙 (前端工程师)
 
-**浣犻渶瑕侀槄璇?**
-1. [workspace-dousha.md](./workspace-dousha.md) - 鍓嶇寮€鍙戝畬鏁存寚鍗?2. [agent-protocol.md](./agent-protocol.md) - 鐞嗚В鍗忎綔娴佺▼
-3. [logging-audit.md](./logging-audit.md) - 濉啓宸ヤ綔鏃ュ織
+**你需要阅读:**
+1. [workspace-dousha.md](./workspace-dousha.md) - 前端开发完整指南
+2. [agent-protocol.md](./agent-protocol.md) - 理解协作流程
+3. [logging-audit.md](./logging-audit.md) - 填写工作日志
 
-**鏃ュ父宸ヤ綔:**
-- UI/UX 璁捐
-- 鍓嶇椤甸潰寮€鍙?- 鍝嶅簲寮忛€傞厤
-- 浜や簰浼樺寲
-- 鎬ц兘璋冧紭
+**日常工作:**
+- UI/UX 设计
+- 前端页面开发
+- 响应式适配
+- 交互优化
+- 性能调优
 
-### 鎴戞槸閰歌彍 (杩愮淮/娴嬭瘯宸ョ▼甯?
+### 我是酸菜 (运维/测试工程师)
 
-**浣犻渶瑕侀槄璇?**
-1. [workspace-suancai.md](./workspace-suancai.md) - 杩愮淮娴嬭瘯瀹屾暣鎸囧崡
-2. [agent-protocol.md](./agent-protocol.md) - 鐞嗚В鍗忎綔娴佺▼
-3. [logging-audit.md](./logging-audit.md) - 濉啓宸ヤ綔鏃ュ織
+**你需要阅读:**
+1. [workspace-suancai.md](./workspace-suancai.md) - 运维测试完整指南
+2. [agent-protocol.md](./agent-protocol.md) - 理解协作流程
+3. [logging-audit.md](./logging-audit.md) - 填写工作日志
 
-**鏃ュ父宸ヤ綔:**
-- 绯荤粺閮ㄧ讲
-- 鏈嶅姟鐩戞帶
-- 鍔熻兘娴嬭瘯
-- 鎬ц兘娴嬭瘯
-- 鏃ュ織绠＄悊
-- 澶囦唤鎭㈠
+**日常工作:**
+- 系统部署
+- 服务监控
+- 功能测试
+- 性能测试
+- 日志管理
+- 备份恢复
 
 ---
 
-## 馃搵 瀹屾暣宸ヤ綔娴佺▼绀轰緥
+## 📋 完整工作流程示例
 
-### 鍦烘櫙锛氬紑鍙?鐢ㄦ埛璇勮"鍔熻兘
+### 场景：开发"用户评论"功能
 
-#### 绗?1 澶╀笂鍗?09:00 - 闇€姹傚垎鏋?
-**鐏屾堡鐨勫伐浣?**
+#### 第 1 天上午 09:00 - 需求分析
+
+**灌汤的工作:**
 ```markdown
-# 鐏屾堡 - 宸ヤ綔鏃ュ織 2026-03-07
+# 灌汤 - 工作日志 2026-03-07
 
-## 浠婃棩璁″垝
-- [ ] 鍒嗘瀽"鐢ㄦ埛璇勮"鍔熻兘闇€姹?- [ ] 鎷嗗垎涓哄叿浣撲换鍔?- [ ] 鍒嗛厤缁欓叡鑲夊拰璞嗘矙
+## 今日计划
+- [ ] 分析"用户评论"功能需求
+- [ ] 拆分为具体任务
+- [ ] 分配给酱肉和豆沙
 
-## 浠诲姟鍒嗚В
-1. 閰辫倝锛氳瘎璁?API 寮€鍙戯紙棰勮 2 澶╋級
-   - 璇勮琛ㄨ璁?   - 澧炲垹鏀规煡鎺ュ彛
-   - 璇勮瀹℃牳鍔熻兘
+## 任务分解
+1. 酱肉：评论 API 开发（预计 2 天）
+   - 评论表设计
+   - 增删改查接口
+   - 评论审核功能
 
-2. 璞嗘矙锛氳瘎璁虹晫闈㈣璁★紙棰勮 2 澶╋級
-   - 璇勮鍒楄〃灞曠ず
-   - 璇勮杈撳叆妗?   - 鍥炲鍔熻兘 UI
+2. 豆沙：评论界面设计（预计 2 天）
+   - 评论列表展示
+   - 评论输入框
+   - 回复功能 UI
 
-3. 閰歌彍锛氳瘎璁哄姛鑳芥祴璇曪紙棰勮 1 澶╋級
-   - 鍔熻兘娴嬭瘯鐢ㄤ緥
-   - 鎬ц兘鍘嬪姏娴嬭瘯
+3. 酸菜：评论功能测试（预计 1 天）
+   - 功能测试用例
+   - 性能压力测试
 ```
 
-#### 绗?1 澶╀笂鍗?09:30 - 浠诲姟鍒嗗彂
+#### 第 1 天上午 09:30 - 任务分发
 
-**鐏屾堡鍒涘缓浠诲姟鏂囦欢:**
+**灌汤创建任务文件:**
 
 `F:\openclaw\workspace\communication\inbox\jiangrou\task_comment_api.json`
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "allocateTask",
   "data": {
     "task_id": "TASK_20260307_004",
-    "task_name": "璇勮 API 寮€鍙?,
-    "description": "瀹炵幇鐢ㄦ埛璇勮鍔熻兘鐨勫悗绔?API",
+    "task_name": "评论 API 开发",
+    "description": "实现用户评论功能的后端 API",
     "priority": "high",
     "due_date": "2026-03-09",
     "deliverables": [
       {
-        "name": "璇勮鏁版嵁妯″瀷",
+        "name": "评论数据模型",
         "path": "backend/models/comment.py"
       },
       {
-        "name": "璇勮 API 鎺ュ彛",
+        "name": "评论 API 接口",
         "path": "backend/api/comments.py"
       }
     ],
@@ -162,22 +172,22 @@
 `F:\openclaw\workspace\communication\inbox\dousha\task_comment_ui.json`
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "璞嗘矙",
+  "from": "灌汤",
+  "to": "豆沙",
   "action": "allocateTask",
   "data": {
     "task_id": "TASK_20260307_005",
-    "task_name": "璇勮鐣岄潰寮€鍙?,
-    "description": "璁捐鍜屽疄鐜扮敤鎴疯瘎璁虹殑鍓嶇鐣岄潰",
+    "task_name": "评论界面开发",
+    "description": "设计和实现用户评论的前端界面",
     "priority": "high",
     "due_date": "2026-03-09",
     "deliverables": [
       {
-        "name": "璇勮缁勪欢",
+        "name": "评论组件",
         "path": "frontend/components/comments/"
       },
       {
-        "name": "璇勮鏍峰紡",
+        "name": "评论样式",
         "path": "frontend/css/comments.css"
       }
     ]
@@ -185,37 +195,39 @@
 }
 ```
 
-#### 绗?1 澶╀笂鍗?10:00 - 閰辫倝寮€濮嬪紑鍙?
-**閰辫倝璇诲彇浠诲姟骞跺搷搴?**
+#### 第 1 天上午 10:00 - 酱肉开始开发
+
+**酱肉读取任务并响应:**
 
 `F:\openclaw\workspace\communication\outbox\guantang\ack_task_004.json`
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "acknowledgeTask",
   "data": {
     "task_id": "TASK_20260307_004",
     "status": "accepted",
     "estimated_start": "2026-03-07T10:00:00Z",
-    "notes": "宸叉帴鏀朵换鍔★紝寮€濮嬭璁¤瘎璁鸿〃缁撴瀯"
+    "notes": "已接收任务，开始设计评论表结构"
   }
 }
 ```
 
-**閰辫倝鐨勬棩蹇楄褰?**
+**酱肉的日志记录:**
 
 `F:\openclaw\workspace\team\jiangrou\logs\daily_20260307.md`
 ```markdown
-# JIANGROU - 宸ヤ綔鏃ュ織 2026-03-07
+# JIANGROU - 工作日志 2026-03-07
 
-## 浠婃棩宸ヤ綔
-- [x] 鎺ユ敹璇勮 API 寮€鍙戜换鍔?- [x] 璁捐璇勮鏁版嵁妯″瀷
-- [x] 瀹炵幇鍩虹 CRUD 鎺ュ彛
-- [ ] 璇勮瀹℃牳鍔熻兘锛堟槑澶╁畬鎴愶級
+## 今日工作
+- [x] 接收评论 API 开发任务
+- [x] 设计评论数据模型
+- [x] 实现基础 CRUD 接口
+- [ ] 评论审核功能（明天完成）
 
-## 浠ｇ爜鎻愪氦
-- `backend/models/comment.py` - 璇勮妯″瀷
+## 代码提交
+- `backend/models/comment.py` - 评论模型
   ```python
   class Comment(db.Model):
       id = db.Column(db.Integer, primary_key=True)
@@ -226,36 +238,40 @@
       status = db.Column(db.String(20), default='pending')
       created_at = db.Column(db.DateTime, default=datetime.utcnow)
   ```
-- `backend/api/comments.py` - 璇勮 API锛堥儴鍒嗗畬鎴愶級
+- `backend/api/comments.py` - 评论 API（部分完成）
 
-## 閬囧埌鐨勯棶棰?- 鏃?
-## 鏄庢棩璁″垝
-- 瀹屾垚璇勮瀹℃牳鍔熻兘
-- 娣诲姞璇勮閫氱煡
-- 閰嶅悎鍓嶇鑱旇皟
+## 遇到的问题
+- 无
 
-## 宸ヤ綔鏃堕暱
-- 鎬昏锛? 灏忔椂
+## 明日计划
+- 完成评论审核功能
+- 添加评论通知
+- 配合前端联调
+
+## 工作时长
+- 总计：6 小时
 ```
 
-#### 绗?1 澶╀笅鍗?15:00 - 璞嗘矙璁捐鐣岄潰
+#### 第 1 天下午 15:00 - 豆沙设计界面
 
-**璞嗘矙鐨勬棩蹇楄褰?**
+**豆沙的日志记录:**
 
 `F:\openclaw\workspace\team\dousha\logs\daily_20260307.md`
 ```markdown
-# DOUSHA - 宸ヤ綔鏃ュ織 2026-03-07
+# DOUSHA - 工作日志 2026-03-07
 
-## 浠婃棩宸ヤ綔
-- [x] 鎺ユ敹璇勮鐣岄潰浠诲姟
-- [x] 璁捐璇勮缁勪欢鍘熷瀷
-- [x] 瀹炵幇璇勮鍒楄〃鏍峰紡
-- [ ] 璇勮杈撳叆妗嗕氦浜掞紙鏄庡ぉ瀹屾垚锛?
-## 璁捐绋?![璇勮缁勪欢璁捐](../designs/comment_component.png)
+## 今日工作
+- [x] 接收评论界面任务
+- [x] 设计评论组件原型
+- [x] 实现评论列表样式
+- [ ] 评论输入框交互（明天完成）
 
-## 浠ｇ爜鎻愪氦
-- `frontend/components/comments/comment-list.html` - 璇勮鍒楄〃
-- `frontend/css/comments.css` - 璇勮鏍峰紡
+## 设计稿
+![评论组件设计](../designs/comment_component.png)
+
+## 代码提交
+- `frontend/components/comments/comment-list.html` - 评论列表
+- `frontend/css/comments.css` - 评论样式
   ```css
   .comment-item {
       padding: 16px;
@@ -279,20 +295,23 @@
   }
   ```
 
-## 鏄庢棩璁″垝
-- 瀹屾垚璇勮杈撳叆妗?- 瀹炵幇鍥炲鍔熻兘
-- 娣诲姞鍔ㄧ敾鏁堟灉
+## 明日计划
+- 完成评论输入框
+- 实现回复功能
+- 添加动画效果
 
-## 宸ヤ綔鏃堕暱
-- 鎬昏锛? 灏忔椂
+## 工作时长
+- 总计：5 小时
 ```
 
-#### 绗?2 澶╀笂鍗?10:00 - 鍓嶅悗绔仈璋?
-**閰辫倝涓庤眴娌欏崗浣?**
+#### 第 2 天上午 10:00 - 前后端联调
 
-鍙屾柟绾﹀畾 API 鎺ュ彛鏍煎紡锛?
+**酱肉与豆沙协作:**
+
+双方约定 API 接口格式：
+
 ```javascript
-// 鍓嶇璋冪敤绀轰緥
+// 前端调用示例
 async function submitComment(articleId, content, parentId = null) {
   const response = await fetch(`/api/articles/${articleId}/comments`, {
     method: 'POST',
@@ -309,69 +328,72 @@ async function submitComment(articleId, content, parentId = null) {
   const data = await response.json();
   
   if (response.ok) {
-    // 鎴愬姛锛氭坊鍔犲埌璇勮鍒楄〃
+    // 成功：添加到评论列表
     addCommentToDOM(data.comment);
   } else {
-    // 澶辫触锛氭樉绀洪敊璇俊鎭?    showError(data.error);
+    // 失败：显示错误信息
+    showError(data.error);
   }
 }
 ```
 
-#### 绗?2 澶╀笅鍗?16:00 - 閰歌彍杩涜娴嬭瘯
+#### 第 2 天下午 16:00 - 酸菜进行测试
 
-**閰歌彍鐨勬祴璇曟姤鍛?**
+**酸菜的测试报告:**
 
 `F:\openclaw\workspace\team\suancai\logs\daily_20260308.md`
 ```markdown
-# SUANCAI - 宸ヤ綔鏃ュ織 2026-03-08
+# SUANCAI - 工作日志 2026-03-08
 
-## 浠婃棩宸ヤ綔
-- [x] 鎺ユ敹璇勮鍔熻兘娴嬭瘯浠诲姟
-- [x] 缂栧啓鍔熻兘娴嬭瘯鐢ㄤ緥
-- [x] 鎵ц鍔熻兘娴嬭瘯
-- [x] 鎬ц兘鍘嬪姏娴嬭瘯
+## 今日工作
+- [x] 接收评论功能测试任务
+- [x] 编写功能测试用例
+- [x] 执行功能测试
+- [x] 性能压力测试
 
-## 娴嬭瘯缁撴灉
+## 测试结果
 
-### 鍔熻兘娴嬭瘯
-- 鉁?鍒涘缓璇勮 - 閫氳繃
-- 鉁?鍒犻櫎璇勮 - 閫氳繃
-- 鉁?鍥炲璇勮 - 閫氳繃
-- 鉁?璇勮瀹℃牳 - 閫氳繃
-- 鈿狅笍 璇勮鍒嗛〉 - 鍙戠幇 Bug锛堝凡鎶ュ憡锛?
-### 鎬ц兘娴嬭瘯
-- 骞跺彂 100 鐢ㄦ埛璇勮 - 骞冲潎鍝嶅簲 150ms
-- 骞跺彂 500 鐢ㄦ埛璇勮 - 骞冲潎鍝嶅簲 380ms
-- 鏁版嵁搴撴煡璇紭鍖栧缓璁細娣诲姞绱㈠紩
+### 功能测试
+- ✅ 创建评论 - 通过
+- ✅ 删除评论 - 通过
+- ✅ 回复评论 - 通过
+- ✅ 评论审核 - 通过
+- ⚠️ 评论分页 - 发现 Bug（已报告）
 
-## Bug 鎶ュ憡
-宸叉彁浜?BUG_001锛?- **闂**: 璇勮鍒嗛〉鍙傛暟閿欒鏃惰繑鍥?500
-- **涓ラ噸绋嬪害**: medium
-- **鎺ユ敹浜?*: 閰辫倝
+### 性能测试
+- 并发 100 用户评论 - 平均响应 150ms
+- 并发 500 用户评论 - 平均响应 380ms
+- 数据库查询优化建议：添加索引
 
-## 鏄庢棩璁″垝
-- 楠岃瘉 Bug 淇
-- 鍑嗗涓婄嚎閮ㄧ讲
+## Bug 报告
+已提交 BUG_001：
+- **问题**: 评论分页参数错误时返回 500
+- **严重程度**: medium
+- **接收人**: 酱肉
 
-## 宸ヤ綔鏃堕暱
-- 鎬昏锛? 灏忔椂
+## 明日计划
+- 验证 Bug 修复
+- 准备上线部署
+
+## 工作时长
+- 总计：6 小时
 ```
 
-#### 绗?3 澶╀笂鍗?09:00 - 瀹屾垚浠诲姟
+#### 第 3 天上午 09:00 - 完成任务
 
-**閰辫倝淇 Bug 鍚庢彁浜?**
+**酱肉修复 Bug 后提交:**
 
 `F:\openclaw\workspace\communication\outbox\guantang\submit_comment_feature.json`
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "submitDeliverable",
   "data": {
     "task_id": "TASK_20260307_004",
     "deliverables": [
       {
-        "name": "璇勮鍔熻兘瀹屾暣瀹炵幇",
+        "name": "评论功能完整实现",
         "type": "feature",
         "paths": [
           "backend/models/comment.py",
@@ -388,110 +410,122 @@ async function submitComment(articleId, content, parentId = null) {
 }
 ```
 
-**鐏屾堡姹囨€诲苟鐢熸垚鎶ュ憡:**
+**灌汤汇总并生成报告:**
 
 `F:\openclaw\workspace\projects\BLOG_20260307_001\progress\daily_20260308.md`
 ```markdown
-# 椤圭洰鏃ユ姤 - 2026-03-08
+# 项目日报 - 2026-03-08
 
-## 閲嶇偣鎴愭灉
-鉁?璇勮鍔熻兘寮€鍙戝畬鎴愶紙閰辫倝锛?鉁?璇勮鐣岄潰瀹炵幇瀹屾垚锛堣眴娌欙級
-鉁?鍔熻兘娴嬭瘯閫氳繃锛堥吀鑿滐級
+## 重点成果
+✅ 评论功能开发完成（酱肉）
+✅ 评论界面实现完成（豆沙）
+✅ 功能测试通过（酸菜）
 
-## 鏁翠綋杩涘害
-- 璇勮鍔熻兘锛?00% 瀹屾垚
-- 璁″垝鍋忓樊锛氭彁鍓?0.5 澶?- 璐ㄩ噺璇勪及锛氳壇濂?
-## 鏄庢棩璁″垝
-- 閮ㄧ讲璇勮鍔熻兘鍒扮敓浜х幆澧?- 寮€濮嬩笅涓€涓姛鑳斤細鏍囩绯荤粺
+## 整体进度
+- 评论功能：100% 完成
+- 计划偏差：提前 0.5 天
+- 质量评估：良好
+
+## 明日计划
+- 部署评论功能到生产环境
+- 开始下一个功能：标签系统
 ```
 
 ---
 
-## 馃搳 璧勬簮閰嶇疆鎬昏
+## 📊 资源配置总览
 
-### 鍐呭瓨鍒嗛厤
+### 内存分配
 
 ```yaml
-鎬诲彲鐢ㄥ唴瀛橈細2GB (2048MB)
+总可用内存：2GB (2048MB)
 
-鍒嗛厤鏂规:
-  鐏屾堡 (PM):     128MB  (6.25%)
-  閰辫倝 (鍚庣):   128MB  (6.25%)
-  璞嗘矙 (鍓嶇):   128MB  (6.25%)
-  閰歌彍 (杩愮淮):    64MB  (3.125%)
-  鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
-  Agent 鎬昏锛?  448MB  (21.875%)
+分配方案:
+  灌汤 (PM):     128MB  (6.25%)
+  酱肉 (后端):   128MB  (6.25%)
+  豆沙 (前端):   128MB  (6.25%)
+  酸菜 (运维):    64MB  (3.125%)
+  ───────────────────────
+  Agent 总计：   448MB  (21.875%)
   
-  鍓╀綑鍙敤锛?  1600MB  (78.125%)
-  鐢ㄤ簬锛?    - 鎿嶄綔绯荤粺锛殈512MB
-    - 鍗氬搴旂敤锛殈768MB
-    - 鏁版嵁搴擄細~256MB
-    - 缂撳啿绌洪棿锛殈64MB
+  剩余可用：   1600MB  (78.125%)
+  用于：
+    - 操作系统：~512MB
+    - 博客应用：~768MB
+    - 数据库：~256MB
+    - 缓冲空间：~64MB
 ```
 
-### CPU 鍒嗛厤
+### CPU 分配
 
 ```yaml
-鎬?CPU 鏍稿績锛? 鏍稿績
+总 CPU 核心：2 核心
 
-鍒嗛厤鏂规:
-  鐏屾堡锛?5% (0.5 鏍稿績)
-  閰辫倝锛?5% (0.5 鏍稿績)
-  璞嗘矙锛?5% (0.5 鏍稿績)
-  閰歌彍锛?5% (0.3 鏍稿績)
-  鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
-  Agent 鎬昏锛?0% (1.8 鏍稿績)
+分配方案:
+  灌汤：25% (0.5 核心)
+  酱肉：25% (0.5 核心)
+  豆沙：25% (0.5 核心)
+  酸菜：15% (0.3 核心)
+  ─────────────────
+  Agent 总计：90% (1.8 核心)
   
-  绯荤粺棰勭暀锛?0% (0.2 鏍稿績)
+  系统预留：10% (0.2 核心)
 ```
 
-### 瀛樺偍绌洪棿
+### 存储空间
 
 ```yaml
-鎬诲瓨鍌細40GB
+总存储：40GB
 
-鍒嗛厤鏂规:
-  鎿嶄綔绯荤粺锛?GB
-  鍗氬绋嬪簭锛?GB
-  鏁版嵁搴擄細3GB
-  浠ｇ爜浠撳簱锛?GB
-  鏃ュ織鏂囦欢锛?GB (涓婇檺)
-  澶囦唤鏂囦欢锛?GB
-  鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
-  宸插垎閰嶏細22GB
+分配方案:
+  操作系统：5GB
+  博客程序：2GB
+  数据库：3GB
+  代码仓库：2GB
+  日志文件：5GB (上限)
+  备份文件：5GB
+  ─────────────────
+  已分配：22GB
   
-  鍙敤绌洪棿锛?8GB
+  可用空间：18GB
 ```
 
 ---
 
-## 馃攧 涓ら樁娈靛疄鏂借鍒?
-### 闃舵 1: 鏈湴寮€鍙戝拰鏃ュ織璁板綍
+## 🔄 两阶段实施计划
 
-**鏃堕棿:** 椤圭洰寮€濮?~ 鍗氬鏂囩珷妯″潡瀹屾垚
+### 阶段 1: 本地开发和日志记录
 
-**鐗圭偣:**
-- 鎵€鏈?Agent 鍦ㄦ湰鍦板伐浣?- 鏃ュ織淇濆瓨鍦ㄦ湰鍦?Markdown 鏂囦欢
-- 閫氳繃鏂囦欢绯荤粺閫氫俊
-- 鎵嬪姩鎴栧崐鑷姩鍖栭儴缃?
-**姣忔棩娴佺▼:**
+**时间:** 项目开始 ~ 博客文章模块完成
+
+**特点:**
+- 所有 Agent 在本地工作
+- 日志保存在本地 Markdown 文件
+- 通过文件系统通信
+- 手动或半自动化部署
+
+**每日流程:**
 ```
-09:00 - Agent 鍚姩锛屾鏌ユ敹浠剁
-09:30 - 寮€濮嬪綋鏃ュ伐浣?12:00 - 鍗堜紤
-13:00 - 缁х画宸ヤ綔
-17:00 - 濉啓宸ヤ綔鏃ュ織
-17:30 - 鐏屾堡鐢熸垚鏃ユ姤
-18:00 - 缁撴潫褰撴棩宸ヤ綔
+09:00 - Agent 启动，检查收件箱
+09:30 - 开始当日工作
+12:00 - 午休
+13:00 - 继续工作
+17:00 - 填写工作日志
+17:30 - 灌汤生成日报
+18:00 - 结束当日工作
 ```
 
-### 闃舵 2: 鍗氬闆嗘垚鍜岃嚜鍔ㄥ寲
+### 阶段 2: 博客集成和自动化
 
-**瑙﹀彂鏉′欢:** 鍗氬鏂囩珷妯″潡寮€鍙戝畬鎴?
-**鏂板鍔熻兘:**
-- 鑷姩灏嗗伐浣滄棩蹇楁彁浜ゅ埌鍗氬
-- 瀹炴椂灞曠ず Agent 宸ヤ綔鐘舵€?- 瀹氭椂浠诲姟璋冨害
-- 瀹屽叏鑷姩鍖栭儴缃?
-**閰嶇疆鍙樻洿:**
+**触发条件:** 博客文章模块开发完成
+
+**新增功能:**
+- 自动将工作日志提交到博客
+- 实时展示 Agent 工作状态
+- 定时任务调度
+- 完全自动化部署
+
+**配置变更:**
 ```json
 {
   "integration": {
@@ -507,167 +541,185 @@ async function submitComment(articleId, content, parentId = null) {
 
 ---
 
-## 馃洜锔?宸ュ叿鍜岀幆澧?
-### 蹇呴渶宸ュ叿
+## 🛠️ 工具和环境
+
+### 必需工具
 
 ```yaml
-鐗堟湰鎺у埗:
+版本控制:
   - Git
   - GitHub/GitLab
 
-Python 鐜:
+Python 环境:
   - Python 3.8+
   - pip
-  - venv (铏氭嫙鐜)
+  - venv (虚拟环境)
 
-缂栬緫鍣?
-  - VS Code (鎺ㄨ崘)
+编辑器:
+  - VS Code (推荐)
   - PyCharm
   - Sublime Text
 ```
 
-### 鍙€夊伐鍏?
+### 可选工具
+
 ```yaml
-API 娴嬭瘯:
+API 测试:
   - Postman
   - curl
 
-鎬ц兘娴嬭瘯:
+性能测试:
   - Apache Bench (ab)
   - wrk
   - Locust
 
-鐩戞帶:
+监控:
   - NetData
-  - 鑷畾涔夎剼鏈?```
+  - 自定义脚本
+```
 
 ---
 
-## 馃摓 娌熼€氫笌鍗忎綔
+## 📞 沟通与协作
 
-### Agent 闂撮€氫俊
+### Agent 间通信
 
-**鏂瑰紡:** 鍩轰簬鏂囦欢绯荤粺鐨勭畝鍖?RPC
+**方式:** 基于文件系统的简化 RPC
 
-**鐩綍缁撴瀯:**
+**目录结构:**
 ```
 F:\openclaw\workspace\communication\
-鈹溾攢鈹€ inbox\           # 鏀朵欢绠?鈹?  鈹溾攢鈹€ guantang\
-鈹?  鈹溾攢鈹€ jiangrou\
-鈹?  鈹溾攢鈹€ dousha\
-鈹?  鈹斺攢鈹€ suancai\
-鈹溾攢鈹€ outbox\          # 鍙戜欢绠?鈹?  鈹斺攢鈹€ ...
-鈹斺攢鈹€ archive\         # 褰掓。
-    鈹斺攢鈹€ ...
+├── inbox\           # 收件箱
+│   ├── guantang\
+│   ├── jiangrou\
+│   ├── dousha\
+│   └── suancai\
+├── outbox\          # 发件箱
+│   └── ...
+└── archive\         # 归档
+    └── ...
 ```
 
-### 娑堟伅鏍煎紡
+### 消息格式
 
 ```json
 {
-  "from": "鍙戦€佽€?Agent",
-  "to": "鎺ユ敹鑰?Agent",
-  "action": "鎿嶄綔绫诲瀷",
+  "from": "发送者 Agent",
+  "to": "接收者 Agent",
+  "action": "操作类型",
   "data": {
-    "鍏蜂綋鏁版嵁": "..."
+    "具体数据": "..."
   },
-  "timestamp": "ISO8601 鏃堕棿鎴?
+  "timestamp": "ISO8601 时间戳"
 }
 ```
 
-### 甯哥敤鎿嶄綔
+### 常用操作
 
-| Action | 璇存槑 | 鍙戦€佽€?| 鎺ユ敹鑰?|
+| Action | 说明 | 发送者 | 接收者 |
 |--------|------|--------|--------|
-| allocateTask | 鍒嗛厤浠诲姟 | 鐏屾堡 | 鍏朵粬 Agent |
-| acknowledgeTask | 纭浠诲姟 | 鍏朵粬 Agent | 鐏屾堡 |
-| queryProgress | 鏌ヨ杩涘害 | 鐏屾堡 | 鍏朵粬 Agent |
-| reportIssue | 鎶ュ憡闂 | 浠讳綍 Agent | 鐏屾堡 |
-| submitDeliverable | 鎻愪氦鎴愭灉 | 鍏朵粬 Agent | 鐏屾堡 |
+| allocateTask | 分配任务 | 灌汤 | 其他 Agent |
+| acknowledgeTask | 确认任务 | 其他 Agent | 灌汤 |
+| queryProgress | 查询进度 | 灌汤 | 其他 Agent |
+| reportIssue | 报告问题 | 任何 Agent | 灌汤 |
+| submitDeliverable | 提交成果 | 其他 Agent | 灌汤 |
 
 ---
 
-## 馃帗 瀛︿範璺緞
+## 🎓 学习路径
 
-### 鏂版墜鍏ラ棬
+### 新手入门
 
-1. 闃呰 [quick-start.md](./quick-start.md)
-2. 閫夋嫨涓€涓?Agent 瑙掕壊
-3. 闃呰瀵瑰簲鐨?workspace 鏂囨。
-4. 鍒涘缓绗竴涓换鍔?5. 瀹屾垚绗竴涓伐浣滄祦绋?
-### 杩涢樁鎻愬崌
+1. 阅读 [quick-start.md](./quick-start.md)
+2. 选择一个 Agent 角色
+3. 阅读对应的 workspace 文档
+4. 创建第一个任务
+5. 完成第一个工作流程
 
-1. 娣卞叆鐞嗚В [agent-protocol.md](./agent-protocol.md)
-2. 浼樺寲璧勬簮閰嶇疆
-3. 瀹炴柦鍗氬闆嗘垚
-4. 寤虹珛鑷姩鍖栨祦绋?
-### 涓撳绾?
-1. 瀹氬埗閫氫俊鍗忚
-2. 鎵╁睍 Agent 鑳藉姏
-3. 闆嗘垚澶栭儴宸ュ叿
-4. 鎬ц兘璋冧紭
+### 进阶提升
+
+1. 深入理解 [agent-protocol.md](./agent-protocol.md)
+2. 优化资源配置
+3. 实施博客集成
+4. 建立自动化流程
+
+### 专家级
+
+1. 定制通信协议
+2. 扩展 Agent 能力
+3. 集成外部工具
+4. 性能调优
 
 ---
 
-## 馃敡 鏁呴殰鎺掗櫎
+## 🔧 故障排除
 
-### 甯歌闂閫熸煡
+### 常见问题速查
 
-| 闂 | 鍙兘鍘熷洜 | 瑙ｅ喅鏂规 |
+| 问题 | 可能原因 | 解决方案 |
 |------|---------|---------|
-| Agent 鏃犲搷搴?| 鏀朵欢绠变负绌?杩涚▼鎸傝捣 | 妫€鏌ヨ繘绋嬬姸鎬侊紝閲嶅惎 Agent |
-| 鏃ュ織鏂囦欢杩囧ぇ | 璁板綍杩囧璋冭瘯淇℃伅 | 璋冩暣鏃ュ織绾у埆锛屽惎鐢ㄨ疆杞?|
-| 閮ㄧ讲澶辫触 | 渚濊禆缂哄け/閰嶇疆閿欒 | 妫€鏌?requirements.txt锛岄獙璇侀厤缃?|
-| 娴嬭瘯澶辫触 | 鐜闂/浠ｇ爜 Bug | 鏌ョ湅娴嬭瘯鎶ュ憡锛屽畾浣嶅叿浣撳師鍥?|
-| 鍐呭瓨涓嶈冻 | 璧勬簮瓒呴檺 | 鍑忓皯骞跺彂锛屼紭鍖栦唬鐮?|
+| Agent 无响应 | 收件箱为空/进程挂起 | 检查进程状态，重启 Agent |
+| 日志文件过大 | 记录过多调试信息 | 调整日志级别，启用轮转 |
+| 部署失败 | 依赖缺失/配置错误 | 检查 requirements.txt，验证配置 |
+| 测试失败 | 环境问题/代码 Bug | 查看测试报告，定位具体原因 |
+| 内存不足 | 资源超限 | 减少并发，优化代码 |
 
-### 鑾峰彇甯姪
+### 获取帮助
 
-1. 鏌ョ湅瀵瑰簲 Agent 鐨?workspace 鏂囨。
-2. 妫€鏌ユ棩蹇楁枃浠?3. 鎼滅储 GitHub Issues
-4. 鑱旂郴椤圭洰缁存姢鑰?
+1. 查看对应 Agent 的 workspace 文档
+2. 检查日志文件
+3. 搜索 GitHub Issues
+4. 联系项目维护者
+
 ---
 
-## 馃搱 鎸佺画鏀硅繘
+## 📈 持续改进
 
-### 瀹氭湡鍥為【
+### 定期回顾
 
-**姣忓懆鍥為【:**
-- 鏈懆瀹屾垚浜嗗摢浜涘姛鑳斤紵
-- 閬囧埌浜嗗摢浜涢棶棰橈紵
-- 濡備綍鏀硅繘宸ヤ綔娴佺▼锛?
-**姣忔湀鍥為【:**
-- 鏁翠綋杩涘害鏄惁绗﹀悎棰勬湡锛?- 璧勬簮閰嶇疆鏄惁鍚堢悊锛?- 闇€瑕佽皟鏁村摢浜涚瓥鐣ワ紵
+**每周回顾:**
+- 本周完成了哪些功能？
+- 遇到了哪些问题？
+- 如何改进工作流程？
 
-### 鍙嶉寰幆
+**每月回顾:**
+- 整体进度是否符合预期？
+- 资源配置是否合理？
+- 需要调整哪些策略？
+
+### 反馈循环
 
 ```
-鏀堕泦鍙嶉 鈫?鍒嗘瀽闂 鈫?鍒跺畾鏀硅繘鏂规 鈫?瀹炴柦 鈫?楠岃瘉鏁堟灉 鈫?鍐嶆鏀堕泦鍙嶉
+收集反馈 → 分析问题 → 制定改进方案 → 实施 → 验证效果 → 再次收集反馈
 ```
 
 ---
 
-## 馃専 鏈€浣冲疄璺?
-### 浠ｇ爜灞傞潰
+## 🌟 最佳实践
 
-1. **閬靛惊缂栫爜瑙勮寖** - PEP 8銆佽涔夊寲 HTML銆佹ā鍧楀寲 CSS
-2. **缂栧啓娉ㄩ噴** - 鍑芥暟 docstring銆佸叧閿€昏緫娉ㄩ噴
-3. **鍗曞厓娴嬭瘯** - 鏍稿績鍔熻兘蹇呴』鏈夋祴璇曡鐩?4. **鐗堟湰鎺у埗** - 棰戠箒鎻愪氦锛屾湁鎰忎箟鐨?commit message
+### 代码层面
 
-### 鍗忎綔灞傞潰
+1. **遵循编码规范** - PEP 8、语义化 HTML、模块化 CSS
+2. **编写注释** - 函数 docstring、关键逻辑注释
+3. **单元测试** - 核心功能必须有测试覆盖
+4. **版本控制** - 频繁提交，有意义的 commit message
 
-1. **鍙婃椂娌熼€?* - 鍙戠幇闂绔嬪嵆鎶ュ憡
-2. **鏂囨。鍖?* - 鎵€鏈夊喅绛栧拰璁ㄨ璁板綍涓嬫潵
-3. **浜掔浉 review** - 浠ｇ爜鎻愪氦鍓嶄簰鐩稿鏌?4. **鐭ヨ瘑鍏变韩** - 閬囧埌鐨勯棶棰樺拰瑙ｅ喅鏂规鍥㈤槦鍏变韩
+### 协作层面
 
-### 杩愮淮灞傞潰
+1. **及时沟通** - 发现问题立即报告
+2. **文档化** - 所有决策和讨论记录下来
+3. **互相 review** - 代码提交前互相审查
+4. **知识共享** - 遇到的问题和解决方案团队共享
 
-1. **鑷姩鍖?* - 鑳借嚜鍔ㄥ寲鐨勭粷涓嶆墜鍔?2. **鐩戞帶棰勮** - 鍏抽敭鎸囨爣璁剧疆鍛婅
-3. **澶囦唤绛栫暐** - 閲嶈鏁版嵁澶氶噸澶囦唤
-4. **搴旀€ラ妗?* - 鍑嗗濂藉洖婊氭柟妗?
+### 运维层面
+
+1. **自动化** - 能自动化的绝不手动
+2. **监控预警** - 关键指标设置告警
+3. **备份策略** - 重要数据多重备份
+4. **应急预案** - 准备好回滚方案
+
 ---
 
-*OpenClaw Agent 鍥㈤槦閰嶇疆鎸囧崡*  
-*鐗堟湰锛歷2.0.0-lite*  
-*鏈€鍚庢洿鏂帮細2026-03-07*
-
+*OpenClaw Agent 团队配置指南*  
+*版本：v2.0.0-lite*  
+*最后更新：2026-03-07*

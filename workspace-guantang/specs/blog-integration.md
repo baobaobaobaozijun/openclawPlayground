@@ -1,64 +1,71 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 博客系统集成
 
-# 鍗氬绯荤粺闆嗘垚
+## 概述
 
-## 姒傝堪
+将 Agent 工作日志自动提交到个人博客系统，实现开发过程的透明化和记录。
 
-灏?Agent 宸ヤ綔鏃ュ織鑷姩鎻愪氦鍒颁釜浜哄崥瀹㈢郴缁燂紝瀹炵幇寮€鍙戣繃绋嬬殑閫忔槑鍖栧拰璁板綍銆?
-## 闆嗘垚鏋舵瀯
+## 集成架构
 
 ```
-Agent 宸ヤ綔 鈫?鏈湴鏃ュ織 鈫?鏍煎紡杞崲 鈫?鍗氬 API 鈫?鍙戝竷鏂囩珷
-                                    鈫?                              鍗氬缃戠珯灞曠ず
+Agent 工作 → 本地日志 → 格式转换 → 博客 API → 发布文章
+                                    ↓
+                              博客网站展示
 ```
 
-## 闃舵鍒掑垎
+## 阶段划分
 
-### 闃舵 1: 鍗氬鎼缓鍓?
-**鏃堕棿:** 椤圭洰寮€濮?~ 鏂囩珷妯″潡瀹屾垚
+### 阶段 1: 博客搭建前
 
-**宸ヤ綔鍐呭:**
-- 鎵€鏈?Agent 鍦ㄦ湰鍦拌褰曞伐浣滄棩蹇?- 鏃ュ織鏍煎紡缁熶竴涓?Markdown
-- 瀛樺偍鍦ㄦ寚瀹氱洰褰?
-**鏃ュ織浣嶇疆:**
+**时间:** 项目开始 ~ 文章模块完成
+
+**工作内容:**
+- 所有 Agent 在本地记录工作日志
+- 日志格式统一为 Markdown
+- 存储在指定目录
+
+**日志位置:**
 ```
 F:\openclaw\workspace\team\
-鈹溾攢鈹€ guantang\logs\daily_YYYYMMDD.md
-鈹溾攢鈹€ jiangrou\logs\daily_YYYYMMDD.md
-鈹溾攢鈹€ dousha\logs\daily_YYYYMMDD.md
-鈹斺攢鈹€ suancai\logs\daily_YYYYMMDD.md
+├── guantang\logs\daily_YYYYMMDD.md
+├── jiangrou\logs\daily_YYYYMMDD.md
+├── dousha\logs\daily_YYYYMMDD.md
+└── suancai\logs\daily_YYYYMMDD.md
 ```
 
-**鏃ュ織妯℃澘:**
+**日志模板:**
 
 ```markdown
-# {Agent 鍚嶇О} - 宸ヤ綔鏃ュ織 {鏃ユ湡}
+# {Agent 名称} - 工作日志 {日期}
 
-## 浠婃棩宸ヤ綔
-- [x] 浠诲姟 1锛氬叿浣撴弿杩?- [x] 浠诲姟 2锛氬叿浣撴弿杩?- [ ] 浠诲姟 3锛氬叿浣撴弿杩帮紙鏈畬鎴愬師鍥狅級
+## 今日工作
+- [x] 任务 1：具体描述
+- [x] 任务 2：具体描述
+- [ ] 任务 3：具体描述（未完成原因）
 
-## 浠ｇ爜鎻愪氦
-- `鏂囦欢璺緞` - 淇敼璇存槑
+## 代码提交
+- `文件路径` - 修改说明
 
-## 閬囧埌鐨勯棶棰?- 闂鎻忚堪锛堝鏈夛級
-- 瑙ｅ喅鏂规/闇€瑕佸府鍔?
-## 鏄庢棩璁″垝
-- 璁″垝浠诲姟 1
-- 璁″垝浠诲姟 2
+## 遇到的问题
+- 问题描述（如有）
+- 解决方案/需要帮助
 
-## 宸ヤ綔鏃堕暱
-- 寮€濮嬫椂闂达細09:00
-- 缁撴潫鏃堕棿锛?7:00
-- 鎬昏锛? 灏忔椂
+## 明日计划
+- 计划任务 1
+- 计划任务 2
+
+## 工作时长
+- 开始时间：09:00
+- 结束时间：17:00
+- 总计：8 小时
 ```
 
-### 闃舵 2: 鏂囩珷妯″潡瀹屾垚鍚?
-**瑙﹀彂鏉′欢:** 鍗氬鏂囩珷绠＄悊鍔熻兘涓婄嚎
+### 阶段 2: 文章模块完成后
 
-**鑷姩鍖栨祦绋?**
+**触发条件:** 博客文章管理功能上线
 
-#### 1. 鏃ュ織鎻愬彇鍜屾牸寮忓寲
+**自动化流程:**
+
+#### 1. 日志提取和格式化
 
 ```python
 # blog_integration.py
@@ -71,7 +78,7 @@ class BlogIntegration:
         self.log_dir = "F:\\openclaw\\workspace\\team"
     
     def extract_daily_log(self, date, agent_name):
-        """璇诲彇骞惰В鏋?Agent 鐨勬棩鏃ュ織"""
+        """读取并解析 Agent 的日日志"""
         log_path = f"{self.log_dir}/{agent_name}/logs/daily_{date}.md"
         
         with open(log_path, 'r', encoding='utf-8') as f:
@@ -80,37 +87,37 @@ class BlogIntegration:
         return self.parse_log(content, agent_name, date)
     
     def parse_log(self, content, agent_name, date):
-        """瑙ｆ瀽鏃ュ織鍐呭锛岃浆鎹负鍗氬鏂囩珷鏍煎紡"""
-        # 鎻愬彇鍏抽敭淇℃伅
+        """解析日志内容，转换为博客文章格式"""
+        # 提取关键信息
         tasks_completed = self.extract_tasks(content, status='completed')
         issues = self.extract_issues(content)
         code_commits = self.extract_commits(content)
         
-        # 鏍煎紡鍖栦负鍗氬鏂囩珷
+        # 格式化为博客文章
         blog_post = {
-            "title": f"椤圭洰寮€鍙戞棩蹇?- {agent_name} - {date}",
+            "title": f"项目开发日志 - {agent_name} - {date}",
             "content": self.format_content(tasks_completed, issues, code_commits),
-            "category": "寮€鍙戞棩蹇?,
-            "tags": ["鏃ュ父", agent_name, date],
-            "status": "draft"  # 鎴?published
+            "category": "开发日志",
+            "tags": ["日常", agent_name, date],
+            "status": "draft"  # 或 published
         }
         
         return blog_post
     
     def format_content(self, tasks, issues, commits):
-        """鏍煎紡鍖栦负鍗氬 HTML 鍐呭"""
+        """格式化为博客 HTML 内容"""
         html = f"""
-<h2>浠婃棩瀹屾垚</h2>
+<h2>今日完成</h2>
 <ul>
 {self.list_to_html(tasks)}
 </ul>
 
-<h2>浠ｇ爜鎻愪氦</h2>
+<h2>代码提交</h2>
 <ul>
 {self.list_to_html(commits)}
 </ul>
 
-<h2>閬囧埌鐨勯棶棰?/h2>
+<h2>遇到的问题</h2>
 <ul>
 {self.list_to_html(issues)}
 </ul>
@@ -118,7 +125,7 @@ class BlogIntegration:
         return html
     
     def submit_to_blog(self, blog_post):
-        """璋冪敤鍗氬 API 鎻愪氦鏂囩珷"""
+        """调用博客 API 提交文章"""
         response = requests.post(
             f"{self.blog_api}/articles",
             json=blog_post,
@@ -127,21 +134,21 @@ class BlogIntegration:
         
         if response.status_code == 201:
             article_id = response.json()['id']
-            print(f"鏂囩珷鎻愪氦鎴愬姛锛両D: {article_id}")
+            print(f"文章提交成功！ID: {article_id}")
             return article_id
         else:
-            print(f"鎻愪氦澶辫触锛歿response.text}")
+            print(f"提交失败：{response.text}")
             return None
 ```
 
-#### 2. 瀹氭椂浠诲姟
+#### 2. 定时任务
 
 ```python
 # scheduler.py
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 def daily_submit_job():
-    """姣忓ぉ 18:00 鑷姩鎻愪氦鏃ュ織鍒板崥瀹?""
+    """每天 18:00 自动提交日志到博客"""
     integration = BlogIntegration()
     today = datetime.now().strftime("%Y%m%d")
     
@@ -149,53 +156,61 @@ def daily_submit_job():
     
     for agent in agents:
         try:
-            # 璇诲彇鏃ュ織
+            # 读取日志
             log_data = integration.extract_daily_log(today, agent)
             
-            # 鎻愪氦鍒板崥瀹?            article_id = integration.submit_to_blog(log_data)
+            # 提交到博客
+            article_id = integration.submit_to_blog(log_data)
             
-            # 鏍囪宸叉彁浜?            if article_id:
+            # 标记已提交
+            if article_id:
                 integration.mark_as_submitted(agent, today, article_id)
                 
         except Exception as e:
-            print(f"{agent} 鏃ュ織鎻愪氦澶辫触锛歿e}")
+            print(f"{agent} 日志提交失败：{e}")
 
-# 鍒涘缓璋冨害鍣?scheduler = BlockingScheduler()
+# 创建调度器
+scheduler = BlockingScheduler()
 scheduler.add_job(daily_submit_job, 'cron', hour=18, minute=0)
 
-print("鍗氬闆嗘垚璋冨害鍣ㄥ惎鍔?..")
+print("博客集成调度器启动...")
 scheduler.start()
 ```
 
-#### 3. 鏈湴澶囦唤绛栫暐
+#### 3. 本地备份策略
 
 ```yaml
-澶囦唤瑙勫垯:
-  - 宸叉彁浜ょ殑鏃ュ織鍦ㄦ湰鍦颁繚鐣?7 澶?  - 7 澶╁悗绉诲姩鍒板綊妗ｇ洰褰?  - 褰掓。鏃ュ織鍘嬬缉淇濆瓨
+备份规则:
+  - 已提交的日志在本地保留 7 天
+  - 7 天后移动到归档目录
+  - 归档日志压缩保存
   
-鐩綍缁撴瀯:
+目录结构:
 F:\openclaw\workspace\team\{agent}\logs\
-鈹溾攢鈹€ current\          # 褰撳墠鏃ュ織锛堟渶杩?7 澶╋級
-鈹溾攢鈹€ archive\          # 褰掓。鏃ュ織锛堝帇缂╋級
-鈹?  鈹溾攢鈹€ 2026\
-鈹?  鈹?  鈹溾攢鈹€ 03\
-鈹?  鈹?  鈹斺攢鈹€ ...
-鈹?  鈹斺攢鈹€ ...
-鈹斺攢鈹€ submitted.json    # 宸叉彁浜よ褰?```
+├── current\          # 当前日志（最近 7 天）
+├── archive\          # 归档日志（压缩）
+│   ├── 2026\
+│   │   ├── 03\
+│   │   └── ...
+│   └── ...
+└── submitted.json    # 已提交记录
+```
 
-## 鍗氬鏂囩珷妯″潡璁捐
+## 博客文章模块设计
 
-### 鏁版嵁搴撹〃缁撴瀯
+### 数据库表结构
 
 ```sql
--- 鏂囩珷鍒嗙被琛?CREATE TABLE categories (
+-- 文章分类表
+CREATE TABLE categories (
     id INTEGER PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     slug VARCHAR(50) UNIQUE,
     description TEXT
 );
 
--- 鏂囩珷琛?CREATE TABLE articles (
+-- 文章表
+CREATE TABLE articles (
     id INTEGER PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     slug VARCHAR(200) UNIQUE,
@@ -211,13 +226,15 @@ F:\openclaw\workspace\team\{agent}\logs\
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
--- 鏂囩珷鏍囩琛?CREATE TABLE tags (
+-- 文章标签表
+CREATE TABLE tags (
     id INTEGER PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     slug VARCHAR(50) UNIQUE
 );
 
--- 鏂囩珷鏍囩鍏宠仈琛?CREATE TABLE article_tags (
+-- 文章标签关联表
+CREATE TABLE article_tags (
     article_id INTEGER,
     tag_id INTEGER,
     PRIMARY KEY (article_id, tag_id),
@@ -226,9 +243,9 @@ F:\openclaw\workspace\team\{agent}\logs\
 );
 ```
 
-### API 鎺ュ彛
+### API 接口
 
-#### 鍒涘缓鏂囩珷
+#### 创建文章
 
 ```http
 POST /api/articles
@@ -236,10 +253,10 @@ Content-Type: application/json
 Authorization: Bearer YOUR_TOKEN
 
 {
-  "title": "椤圭洰寮€鍙戞棩蹇?- 閰辫倝 - 2026-03-07",
-  "content": "<h2>浠婃棩瀹屾垚</h2>...",
-  "category": "寮€鍙戞棩蹇?,
-  "tags": ["鏃ュ父", "閰辫倝", "2026-03-07"],
+  "title": "项目开发日志 - 酱肉 - 2026-03-07",
+  "content": "<h2>今日完成</h2>...",
+  "category": "开发日志",
+  "tags": ["日常", "酱肉", "2026-03-07"],
   "status": "draft"
 }
 
@@ -251,7 +268,7 @@ Response:
 }
 ```
 
-#### 鏇存柊鏂囩珷
+#### 更新文章
 
 ```http
 PUT /api/articles/{id}
@@ -260,29 +277,31 @@ Content-Type: application/json
 {
   "title": "...",
   "content": "...",
-  "status": "published"  // 鍙戝竷
+  "status": "published"  // 发布
 }
 ```
 
-#### 鎵归噺鑾峰彇鏂囩珷
+#### 批量获取文章
 
 ```http
-GET /api/articles?category=寮€鍙戞棩蹇?status=published&page=1&limit=10
+GET /api/articles?category=开发日志&status=published&page=1&limit=10
 ```
 
-## 宸ヤ綔鐘舵€佸睍绀?
-### Agent 鐘舵€侀〉闈?
-鍦ㄥ崥瀹㈤椤垫垨涓撻棬椤甸潰灞曠ず 4 涓?Agent 鐨勫伐浣滅姸鎬侊細
+## 工作状态展示
+
+### Agent 状态页面
+
+在博客首页或专门页面展示 4 个 Agent 的工作状态：
 
 ```html
-<!-- 鍓嶇缁勪欢绀轰緥 -->
+<!-- 前端组件示例 -->
 <div class="agent-status">
-  <h2>Agent 鍥㈤槦宸ヤ綔鐘舵€?/h2>
+  <h2>Agent 团队工作状态</h2>
   
   <div class="agent-card">
-    <h3>鐏屾堡 - PM</h3>
-    <div class="status-badge online">鍦ㄧ嚎</div>
-    <p>褰撳墠浠诲姟锛氬崗璋冨墠鍚庣鑱旇皟</p>
+    <h3>灌汤 - PM</h3>
+    <div class="status-badge online">在线</div>
+    <p>当前任务：协调前后端联调</p>
     <div class="progress-bar">
       <div class="progress" style="width: 80%"></div>
     </div>
@@ -290,9 +309,9 @@ GET /api/articles?category=寮€鍙戞棩蹇?status=published&page=1&limit=10
   </div>
   
   <div class="agent-card">
-    <h3>閰辫倝 - 鍚庣</h3>
-    <div class="status-badge busy">宸ヤ綔涓?/div>
-    <p>褰撳墠浠诲姟锛氭枃绔犵鐞?API 寮€鍙?/p>
+    <h3>酱肉 - 后端</h3>
+    <div class="status-badge busy">工作中</div>
+    <p>当前任务：文章管理 API 开发</p>
     <div class="progress-bar">
       <div class="progress" style="width: 60%"></div>
     </div>
@@ -300,9 +319,9 @@ GET /api/articles?category=寮€鍙戞棩蹇?status=published&page=1&limit=10
   </div>
   
   <div class="agent-card">
-    <h3>璞嗘矙 - 鍓嶇</h3>
-    <div class="status-badge online">鍦ㄧ嚎</div>
-    <p>褰撳墠浠诲姟锛氱Щ鍔ㄧ閫傞厤</p>
+    <h3>豆沙 - 前端</h3>
+    <div class="status-badge online">在线</div>
+    <p>当前任务：移动端适配</p>
     <div class="progress-bar">
       <div class="progress" style="width: 75%"></div>
     </div>
@@ -310,9 +329,9 @@ GET /api/articles?category=寮€鍙戞棩蹇?status=published&page=1&limit=10
   </div>
   
   <div class="agent-card">
-    <h3>閰歌彍 - 杩愮淮/娴嬭瘯</h3>
-    <div class="status-badge idle">绌洪棽</div>
-    <p>褰撳墠浠诲姟锛氱瓑寰呮祴璇?/p>
+    <h3>酸菜 - 运维/测试</h3>
+    <div class="status-badge idle">空闲</div>
+    <p>当前任务：等待测试</p>
     <div class="progress-bar">
       <div class="progress" style="width: 40%"></div>
     </div>
@@ -321,65 +340,67 @@ GET /api/articles?category=寮€鍙戞棩蹇?status=published&page=1&limit=10
 </div>
 ```
 
-### 瀹炴椂鏁版嵁婧?
+### 实时数据源
+
 ```python
 # status_api.py
 @app.route('/api/agent-status')
 def get_agent_status():
-    """鑾峰彇 Agent 瀹炴椂鐘舵€?""
+    """获取 Agent 实时状态"""
     agents = {
         'guantang': {
-            'name': '鐏屾堡',
+            'name': '灌汤',
             'role': 'PM',
             'status': 'online',  # online, busy, idle, offline
-            'current_task': '鍗忚皟鍓嶅悗绔仈璋?,
+            'current_task': '协调前后端联调',
             'progress': 80,
             'last_active': '2026-03-07T14:00:00Z'
         },
         'jiangrou': {
-            'name': '閰辫倝',
-            'role': '鍚庣寮€鍙?,
+            'name': '酱肉',
+            'role': '后端开发',
             'status': 'busy',
-            'current_task': '鏂囩珷绠＄悊 API 寮€鍙?,
+            'current_task': '文章管理 API 开发',
             'progress': 60,
             'last_active': '2026-03-07T14:05:00Z'
         },
-        # ... 鍏朵粬 Agent
+        # ... 其他 Agent
     }
     
     return jsonify(agents)
 ```
 
-## 閰嶇疆瑕佹眰
+## 配置要求
 
-### 鐜鍙橀噺
+### 环境变量
 
 ```bash
-# .env 鏂囦欢
+# .env 文件
 BLOG_API_URL=http://yourblog.com/api
 BLOG_API_TOKEN=your_api_token_here
-LOG_SUBMIT_TIME=18:00  # 姣忔棩鎻愪氦鏃堕棿
+LOG_SUBMIT_TIME=18:00  # 每日提交时间
 LOCAL_LOG_RETENTION_DAYS=7
-AUTO_PUBLISH=false  # true=鑷姩鍙戝竷锛宖alse=鑽夌
+AUTO_PUBLISH=false  # true=自动发布，false=草稿
 ```
 
-### 渚濊禆瀹夎
+### 依赖安装
 
 ```bash
 pip install requests apscheduler python-dotenv
 ```
 
-## 瀹夊叏鑰冭檻
+## 安全考虑
 
-### API 璁よ瘉
+### API 认证
 
-浣跨敤 Token 璁よ瘉鏂瑰紡锛?
+使用 Token 认证方式：
+
 ```python
-# 鐢熸垚 Token
+# 生成 Token
 import secrets
 API_TOKEN = secrets.token_urlsafe(32)
 
-# 楠岃瘉 Token
+# 验证 Token
 @app.before_request
 def verify_token():
     if request.path.startswith('/api/'):
@@ -388,14 +409,13 @@ def verify_token():
             return jsonify({'error': 'Unauthorized'}), 401
 ```
 
-### 鏉冮檺鎺у埗
+### 权限控制
 
 ```python
-# 鍙湁鐗瑰畾 Agent 鍙互鍙戝竷鏂囩珷
+# 只有特定 Agent 可以发布文章
 ALLOWED_AGENTS = ['guantang', 'jiangrou', 'dousha', 'suancai']
 
 def check_agent_permission(agent_name):
     if agent_name not in ALLOWED_AGENTS:
-        raise PermissionError(f"Agent {agent_name} 鏃犳潈闄?)
+        raise PermissionError(f"Agent {agent_name} 无权限")
 ```
-

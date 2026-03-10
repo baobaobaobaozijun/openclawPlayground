@@ -1,24 +1,26 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 酸菜 (运维/测试) - 完整知识库
 
-# 閰歌彍 (杩愮淮/娴嬭瘯) - 瀹屾暣鐭ヨ瘑搴?
-## 馃摎 鐭ヨ瘑搴撶洰褰?
-- [韬唤璁ょ煡](./IDENTITY.md)
-- [鑱岃矗瑙勮寖](./ROLE.md)
-- [琛屼负鍑嗗垯](./SOUL.md)
-- [DevOps鏈€浣冲疄璺礭(./devops-best-practices.md)
-- [鑷姩鍖栨祴璇曟寚鍗梋(./automation-testing-guide.md)
-- [鐩戞帶涓庡憡璀﹂厤缃甝(./monitoring-alerting.md)
-- [CI/CD娴佺▼璁捐](./cicd-pipeline-design.md)
-- [鏁呴殰鎺掓煡鎵嬪唽](./troubleshooting-handbook.md)
+## 📚 知识库目录
+
+- [身份认知](./IDENTITY.md)
+- [职责规范](./ROLE.md)
+- [行为准则](./SOUL.md)
+- [DevOps最佳实践](./devops-best-practices.md)
+- [自动化测试指南](./automation-testing-guide.md)
+- [监控与告警配置](./monitoring-alerting.md)
+- [CI/CD流程设计](./cicd-pipeline-design.md)
+- [故障排查手册](./troubleshooting-handbook.md)
 
 ---
 
-## 馃洜锔?DevOps鏈€浣冲疄璺?
-### 1. Docker瀹瑰櫒鍖栭儴缃?
-#### Dockerfile缂栧啓瑙勮寖
+## 🛠️ DevOps最佳实践
+
+### 1. Docker容器化部署
+
+#### Dockerfile编写规范
 ```dockerfile
-# 浣跨敤澶氶樁娈垫瀯寤哄噺灏忛暅鍍忎綋绉?FROM python:3.9-slim as builder
+# 使用多阶段构建减小镜像体积
+FROM python:3.9-slim as builder
 
 WORKDIR /app
 COPY requirements.txt .
@@ -38,7 +40,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 CMD ["python", "main.py"]
 ```
 
-#### Docker Compose閰嶇疆
+#### Docker Compose配置
 ```yaml
 version: '3.8'
 
@@ -79,9 +81,10 @@ volumes:
   redis_data:
 ```
 
-### 2. 鎸佺画闆嗘垚/鎸佺画閮ㄧ讲 (CI/CD)
+### 2. 持续集成/持续部署 (CI/CD)
 
-#### GitHub Actions宸ヤ綔娴?```yaml
+#### GitHub Actions工作流
+```yaml
 name: CI/CD Pipeline
 
 on:
@@ -143,29 +146,32 @@ jobs:
     
     - name: Deploy to server
       run: |
-        # 閮ㄧ讲鑴氭湰
+        # 部署脚本
         ssh user@server "cd /app && docker-compose pull && docker-compose up -d"
 ```
 
 ---
 
-## 馃И 鑷姩鍖栨祴璇曟寚鍗?
-### 1. 娴嬭瘯閲戝瓧濉?
+## 🧪 自动化测试指南
+
+### 1. 测试金字塔
+
 ```
         /\
        /  \
-      / E2E \     鈫?绔埌绔祴璇?(10%)
+      / E2E \     ← 端到端测试 (10%)
      /______\
     /        \
-   / Integration\  鈫?闆嗘垚娴嬭瘯 (20%)
+   / Integration\  ← 集成测试 (20%)
   /______________\
  /                \
 /__________________\
-   Unit Tests        鈫?鍗曞厓娴嬭瘯 (70%)
+   Unit Tests        ← 单元测试 (70%)
 ```
 
-### 2. 鍗曞厓娴嬭瘯鏈€浣冲疄璺?
-#### pytest娴嬭瘯鐢ㄤ緥
+### 2. 单元测试最佳实践
+
+#### pytest测试用例
 ```python
 # tests/test_article_api.py
 import pytest
@@ -177,10 +183,10 @@ client = TestClient(app)
 class TestArticleAPI:
     
     def test_create_article_success(self):
-        """娴嬭瘯鍒涘缓鏂囩珷鎴愬姛"""
+        """测试创建文章成功"""
         payload = {
-            "title": "娴嬭瘯鏂囩珷",
-            "content": "杩欐槸娴嬭瘯鍐呭"
+            "title": "测试文章",
+            "content": "这是测试内容"
         }
         
         response = client.post("/api/articles", json=payload)
@@ -188,11 +194,11 @@ class TestArticleAPI:
         assert response.status_code == 201
         data = response.json()
         assert data["success"] is True
-        assert data["data"]["title"] == "娴嬭瘯鏂囩珷"
+        assert data["data"]["title"] == "测试文章"
         assert "id" in data["data"]
     
     def test_get_article_not_found(self):
-        """娴嬭瘯鑾峰彇涓嶅瓨鍦ㄧ殑鏂囩珷"""
+        """测试获取不存在的文章"""
         response = client.get("/api/articles/99999")
         
         assert response.status_code == 404
@@ -203,21 +209,21 @@ class TestArticleAPI:
     @pytest.mark.parametrize(
         "title,content,expected_status",
         [
-            ("", "鍐呭", 422),  # 鏍囬涓虹┖
-            ("鏍囬", "", 201),  # 鍐呭涓虹┖鍏佽
-            ("A" * 201, "鍐呭", 422),  # 鏍囬瓒呴暱
+            ("", "内容", 422),  # 标题为空
+            ("标题", "", 201),  # 内容为空允许
+            ("A" * 201, "内容", 422),  # 标题超长
         ]
     )
     def test_create_article_validation(self, title, content, expected_status):
-        """娴嬭瘯鏂囩珷鍒涘缓鐨勮緭鍏ラ獙璇?""
+        """测试文章创建的输入验证"""
         payload = {"title": title, "content": content}
         response = client.post("/api/articles", json=payload)
         assert response.status_code == expected_status
 ```
 
-### 3. 鎬ц兘娴嬭瘯
+### 3. 性能测试
 
-#### Locust璐熻浇娴嬭瘯鑴氭湰
+#### Locust负载测试脚本
 ```python
 # tests/performance/load_test.py
 from locust import HttpUser, task, between
@@ -227,7 +233,7 @@ class ArticleUser(HttpUser):
     wait_time = between(1, 3)
     
     def on_start(self):
-        """鐢ㄦ埛寮€濮嬫椂鐨勭櫥褰?""
+        """用户开始时的登录"""
         response = self.client.post("/api/auth/login", json={
             "username": "testuser",
             "password": "testpass"
@@ -237,41 +243,43 @@ class ArticleUser(HttpUser):
     
     @task(3)
     def get_articles(self):
-        """鑾峰彇鏂囩珷鍒楄〃 - 楂橀鎿嶄綔"""
+        """获取文章列表 - 高频操作"""
         self.client.get("/api/articles", headers=self.headers)
     
     @task(2)
     def get_article_detail(self):
-        """鑾峰彇鏂囩珷璇︽儏"""
+        """获取文章详情"""
         article_id = random.randint(1, 100)
         self.client.get(f"/api/articles/{article_id}", headers=self.headers)
     
     @task(1)
     def create_article(self):
-        """鍒涘缓鏂囩珷 - 浣庨鎿嶄綔"""
+        """创建文章 - 低频操作"""
         self.client.post("/api/articles", json={
-            "title": f"娴嬭瘯鏂囩珷{random.randint(1, 1000)}",
-            "content": "杩欐槸娴嬭瘯鍐呭"
+            "title": f"测试文章{random.randint(1, 1000)}",
+            "content": "这是测试内容"
         }, headers=self.headers)
 ```
 
-杩愯璐熻浇娴嬭瘯锛?```bash
+运行负载测试：
+```bash
 locust -f tests/performance/load_test.py --host=http://localhost:8000
 ```
 
 ---
 
-## 馃搳 鐩戞帶涓庡憡璀﹂厤缃?
-### 1. Prometheus鐩戞帶鎸囨爣
+## 📊 监控与告警配置
 
-#### 搴旂敤鎸囨爣鏆撮湶
+### 1. Prometheus监控指标
+
+#### 应用指标暴露
 ```python
 # src/metrics.py
 from prometheus_client import Counter, Histogram, generate_latest
 import time
 from functools import wraps
 
-# 瀹氫箟鎸囨爣
+# 定义指标
 REQUEST_COUNT = Counter(
     'http_requests_total',
     'Total HTTP requests',
@@ -308,14 +316,15 @@ def metrics():
     return Response(generate_latest(), media_type="text/plain")
 ```
 
-### 2. Grafana浠〃鏉块厤缃?
-#### 鍏抽敭鐩戞帶闈㈡澘
-- **绯荤粺璧勬簮**: CPU銆佸唴瀛樸€佺鐩樹娇鐢ㄧ巼
-- **搴旂敤鎬ц兘**: QPS銆佸搷搴旀椂闂淬€侀敊璇巼
-- **鏁版嵁搴?*: 鏌ヨ鑰楁椂銆佽繛鎺ユ暟銆佹參鏌ヨ
-- **缂撳瓨**: 鍛戒腑鐜囥€佸唴瀛樹娇鐢ㄣ€侀敭鏁伴噺
+### 2. Grafana仪表板配置
 
-### 3. 鍛婅瑙勫垯
+#### 关键监控面板
+- **系统资源**: CPU、内存、磁盘使用率
+- **应用性能**: QPS、响应时间、错误率
+- **数据库**: 查询耗时、连接数、慢查询
+- **缓存**: 命中率、内存使用、键数量
+
+### 3. 告警规则
 
 ```yaml
 # prometheus/alerts.yml
@@ -328,8 +337,8 @@ groups:
     labels:
       severity: critical
     annotations:
-      summary: "閿欒鐜囪繃楂?({{ $value | humanizePercentage }})"
-      description: "杩囧幓 5 鍒嗛挓閿欒鐜囪秴杩?5%"
+      summary: "错误率过高 ({{ $value | humanizePercentage }})"
+      description: "过去 5 分钟错误率超过 5%"
   
   - alert: SlowResponse
     expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
@@ -337,57 +346,66 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: "鍝嶅簲杩囨參 (P95: {{ $value }}s)"
-      description: "95%鐨勮姹傚搷搴旀椂闂磋秴杩?2 绉?
+      summary: "响应过慢 (P95: {{ $value }}s)"
+      description: "95%的请求响应时间超过 2 秒"
 ```
 
 ---
 
-## 馃攳 鏁呴殰鎺掓煡鎵嬪唽
+## 🔍 故障排查手册
 
-### 鎺掓煡娴佺▼
+### 排查流程
 
 ```
-1. 鐜拌薄纭
-   鈫?2. 鏌ョ湅鐩戞帶鎸囨爣
-   鈫?3. 妫€鏌ユ棩蹇?   鈫?4. 瀹氫綅闂
-   鈫?5. 瀹炴柦淇
-   鈫?6. 楠岃瘉缁撴灉
-   鈫?7. 澶嶇洏鎬荤粨
+1. 现象确认
+   ↓
+2. 查看监控指标
+   ↓
+3. 检查日志
+   ↓
+4. 定位问题
+   ↓
+5. 实施修复
+   ↓
+6. 验证结果
+   ↓
+7. 复盘总结
 ```
 
-### 甯歌闂鎺掓煡
+### 常见问题排查
 
-#### 闂 1: API鍝嶅簲瓒呮椂
+#### 问题 1: API响应超时
 
-**鎺掓煡姝ラ:**
+**排查步骤:**
 ```bash
-# 1. 妫€鏌ユ湇鍔＄姸鎬?docker-compose ps
+# 1. 检查服务状态
+docker-compose ps
 
-# 2. 鏌ョ湅璧勬簮浣跨敤
+# 2. 查看资源使用
 docker stats
 
-# 3. 鏌ョ湅鏃ュ織
+# 3. 查看日志
 docker-compose logs -f backend
 
-# 4. 妫€鏌ユ暟鎹簱杩炴帴
+# 4. 检查数据库连接
 docker-compose exec backend python -c "from sqlalchemy import create_engine; engine = create_engine('DATABASE_URL'); engine.connect()"
 
-# 5. 鍒嗘瀽鎱㈡煡璇?docker-compose exec mysql mysql -u root -p -e "SHOW PROCESSLIST;"
+# 5. 分析慢查询
+docker-compose exec mysql mysql -u root -p -e "SHOW PROCESSLIST;"
 ```
 
-#### 闂 2: 鍐呭瓨娉勬紡
+#### 问题 2: 内存泄漏
 
-**鎺掓煡鏂规硶:**
+**排查方法:**
 ```bash
-# 鐩戞帶瀹瑰櫒鍐呭瓨
+# 监控容器内存
 docker stats --no-stream
 
-# Python 杩涚▼鍐呭瓨鍒嗘瀽
+# Python 进程内存分析
 import tracemalloc
 tracemalloc.start()
 
-# ... 杩愯浠ｇ爜 ...
+# ... 运行代码 ...
 
 snapshot = tracemalloc.take_snapshot()
 top_stats = snapshot.statistics('lineno')
@@ -396,34 +414,36 @@ for stat in top_stats[:10]:
     print(stat)
 ```
 
-#### 闂 3: 鏁版嵁搴撹繛鎺ュけ璐?
-**蹇€熻瘖鏂?**
+#### 问题 3: 数据库连接失败
+
+**快速诊断:**
 ```bash
-# 妫€鏌ユ暟鎹簱鏄惁杩愯
+# 检查数据库是否运行
 docker-compose exec db mysqladmin status -u root -p
 
-# 妫€鏌ヨ繛鎺ユ暟
+# 检查连接数
 docker-compose exec db mysql -u root -p -e "SHOW STATUS LIKE 'Threads_connected';"
 
-# 閲嶅惎鏁版嵁搴擄紙璋ㄦ厧浣跨敤锛?docker-compose restart db
+# 重启数据库（谨慎使用）
+docker-compose restart db
 ```
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## 📖 学习资源
 
-### 瀹樻柟鏂囨。
-- [Docker 鏂囨。](https://docs.docker.com/)
-- [GitHub Actions 鏂囨。](https://docs.github.com/en/actions)
-- [Prometheus 鏂囨。](https://prometheus.io/docs/)
-- [pytest 鏂囨。](https://docs.pytest.org/)
+### 官方文档
+- [Docker 文档](https://docs.docker.com/)
+- [GitHub Actions 文档](https://docs.github.com/en/actions)
+- [Prometheus 文档](https://prometheus.io/docs/)
+- [pytest 文档](https://docs.pytest.org/)
 
-### 鏈€浣冲疄璺?- [The Twelve-Factor App](https://12factor.net/)
+### 最佳实践
+- [The Twelve-Factor App](https://12factor.net/)
 - [Google SRE Handbook](https://sre.google/sre-book/table-of-contents/)
 - [Site Reliability Engineering](https://landing.google.com/sre/books/)
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-08*  
-*缁存姢鑰咃細閰歌彍Agent*
-
+*最后更新：2026-03-08*  
+*维护者：酸菜Agent*

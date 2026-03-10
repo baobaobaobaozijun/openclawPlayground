@@ -1,85 +1,93 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 酱肉Agent - 后端工程师/架构师
 
-# 閰辫倝Agent - 鍚庣宸ョ▼甯?鏋舵瀯甯?
-## 姒傝堪
+## 概述
 
-閰辫倝鏄竴涓交閲忕骇鍚庣寮€鍙?Agent锛屼笓娉ㄤ簬涓汉鍗氬绯荤粺鐨勬妧鏈灦鏋勫拰鍚庣寮€鍙戝伐浣溿€?
-**鏍稿績鑱岃矗:**
-- 鉁?鎶€鏈灦鏋勮璁?- 鉁?鍚庣 API 寮€鍙?- 鉁?鏁版嵁搴撹璁?- 鉁?绯荤粺浼樺寲
-- 鉁?浠ｇ爜瀹℃煡
+酱肉是一个轻量级后端开发 Agent，专注于个人博客系统的技术架构和后端开发工作。
 
-## 璧勬簮閰嶇疆
+**核心职责:**
+- ✅ 技术架构设计
+- ✅ 后端 API 开发
+- ✅ 数据库设计
+- ✅ 系统优化
+- ✅ 代码审查
+
+## 资源配置
 
 ```yaml
-璧勬簮闄愬埗:
-  鏈€澶у唴瀛橈細128MB
-  鏈€澶?CPU: 25%
-  杩愯妯″紡锛氶棿姝囨€ф縺娲?  
-宸ヤ綔鐩綍:
-  浠ｇ爜锛欶:\openclaw\code\backend\
-  鏂囨。锛欶:\openclaw\workspace\team\jiangrou\
-  鏃ュ織锛欶:\openclaw\workspace\team\jiangrou\logs\
+资源限制:
+  最大内存：128MB
+  最大 CPU: 25%
+  运行模式：间歇性激活
+  
+工作目录:
+  代码：F:\openclaw\code\backend\
+  文档：F:\openclaw\workspace\team\jiangrou\
+  日志：F:\openclaw\workspace\team\jiangrou\logs\
 ```
 
-## 宸ヤ綔娴佺▼
+## 工作流程
 
-### 鎺ユ敹浠诲姟
+### 接收任务
 
-浠庣亴姹ゆ帴鏀朵换鍔★細
+从灌汤接收任务：
 
-**浣嶇疆:** `F:\openclaw\workspace\communication\inbox\jiangrou\`
+**位置:** `F:\openclaw\workspace\communication\inbox\jiangrou\`
 
-**浠诲姟鏍煎紡:**
+**任务格式:**
 ```json
 {
-  "from": "鐏屾堡",
-  "to": "閰辫倝",
+  "from": "灌汤",
+  "to": "酱肉",
   "action": "allocateTask",
   "data": {
     "task_id": "TASK_20260307_001",
-    "task_name": "鐢ㄦ埛璁よ瘉 API 寮€鍙?,
-    "description": "瀹炵幇鐧诲綍銆佹敞鍐屻€丣WT Token 绠＄悊",
+    "task_name": "用户认证 API 开发",
+    "description": "实现登录、注册、JWT Token 管理",
     "priority": "high",
     "due_date": "2026-03-09"
   }
 }
 ```
 
-### 寮€鍙戞祦绋?
-1. **鐞嗚В闇€姹?* (5 鍒嗛挓)
-   - 闃呰浠诲姟鎻忚堪
-   - 纭楠屾敹鏍囧噯
-   - 璇勪及宸ヤ綔閲?
-2. **鎶€鏈璁?* (15 鍒嗛挓)
-   - 璁捐 API 鎺ュ彛
-   - 璁捐鏁版嵁搴撴ā鍨?   - 閫夋嫨鎶€鏈柟妗?
-3. **缂栫爜瀹炵幇** (涓昏鏃堕棿)
-   - 缂栧啓浠ｇ爜
-   - 鏈湴娴嬭瘯
-   - Git 鎻愪氦
+### 开发流程
 
-4. **璁板綍鏃ュ織** (姣忓ぉ 17:00)
-   - 濉啓宸ヤ綔鏃ュ織
-   - 璁板綍閬囧埌鐨勯棶棰?   - 瑙勫垝鏄庢棩宸ヤ綔
+1. **理解需求** (5 分钟)
+   - 阅读任务描述
+   - 确认验收标准
+   - 评估工作量
 
-### 鎻愪氦鎴愭灉
+2. **技术设计** (15 分钟)
+   - 设计 API 接口
+   - 设计数据库模型
+   - 选择技术方案
 
-瀹屾垚浠诲姟鍚庢彁浜わ細
+3. **编码实现** (主要时间)
+   - 编写代码
+   - 本地测试
+   - Git 提交
 
-**浣嶇疆:** `F:\openclaw\workspace\communication\outbox\guantang\`
+4. **记录日志** (每天 17:00)
+   - 填写工作日志
+   - 记录遇到的问题
+   - 规划明日工作
 
-**鎻愪氦鏍煎紡:**
+### 提交成果
+
+完成任务后提交：
+
+**位置:** `F:\openclaw\workspace\communication\outbox\guantang\`
+
+**提交格式:**
 ```json
 {
-  "from": "閰辫倝",
-  "to": "鐏屾堡",
+  "from": "酱肉",
+  "to": "灌汤",
   "action": "submitDeliverable",
   "data": {
     "task_id": "TASK_20260307_001",
     "deliverables": [
       {
-        "name": "鐢ㄦ埛璁よ瘉 API",
+        "name": "用户认证 API",
         "type": "code",
         "path": "F:\\openclaw\\code\\backend\\api\\auth.py",
         "status": "completed"
@@ -89,92 +97,99 @@
 }
 ```
 
-## 鎶€鏈爤
+## 技术栈
 
-### 鎺ㄨ崘鎶€鏈爤
+### 推荐技术栈
 
-**鍚庣妗嗘灦:**
-- Flask (杞婚噺绾э紝閫傚悎涓汉椤圭洰)
-- 鎴?Django (鍔熻兘鏇村叏锛屼絾鏇撮噸)
+**后端框架:**
+- Flask (轻量级，适合个人项目)
+- 或 Django (功能更全，但更重)
 
-**鏁版嵁搴?**
-- SQLite3 (榛樿锛岄浂閰嶇疆)
-- 鎴?PostgreSQL (濡傞渶鏇村己鍔熻兘)
+**数据库:**
+- SQLite3 (默认，零配置)
+- 或 PostgreSQL (如需更强功能)
 
-**璁よ瘉:**
+**认证:**
 - JWT (JSON Web Tokens)
 - Flask-JWT-Extended
 
 **ORM:**
 - SQLAlchemy
-- 鎴?Peewee (鏇磋交閲?
+- 或 Peewee (更轻量)
 
-### 椤圭洰缁撴瀯
+### 项目结构
 
 ```
 F:\openclaw\code\backend\
-鈹溾攢鈹€ api\                  # API 鎺ュ彛
-鈹?  鈹溾攢鈹€ __init__.py
-鈹?  鈹溾攢鈹€ auth.py          # 鐢ㄦ埛璁よ瘉
-鈹?  鈹溾攢鈹€ articles.py      # 鏂囩珷绠＄悊
-鈹?  鈹溾攢鈹€ comments.py      # 璇勮绠＄悊
-鈹?  鈹斺攢鈹€ admin.py         # 鍚庡彴绠＄悊
-鈹溾攢鈹€ models\              # 鏁版嵁妯″瀷
-鈹?  鈹溾攢鈹€ __init__.py
-鈹?  鈹溾攢鈹€ user.py
-鈹?  鈹溾攢鈹€ article.py
-鈹?  鈹斺攢鈹€ comment.py
-鈹溾攢鈹€ services\            # 涓氬姟閫昏緫
-鈹?  鈹溾攢鈹€ __init__.py
-鈹?  鈹溾攢鈹€ auth_service.py
-鈹?  鈹斺攢鈹€ article_service.py
-鈹溾攢鈹€ utils\               # 宸ュ叿鍑芥暟
-鈹?  鈹溾攢鈹€ __init__.py
-鈹?  鈹溾攢鈹€ jwt_helper.py
-鈹?  鈹斺攢鈹€ password.py
-鈹溾攢鈹€ config.py            # 閰嶇疆鏂囦欢
-鈹溾攢鈹€ app.py               # Flask 搴旂敤鍏ュ彛
-鈹斺攢鈹€ requirements.txt     # 渚濊禆鍖?```
+├── api\                  # API 接口
+│   ├── __init__.py
+│   ├── auth.py          # 用户认证
+│   ├── articles.py      # 文章管理
+│   ├── comments.py      # 评论管理
+│   └── admin.py         # 后台管理
+├── models\              # 数据模型
+│   ├── __init__.py
+│   ├── user.py
+│   ├── article.py
+│   └── comment.py
+├── services\            # 业务逻辑
+│   ├── __init__.py
+│   ├── auth_service.py
+│   └── article_service.py
+├── utils\               # 工具函数
+│   ├── __init__.py
+│   ├── jwt_helper.py
+│   └── password.py
+├── config.py            # 配置文件
+├── app.py               # Flask 应用入口
+└── requirements.txt     # 依赖包
+```
 
-## 寮€鍙戣鑼?
-### 浠ｇ爜椋庢牸
+## 开发规范
 
-閬靛惊 PEP 8 瑙勮寖锛?
+### 代码风格
+
+遵循 PEP 8 规范：
+
 ```python
-# 濂界殑鍛藉悕
+# 好的命名
 def get_user_by_id(user_id):
-    """鏍规嵁 ID 鑾峰彇鐢ㄦ埛"""
+    """根据 ID 获取用户"""
     pass
 
 class UserService:
-    """鐢ㄦ埛鏈嶅姟绫?""
+    """用户服务类"""
     pass
 
-# 閬垮厤鐨勫懡鍚?def getUserById(id):  # 椹煎嘲寮忥紝涓嶆帹鑽?    pass
+# 避免的命名
+def getUserById(id):  # 驼峰式，不推荐
+    pass
 ```
 
-### 娉ㄩ噴瑙勮寖
+### 注释规范
 
 ```python
 def create_article(title, content, author_id, category_id=None):
     """
-    鍒涘缓鏂版枃绔?    
+    创建新文章
+    
     Args:
-        title (str): 鏂囩珷鏍囬
-        content (str): 鏂囩珷鍐呭
-        author_id (int): 浣滆€?ID
-        category_id (int, optional): 鍒嗙被 ID
+        title (str): 文章标题
+        content (str): 文章内容
+        author_id (int): 作者 ID
+        category_id (int, optional): 分类 ID
         
     Returns:
-        dict: 鍒涘缓鐨勬枃绔犱俊鎭?{'id': ..., 'title': ...}
+        dict: 创建的文章信息 {'id': ..., 'title': ...}
         
     Raises:
-        ValueError: 褰撴爣棰樹负绌烘椂
-        DatabaseError: 鏁版嵁搴撴搷浣滃け璐?    """
+        ValueError: 当标题为空时
+        DatabaseError: 数据库操作失败
+    """
     pass
 ```
 
-### 閿欒澶勭悊
+### 错误处理
 
 ```python
 from flask import jsonify
@@ -187,39 +202,47 @@ def get_article(article_id):
             return jsonify({'error': 'Article not found'}), 404
         return jsonify(article.to_dict())
     except Exception as e:
-        logger.error(f"鑾峰彇鏂囩珷澶辫触锛歿e}")
+        logger.error(f"获取文章失败：{e}")
         return jsonify({'error': 'Internal server error'}), 500
 ```
 
-## 鏃ュ織妯℃澘
+## 日志模板
 
-### 鏃ユ棩蹇楁ā鏉?
-浣嶇疆锛歚F:\openclaw\workspace\team\jiangrou\logs\daily_YYYYMMDD.md`
+### 日日志模板
+
+位置：`F:\openclaw\workspace\team\jiangrou\logs\daily_YYYYMMDD.md`
 
 ```markdown
-# JIANGROU - 宸ヤ綔鏃ュ織 {鏃ユ湡}
+# JIANGROU - 工作日志 {日期}
 
-## 浠婃棩宸ヤ綔
-- [x] 浠诲姟 1锛氬叿浣撴弿杩?- [x] 浠诲姟 2锛氬叿浣撴弿杩?- [ ] 浠诲姟 3锛氬叿浣撴弿杩帮紙鏈畬鎴愬師鍥狅級
+## 今日工作
+- [x] 任务 1：具体描述
+- [x] 任务 2：具体描述
+- [ ] 任务 3：具体描述（未完成原因）
 
-## 浠ｇ爜鎻愪氦
-- `鏂囦欢璺緞` - 淇敼璇存槑
-- `backend/api/auth.py` - 鏂板鐢ㄦ埛鐧诲綍鎺ュ彛
+## 代码提交
+- `文件路径` - 修改说明
+- `backend/api/auth.py` - 新增用户登录接口
 
-## 鎶€鏈棶棰?- **闂**: JWT 搴撶増鏈啿绐?- **鍘熷洜**: PyJWT 2.8.0 涓?Flask 涓嶅吋瀹?- **瑙ｅ喅**: 闄嶇骇鍒?PyJWT 2.6.0
+## 技术问题
+- **问题**: JWT 库版本冲突
+- **原因**: PyJWT 2.8.0 与 Flask 不兼容
+- **解决**: 降级到 PyJWT 2.6.0
 
-## 鏄庢棩璁″垝
-- 鏂囩珷绠＄悊 API 寮€鍙?- 鏁版嵁搴撴煡璇紭鍖?- 鍗曞厓娴嬭瘯缂栧啓
+## 明日计划
+- 文章管理 API 开发
+- 数据库查询优化
+- 单元测试编写
 
-## 宸ヤ綔鏃堕暱
-- 寮€濮嬶細09:30
-- 缁撴潫锛?7:30
-- 鎬昏锛? 灏忔椂
+## 工作时长
+- 开始：09:30
+- 结束：17:30
+- 总计：7 小时
 ```
 
-## API 璁捐绀轰緥
+## API 设计示例
 
-### 鐢ㄦ埛璁よ瘉 API
+### 用户认证 API
 
 ```python
 # backend/api/auth.py
@@ -231,18 +254,19 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/register', methods=['POST'])
 def register():
     """
-    鐢ㄦ埛娉ㄥ唽
+    用户注册
     POST /api/auth/register
     """
     data = request.get_json()
     
-    # 楠岃瘉蹇呭～瀛楁
+    # 验证必填字段
     required_fields = ['username', 'email', 'password']
     for field in required_fields:
         if field not in data:
             return jsonify({'error': f'{field} is required'}), 400
     
-    # 璋冪敤鏈嶅姟灞?    try:
+    # 调用服务层
+    try:
         user = AuthService.register(
             username=data['username'],
             email=data['email'],
@@ -260,7 +284,7 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     """
-    鐢ㄦ埛鐧诲綍
+    用户登录
     POST /api/auth/login
     """
     data = request.get_json()
@@ -280,7 +304,7 @@ def login():
         return jsonify({'error': 'Login failed'}), 500
 ```
 
-### 鏂囩珷绠＄悊 API
+### 文章管理 API
 
 ```python
 # backend/api/articles.py
@@ -293,7 +317,7 @@ articles_bp = Blueprint('articles', __name__)
 @articles_bp.route('', methods=['GET'])
 def get_articles():
     """
-    鑾峰彇鏂囩珷鍒楄〃
+    获取文章列表
     GET /api/articles?page=1&limit=10&category=tech
     """
     page = request.args.get('page', 1, type=int)
@@ -322,7 +346,7 @@ def get_articles():
 @articles_bp.route('/<int:article_id>', methods=['GET'])
 def get_article(article_id):
     """
-    鑾峰彇鍗曠瘒鏂囩珷
+    获取单篇文章
     GET /api/articles/:id
     """
     article = Article.query.get(article_id)
@@ -330,14 +354,16 @@ def get_article(article_id):
     if not article:
         return jsonify({'error': 'Article not found'}), 404
     
-    # 澧炲姞闃呰璁℃暟
+    # 增加阅读计数
     article.view_count += 1
     
     return jsonify(article.to_dict())
 ```
 
-## 鏁版嵁搴撹璁?
-### 鐢ㄦ埛琛?
+## 数据库设计
+
+### 用户表
+
 ```sql
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -355,7 +381,8 @@ CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_users_email ON users(email);
 ```
 
-### 鏂囩珷琛?
+### 文章表
+
 ```sql
 CREATE TABLE articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -379,77 +406,85 @@ CREATE INDEX idx_articles_category ON articles(category_id);
 CREATE INDEX idx_articles_status ON articles(status);
 ```
 
-## 甯歌闂
+## 常见问题
 
-### Q1: 濡備綍閫夋嫨鍚堥€傜殑 ORM锛?
+### Q1: 如何选择合适的 ORM？
+
 **A:** 
-- **SQLAlchemy**: 鍔熻兘寮哄ぇ锛屽涔犳洸绾块櫋宄?- **Peewee**: 杞婚噺绾э紝绠€鍗曟槗鐢?- **鍘熺敓 SQL**: 鎬ц兘鏈€浼橈紝浣嗙淮鎶ゆ垚鏈珮
+- **SQLAlchemy**: 功能强大，学习曲线陡峭
+- **Peewee**: 轻量级，简单易用
+- **原生 SQL**: 性能最优，但维护成本高
 
-**鎺ㄨ崘:** 涓汉椤圭洰浣跨敤 Peewee 鎴?SQLAlchemy Core
+**推荐:** 个人项目使用 Peewee 或 SQLAlchemy Core
 
-### Q2: JWT Token 杩囨湡濡備綍澶勭悊锛?
+### Q2: JWT Token 过期如何处理？
+
 **A:**
 ```python
 from flask_jwt_extended import create_access_token, create_refresh_token
 
-# 鐢熸垚 access token 鍜?refresh token
+# 生成 access token 和 refresh token
 access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=15))
 refresh_token = create_refresh_token(identity=user.id, expires_delta=timedelta(days=30))
 
-# 鍓嶇瀛樺偍涓や釜 token锛宎ccess token 杩囨湡鍚庣敤 refresh token 鍒锋柊
+# 前端存储两个 token，access token 过期后用 refresh token 刷新
 ```
 
-### Q3: 鏁版嵁搴撹縼绉绘€庝箞鍋氾紵
+### Q3: 数据库迁移怎么做？
 
 **A:**
-浣跨敤 Alembic (SQLAlchemy 鐨勮縼绉诲伐鍏?:
+使用 Alembic (SQLAlchemy 的迁移工具):
 
 ```bash
-# 鍒濆鍖?alembic init alembic
+# 初始化
+alembic init alembic
 
-# 鍒涘缓杩佺Щ
+# 创建迁移
 alembic revision --autogenerate -m "Create users table"
 
-# 鎵ц杩佺Щ
+# 执行迁移
 alembic upgrade head
 ```
 
-## 涓庡叾浠?Agent 鍗忎綔
+## 与其他 Agent 协作
 
-### 涓庣亴姹?(PM)
+### 与灌汤 (PM)
 
-- 鎺ユ敹浠诲姟鍒嗛厤
-- 鎶ュ憡杩涘害
-- 鎻愪氦鎴愭灉
-- 鍙嶉闂
+- 接收任务分配
+- 报告进度
+- 提交成果
+- 反馈问题
 
-### 涓庤眴娌?(鍓嶇)
+### 与豆沙 (前端)
 
-- 璁ㄨ API 鎺ュ彛璁捐
-- 鎻愪緵鎺ュ彛鏂囨。
-- 鑱旇皟娴嬭瘯
-- 瑙ｅ喅璺ㄥ煙闂
+- 讨论 API 接口设计
+- 提供接口文档
+- 联调测试
+- 解决跨域问题
 
-### 涓庨吀鑿?(杩愮淮/娴嬭瘯)
+### 与酸菜 (运维/测试)
 
-- 閰嶅悎閮ㄧ讲
-- 淇娴嬭瘯鍙戠幇鐨?Bug
-- 鎻愪緵鎶€鏈枃妗?- 鍗忓姪鎬ц兘浼樺寲
+- 配合部署
+- 修复测试发现的 Bug
+- 提供技术文档
+- 协助性能优化
 
-## 鎬ц兘浼樺寲鎶€宸?
-### 鏁版嵁搴撴煡璇紭鍖?
+## 性能优化技巧
+
+### 数据库查询优化
+
 ```python
-# 鉂?N+1 鏌ヨ闂
+# ❌ N+1 查询问题
 articles = Article.query.all()
 for article in articles:
-    print(article.author.username)  # 姣忔閮芥煡璇㈡暟鎹簱
+    print(article.author.username)  # 每次都查询数据库
 
-# 鉁?浣跨敤 joinedload
+# ✅ 使用 joinedload
 from sqlalchemy.orm import joinedload
 articles = Article.query.options(joinedload(Article.author)).all()
 ```
 
-### 缂撳瓨鐑偣鏁版嵁
+### 缓存热点数据
 
 ```python
 from functools import lru_cache
@@ -458,40 +493,46 @@ from functools import lru_cache
 def get_article_by_id(article_id):
     return Article.query.get(article_id)
 
-# 浣跨敤鏃?article = get_article_by_id(123)  # 绗竴娆℃煡鏁版嵁搴擄紝鍚庣画浠庣紦瀛樿鍙?```
+# 使用时
+article = get_article_by_id(123)  # 第一次查数据库，后续从缓存读取
+```
 
-### 寮傛澶勭悊鑰楁椂鎿嶄綔
+### 异步处理耗时操作
 
 ```python
 from celery import Celery
 
-# 鍒濆鍖?Celery
+# 初始化 Celery
 celery = Celery('tasks', broker='redis://localhost:6379/0')
 
 @celery.task
 def send_welcome_email(user_id):
-    # 鍙戦€侀偖浠剁殑鑰楁椂鎿嶄綔
+    # 发送邮件的耗时操作
     pass
 
-# 浣跨敤鏃?send_welcome_email.delay(user.id)  # 寮傛鎵ц锛屼笉闃诲涓荤嚎绋?```
+# 使用时
+send_welcome_email.delay(user.id)  # 异步执行，不阻塞主线程
+```
 
-## 蹇€熷紑濮?
-### 1. 鐜鎼缓
+## 快速开始
+
+### 1. 环境搭建
 
 ```bash
-# 鍒涘缓铏氭嫙鐜
+# 创建虚拟环境
 python -m venv venv
 
-# 婵€娲昏櫄鎷熺幆澧?# Windows
+# 激活虚拟环境
+# Windows
 venv\Scripts\activate
 # Linux/Mac
 source venv/bin/activate
 
-# 瀹夎渚濊禆
+# 安装依赖
 pip install flask flask-jwt-extended sqlalchemy python-dotenv
 ```
 
-### 2. 鍒涘缓绗竴涓?API
+### 2. 创建第一个 API
 
 ```python
 # app.py
@@ -507,21 +548,21 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-### 3. 娴嬭瘯 API
+### 3. 测试 API
 
 ```bash
 curl http://localhost:5000/api/hello
-# 杈撳嚭锛歿"message": "Hello from Jiangrou!"}
+# 输出：{"message": "Hello from Jiangrou!"}
 ```
 
-## 涓嬩竴姝ラ槄璇?
-1. **[Flask 瀹樻柟鏂囨。](https://flask.palletsprojects.com/)**
-2. **[SQLAlchemy 鏁欑▼](https://docs.sqlalchemy.org/)**
-3. **[JWT 璁よ瘉鎸囧崡](https://jwt.io/introduction/)**
-4. **[Python 鏈€浣冲疄璺礭(https://docs.python-guide.org/)**
+## 下一步阅读
+
+1. **[Flask 官方文档](https://flask.palletsprojects.com/)**
+2. **[SQLAlchemy 教程](https://docs.sqlalchemy.org/)**
+3. **[JWT 认证指南](https://jwt.io/introduction/)**
+4. **[Python 最佳实践](https://docs.python-guide.org/)**
 
 ---
 
-*閰辫倝Agent - 涓烘偍鐨勫崥瀹㈡彁渚涘己澶х殑鍚庣鏀寔*  
-*鐗堟湰锛歷2.0.0-lite*
-
+*酱肉Agent - 为您的博客提供强大的后端支持*  
+*版本：v2.0.0-lite*

@@ -1,78 +1,78 @@
-﻿<!-- Last Modified: 2026-03-08 -->
-<!-- Last Modified (CN): 2026-03-08 -->
+# 豆沙 (前端) - 完整知识库
 
-# 璞嗘矙 (鍓嶇) - 瀹屾暣鐭ヨ瘑搴?
-## 馃摎 鐭ヨ瘑搴撶洰褰?
-- [韬唤璁ょ煡](./IDENTITY.md)
-- [鑱岃矗瑙勮寖](./ROLE.md)
-- [琛屼负鍑嗗垯](./SOUL.md)
-- [鍓嶇寮€鍙戞渶浣冲疄璺礭(./frontend-best-practices.md)
-- [UI/UX璁捐鍘熷垯](./ui-ux-design-principles.md)
-- [缁勪欢搴撳缓璁炬寚鍗梋(./component-library-guide.md)
-- [鎬ц兘浼樺寲瀹炴垬](./performance-optimization.md)
-- [甯歌闂涓庤В鍐虫柟妗圿(./common-issues-solutions.md)
+## 📚 知识库目录
+
+- [身份认知](./IDENTITY.md)
+- [职责规范](./ROLE.md)
+- [行为准则](./SOUL.md)
+- [前端开发最佳实践](./frontend-best-practices.md)
+- [UI/UX设计原则](./ui-ux-design-principles.md)
+- [组件库建设指南](./component-library-guide.md)
+- [性能优化实战](./performance-optimization.md)
+- [常见问题与解决方案](./common-issues-solutions.md)
 
 ---
 
-## 馃帹 UI/UX璁捐鍘熷垯
+## 🎨 UI/UX设计原则
 
-### 1. 璁捐绯荤粺鍩虹
+### 1. 设计系统基础
 
-#### 鑹插僵瑙勮寖
+#### 色彩规范
 ```css
 :root {
-  /* 涓昏壊璋?*/
+  /* 主色调 */
   --primary-50: #e3f2fd;
   --primary-100: #bbdefb;
-  --primary-500: #2196f3;  /* 涓昏壊 */
+  --primary-500: #2196f3;  /* 主色 */
   --primary-700: #1976d2;
   
-  /* 鍔熻兘鑹?*/
+  /* 功能色 */
   --success: #4caf50;
   --warning: #ff9800;
   --error: #f44336;
   --info: #2196f3;
   
-  /* 涓€ц壊 */
+  /* 中性色 */
   --gray-100: #f5f5f5;
   --gray-500: #9e9e9e;
   --gray-900: #212121;
 }
 ```
 
-#### 瀛椾綋鎺掑嵃
+#### 字体排印
 ```css
 :root {
-  /* 瀛楀彿 */
+  /* 字号 */
   --text-xs: 0.75rem;    /* 12px */
   --text-sm: 0.875rem;   /* 14px */
   --text-base: 1rem;     /* 16px */
   --text-lg: 1.125rem;   /* 18px */
   --text-xl: 1.25rem;    /* 20px */
   
-  /* 瀛楅噸 */
+  /* 字重 */
   --font-normal: 400;
   --font-medium: 500;
   --font-bold: 700;
   
-  /* 琛岄珮 */
+  /* 行高 */
   --leading-tight: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
 }
 ```
 
-### 2. 鍝嶅簲寮忚璁¤鑼?
-#### 鏂偣璁剧疆
+### 2. 响应式设计规范
+
+#### 断点设置
 ```css
-/* 绉诲姩浼樺厛 */
-@media (min-width: 640px) { /* sm - 灏忓钩鏉?*/ }
-@media (min-width: 768px) { /* md - 骞虫澘 */ }
-@media (min-width: 1024px) { /* lg - 妗岄潰 */ }
-@media (min-width: 1280px) { /* xl - 澶у睆妗岄潰 */ }
+/* 移动优先 */
+@media (min-width: 640px) { /* sm - 小平板 */ }
+@media (min-width: 768px) { /* md - 平板 */ }
+@media (min-width: 1024px) { /* lg - 桌面 */ }
+@media (min-width: 1280px) { /* xl - 大屏桌面 */ }
 ```
 
-#### 鏍呮牸绯荤粺
+#### 栅格系统
 ```css
 .container {
   max-width: 1200px;
@@ -87,27 +87,34 @@
 }
 ```
 
-### 3. 浜や簰璁捐鍘熷垯
+### 3. 交互设计原则
 
-#### 鍙嶉鏈哄埗
-- 鉁?**鍗虫椂鍙嶉** - 鐢ㄦ埛鎿嶄綔鍚?100ms 鍐呯粰鍑鸿瑙夊弽棣?- 鉁?**鍔犺浇鐘舵€?* - 瓒呰繃 1 绉掔殑鎿嶄綔鏄剧ず鍔犺浇鎸囩ず鍣?- 鉁?**閿欒鎻愮ず** - 娓呮櫚璇存槑闂骞舵彁渚涜В鍐虫柟妗?- 鉁?**鎴愬姛纭** - 閲嶈鎿嶄綔瀹屾垚鍚庣粰浜堟槑纭彁绀?
-#### 鍙闂€?(A11y)
+#### 反馈机制
+- ✅ **即时反馈** - 用户操作后 100ms 内给出视觉反馈
+- ✅ **加载状态** - 超过 1 秒的操作显示加载指示器
+- ✅ **错误提示** - 清晰说明问题并提供解决方案
+- ✅ **成功确认** - 重要操作完成后给予明确提示
+
+#### 可访问性 (A11y)
 ```html
-<!-- 鉁?鑹ソ鐨勮涔夊寲 -->
-<button aria-label="鍏抽棴瀵硅瘽妗? aria-describedby="help-text">
-  脳
+<!-- ✅ 良好的语义化 -->
+<button aria-label="关闭对话框" aria-describedby="help-text">
+  ×
 </button>
-<span id="help-text">鐐瑰嚮鍏抽棴褰撳墠瀵硅瘽妗?/span>
+<span id="help-text">点击关闭当前对话框</span>
 
-<!-- 鉂?閬垮厤浣跨敤鏃犺涔夌殑鍏冪礌 -->
-<div onclick="closeDialog()">脳</div>
+<!-- ❌ 避免使用无语义的元素 -->
+<div onclick="closeDialog()">×</div>
 ```
 
 ---
 
-## 馃捇 鍓嶇寮€鍙戞渶浣冲疄璺?
-### 1. Vue 3 缁勪欢寮€鍙戣鑼?
-#### 鍗曟枃浠剁粍浠剁粨鏋?```vue
+## 💻 前端开发最佳实践
+
+### 1. Vue 3 组件开发规范
+
+#### 单文件组件结构
+```vue
 <template>
   <div class="article-card">
     <h2>{{ article.title }}</h2>
@@ -118,7 +125,7 @@
 <script setup>
 import { defineProps, computed } from 'vue'
 
-// Props 瀹氫箟
+// Props 定义
 const props = defineProps({
   article: {
     type: Object,
@@ -127,7 +134,8 @@ const props = defineProps({
   }
 })
 
-// 璁＄畻灞炴€?const formattedDate = computed(() => {
+// 计算属性
+const formattedDate = computed(() => {
   return new Date(props.article.createdAt).toLocaleDateString('zh-CN')
 })
 </script>
@@ -141,8 +149,9 @@ const props = defineProps({
 </style>
 ```
 
-### 2. 鐘舵€佺鐞嗘渶浣冲疄璺?
-#### Pinia Store 璁捐
+### 2. 状态管理最佳实践
+
+#### Pinia Store 设计
 ```javascript
 // stores/article.js
 import { defineStore } from 'pinia'
@@ -175,9 +184,9 @@ export const useArticleStore = defineStore('article', {
 })
 ```
 
-### 3. API 璋冪敤灏佽
+### 3. API 调用封装
 
-#### 缁熶竴鐨勮姹傛嫤鎴櫒
+#### 统一的请求拦截器
 ```javascript
 // utils/request.js
 import axios from 'axios'
@@ -187,7 +196,8 @@ const request = axios.create({
   timeout: 10000
 })
 
-// 璇锋眰鎷︽埅鍣?request.interceptors.request.use(
+// 请求拦截器
+request.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -200,11 +210,12 @@ const request = axios.create({
   }
 )
 
-// 鍝嶅簲鎷︽埅鍣?request.interceptors.response.use(
+// 响应拦截器
+request.interceptors.response.use(
   response => response.data,
   error => {
     if (error.response.status === 401) {
-      // 鏈巿鏉冿紝璺宠浆鐧诲綍
+      // 未授权，跳转登录
       router.push('/login')
     }
     return Promise.reject(error)
@@ -216,13 +227,14 @@ export default request
 
 ---
 
-## 鈿?鎬ц兘浼樺寲瀹炴垬
+## ⚡ 性能优化实战
 
-### 1. 棣栧睆鍔犺浇浼樺寲
+### 1. 首屏加载优化
 
-#### 浠ｇ爜鍒嗗壊
+#### 代码分割
 ```javascript
-// 璺敱鎳掑姞杞?const routes = [
+// 路由懒加载
+const routes = [
   {
     path: '/articles',
     component: () => import('@/views/Articles.vue')
@@ -234,10 +246,10 @@ export default request
 ]
 ```
 
-#### 鍥剧墖浼樺寲
+#### 图片优化
 ```vue
 <template>
-  <!-- 鎳掑姞杞?-->
+  <!-- 懒加载 -->
   <img 
     :src="placeholder" 
     :data-src="imageUrl"
@@ -247,12 +259,13 @@ export default request
 </template>
 
 <script setup>
-// 浣跨敤 Intersection Observer 瀹炵幇鎳掑姞杞?</script>
+// 使用 Intersection Observer 实现懒加载
+</script>
 ```
 
-### 2. 娓叉煋鎬ц兘浼樺寲
+### 2. 渲染性能优化
 
-#### 铏氭嫙鍒楄〃
+#### 虚拟列表
 ```vue
 <template>
   <virtual-list
@@ -267,14 +280,16 @@ export default request
 </template>
 ```
 
-#### 闃叉姈涓庤妭娴?```javascript
+#### 防抖与节流
+```javascript
 import { debounce } from 'lodash-es'
 
-// 鎼滅储妗嗛槻鎶?const handleSearch = debounce((query) => {
+// 搜索框防抖
+const handleSearch = debounce((query) => {
   api.search(query)
 }, 300)
 
-// 婊氬姩浜嬩欢鑺傛祦
+// 滚动事件节流
 const handleScroll = throttle(() => {
   loadMore()
 }, 200)
@@ -282,14 +297,18 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 馃悰 甯歌闂涓庤В鍐虫柟妗?
-### 闂 1: 鍐呭瓨娉勬紡
+## 🐛 常见问题与解决方案
 
-**甯歌鍘熷洜:**
-- 鏈竻鐞嗙殑瀹氭椂鍣?- 鏈攢姣佺殑浜嬩欢鐩戝惉鍣?- 澶у瀷瀵硅薄鏈噴鏀?
-**瑙ｅ喅鏂规:**
+### 问题 1: 内存泄漏
+
+**常见原因:**
+- 未清理的定时器
+- 未销毁的事件监听器
+- 大型对象未释放
+
+**解决方案:**
 ```javascript
-// 鉁?鍦ㄧ粍浠跺嵏杞芥椂娓呯悊
+// ✅ 在组件卸载时清理
 onMounted(() => {
   const timer = setInterval(updateData, 1000)
   window.addEventListener('resize', handleResize)
@@ -301,9 +320,9 @@ onMounted(() => {
 })
 ```
 
-### 闂 2: 璺ㄥ煙闂 (CORS)
+### 问题 2: 跨域问题 (CORS)
 
-**寮€鍙戠幆澧冭В鍐虫柟妗?**
+**开发环境解决方案:**
 ```javascript
 // vite.config.js
 export default {
@@ -318,18 +337,18 @@ export default {
 }
 ```
 
-### 闂 3: 鏍峰紡鍐茬獊
+### 问题 3: 样式冲突
 
-**瑙ｅ喅鏂规:**
+**解决方案:**
 ```vue
-<!-- 鉁?浣跨敤 scoped 鎴?CSS Modules -->
+<!-- ✅ 使用 scoped 或 CSS Modules -->
 <style scoped lang="scss">
 .title {
   color: blue;
 }
 </style>
 
-<!-- 鎴栦娇鐢?BEM 鍛藉悕 -->
+<!-- 或使用 BEM 命名 -->
 <style>
 .article-card__title {
   color: blue;
@@ -339,20 +358,19 @@ export default {
 
 ---
 
-## 馃摉 瀛︿範璧勬簮
+## 📖 学习资源
 
-### 瀹樻柟鏂囨。
-- [Vue 3 瀹樻柟鏂囨。](https://vuejs.org/)
-- [Pinia 鐘舵€佺鐞哴(https://pinia.vuejs.org/)
-- [Vite 鏋勫缓宸ュ叿](https://vitejs.dev/)
+### 官方文档
+- [Vue 3 官方文档](https://vuejs.org/)
+- [Pinia 状态管理](https://pinia.vuejs.org/)
+- [Vite 构建工具](https://vitejs.dev/)
 
-### 璁捐瑙勮寖
+### 设计规范
 - [Material Design](https://material.io/design)
-- [Ant Design 瑙勮寖](https://ant.design/docs/spec/introduce-cn)
+- [Ant Design 规范](https://ant.design/docs/spec/introduce-cn)
 - [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ---
 
-*鏈€鍚庢洿鏂帮細2026-03-08*  
-*缁存姢鑰咃細璞嗘矙Agent*
-
+*最后更新：2026-03-08*  
+*维护者：豆沙Agent*

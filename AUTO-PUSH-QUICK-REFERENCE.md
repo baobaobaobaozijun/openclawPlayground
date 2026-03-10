@@ -1,5 +1,4 @@
-﻿<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+# Auto Push Agent - 快速参考
 
 # Auto Push Agent - 快速参考
 

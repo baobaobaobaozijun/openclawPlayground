@@ -1,5 +1,4 @@
-﻿<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+﻿# 酱肉 (Jiangrou) - 工作空间配置
 
 # 酱肉 (Jiangrou) - 后端工程师工作台
 
