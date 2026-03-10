@@ -1,11 +1,11 @@
-<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified (CN): 2026-03-10 -->
 
 # OpenClaw 项目架构总览
 
 🏗️ **Agent 团队协作与工程架构**
 
-*最后更新：2026-03-09*
+*最后更新：2026-03-10*
 
 ---
 
@@ -58,14 +58,27 @@ f:\openclaw/
 │   │   │
 │   │   ├── config-samples/       # 配置示例备份
 │   │   ├── guides/               # 使用指南
+│   │   │   ├── simple-monitoring-guide.md    # 【新增】简化版监控指南 ⭐
 │   │   ├── specs/                # 规范文档
-│   │   └── logs/                 # 工作日志归档
+│   │   │   ├── 03-technical-specs/
+│   │   │   │   ├── agent-communication-protocol-v2.md  # Agent 通信协议 v2.0
+│   │   │   │   └── agent-error-monitoring.md           # 【新增】错误监控与故障处理 ⭐
+│   │   │   └── ...
+│   │   ├── monitoring/             # 【新增】监控系统 ⭐
+│   │   │   └── dashboard.md      # 实时监控仪表板
+│   │   ├── scripts/                # 【新增】自动化脚本 ⭐
+│   │   │   └── simple-monitor.ps1  # 简化版监控脚本 (每 5 分钟检查)
+│   │   ├── disasters/              # 【新增】灾难现场保护 ⭐
+│   │   │   ├── monitor-log.txt     # 监控日志
+│   │   │   └── disaster-*/         # 灾难现场目录
+│   │   └── logs/                   # 工作日志归档
 │   │
 │   ├── workspace-jiangrou/        # 🥩 酱肉工作台 ⭐
-│   │   ├── IDENTITY.md           # 【核心】身份认知
-│   │   ├── ROLE.md               # 【核心】职责规范
-│   │   ├── SOUL.md               # 【核心】行为准则
-│   │   ├── README.md             # 工作台说明
+│   │   ├── IDENTITY.md          # 【核心】身份认知
+│   │   ├── ROLE.md              # 【核心】职责规范
+│   │   ├── SOUL.md              # 【核心】行为准则
+│   │   ├── MEMORY.md            # 【新增】飞行记录仪式操作日志 ⭐
+│   │   ├── README.md            # 工作台说明
 │   │   ├── .gitignore            # Git 忽略配置
 │   │   ├── tasks/                # 任务管理
 │   │   │   ├── inbox/
@@ -76,10 +89,11 @@ f:\openclaw/
 │   │   └── logs/                 # 工作日志
 │   │
 │   ├── workspace-dousha/          # 🍡 豆沙工作台 ⭐
-│   │   ├── IDENTITY.md           # 【核心】身份认知
-│   │   ├── ROLE.md               # 【核心】职责规范
-│   │   ├── SOUL.md               # 【核心】行为准则
-│   │   ├── README.md             # 工作台说明
+│   │   ├── IDENTITY.md         # 【核心】身份认知
+│   │   ├── ROLE.md             # 【核心】职责规范
+│   │   ├── SOUL.md             # 【核心】行为准则
+│   │   ├── MEMORY.md           # 【新增】飞行记录仪式操作日志 ⭐
+│   │   ├── README.md           # 工作台说明
 │   │   ├── .gitignore            # Git 忽略配置
 │   │   ├── tasks/                # 任务管理
 │   │   │   ├── inbox/
@@ -91,10 +105,11 @@ f:\openclaw/
 │   │   └── logs/                 # 工作日志
 │   │
 │   ├── workspace-suancai/         # 🥬 酸菜工作台 ⭐
-│   │   ├── IDENTITY.md           # 【核心】身份认知
-│   │   ├── ROLE.md               # 【核心】职责规范
-│   │   ├── SOUL.md               # 【核心】行为准则
-│   │   ├── README.md             # 工作台说明
+│   │   ├── IDENTITY.md         # 【核心】身份认知
+│   │   ├── ROLE.md             # 【核心】职责规范
+│   │   ├── SOUL.md             # 【核心】行为准则
+│   │   ├── MEMORY.md           # 【新增】飞行记录仪式操作日志 ⭐
+│   │   ├── README.md           # 工作台说明
 │   │   ├── .gitignore            # Git 忽略配置
 │   │   ├── tasks/                # 任务管理
 │   │   │   ├── inbox/
@@ -176,17 +191,24 @@ f:\openclaw/
 **工作空间:** `agent/workspace-guantang/`  
 
 
-**核心职责:**
+**核心职责**:
 - 产品规划与需求分析
 - 项目进度管理
 - 团队协调与决策
 - 质量把控与验收
 - 管理所有 Agent 的配置文档
+- **监控与故障处理** ⭐ 【新增】
+  - 每 5 分钟检查所有 Agent 状态
+  - 自动保存灾难现场
+  - 零成本本地告警 (无短信/邮件)
 
-**管理内容:**
+**管理内容**:
 - `agent-configs/` - 各 Agent 的技术规范备份（参考文档）
 - `guides/` - 使用指南和教程
 - `specs/` - 系统规范和架构文档
+- `monitoring/` - 【新增】监控仪表板
+- `scripts/` - 【新增】自动化监控脚本
+- `disasters/` - 【新增】灾难现场保护
 - `logs/` - 团队工作日志归档
 
 **核心配置文件:**
@@ -578,29 +600,38 @@ docker-compose -f docker-compose/docker-compose-agents.yml up -d
 - [IDENTITY.md](./workspace-jiangrou/IDENTITY.md) - 我是谁
 - [ROLE.md](./workspace-jiangrou/ROLE.md) - 我做什么
 - [SOUL.md](./workspace-jiangrou/SOUL.md) - 我如何工作
+- [MEMORY.md](./workspace-jiangrou/MEMORY.md) - 【新增】飞行记录仪式操作日志 ⭐
 - [TECHNICAL-DOCS.md](./workspace-jiangrou/TECHNICAL-DOCS.md) - 完整技术文档 ⭐
 
 **豆沙工作台:**
 - [IDENTITY.md](./workspace-dousha/IDENTITY.md) - 我是谁
 - [ROLE.md](./workspace-dousha/ROLE.md) - 我做什么
 - [SOUL.md](./workspace-dousha/SOUL.md) - 我如何工作
+- [MEMORY.md](./workspace-dousha/MEMORY.md) - 【新增】飞行记录仪式操作日志 ⭐
 - [TECHNICAL-DOCS.md](./workspace-dousha/TECHNICAL-DOCS.md) - 完整技术文档 ⭐
 
 **酸菜工作台:**
 - [IDENTITY.md](./workspace-suancai/IDENTITY.md) - 我是谁
 - [ROLE.md](./workspace-suancai/ROLE.md) - 我做什么
 - [SOUL.md](./workspace-suancai/SOUL.md) - 我如何工作
+- [MEMORY.md](./workspace-suancai/MEMORY.md) - 【新增】飞行记录仪式操作日志 ⭐
 - [TECHNICAL-DOCS.md](./workspace-suancai/TECHNICAL-DOCS.md) - 完整技术文档 ⭐
 
 ### 配置文档中心
 
-**核心文档:**
+**核心文档**:
 - [灌汤身份认知](./workspace-guantang/IDENTITY.md)
 - [灌汤行为准则](./workspace-guantang/SOUL.md)
 - [团队协作规范](./workspace-guantang/AGENTS.md)
 - [启动指南](./workspace-guantang/BOOTSTRAP.md)
 
-**技术规范（参考资料）:**
+**【新增】监控与故障处理**:
+- [简化版监控指南](./workspace-guantang/guides/simple-monitoring-guide.md) ⭐
+- [错误监控与故障处理机制](./workspace-guantang/specs/03-technical-specs/agent-error-monitoring.md) ⭐
+- [实时监控仪表板](./workspace-guantang/monitoring/dashboard.md) ⭐
+- [监控脚本](./workspace-guantang/scripts/simple-monitor.ps1) ⭐
+
+**技术规范**（参考资料）
 - [酱肉技术规范](./workspace-guantang/agent-configs/jiangrou/README.md)
 - [豆沙技术规范](./workspace-guantang/agent-configs/dousha/README.md)
 - [酸菜技术规范](./workspace-guantang/agent-configs/suancai/README.md)
@@ -894,5 +925,5 @@ docker-compose down
 **祝团队合作愉快！开始创造伟大的产品吧！** 🚀
 
 *维护者：灌汤 PM*  
-*更新日期：2026-03-09*
-*备注：架构文档已根据最新文件层次结构更新*
+*更新日期：2026-03-10*
+*备注：添加完整监控系统 (零成本、飞行记录仪式 MEMORY、灾难现场保护)*
