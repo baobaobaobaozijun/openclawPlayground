@@ -43,17 +43,20 @@
 
 ### 4. 工作日志 📝
 
-**记录要求:**
-- 每次修改 agent 文件夹内容时记录日志
+**记录要求**:
+- 每次修改 agent 文件夹内容时记录日志 ⭐⭐⭐
 - 日志格式：`YYYYMMDD-hhmmss-{修改人}-{修改内容}.md`
 - 存储位置：`F:\openclaw\agent\workinglog\`
+- **修改后必须立即 Git 提交** ⭐⭐⭐
+- **任务完成后必须立即写日志** ⭐⭐⭐
 
 ### 5. 代码推送 🚀
 
 **自动推送:**
-- 每次更新完 agent 文件夹内容后
-- 自动 commit 并 push 到 GitHub 仓库
+- 每次更新完 agent 文件夹内容后 ⭐⭐⭐
+- **立即**自动 commit 并 push 到 GitHub 仓库
 - 仓库：https://github.com/baobaobaobaozijun/openclawPlayground
+- **推送前必须先生成工作日志** ⭐⭐⭐
 
 ---
 
