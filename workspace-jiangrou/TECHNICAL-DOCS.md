@@ -1,7 +1,6 @@
 ﻿# 酱肉 (Jiangrou) - 完整技术文档
 
-<<<<<<< HEAD
-# 酱肉 (Jiangrou) - 完整技术文档
+<!-- Last Modified: 2026-03-10 -->
 
 🍖 **后端工程师 / 系统架构师**
 
@@ -18,29 +17,11 @@
 
 ---
 
-## 🏢 Agent 身份
-=======
-🥩 **后端工程师 / 系统架构师**
-
----
-
-## 📚 快速导航
-
-- [身份认知](./IDENTITY.md) - 我是谁
-- [职责规范](./ROLE.md) - 我做什么
-- [行为准则](./SOUL.md) - 我如何工作
-- [技术栈规范](#技术栈规范) - 使用什么技术
-- [开发最佳实践](#开发最佳实践) - 如何做
-- [常见问题解决](#常见问题与解决方案) - 问题排查
-
----
-
 ## 👤 Agent 身份
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 **名称:** 酱肉  
 **角色:** 后端工程师 / 系统架构师  
-**职责:** 负责所有后端业务代码的实现、数据库设计、系统架构
+**职责:**负责所有后端业务代码的实现、数据库设计、系统架构
 
 **核心配置文件:**
 - [IDENTITY.md](./IDENTITY.md) - 身份认知
@@ -50,76 +31,6 @@
 ---
 
 ## 💻 技术栈规范
-
-<<<<<<< HEAD
-### 语言与框架
-
-| 技术 | 版本 | 用途 | 说明 |
-|------|------|------|------|
-| **Java** | 21 (LTS) | 主要编程语言 | 必须使用 LTS 版本 |
-| **Spring Boot** | 3.2+ | Web 框架 | 提供 RESTful API |
-| **Spring Security** | 6.x | 安全框架 | JWT 认证、权限管理 |
-| **MyBatis-Plus** | 3.5+ | ORM 框架 | 数据访问层 |
-
-### 数据库
-
-| 技术 | 版本 | 用途 | 说明 |
-|------|------|------|------|
-| **MySQL** | 8.0+ | 主数据库 | InnoDB 引擎 |
-| **Redis** | 7.0+ | 缓存/会话存储 | 支持集群模式 |
-
-### 工具链
-
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| **Maven** | 3.9+ | 构建工具 |
-| **Git** | latest | 版本控制 |
-| **Docker** | latest | 容器化部署 |
-| **SonarQube** | latest | 代码质量扫描 |
-
----
-
-## 🏗️ 项目结构规范
-
-```
-backend/
-├── src/main/java/com/example/blog/
-│   ├── controller/           # REST API 控制器层
-│   ├── service/              # 业务逻辑层
-│   │   └── impl/            # 服务实现
-│   ├── repository/          # 数据访问层（DAO）
-│   ├── entity/              # 实体类（数据库表映射）
-│   ├── dto/                 # 数据传输对象
-│   ├── vo/                  # 视图对象（返回给前端）
-│   ├── config/              # 配置类
-│   ├── security/            # 安全相关（JWT、认证）
-│   ├── exception/           # 自定义异常
-│   ├── util/                # 工具类
-│   └── BlogApplication.java # 启动类
-├── src/main/resources/
-│   ├── application.yml     # 主配置文件
-│   ├── application-dev.yml  # 开发环境配置
-│   ├── application-prod.yml # 生产环境配置
-│   └── mapper/              # MyBatis XML 映射文件
-└── pom.xml                 # Maven 依赖配置
-```
-
----
-
-## 🔧 开发最佳实践
-
-### 1. RESTful API 设计规范
-
-**URL 命名:**
-```java
-// ✅ 好的设计
-GET    /api/v1/articles          // 获取文章列表
-POST   /api/v1/articles          // 创建文章
-GET    /api/v1/articles/{id}     // 获取单篇文章
-PUT    /api/v1/articles/{id}     // 更新文章
-DELETE /api/v1/articles/{id}     // 删除文章
-=======
-### 核心技术栈
 
 ```
 语言：Java 21 (LTS)
@@ -151,15 +62,7 @@ JVM: OpenJDK 21 (HotSpot)
 ### 1. RESTful API 设计规范
 
 #### Controller 示例
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
-
-// ❌ 差的设计
-GET    /api/v1/getArticles       // 动词出现在 URL 中
-POST   /api/v1/createArticle     
 ```
-
-**Controller 示例:**
-```java
 @RestController
 @RequestMapping("/api/v1/articles")
 @RequiredArgsConstructor
@@ -185,13 +88,8 @@ public class ArticleController {
 }
 ```
 
-<<<<<<< HEAD
-### 2. 统一响应格式
-=======
 #### 统一响应格式
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
-
-```java
+```
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -201,11 +99,7 @@ public class ApiResponse<T> {
     private T data;
     
     public static <T> ApiResponse<T> success(T data) {
-<<<<<<< HEAD
-       return new ApiResponse<>(200, "success", data);
-=======
         return new ApiResponse<>(true, "操作成功", data, LocalDateTime.now());
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
     }
     
     public static <T> ApiResponse<T> error(String message) {
@@ -214,67 +108,44 @@ public class ApiResponse<T> {
 }
 ```
 
-<<<<<<< HEAD
-### 3. 异常处理规范
-=======
 ### 2. 数据库设计原则
 
 #### Entity 示例
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
-
-```java
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+```
+@Entity
+@Table(name = "article")
+public class Article {
     
-    @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResponse<Void> handleNotFound(ResourceNotFoundException e) {
-       return ApiResponse.error(e.getMessage());
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse<Map<String, String>> handleValidationErrors(
-        MethodArgumentNotValidException ex
-    ) {
-        Map<String, String> errors = new HashMap<>();
-       ex.getBindingResult().getFieldErrors().forEach(error -> 
-            errors.put(error.getField(), error.getDefaultMessage())
-        );
-       return ApiResponse.error("验证失败");
-    }
+    @Column(nullable = false)
+    private String title;
+    
+    @Column(nullable = false)
+    private String content;
+    
+    @Column(nullable = false)
+    private Long authorId;
+    
+    @Column(nullable = false)
+    private Integer status;
+    
+    @Column(nullable = false)
+    private Integer viewCount;
+    
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }
+
 ```
 
-<<<<<<< HEAD
-### 4. 数据库设计规范
-
-**表命名:**
-- ✅ `user`, `article`, `comment` (单数)
-- ❌ `users`, `articles`, `comments` (复数)
-
-**必填字段:**
-```sql
-CREATE TABLE article (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键 ID',
-   title VARCHAR(200) NOT NULL COMMENT '标题',
-   content TEXT NOT NULL COMMENT '内容',
-    author_id BIGINT NOT NULL COMMENT '作者 ID',
-    status TINYINT DEFAULT 1 COMMENT '状态：0-草稿，1-发布',
-    view_count INT DEFAULT 0 COMMENT '浏览量',
-   created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    INDEX idx_author (author_id),
-    INDEX idx_status_created (status, created_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章表';
-```
-
-### 5. 日志规范
-=======
 ### 3. Service 层实现
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
-
-```java
+```
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -299,22 +170,16 @@ public class ArticleServiceImpl implements ArticleService {
 }
 ```
 
-<<<<<<< HEAD
----
-
-## 📊 常见问题与解决
-=======
 ### 4. 性能优化
 
 #### 缓存配置
->>>>>>> parent of 0f9915d (docs: Add last modified date comments to 75+ Markdown files for version tracking)
 
 ### Q1: JWT Token 如何实现？
 
 **解决方案:**
 
 1. **添加依赖:**
-```xml
+```
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
     <artifactId>jjwt-api</artifactId>
@@ -329,7 +194,7 @@ public class ArticleServiceImpl implements ArticleService {
 ```
 
 2. **JWT 工具类:**
-```java
+```
 @Component
 public class JwtUtil {
     
@@ -361,7 +226,7 @@ public class JwtUtil {
 
 ### 5. 安全配置
 
-```java
+```
 @Configuration
 public class CorsConfig {
     
@@ -386,7 +251,7 @@ public class CorsConfig {
 **解决方案:**
 
 1. **添加依赖:**
-```xml
+```
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -394,7 +259,7 @@ public class CorsConfig {
 ```
 
 2. **配置 Redis:**
-```yaml
+```
 spring:
  redis:
     host: localhost
@@ -409,7 +274,7 @@ spring:
 ```
 
 3. **使用缓存:**
-```java
+```
 @Service
 public class ArticleServiceImpl implements ArticleService {
     
