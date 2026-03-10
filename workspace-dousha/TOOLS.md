@@ -1,196 +1,201 @@
-<!-- Last Modified: 2026-03-09 -->
-<!-- Last Modified (CN): 2026-03-09 -->
+<!-- Last Modified: 2026-03-10 -->
 
-# TOOLS.md - 本地笔记
+# TOOLS.md - 豆沙的工具箱
 
-## 📁 权限边界
-
-**⚠️ 重要：写操作限制**
-
-| 路径 | 权限 | 说明 |
-|------|------|------|
-| `F:\openclaw\agent\workspace-dousha\*` | ✅ 可写 | 我的工作空间 |
-| `F:\openclaw\code\frontend\*` | ✅ 可写 | 前端代码目录 |
-| `F:\openclaw\agent\workspace-*\*` | ⚠️ 只读 | 其他 Agent 工作空间 |
-| `F:\openclaw\code\backend\*` | ❌ 只读 | 后端代码 |
-| `C:\*` | ❌ 禁止 | 系统目录 |
-| 其他所有路径 | ❌ 只读 | 外部数据 |
+**角色:**前端工程师 / UI/UX设计师  
+**技术栈:** Vue 3 + TypeScript + Vite  
+**更新日期:** 2026-03-10
 
 ---
 
-## 🏢 Agent 工作空间配置
+## 📡 Gateway 通信配置 ⭐⭐⭐
 
-### 豆沙 (前端工程师) 🍡
-- **Workspace**: `F:\openclaw\agent\workspace-dousha`
-- **Code**: `F:\openclaw\code\frontend`
-- **Docker 挂载**: `/app/workspace` + `/app/frontend`
-- **端口**: `18792` (容器映射)
-- **职责**: 
-  - Vue 3 + TypeScript 前端开发
-  - UI/UX 设计与实现
-  - 响应式网页设计
-  - 前端性能优化
-  - 跨浏览器兼容性测试
+### Docker 容器内配置
 
-### 技术栈详情
+**环境变量:**
+```yaml
+environment:
+  # ⭐ Gateway 连接配置 (必须)
+  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
+  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
+  
+  # 其他配置
+  - OPENCLAW_MODEL=bailian/qwen3-coder-plus
+  - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+  - OPENCLAW_API_KEY=sk-dc74719ea21348f183cbabb87f01999c
+  - INSTANCE_NAME=dousha
+  - INSTANCE_ROLE=frontend-engineer
+```
 
-**核心框架:**
-- Vue.js 3.4+ (Composition API)
-- TypeScript 5.3+
-- Vite 5.0+
-- Pinia 2.1+
+**Docker 网络配置:**
+```yaml
+extra_hosts:
+  # ⭐ 允许访问宿主机网络 (必须)
+  - "host.docker.internal:host-gateway"
+```
 
-**UI 组件库:**
-- Element Plus 2.5+ (PC 端)
-- Vant 4.7+ (移动端)
-- Tailwind CSS 3.4+
+### 本地 Gateway 信息
 
-**工具库:**
-- Vue Router 4.2+
-- Axios 1.6+
-- ECharts 5.4+ (数据可视化)
-- Day.js 1.11+ (日期处理)
+**灌汤 Gateway:**
+- **URL:** `http://localhost:18789`
+- **端口:** 18789
+- **模式:** local (loopback)
+- **认证:** token
+- **Token:** `4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39`
 
-**开发环境:**
-- Node.js 20.x LTS
-- npm / pnpm
-- VS Code + Volar 插件
-- Chrome DevTools
-
-### 酱肉 (后端工程师) 🍖
-- **Workspace**: `F:\openclaw\agent\workspace-jiangrou`
-- **Code**: `F:\openclaw\code\backend`
-- **技术栈**: Java 21 + Spring Boot 3.2+ + MySQL 8.0+ + Redis 7.0+
-
-### 灌汤 (产品经理) 🍲
-- **Workspace**: `F:\openclaw\agent\workspace-guantang`
-- **职责**: 产品规划、需求分析、任务分配、进度跟踪
-
-### 酸菜 (运维工程师) 🥬
-- **Workspace**: `F:\openclaw\agent\workspace-suancai`
-- **Code**: `F:\openclaw\code\deploy` + `F:\openclaw\code\tests`
-- **职责**: Docker 部署、CI/CD、监控告警、自动化测试
+**配置文件:** `C:\Users\Administrator\.openclaw\openclaw.json`
 
 ---
 
-## 🛠️ 我的 Skills
+## 📨 通信目录
 
-### 1. working-logger 📝
+### 收件箱 (Inbox)
 
-**用途:** 记录对 `F:\openclaw\agent\workspace-dousha` 的所有修改
+**本地路径:** `F:\openclaw\agent\workspace-dousha\communication\inbox\`
 
-**日志位置:** `F:\openclaw\agent\workspace-dousha\logs\`
+**Docker 内路径:** `/app/workspace/communication/inbox/`
 
-**文件名格式:** `daily_YYYYMMDD.md`
+**说明:**
+- 接收来自灌汤的设计任务
+- 接收来自酱肉的 API 接口文档
+- 接收来自酸菜的前端测试报告
 
-### 2. auto-github-push 🚀
+### 发件箱 (Outbox)
 
-**用途:** 自动推送代码到 GitHub
+**本地路径:** `F:\openclaw\agent\workspace-dousha\communication\outbox\`
 
-**仓库:** https://github.com/baobaobaobaozijun/openclawPlayground
+**Docker 内路径:** `/app/workspace/communication/outbox/`
 
-**触发时机:** 每次修改完 workspace-dousha 文件夹后
+**说明:**
+- 向灌汤提交设计成果
+- 向酱肉请求 API 接口调整
+- 向酸菜发送前端测试请求
 
 ---
 
-## 📡 Agent 通信
+## 🔧 核心接口
 
-### 收件箱路径
+### 1. 接收设计任务 (allocateTask)
 
-| Agent | 收件箱 |
-|-------|--------|
-| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\inbox\dousha\` |
-| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\inbox\jiangrou\` |
-| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\inbox\suancai\` |
-| 灌汤 | `F:\openclaw\agent\workspace-guantang\communication\inbox\guantang\` |
+**来源:**灌汤 → 豆沙
 
-### 消息格式
-
+**示例消息:**
 ```json
 {
-  "from": "dousha",
-  "to": "{agent}",
-  "action": "{action}",
-  "data": {},
-  "timestamp": "ISO8601"
+  "action": "allocateTask",
+  "data": {
+   "task": {
+     "id": "TASK_20260310_002",
+     "title": "博客首页 UI 设计",
+     "description": "设计并实现博客首页，包含文章列表、分页、搜索功能"
+   },
+   "requirements": [
+     "响应式设计，支持 PC 和移动端",
+     "使用 Element Plus 组件库",
+     "配色方案参考现代博客平台"
+   ],
+   "deliverables": [
+     {
+       "type": "design",
+       "path": "workspace-dousha/designs/homepage-mockup.png"
+     },
+     {
+       "type": "code",
+       "path": "code/frontend/views/Home.vue"
+     }
+   ]
+  }
 }
 ```
 
-### 常见通信场景
-
-**与酱肉协作:**
-- 确认 API 接口定义和数据格式
-- 及时反馈接口问题和建议
-- 配合进行接口联调
-- 共同制定错误处理机制
-
-**与灌汤协作:**
-- 理解产品需求和用户场景
-- 提供设计方案并确认
-- 收集用户反馈并迭代
-- 参与产品评审
-
-**与酸菜协作:**
-- 配置前端监控和错误追踪
-- 性能指标监控
-- 自动化测试集成
-- 部署流程优化
-
 ---
 
-## 🔧 常用命令
+### 2. API 接口请求 (requestAPIChange)
 
-```bash
-# 启动开发服务器
-cd F:\openclaw\code\frontend
-npm run dev
+**来源:**豆沙 → 酱肉
 
-# 构建生产版本
-npm run build
-
-# 类型检查
-npm run type-check
-
-# 运行测试
-npm run test
-
-# 代码格式化
-npm run lint -- --fix
-
-# GitHub 认证
-gh auth login
-
-# 检查 git 状态
-cd F:\openclaw\agent\workspace-dousha && git status
-
-# 手动推送
-cd F:\openclaw\agent\workspace-dousha && git add . && git commit -m "message" && git push
-
-# 安装 skill
-cd F:\openclaw\agent\workspace-dousha
-npx clawhub install <skill-name>
+**示例消息:**
+```json
+{
+  "action": "requestAPIChange",
+  "data": {
+   "api_endpoint": "/api/articles",
+   "current_issue": "返回的文章列表缺少作者信息",
+   "requested_change": "在文章列表中增加 author 字段",
+   "urgency": "medium"
+  }
+}
 ```
 
 ---
 
-## 📊 性能指标监控
+### 3. 提交设计成果 (submitDesign)
 
-### 关键指标
+**来源:**豆沙 → 灌汤
 
-- **页面加载时间**: < 2s
-- **首屏渲染时间 (FCP)**: < 1s
-- **Lighthouse 性能评分**: ≥ 90
-- ** bundle 体积**: < 500KB (gzipped)
-- **API 响应时间**: P95 < 300ms
-
-### 监控工具
-
-- Chrome DevTools Performance
-- Lighthouse CI
-- Web Vitals Extension
-- Bundle Analyzer
+**示例消息:**
+```json
+{
+  "action": "submitDesign",
+  "data": {
+   "task_id": "TASK_20260310_002",
+   "deliverables": [
+     {
+       "name": "博客首页设计稿",
+       "type": "design",
+       "path": "workspace-dousha/designs/homepage-mockup.png",
+       "format": "PNG + Figma"
+     },
+     {
+       "name": "首页组件代码",
+       "type": "code",
+       "path": "code/frontend/views/Home.vue",
+       "status": "ready_for_review"
+     }
+   ]
+  }
+}
+```
 
 ---
 
-*最后更新：2026-03-09*  
-*维护者：豆沙 (Dousha)*
+## 🛠️ 常用命令
+
+### 检查 Gateway 连接
+
+**PowerShell:**
+```powershell
+$gatewayUrl = "http://host.docker.internal:18789"
+$token = "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
+
+try {
+    $headers = @{
+        'Authorization' = "Bearer $token"
+        'Content-Type' = 'application/json'
+    }
+    
+    $response = Invoke-RestMethod -Uri "$gatewayUrl/api/v1/health" -Headers $headers -Method Get
+    
+    Write-Host "✅ Gateway 在线" -ForegroundColor Green
+}
+catch {
+    Write-Host "❌ Gateway 离线" -ForegroundColor Red
+}
+```
+
+---
+
+## 📊 错误处理
+
+### 常见错误码
+
+| 错误码 | 名称 | 说明 | 处理方式 |
+|--------|------|------|---------|
+| ERR_001 | AGENT_UNREACHABLE | Agent 不可达 | 重试 3 次，使用文件模式 |
+| ERR_003 | AUTH_FAILED | 认证失败 | 检查 Token 配置 |
+| ERR_004 | GATEWAY_OFFLINE | Gateway 离线 | 降级到文件系统 |
+
+---
+
+**最后更新:** 2026-03-10  
+**维护者:**豆沙 (Dousha)

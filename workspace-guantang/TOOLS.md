@@ -78,25 +78,198 @@
 
 ## 📡 Agent 通信
 
+### ⭐ 重要：Gateway 连接配置
+
+**本地灌汤 Gateway 配置:**
+```json
+{
+  "gateway": {
+   "port": 18789,
+   "mode": "local",
+   "bind": "loopback",
+   "auth": {
+     "mode": "token",
+     "token": "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
+   }
+  }
+}
+```
+
+**配置文件位置:** `C:\Users\Administrator\.openclaw\openclaw.json`
+
+### Docker 容器 Gateway 配置
+
+**酱肉容器环境变量:**
+```yaml
+environment:
+  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
+  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
+extra_hosts:
+  - "host.docker.internal:host-gateway"
+```
+
 ### 收件箱路径
 
-| Agent | 收件箱 |
-|-------|--------|
-| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\inbox\jiangrou\` |
-| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\inbox\dousha\` |
-| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\inbox\suancai\` |
+| Agent | 收件箱 (本地) | 收件箱 (Docker 内) |
+|-------|------------|------------------|
+| 灌汤 | `F:\openclaw\agent\workspace-guantang\communication\inbox\` | - |
+| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\inbox\` | `/app/workspace/communication/inbox/` |
+| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\inbox\` | `/app/workspace/communication/inbox/` |
+| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\inbox\` | `/app/workspace/communication/inbox/` |
+
+### 发件箱路径
+
+| Agent | 发件箱 (本地) | 发件箱 (Docker 内) |
+|-------|------------|------------------|
+| 灌汤 | `F:\openclaw\agent\workspace-guantang\communication\outbox\` | - |
+| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\outbox\` | `/app/workspace/communication/outbox/` |
+| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\outbox\` | `/app/workspace/communication/outbox/` |
+| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\outbox\` | `/app/workspace/communication/outbox/` |
+
+### 共享通信目录
+
+**路径:** `F:\openclaw\workspace\communication\`
+
+```
+communication/
+├── inbox/           # 接收的消息
+│   ├── guantang/   # 灌汤的收件箱
+│   ├── jiangrou/   # 酱肉的收件箱
+│   ├── dousha/     # 豆沙的收件箱
+│   └── suancai/    # 酸菜的收件箱
+└── outbox/         # 发送的消息
+   ├── guantang/   # 灌汤的发件箱
+   ├── jiangrou/   # 酱肉的发件箱
+   ├── dousha/     # 豆沙的发件箱
+   └── suancai/    # 酸菜的发件箱
+```
 
 ### 消息格式
 
+**标准消息结构:**
 ```json
 {
-  "from": "guantang",
-  "to": "{agent}",
-  "action": "{action}",
-  "data": {},
-  "timestamp": "ISO8601"
+  "version": "2.0",
+  "message_id": "MSG_20260310_001",
+  "from": {
+   "agent": "灌汤",
+   "role": "pm",
+   "instance_id": "guantang-local",
+   "gateway_url": "http://localhost:18789"
+  },
+  "to": {
+   "agent": "酱肉",
+   "role": "backend-engineer",
+   "instance_id": "jiangrou-docker",
+   "gateway_url": "http://host.docker.internal:18789"
+  },
+  "action": "allocateTask",
+  "priority": "high",
+  "data": {
+   // 具体数据内容
+  },
+  "metadata": {
+   "timestamp": "2026-03-10T10:30:00Z",
+   "ttl": 3600,
+   "requires_ack": true,
+   "correlation_id": "CORR_20260310_001"
+  }
 }
 ```
+
+### 核心接口
+
+#### 1. allocateTask - 任务分发
+
+**灌汤 → 酱肉:**
+```json
+{
+  "action": "allocateTask",
+  "data": {
+   "task": {
+     "id": "TASK_20260310_001",
+     "title": "开发用户认证 API",
+     "description": "实现登录、注册、JWT 认证功能"
+   },
+   "requirements": [
+     "支持用户名密码登录",
+     "JWT token 有效期 24 小时",
+     "包含单元测试"
+   ],
+   "timeline": {
+     "start_date": "2026-03-10",
+     "due_date": "2026-03-12"
+   }
+  }
+}
+```
+
+#### 2. queryProgress- 进度查询
+
+**灌汤 → 酱肉:**
+```json
+{
+  "action": "queryProgress",
+  "data": {
+   "task_ids": ["TASK_20260310_001"],
+   "include_details": true
+  }
+}
+```
+
+#### 3. reportIssue - 问题报告
+
+**酱肉 → 灌汤:**
+```json
+{
+  "action": "reportIssue",
+  "data": {
+   "task_id": "TASK_20260310_001",
+   "issue": {
+     "type": "technical",
+     "severity": "medium",
+     "title": "JWT 库版本冲突",
+     "description": "当前 JWT 库与 Flask 版本不兼容"
+   },
+   "proposed_solution": "降级 JWT 库到 1.x 版本"
+  }
+}
+```
+
+#### 4. submitDeliverable- 交付物提交
+
+**酱肉 → 灌汤:**
+```json
+{
+  "action": "submitDeliverable",
+  "data": {
+   "task_id": "TASK_20260310_001",
+   "deliverables": [
+     {
+       "name": "用户认证 API",
+       "type": "code",
+       "path": "code/backend/api/auth.py",
+       "version": "1.0.0",
+       "status": "ready_for_review"
+     }
+   ]
+  }
+}
+```
+
+### 错误码
+
+| 错误码 | 名称 | 说明 | 处理方式 |
+|--------|------|------|---------|
+| ERR_001 | AGENT_UNREACHABLE | Agent 不可达 | 重试 3 次后报告 PM |
+| ERR_002 | INVALID_MESSAGE | 消息格式错误 | 返回错误详情 |
+| ERR_003 | AUTH_FAILED | 认证失败 | 检查 Token 配置 |
+| ERR_004 | GATEWAY_OFFLINE | Gateway 离线 | 切换到文件模式 |
+| ERR_005 | TIMEOUT | 请求超时 | 增加超时时间或重试 |
+
+### 详细文档
+
+查看完整的通信协议：[agent-communication-protocol-v2.md](./specs/03-technical-specs/agent-communication-protocol-v2.md)
 
 ---
 
