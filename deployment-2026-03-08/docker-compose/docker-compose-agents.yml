@@ -1,16 +1,15 @@
 services:
   jiangrou:
     image: ghcr.io/openclaw/openclaw:latest
-   container_name: openclaw-instance-1
-   ports:
+    container_name: openclaw-instance-1
+    ports:
       - "18791:18789"
-   environment:
+    environment:
       - OPENCLAW_MODEL=bailian/qwen3-coder-plus
       - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
       - OPENCLAW_API_KEY=sk-0101b7d3672245ac8cd15d454198b4db
       - INSTANCE_NAME=jiangrou
       - INSTANCE_ROLE=backend-engineer
-      # ⭐ 关键：配置连接到本地灌汤 Gateway
       - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
       - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
     volumes:
@@ -18,13 +17,12 @@ services:
       - F:\openclaw\code\backend:/app/backend
       - F:\openclaw\agent\workspace-jiangrou:/app/workspace
       - F:\openclaw\workspace\communication:/app/communication
-   restart: unless-stopped
-   networks:
+    restart: unless-stopped
+    networks:
       - openclaw-network
     extra_hosts:
-      # ⭐ 关键：允许访问宿主机网络
       - "host.docker.internal:host-gateway"
-   command: openclaw gateway run
+    command: openclaw gateway run
 
   dousha:
     image: ghcr.io/openclaw/openclaw:latest
