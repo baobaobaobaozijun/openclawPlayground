@@ -4,6 +4,14 @@
     "self-improving-agent": {
       "version": "3.0.1",
       "installedAt": 1773244220626
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1773244563708
+    },
+    "moltguard": {
+      "version": "6.8.16",
+      "installedAt": 1773244571449
     }
   }
 }

@@ -16,15 +16,17 @@
 3. 尝试安装 MoltGuard-Security
 
 **执行结果:**
-- ✅ self-improving-agent - 安装成功
-- ⏳ obsidian - 遇到速率限制，等待中
-- ⏳ MoltGuard-Security - 等待安装
+- ✅ self-improving-agent - 安装成功 (19 个文件)
+- ✅ obsidian - 安装成功 (等待 90 秒后成功)
+- ✅ MoltGuard-Security - 安装成功
 
 **问题:**
-- ClawHub API 速率限制严格，需要长时间等待
+- ClawHub API 速率限制严格，需要长时间等待 (30-90 秒)
 
 ## 修改的文件
 - `skills/self-improving-agent/` - 已安装 ✅
+- `skills/obsidian/` - 已安装 ✅
+- `skills/moltguard/` - 已安装 ✅
 
 ## 关联通知
 - [ ] 待所有 skill 安装完成后推送 GitHub
