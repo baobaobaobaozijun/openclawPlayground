@@ -1,49 +1,28 @@
-<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified: 2026-03-12 -->
 
 # TOOLS.md - 酱肉的工具箱
 
 **角色:** 后端工程师  
 **技术栈:** Java 21 + Spring Boot 3.2+  
-**更新日期:** 2026-03-10
+**运行模式:** 本地化运行 (非 Docker)  
+**更新日期:** 2026-03-12
 
 ---
 
 ## 📡 Gateway 通信配置 ⭐⭐⭐
 
-### Docker 容器内配置
+### 本地运行配置
 
-**环境变量:**
-```yaml
-environment:
-  # ⭐ Gateway 连接配置 (必须)
-  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
-  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
-  
-  # 其他配置
-  - OPENCLAW_MODEL=bailian/qwen3-coder-plus
-  - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-  - OPENCLAW_API_KEY=sk-0101b7d3672245ac8cd15d454198b4db
-  - INSTANCE_NAME=jiangrou
-  - INSTANCE_ROLE=backend-engineer
-```
-
-**Docker 网络配置:**
-```yaml
-extra_hosts:
-  # ⭐ 允许访问宿主机网络 (必须)
-  - "host.docker.internal:host-gateway"
-```
-
-### 本地 Gateway 信息
-
-**灌汤 Gateway:**
-- **URL:** `http://localhost:18789`
-- **端口:** 18789
+**Gateway 连接:**
+- **URL:** `http://localhost:18790`
+- **端口:** 18790
 - **模式:** local (loopback)
 - **认证:** token
 - **Token:** `4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39`
 
 **配置文件:** `C:\Users\Administrator\.openclaw\openclaw.json`
+
+**工作空间:** `F:\openclaw\agent\workspace-jiangrou`
 
 ---
 
@@ -51,9 +30,7 @@ extra_hosts:
 
 ### 收件箱 (Inbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-jiangrou\communication\inbox\`
-
-**Docker 内路径:** `/app/workspace/communication/inbox/`
+**路径:** `F:\openclaw\agent\workspace-jiangrou\communication\inbox\`
 
 **说明:**
 - 接收来自灌汤的任务分配
@@ -62,9 +39,7 @@ extra_hosts:
 
 ### 发件箱 (Outbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-jiangrou\communication\outbox\`
-
-**Docker 内路径:** `/app/workspace/communication/outbox/`
+**路径:** `F:\openclaw\agent\workspace-jiangrou\communication\outbox\`
 
 **说明:**
 - 向灌汤提交任务成果
@@ -210,7 +185,7 @@ extra_hosts:
 
 **PowerShell:**
 ```powershell
-$gatewayUrl = "http://host.docker.internal:18789"
+$gatewayUrl = "http://localhost:18790"
 $token = "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
 
 try {
@@ -222,24 +197,12 @@ try {
     $response = Invoke-RestMethod -Uri "$gatewayUrl/api/v1/health" -Headers $headers -Method Get
     
     Write-Host "✅ Gateway 在线" -ForegroundColor Green
-    Write-Host"状态：$($response.status)"
+    Write-Host "状态：$($response.status)"
 }
 catch {
     Write-Host "❌ Gateway 离线" -ForegroundColor Red
     Write-Host "错误：$($_.Exception.Message)"
 }
-```
-
-### 测试宿主机连通性
-
-**Bash (Docker 内):**
-```bash
-# Ping 宿主机
-ping host.docker.internal
-
-# 测试 Gateway 端口
-curl -H "Authorization: Bearer 4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39" \
-     http://host.docker.internal:18789/api/v1/health
 ```
 
 ---

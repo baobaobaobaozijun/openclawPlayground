@@ -1,49 +1,28 @@
-<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified: 2026-03-12 -->
 
 # TOOLS.md - 豆沙的工具箱
 
-**角色:**前端工程师 / UI/UX设计师  
+**角色:** 前端工程师 / UI/UX设计师  
 **技术栈:** Vue 3 + TypeScript + Vite  
-**更新日期:** 2026-03-10
+**运行模式:** 本地化运行 (非 Docker)  
+**更新日期:** 2026-03-12
 
 ---
 
 ## 📡 Gateway 通信配置 ⭐⭐⭐
 
-### Docker 容器内配置
+### 本地运行配置
 
-**环境变量:**
-```yaml
-environment:
-  # ⭐ Gateway 连接配置 (必须)
-  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
-  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
-  
-  # 其他配置
-  - OPENCLAW_MODEL=bailian/qwen3-coder-plus
-  - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-  - OPENCLAW_API_KEY=sk-dc74719ea21348f183cbabb87f01999c
-  - INSTANCE_NAME=dousha
-  - INSTANCE_ROLE=frontend-engineer
-```
-
-**Docker 网络配置:**
-```yaml
-extra_hosts:
-  # ⭐ 允许访问宿主机网络 (必须)
-  - "host.docker.internal:host-gateway"
-```
-
-### 本地 Gateway 信息
-
-**灌汤 Gateway:**
-- **URL:** `http://localhost:18789`
-- **端口:** 18789
+**Gateway 连接:**
+- **URL:** `http://localhost:18790`
+- **端口:** 18790
 - **模式:** local (loopback)
 - **认证:** token
 - **Token:** `4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39`
 
 **配置文件:** `C:\Users\Administrator\.openclaw\openclaw.json`
+
+**工作空间:** `F:\openclaw\agent\workspace-dousha`
 
 ---
 
@@ -51,25 +30,21 @@ extra_hosts:
 
 ### 收件箱 (Inbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-dousha\communication\inbox\`
-
-**Docker 内路径:** `/app/workspace/communication/inbox/`
+**路径:** `F:\openclaw\agent\workspace-dousha\communication\inbox\`
 
 **说明:**
 - 接收来自灌汤的设计任务
 - 接收来自酱肉的 API 接口文档
-- 接收来自酸菜的前端测试报告
+- 接收来自酸菜的测试报告
 
 ### 发件箱 (Outbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-dousha\communication\outbox\`
-
-**Docker 内路径:** `/app/workspace/communication/outbox/`
+**路径:** `F:\openclaw\agent\workspace-dousha\communication\outbox\`
 
 **说明:**
 - 向灌汤提交设计成果
 - 向酱肉请求 API 接口调整
-- 向酸菜发送前端测试请求
+- 向酸菜发送测试请求
 
 ---
 
@@ -77,7 +52,7 @@ extra_hosts:
 
 ### 1. 接收设计任务 (allocateTask)
 
-**来源:**灌汤 → 豆沙
+**来源:** 灌汤 → 豆沙
 
 **示例消息:**
 ```json
@@ -112,7 +87,7 @@ extra_hosts:
 
 ### 2. API 接口请求 (requestAPIChange)
 
-**来源:**豆沙 → 酱肉
+**来源:** 豆沙 → 酱肉
 
 **示例消息:**
 ```json
@@ -131,7 +106,7 @@ extra_hosts:
 
 ### 3. 提交设计成果 (submitDesign)
 
-**来源:**豆沙 → 灌汤
+**来源:** 豆沙 → 灌汤
 
 **示例消息:**
 ```json
@@ -165,7 +140,7 @@ extra_hosts:
 
 **PowerShell:**
 ```powershell
-$gatewayUrl = "http://host.docker.internal:18789"
+$gatewayUrl = "http://localhost:18790"
 $token = "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
 
 try {
@@ -199,26 +174,24 @@ catch {
 
 ## 📚 统一知识库 ⭐⭐⭐【新增】
 
-**知识库路径:** `/app/doc` (Docker 容器内)  
-**本地路径:** `F:\openclaw\agent\doc`
+**知识库路径:** `F:\openclaw\agent\doc`
 
 **知识库索引:** [../../doc/README.md](../../doc/README.md)
 
 **常用文档:**
 - [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议 v2.0](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [Agent 通信协议](../../doc/specs/03-technical-specs/agent-protocol.md)
 - [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
-- [前端开发指南](../../doc/guides/03-agent-guides/dousha-guide.md) (待创建)
+- [轻量级模式](../../doc/knowledge/02-best-practices/lightweight-mode.md)
 
 ---
 
-## 📖 详细文档
+## 📖 参考资料
 
-**完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
-
-**架构说明:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+**架构文档:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+**轻量级架构:** [doc/ARCHITECTURE-LITE.md](../../doc/ARCHITECTURE-LITE.md)
 
 ---
 
-**最后更新:** 2026-03-10  
-**维护者:**豆沙 (Dousha)
+**最后更新:** 2026-03-12  
+**维护者:** 豆沙 (Dousha)

@@ -1,49 +1,28 @@
-<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified: 2026-03-12 -->
 
 # TOOLS.md - 酸菜的工具箱
 
-**角色:**运维工程师 / 测试专家  
-**技术栈:**Docker + K8s + Jenkins + JUnit  
-**更新日期:** 2026-03-10
+**角色:** 运维工程师 / 测试专家  
+**技术栈:** systemd + Nginx + MySQL + Shell  
+**运行模式:** 本地化运行 (非 Docker)  
+**更新日期:** 2026-03-12
 
 ---
 
 ## 📡 Gateway 通信配置 ⭐⭐⭐
 
-### Docker 容器内配置
+### 本地运行配置
 
-**环境变量:**
-```yaml
-environment:
-  # ⭐ Gateway 连接配置 (必须)
-  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
-  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
-  
-  # 其他配置
-  - OPENCLAW_MODEL=bailian/qwen3-coder-plus
-  - OPENCLAW_API_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-  - OPENCLAW_API_KEY=sk-1edeed01f7104f75b0c4c69237b7f577
-  - INSTANCE_NAME=suancai
-  - INSTANCE_ROLE=devops-engineer
-```
-
-**Docker 网络配置:**
-```yaml
-extra_hosts:
-  # ⭐ 允许访问宿主机网络 (必须)
-  - "host.docker.internal:host-gateway"
-```
-
-### 本地 Gateway 信息
-
-**灌汤 Gateway:**
-- **URL:** `http://localhost:18789`
-- **端口:** 18789
+**Gateway 连接:**
+- **URL:** `http://localhost:18790`
+- **端口:** 18790
 - **模式:** local (loopback)
 - **认证:** token
 - **Token:** `4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39`
 
 **配置文件:** `C:\Users\Administrator\.openclaw\openclaw.json`
+
+**工作空间:** `F:\openclaw\agent\workspace-suancai`
 
 ---
 
@@ -51,9 +30,7 @@ extra_hosts:
 
 ### 收件箱 (Inbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-suancai\communication\inbox\`
-
-**Docker 内路径:** `/app/workspace/communication/inbox/`
+**路径:** `F:\openclaw\agent\workspace-suancai\communication\inbox\`
 
 **说明:**
 - 接收来自灌汤的部署任务
@@ -62,9 +39,7 @@ extra_hosts:
 
 ### 发件箱 (Outbox)
 
-**本地路径:** `F:\openclaw\agent\workspace-suancai\communication\outbox\`
-
-**Docker 内路径:** `/app/workspace/communication/outbox/`
+**路径:** `F:\openclaw\agent\workspace-suancai\communication\outbox\`
 
 **说明:**
 - 向灌汤报告部署状态
@@ -77,7 +52,7 @@ extra_hosts:
 
 ### 1. 接收部署任务 (allocateTask)
 
-**来源:**灌汤 → 酸菜
+**来源:** 灌汤 → 酸菜
 
 **示例消息:**
 ```json
@@ -87,11 +62,11 @@ extra_hosts:
    "task": {
      "id": "TASK_20260310_003",
      "title": "部署博客系统到生产环境",
-     "description": "完成生产环境的 Docker 部署和 CI/CD 配置"
+     "description": "完成生产环境的 Nginx 配置和 systemd 服务配置"
    },
    "requirements": [
-     "配置 Docker Compose 生产环境",
-    设置 CI/CD Pipeline",
+     "配置 Nginx 反向代理",
+     "配置 systemd 服务管理 Spring Boot",
      "配置监控和告警"
    ]
   }
@@ -102,7 +77,7 @@ extra_hosts:
 
 ### 2. 发送测试报告 (submitTestReport)
 
-**来源:**酸菜 → 酱肉/豆沙
+**来源:** 酸菜 → 酱肉/豆沙
 
 **示例消息:**
 ```json
@@ -128,7 +103,7 @@ extra_hosts:
 
 ### 3. 发送监控告警 (sendAlert)
 
-**来源:**酸菜 → 所有人
+**来源:** 酸菜 → 所有人
 
 **示例消息:**
 ```json
@@ -154,7 +129,7 @@ extra_hosts:
 
 **PowerShell:**
 ```powershell
-$gatewayUrl = "http://host.docker.internal:18789"
+$gatewayUrl = "http://localhost:18790"
 $token = "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
 
 try {
@@ -166,33 +141,12 @@ try {
     $response = Invoke-RestMethod -Uri "$gatewayUrl/api/v1/health" -Headers $headers -Method Get
     
     Write-Host "✅ Gateway 在线" -ForegroundColor Green
-    Write-Host"状态：$($response.status)"
+    Write-Host "状态：$($response.status)"
 }
 catch {
-    Write-Host"❌ Gateway 离线" -ForegroundColor Red
+    Write-Host "❌ Gateway 离线" -ForegroundColor Red
     Write-Host "错误：$($_.Exception.Message)"
 }
-```
-
-### 测试所有 Agent 连通性
-
-**Bash:**
-```bash
-#!/bin/bash
-
-GATEWAY_URL="http://host.docker.internal:18789"
-TOKEN="4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
-
-echo "检查 Gateway 健康状态..."
-curl -H "Authorization: Bearer $TOKEN" $GATEWAY_URL/api/v1/health
-
-echo -e "\n检查各 Agent 状态..."
-for agent in guantang jiangrou dousha suancai; do
-    echo "检查 $agent..."
-    curl -H "Authorization: Bearer $TOKEN" \
-         "$GATEWAY_URL/api/v1/agents/$agent/status"
-    echo ""
-done
 ```
 
 ---
@@ -211,7 +165,7 @@ done
 ### 监控策略
 
 ```yaml
-监控指标：
+监控指标:
   - Gateway 可用性
   - Agent 响应时间
   - 消息队列长度
@@ -227,26 +181,24 @@ done
 
 ## 📚 统一知识库 ⭐⭐⭐【新增】
 
-**知识库路径:** `/app/doc` (Docker 容器内)  
-**本地路径:** `F:\openclaw\agent\doc`
+**知识库路径:** `F:\openclaw\agent\doc`
 
 **知识库索引:** [../../doc/README.md](../../doc/README.md)
 
 **常用文档:**
 - [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议 v2.0](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [Agent 通信协议](../../doc/specs/03-technical-specs/agent-protocol.md)
 - [错误监控](../../doc/specs/03-technical-specs/agent-error-monitoring.md)
-- [部署指南](../../doc/guides/02-deployment/) (待创建)
+- [轻量级模式](../../doc/knowledge/02-best-practices/lightweight-mode.md)
 
 ---
 
-## 📖 详细文档
+## 📖 参考资料
 
-**完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
-
-**架构说明:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+**架构文档:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+**轻量级架构:** [doc/ARCHITECTURE-LITE.md](../../doc/ARCHITECTURE-LITE.md)
 
 ---
 
-**最后更新:** 2026-03-10  
-**维护者:**酸菜 (Suancai)
+**最后更新:** 2026-03-12  
+**维护者:** 酸菜 (Suancai)
