@@ -1,7 +1,7 @@
 ﻿﻿<!-- Last Modified: 2026-03-09 -->
 <!-- Last Modified (CN): 2026-03-09 -->
 
-# OpenClaw Agent Team - 灌汤配置中心
+# 包子铺项目 - 灌汤配置中心
 
 📋 **这是灌汤 (PM) 的配置文档和工作空间**
 
@@ -9,10 +9,15 @@
 
 ## 🏠 关于本项目
 
-**workspace-guantang** 是 OpenClaw Agent 团队中**灌汤 (PM)** 的独立工作空间，包含：
+**workspace-guantang** 是**包子铺项目**中**灌汤 (PM)** 的独立工作空间，基于 **OpenClaw 框架**构建，包含：
 - ✅ 灌汤的核心配置文件
 - ✅ 其他 Agent 的配置文档（agent-configs/）
 - ✅ 工作日志和经验总结（logs/）
+
+**命名说明:**
+- 🥟 **包子铺** - 项目名称 (业务系统)
+- 🔧 **OpenClaw** - 技术框架名称 (Agent 协作平台)
+- 📋 详见：[../docs/naming-convention.md](../docs/naming-convention.md)
 
 ---
 

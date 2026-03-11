@@ -11,7 +11,8 @@ services:
       - INSTANCE_NAME=jiangrou
       - INSTANCE_ROLE=backend-engineer
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
-      - OPENCLAW_GATEWAY_MODE=local
+      - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
+      - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
     volumes:
       - openclaw-data-1:/home/node
       - F:\openclaw\code\backend:/app/backend
@@ -23,7 +24,6 @@ services:
       - openclaw-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: openclaw gateway run --allow-unconfigured
 
   dousha:
     image: ghcr.io/openclaw/openclaw:latest
@@ -37,7 +37,8 @@ services:
       - INSTANCE_NAME=dousha
       - INSTANCE_ROLE=frontend-engineer
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
-      - OPENCLAW_GATEWAY_MODE=local
+      - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
+      - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
     volumes:
       - openclaw-data-2:/home/node
       - F:\openclaw\code\frontend:/app/frontend
@@ -47,7 +48,6 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    command: openclaw gateway run --allow-unconfigured
 
   suancai:
     image: ghcr.io/openclaw/openclaw:latest
@@ -61,7 +61,8 @@ services:
       - INSTANCE_NAME=suancai
       - INSTANCE_ROLE=devops-engineer
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
-      - OPENCLAW_GATEWAY_MODE=local
+      - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
+      - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
     volumes:
       - openclaw-data-3:/home/node
       - F:\openclaw\code\deploy:/app/deploy
@@ -72,7 +73,6 @@ services:
     restart: unless-stopped
     networks:
       - openclaw-network
-    command: openclaw gateway run --allow-unconfigured
 
 volumes:
   openclaw-data-1:
