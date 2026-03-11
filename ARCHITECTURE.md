@@ -52,7 +52,13 @@
 ```
 f:\openclaw/
 │
-├── agent/                          # 🧠 Agent 配置与工作区
+├── doc/                          # 📚 统一知识库 ⭐【新增】
+│   ├── README.md                # 知识库索引和导航
+│   ├── specs/                   # 规范文档
+│   ├── guides/                  # 使用指南
+│   └── knowledge/               # 领域知识和最佳实践
+│
+├── agent/                        # 🧠 Agent 配置与工作区
 │   ├── ARCHITECTURE.md            # 本文件 - 项目架构说明
 │   │
 │   ├── workspace-guantang/        # 📋 PM/项目经理工作台

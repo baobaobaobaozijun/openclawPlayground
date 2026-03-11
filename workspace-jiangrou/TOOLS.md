@@ -270,7 +270,35 @@ curl -H "Authorization: Bearer 4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
 
 ---
 
-## 📖 详细文档
+## 📚 统一知识库 ⭐⭐⭐【新增】
+
+**知识库路径:** `/app/doc` (Docker 容器内)  
+**本地路径:** `F:\openclaw\agent\doc`
+
+**知识库索引:** [../../doc/README.md](../../doc/README.md)
+
+**常用文档:**
+- [系统架构](../../doc/specs/01-architecture/system-architecture.md)
+- [Agent 通信协议 v2.0](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
+- [数据库设计](../../doc/specs/02-business-specs/blog-system-database-design.md)
+- [错误监控](../../doc/specs/03-technical-specs/agent-error-monitoring.md)
+
+**知识库分类:**
+```
+doc/
+├── specs/           # 规范文档
+│   ├── 01-architecture/    # 架构设计
+│   ├── 02-business-specs/  # 业务需求
+│   ├── 03-technical-specs/ # 技术规范
+│   └── 04-processes/       # 流程规范
+├── guides/          # 使用指南
+└── knowledge/       # 知识库
+```
+
+---
+
+## 📖 参考资料
 
 **完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
 

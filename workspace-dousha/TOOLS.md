@@ -197,6 +197,21 @@ catch {
 
 ---
 
+## 📚 统一知识库 ⭐⭐⭐【新增】
+
+**知识库路径:** `/app/doc` (Docker 容器内)  
+**本地路径:** `F:\openclaw\agent\doc`
+
+**知识库索引:** [../../doc/README.md](../../doc/README.md)
+
+**常用文档:**
+- [系统架构](../../doc/specs/01-architecture/system-architecture.md)
+- [Agent 通信协议 v2.0](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
+- [前端开发指南](../../doc/guides/03-agent-guides/dousha-guide.md) (待创建)
+
+---
+
 ## 📖 详细文档
 
 **完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)

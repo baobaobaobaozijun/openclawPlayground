@@ -267,6 +267,26 @@ communication/
 | ERR_004 | GATEWAY_OFFLINE | Gateway 离线 | 切换到文件模式 |
 | ERR_005 | TIMEOUT | 请求超时 | 增加超时时间或重试 |
 
+### 📚 统一知识库 ⭐⭐⭐【新增】
+
+**知识库路径:** `F:\openclaw\agent\doc`
+
+**知识库索引:** [../doc/README.md](../doc/README.md)
+
+**常用文档:**
+- [系统架构](../doc/specs/01-architecture/system-architecture.md)
+- [Agent 通信协议 v2.0](../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [错误监控](../doc/specs/03-technical-specs/agent-error-monitoring.md)
+- [博客系统需求](../doc/specs/02-business-specs/blog-system-requirements.md)
+
+**管理职责:**
+- ✅ 维护知识库整体结构
+- ✅ 审核新增文档
+- ✅ 定期检查文档完整性
+- ✅ 通知 Agent 文档更新
+
+---
+
 ### 详细文档
 
 查看完整的通信协议：[agent-communication-protocol-v2.md](./specs/03-technical-specs/agent-communication-protocol-v2.md)
