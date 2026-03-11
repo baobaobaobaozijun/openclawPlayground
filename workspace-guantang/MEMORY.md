@@ -1,10 +1,37 @@
-<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified: 2026-03-11 -->
 
 # MEMORY.md - 灌汤的工作记忆
 
 **Agent:**灌汤 (Guantang)  
 **角色:**PM / 项目经理  
-**最后更新:**2026-03-10 17:30:00
+**最后更新:**2026-03-11 22:48:00
+
+---
+
+## 🔄 架构认知更新
+
+### 2026-03-11 22:48 - 单机多 Agent 架构确认
+**更新内容:** 修正 Agent 架构认知
+**变更前:** 认为使用 Docker 容器集群
+**变更后:** 确认为单机多 Agent 模式（同一 OpenClaw 实例）
+
+**正确架构:**
+- Gateway: Port 18790, Token: 4aa59ed...
+- 4 个 Agent 在同一 OpenClaw 中注册
+- 通信方式：Gateway 实时路由（非文件交换）
+- 无需 Docker 容器隔离
+
+**Agent 列表:**
+| Agent | ID | Workspace | Model |
+|-------|-----|-----------|-------|
+| 灌汤 | guantang | workspace-guantang | qwen3.5-plus |
+| 酱肉 | jiangrou | workspace-jiangrou | qwen3-coder-plus |
+| 豆沙 | dousha | workspace-dousha | qwen3-coder-plus |
+| 酸菜 | suancai | workspace-suancai | qwen3-coder-plus |
+
+**已更新文件:**
+- ✅ TOOLS.md - 修正架构描述
+- ✅ MEMORY.md - 记录认知更新
 
 ---
 

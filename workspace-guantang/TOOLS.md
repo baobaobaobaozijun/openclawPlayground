@@ -18,16 +18,20 @@
 
 ## 🏢 Agent 工作空间配置
 
-### 灌汤 (PM)
+**架构模式:** 单机多 Agent（非 Docker 集群）  
+**Gateway:** 本地 Gateway (Port 18790)  
+**通信方式:** Gateway 实时路由
+
+### 灌汤 (PM) 🍲
+- **Agent ID:** `guantang`
 - **Workspace**: `F:\openclaw\agent\workspace-guantang`
-- **Code**: `F:\openclaw\code` (共享)
-- **Docker 挂载**: `/app/workspace`
+- **Model:** `bailian/qwen3.5-plus`
 - **职责**: 产品规划、需求分析、任务分配、进度跟踪
 
 ### 酱肉 (后端工程师) 🍖
+- **Agent ID:** `jiangrou`
 - **Workspace**: `F:\openclaw\agent\workspace-jiangrou`
-- **Code**: `F:\openclaw\code\backend`
-- **Docker 挂载**: `/app/workspace` + `/app/backend`
+- **Model:** `bailian/qwen3-coder-plus`
 - **技术栈**: Java 21 + Spring Boot 3.2+ + MySQL 8.0+ + Redis 7.0+
 - **核心职责**:
   - RESTful API 设计与实现
@@ -43,16 +47,16 @@
   - 方法复杂度 < 10
 
 ### 豆沙 (前端工程师) 🍡
+- **Agent ID:** `dousha`
 - **Workspace**: `F:\openclaw\agent\workspace-dousha`
-- **Code**: `F:\openclaw\code\frontend`
-- **Docker 挂载**: `/app/workspace` + `/app/frontend`
+- **Model:** `bailian/qwen3-coder-plus`
 - **职责**: Vue 3 开发、TypeScript、UI/UX设计
 
 ### 酸菜 (运维工程师) 🥬
+- **Agent ID:** `suancai`
 - **Workspace**: `F:\openclaw\agent\workspace-suancai`
-- **Code**: `F:\openclaw\code\deploy` + `F:\openclaw\code\tests`
-- **Docker 挂载**: `/app/workspace` + `/app/deploy` + `/app/tests`
-- **职责**: Docker 部署、CI/CD、监控告警、自动化测试
+- **Model:** `bailian/qwen3-coder-plus`
+- **职责**: 部署脚本、CI/CD 配置、监控告警、自动化测试
 
 ---
 
@@ -80,11 +84,11 @@
 
 ### ⭐ 重要：Gateway 连接配置
 
-**本地灌汤 Gateway 配置:**
+**统一 Gateway 配置:**
 ```json
 {
   "gateway": {
-   "port": 18789,
+   "port": 18790,
    "mode": "local",
    "bind": "loopback",
    "auth": {
@@ -97,84 +101,23 @@
 
 **配置文件位置:** `C:\Users\Administrator\.openclaw\openclaw.json`
 
-### Docker 容器 Gateway 配置
+### Agent 间通信
 
-**酱肉容器环境变量:**
-```yaml
-environment:
-  - OPENCLAW_GATEWAY_URL=http://host.docker.internal:18789
-  - OPENCLAW_GATEWAY_TOKEN=4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39
-extra_hosts:
-  - "host.docker.internal:host-gateway"
-```
-
-### 收件箱路径
-
-| Agent | 收件箱 (本地) | 收件箱 (Docker 内) |
-|-------|------------|------------------|
-| 灌汤 | `F:\openclaw\agent\workspace-guantang\communication\inbox\` | - |
-| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\inbox\` | `/app/workspace/communication/inbox/` |
-| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\inbox\` | `/app/workspace/communication/inbox/` |
-| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\inbox\` | `/app/workspace/communication/inbox/` |
-
-### 发件箱路径
-
-| Agent | 发件箱 (本地) | 发件箱 (Docker 内) |
-|-------|------------|------------------|
-| 灌汤 | `F:\openclaw\agent\workspace-guantang\communication\outbox\` | - |
-| 酱肉 | `F:\openclaw\agent\workspace-jiangrou\communication\outbox\` | `/app/workspace/communication/outbox/` |
-| 豆沙 | `F:\openclaw\agent\workspace-dousha\communication\outbox\` | `/app/workspace/communication/outbox/` |
-| 酸菜 | `F:\openclaw\agent\workspace-suancai\communication\outbox\` | `/app/workspace/communication/outbox/` |
-
-### 共享通信目录
-
-**路径:** `F:\openclaw\agent\communication\`
+**架构:** 单机多 Agent，通过 Gateway 实时路由  
+**通信目录:** `F:\openclaw\agent\communication\`（可选，用于日志记录）
 
 ```
 communication/
-├── inbox/           # 接收的消息
+├── inbox/           # 接收的消息（日志）
 │   ├── guantang/   # 灌汤的收件箱
 │   ├── jiangrou/   # 酱肉的收件箱
 │   ├── dousha/     # 豆沙的收件箱
 │   └── suancai/    # 酸菜的收件箱
-└── outbox/         # 发送的消息
+└── outbox/         # 发送的消息（日志）
    ├── guantang/   # 灌汤的发件箱
    ├── jiangrou/   # 酱肉的发件箱
    ├── dousha/     # 豆沙的发件箱
    └── suancai/    # 酸菜的发件箱
-```
-
-### 消息格式
-
-**标准消息结构:**
-```json
-{
-  "version": "2.0",
-  "message_id": "MSG_20260310_001",
-  "from": {
-   "agent": "灌汤",
-   "role": "pm",
-   "instance_id": "guantang-local",
-   "gateway_url": "http://localhost:18789"
-  },
-  "to": {
-   "agent": "酱肉",
-   "role": "backend-engineer",
-   "instance_id": "jiangrou-docker",
-   "gateway_url": "http://host.docker.internal:18789"
-  },
-  "action": "allocateTask",
-  "priority": "high",
-  "data": {
-   // 具体数据内容
-  },
-  "metadata": {
-   "timestamp": "2026-03-10T10:30:00Z",
-   "ttl": 3600,
-   "requires_ack": true,
-   "correlation_id": "CORR_20260310_001"
-  }
-}
 ```
 
 ### 核心接口
@@ -204,7 +147,7 @@ communication/
 }
 ```
 
-#### 2. queryProgress- 进度查询
+#### 2. queryProgress - 进度查询
 
 **灌汤 → 酱肉:**
 ```json
@@ -229,14 +172,14 @@ communication/
      "type": "technical",
      "severity": "medium",
      "title": "JWT 库版本冲突",
-     "description": "当前 JWT 库与 Flask 版本不兼容"
+     "description": "当前 JWT 库与 Spring Boot 版本不兼容"
    },
-   "proposed_solution": "降级 JWT 库到 1.x 版本"
+   "proposed_solution": "升级 Spring Boot 到 3.2.5"
   }
 }
 ```
 
-#### 4. submitDeliverable- 交付物提交
+#### 4. submitDeliverable - 交付物提交
 
 **酱肉 → 灌汤:**
 ```json
@@ -248,7 +191,7 @@ communication/
      {
        "name": "用户认证 API",
        "type": "code",
-       "path": "code/backend/api/auth.py",
+       "path": "code/backend/api/auth/",
        "version": "1.0.0",
        "status": "ready_for_review"
      }
@@ -256,16 +199,6 @@ communication/
   }
 }
 ```
-
-### 错误码
-
-| 错误码 | 名称 | 说明 | 处理方式 |
-|--------|------|------|---------|
-| ERR_001 | AGENT_UNREACHABLE | Agent 不可达 | 重试 3 次后报告 PM |
-| ERR_002 | INVALID_MESSAGE | 消息格式错误 | 返回错误详情 |
-| ERR_003 | AUTH_FAILED | 认证失败 | 检查 Token 配置 |
-| ERR_004 | GATEWAY_OFFLINE | Gateway 离线 | 切换到文件模式 |
-| ERR_005 | TIMEOUT | 请求超时 | 增加超时时间或重试 |
 
 ### 📚 统一知识库 ⭐⭐⭐【新增】
 
