@@ -6,6 +6,7 @@
 🏭 **基于 OpenClaw 框架的 Agent 团队协作与工程架构**
 
 *最后更新：2026-03-11*
+*备注：轻量级架构设计（2G 内存服务器适用）*
 
 ---
 
@@ -174,10 +175,8 @@ f:\openclaw/
 │   │   └── README.md             # 工程说明
 │   │
 │   ├── deploy/                    # 部署脚本
-│   │   ├── ops-infra/            # 运维基础设施
-│   │   ├── kubernetes/           # K8s 配置（可选）
+│   │   ├── nginx/                # Nginx 配置
 │   │   ├── scripts/              # 部署脚本
-│   │   ├── environments/         # 环境配置
 │   │   └── README.md             # 部署说明
 │   │
 │   └── tests/                     # 测试脚本
@@ -317,10 +316,11 @@ f:\openclaw/
 - 日志管理
 
 **技术栈:**
-- **CI/CD:** GitHub Actions
-- **监控:** Prometheus + Grafana（或简化版 PowerShell 脚本）
-- **测试:** JUnit 5, Testcontainers, Gatling
-- **日志:** ELK Stack（或统一日志文件）
+- **Web 服务器:** Nginx (反向代理 + 静态文件)
+- **进程管理:** systemd
+- **监控:** Prometheus Node Exporter（可选）
+- **日志:** Journalctl + 文件日志
+- **备份:** Shell 脚本
 
 **工作流程:**
 1. 在 `workspace-suancai/tasks/inbox/` 接收任务
@@ -502,6 +502,7 @@ pm2 start openclaw --name "baozipu"
 | **安全** | Spring Security | 6.x | 认证授权 |
 | **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ | 对象关系映射 |
 | **数据库** | MySQL | 8.0+ | 主数据库 |
+| **缓存** | Caffeine | 3.x | 本地缓存（替代 Redis） |
 | **构建** | Maven | 3.9+ | 项目构建和管理 |
 
 ### 前端技术栈（豆沙负责）
