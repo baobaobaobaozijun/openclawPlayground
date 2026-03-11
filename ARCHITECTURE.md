@@ -1,11 +1,11 @@
-<!-- Last Modified: 2026-03-11 -->
-<!-- Last Modified (CN): 2026-03-11 -->
+<!-- Last Modified: 2026-03-12 -->
+<!-- Last Modified (CN): 2026-03-12 -->
 
 # 包子铺项目架构总览
 
 🏭 **基于 OpenClaw 框架的 Agent 团队协作与工程架构**
 
-*最后更新：2026-03-11*
+*最后更新：2026-03-12*
 *备注：轻量级架构设计（2G 内存服务器适用）*
 
 ---
@@ -570,7 +570,8 @@ pm2 start openclaw --name "baozipu"
 - [酸菜技术规范](./workspace-guantang/agent-configs/suancai/README.md)
 
 **使用指南:**
-- [本地化运行模式](#-本地化运行模式)
+- **[快速启动指南](./workspace-guantang/guides/quick-start.md)** ⭐ 新手必读
+- **[本地化运行指南](./workspace-guantang/guides/local-run-guide.md)** ⭐ 运行配置
 - [GitHub 上传指南](./workspace-guantang/guides/github-upload-guide.md)
 
 **规范文档:**
