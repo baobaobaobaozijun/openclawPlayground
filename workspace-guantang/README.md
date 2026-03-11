@@ -43,7 +43,11 @@ workspace-guantang/
 ├── config-samples/          # 配置示例
 ├── guides/                  # 使用指南
 ├── logs/                    # 工作日志
-└── specs/                   # 规范文档
+├── specs/                   # 规范文档
+└── 📚 文档中心 (../doc/)     # 统一知识库 ⭐
+    ├── ARCHITECTURE-LITE.md  # 轻量级架构设计
+    ├── specs/               # 系统规范
+    └── guides/              # 使用指南
 ```
 
 ---

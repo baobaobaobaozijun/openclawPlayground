@@ -16,11 +16,14 @@
 - **[SOUL.md](./SOUL.md)** - 我如何工作？我的原则是什么？
 - **[TECHNICAL-DOCS.md](./TECHNICAL-DOCS.md)** - 完整技术文档和最佳实践
 
+### 📚 文档中心（统一知识库）
+- **[ARCHITECTURE-LITE.md](../doc/ARCHITECTURE-LITE.md)** - 轻量级架构设计（2G 服务器适用）⭐
+- **[系统架构](../doc/specs/01-architecture/system-architecture.md)** - 详细架构说明
+- **[错误监控](../doc/specs/03-technical-specs/agent-error-monitoring.md)** - 监控与故障处理
+
 ### 工作目录
 - **tasks/inbox/** - 待处理任务
 - **tasks/outbox/** - 已完成任务
-- **communication/inbox/** - 收到的消息
-- **communication/outbox/** - 发送的消息
 - **logs/** - 工作日志归档
 
 ---

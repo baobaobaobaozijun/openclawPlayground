@@ -19,15 +19,13 @@
 workspace-dousha/
 ├── README.md              # 本文件 - 你的工作台
 ├── tasks/                 # 任务管理
-│   ├── backlog/          # 待办任务
-│   ├── in-progress/      # 进行中
-│   └── completed/        # 已完成
-├── design/                # 设计资源
-│   ├── figma/            # Figma 链接
-│   └── components/       # 组件规范
-├── communication/         # 沟通记录
-│   ├── with-guantang.md  # 与 PM 沟通
-│   ├── with-jiangrou.md  # 与后端沟通
+│   ├── inbox/            # 待处理任务
+│   └── outbox/           # 已完成任务
+├── designs/               # 设计资源
+├── logs/                  # 工作日志
+└── 📚 文档中心 (../doc/)   # 统一知识库 ⭐
+    └── ARCHITECTURE-LITE.md  # 轻量级架构设计
+```
 │   └── with-suancai.md   # 与运维沟通
 └── logs/                 # 工作日志
     └── daily/           # 每日日志

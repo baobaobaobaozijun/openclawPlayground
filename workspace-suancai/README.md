@@ -15,19 +15,17 @@
 ## 📁 项目结构
 
 ```
-openclaw-devops/
+workspace-suancai/
 ├── README.md              # 本文件
-├── requirements.txt       # Python 依赖
-├── .gitignore            # Git 忽略配置
-│
-├── scripts/              # 运维脚本（待创建）
-│   ├── deploy/           # 部署脚本
-│   │   ├── deploy.sh
-│   │   └── rollback.sh
-│   │
-│   ├── monitoring/       # 监控脚本
-│   │   ├── health_check.py
-│   │   └── alert.py
+├── tasks/                 # 任务管理
+│   ├── inbox/            # 待处理任务
+│   └── outbox/           # 已完成任务
+├── logs/                  # 工作日志
+└── 📚 文档中心 (../doc/)   # 统一知识库 ⭐
+    ├── ARCHITECTURE-LITE.md  # 轻量级架构设计
+    └── specs/03-technical-specs/
+        └── agent-error-monitoring.md  # 错误监控指南
+```
 │   │
 │   └── backup/           # 备份脚本
 │       └── backup_db.sh
