@@ -1,0 +1,36 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260311_232400_003",
+  "from": {
+    "agent": "灌汤",
+    "role": "pm",
+    "instance_id": "guantang-local"
+  },
+  "to": {
+    "agent": "酸菜",
+    "role": "devops-engineer",
+    "instance_id": "suancai-local"
+  },
+  "action": "notifySkillUpdate",
+  "priority": "high",
+  "data": {
+    "notice": "已为你添加两个强制性 skill",
+    "skills_added": [
+      "working-logger",
+      "auto-github-push"
+    ],
+    "skills_path": "F:\\openclaw\\agent\\workspace-suancai\\skills\\",
+    "requirements": [
+      "每次任务后必须记录工作日志到 workinglog/",
+      "每次修改后必须 git commit + push",
+      "任务完成必须确认 4 项检查清单"
+    ],
+    "soul_updated": "SOUL.md 已添加强制性工作规范章节"
+  },
+  "metadata": {
+    "timestamp": "2026-03-11T23:24:00+08:00",
+    "ttl": 300,
+    "requires_ack": true,
+    "correlation_id": "SKILL-SYNC-20260311"
+  }
+}
