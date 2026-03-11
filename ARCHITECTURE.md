@@ -1,11 +1,11 @@
-<!-- Last Modified: 2026-03-10 -->
-<!-- Last Modified (CN): 2026-03-10 -->
+<!-- Last Modified: 2026-03-11 -->
+<!-- Last Modified (CN): 2026-03-11 -->
 
 # 包子铺项目架构总览
 
 🏭 **基于 OpenClaw 框架的 Agent 团队协作与工程架构**
 
-*最后更新：2026-03-10*
+*最后更新：2026-03-11*
 
 ---
 
@@ -256,7 +256,7 @@ f:\openclaw/
 
 **工作流程:**
 1. 在 `workspace-jiangrou/tasks/inbox/` 接收任务
-2. 在 `workspace-jiangrou/communication/` 中沟通
+2. 通过 Gateway 进程内通信或直接交流
 3. 在 `code/backend/` 中编写代码
 4. 提交到独立的代码仓库
 
@@ -291,7 +291,7 @@ f:\openclaw/
 **工作流程:**
 1. 在 `workspace-dousha/tasks/inbox/` 接收任务
 2. 查看 `workspace-dousha/designs/` 设计稿
-3. 在沟通文件中提问
+3. 通过 Gateway 进程内通信或直接交流
 4. 在 `code/frontend/` 中实现界面
 
 **详细技术文档:** [agent/workspace-guantang/agent-configs/dousha/README.md](./workspace-guantang/agent-configs/dousha/README.md)
@@ -434,10 +434,10 @@ Agent 接收任务
 - **特点:** 可编译、可运行、可部署
 - **共享性:** 所有 Agent 共享同一个 code 目录，但各自负责不同子目录
 
-#### 4. Docker 部署 (`agent/deployment-2026-03-08/`)
-- **用途:** Docker Compose 编排配置，支持多实例部署
-- **特点:** 容器化、隔离性、易于扩展
-- **配置分离:** 每个 Agent 有独立的容器实例和配置文件
+#### 4. 迁移历史 (`agent/migration/`)
+- **用途:** 保存从 Docker 迁移到本地的历史文档
+- **特点:** 记录架构演进过程
+- **参考文件:** [MIGRATION-GUIDE-to-single-gateway.md](./migration/MIGRATION-GUIDE-to-single-gateway.md)
 
 ### 为什么要这样设计？
 
@@ -488,19 +488,7 @@ openclaw gateway
 
 # 或通过 PM2 等工具管理
 pm2 start openclaw --name "baozipu"
-```
-
-### 访问地址
-
-| 服务 | 端口 | URL |
-|------|------|-----|
-| **酱肉Agent** | 18791 | http://localhost:18791 |
-| **豆沙Agent** | 18792 | http://localhost:18792 |
-| **酸菜Agent** | 18793 | http://localhost:18793 |
-| **SearXNG (酱肉)** | 8081 | http://localhost:8081 |
-| **SearXNG (豆沙)** | 8082 | http://localhost:8082 |
-| **SearXNG (酸菜)** | 8083 | http://localhost:8083 |
-
+``
 ---
 
 ## 💻 技术栈总览
@@ -514,7 +502,6 @@ pm2 start openclaw --name "baozipu"
 | **安全** | Spring Security | 6.x | 认证授权 |
 | **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ | 对象关系映射 |
 | **数据库** | MySQL | 8.0+ | 主数据库 |
-| **缓存** | Redis | 7.0+ | 缓存层 |
 | **构建** | Maven | 3.9+ | 项目构建和管理 |
 
 ### 前端技术栈（豆沙负责）
@@ -533,9 +520,6 @@ pm2 start openclaw --name "baozipu"
 
 | 组件 | 技术 | 用途 |
 |------|------|------|
-| **容器化** | Docker + Docker Compose | 应用容器化和编排 |
-| **CI/CD** | GitHub Actions | 持续集成和部署 |
-| **监控** | Prometheus + Grafana | 系统监控和可视化 |
 | **单元测试** | JUnit 5 + Mockito | Java 单元测试 |
 | **集成测试** | Testcontainers | 容器化集成测试 |
 | **性能测试** | Gatling / JMeter | 负载和压力测试 |
@@ -578,7 +562,6 @@ pm2 start openclaw --name "baozipu"
 - [启动指南](./workspace-guantang/BOOTSTRAP.md)
 
 **【新增】监控与故障处理**:
-- [简化版监控指南](./workspace-guantang/guides/simple-monitoring-guide.md) ⭐
 - [错误监控与故障处理机制](./workspace-guantang/specs/03-technical-specs/agent-error-monitoring.md) ⭐
 - [实时监控仪表板](./workspace-guantang/monitoring/dashboard.md) ⭐
 - [监控脚本](./workspace-guantang/scripts/simple-monitor.ps1) ⭐
@@ -589,8 +572,7 @@ pm2 start openclaw --name "baozipu"
 - [酸菜技术规范](./workspace-guantang/agent-configs/suancai/README.md)
 
 **使用指南:**
-- [快速开始](./workspace-guantang/guides/quick-start.md)
-- [Docker 部署指南](./workspace-guantang/guides/docker-deployment-guide.md)
+- [本地化运行模式](#-本地化运行模式)
 - [GitHub 上传指南](./workspace-guantang/guides/github-upload-guide.md)
 
 **规范文档:**
@@ -603,7 +585,7 @@ pm2 start openclaw --name "baozipu"
 **酱肉工作台:**
 - [工作台说明](./workspace-jiangrou/README.md)
 - 任务目录：`workspace-jiangrou/tasks/inbox/`, `workspace-jiangrou/tasks/outbox/`
-- 沟通记录：`workspace-jiangrou/communication/`
+- 沟通方式：Gateway 进程内通信 / 工作日志记录
 - 工作日志：`workspace-jiangrou/logs/`
 - 代码工作区：`code/backend/`
 
@@ -611,7 +593,7 @@ pm2 start openclaw --name "baozipu"
 - [工作台说明](./workspace-dousha/README.md)
 - 任务目录：`workspace-dousha/tasks/inbox/`, `workspace-dousha/tasks/outbox/`
 - 设计资源：`workspace-dousha/designs/`
-- 沟通记录：`workspace-dousha/communication/`
+- 沟通方式：Gateway 进程内通信 / 工作日志记录
 - 工作日志：`workspace-dousha/logs/`
 - 代码工作区：`code/frontend/`
 
@@ -620,7 +602,7 @@ pm2 start openclaw --name "baozipu"
 - 任务目录：`workspace-suancai/tasks/inbox/`, `workspace-suancai/tasks/outbox/`
 - 测试工作区：`code/tests/`
 - 部署脚本：`code/deploy/`
-- 沟通记录：`workspace-suancai/communication/`
+- 沟通方式：Gateway 进程内通信 / 工作日志记录
 - 工作日志：`workspace-suancai/logs/`
 
 ### 工程文档
@@ -637,7 +619,7 @@ pm2 start openclaw --name "baozipu"
 
 **部署脚本:**
 - [部署说明](../../code/deploy/README.md)
-- Docker 配置：`code/deploy/docker/`
+- 运维基础设施：`code/deploy/ops-infra/`
 - 部署脚本：`code/deploy/scripts/`
 
 **测试脚本:**
@@ -645,37 +627,6 @@ pm2 start openclaw --name "baozipu"
 - 单元测试：`code/tests/unit/`
 - 集成测试：`code/tests/integration/`
 - 性能测试：`code/tests/performance/`
-
-### Docker 部署配置
-
-**部署目录:** `deployment-2026-03-08/`
-
-**核心文件:**
-- [恢复报告](./deployment-2026-03-08/RESTORE_COMPLETE.md) - 完整的恢复说明和指南
-- Docker Compose 配置：`deployment-2026-03-08/docker-compose/`
-  - `docker-compose-agents.yml` - OpenClaw Agent 三容器编排（推荐）
-  - `docker-compose-searxng.yml` - SearXNG 搜索引擎编排
-- 初始化和测试脚本：`deployment-2026-03-08/scripts/`
-  - `init-docker-containers.py` - Python 初始化脚本
-  - `test-connectivity.ps1` - PowerShell 连接测试
-- SearXNG 配置：`deployment-2026-03-08/searxng-configs/`
-  - 酱肉技术调研搜索引擎
-  - 豆沙设计资源搜索引擎
-  - 酸菜运维知识搜索引擎
-- JSON 配置文件：`deployment-2026-03-08/json-files/`
-  - Agent 通信配置
-  - 入职任务模板
-  - 测试消息模板
-
-**快速启动:**
-```bash
-cd deployment-2026-03-08/scripts
-python init-docker-containers.py
-```
-
-**访问地址:**
-- OpenClaw Agent UI: http://localhost:18791-18793
-- SearXNG 搜索引擎：http://localhost:8081-8083
 
 ---
 
@@ -711,61 +662,28 @@ python init-docker-containers.py
 
 ---
 
-## 🚀 开发与部署流程
+## 🚀 本地化运行流程
 
-### 本地开发流程
+### 启动 Gateway
 
-1. **克隆仓库**
-   ```bash
-   # 配置文档中心
-   git clone https://github.com/baobaobaobaozijun/openclawPlayground.git agent
-   
-    # 代码工程
-   git clone https://github.com/baobaobaobaozijun/openclaw-backend.git code/backend
-   git clone https://github.com/baobaobaobaozijun/openclaw-frontend.git code/frontend
-   git clone https://github.com/baobaobaobaozijun/openclaw-devops.git code/devops
-   git clone https://github.com/baobaobaobaozijun/openclaw-test.git code/test
- 
-   ```
+```powershell
+# 直接启动 OpenClaw Gateway
+openclaw gateway
 
-2. **开始工作**
-   ```bash
-   # 酱肉示例
-   cd agent/workspace-jiangrou
-   
-   # 首先阅读核心配置文件
-   cat IDENTITY.md  # 认识自己
-   cat ROLE.md      # 明确职责
-   cat SOUL.md      # 了解行为准则
-   
-   # 查看任务
-   cat tasks/inbox/TASK-XXX.md
-   
-   # 开始编码
-   cd ../../code/backend
-   mvn spring-boot:run  # 启动开发服务器
-   ```
+# 或通过 PM2 管理进程
+pm2 start openclaw --name "baozipu"
 
-### Docker 部署流程
-
-```bash
-# 进入部署目录
-cd agent/deployment-2026-03-08/scripts
-
-# 运行初始化脚本
-python init-docker-containers.py
-
-# 或使用 Docker Compose 启动所有服务
-docker-compose -f ../docker-compose/docker-compose-agents.yml up -d
+# 查看运行状态
+pm2 status
 
 # 查看日志
-docker-compose logs -f
+pm2 logs baozipu
 
 # 停止服务
-docker-compose down
+pm2 stop baozipu
 ```
 
-详细部署指南：[deployment-2026-03-08/RESTORE_COMPLETE.md](./deployment-2026-03-08/RESTORE_COMPLETE.md)
+**访问地址:** http://localhost:18789
 
 ---
 
@@ -779,7 +697,7 @@ docker-compose down
 | **技术规范中心** | 1 | agent/workspace-guantang/agent-configs（含 3 个 Agent 配置） |
 | **工程代码** | 4 | code/backend, code/frontend, code/deploy, code/tests |
 | **文档资料** | 2 | guides/, specs/, logs/ |
-| **Docker 部署** | 1 | agent/deployment-2026-03-08（含 Docker Compose、SearXNG、脚本等） |
+| **迁移历史** | 1 | agent/migration/（含迁移指南、配置模板） |
 
 ### 核心配置文件清单
 
@@ -824,10 +742,11 @@ docker-compose down
 - 技术规范集中管理，更新透明
 - 工程代码共享，便于协作
 
-### 容器化部署
-- Docker Compose 多实例隔离运行
-- 每个 Agent 有独立的环境和配置
-- 易于扩展和迁移
+### 本地化运行
+- 单 Gateway 进程内运行多个 Agent
+- 零延迟通信（~2ms）
+- 资源占用低（~600MB）
+- 无需 Docker 依赖
 
 ### 安全性保障
 - 敏感配置集中管理
@@ -861,15 +780,15 @@ docker-compose down
 - ❌ **删除任何 Agent 的 IDENTITY.md, ROLE.md, SOUL.md** - 这会导致 Agent 无法启动
 - ❌ **移动核心配置文件到其他目录** - Agent 启动时会直接从 workspace-xxx/ 根目录读取
 - ❌ **修改核心配置文件的文件名** - 必须保持标准命名
-- ❌ **删除 agent/deployment-2026-03-08/ 目录** - 包含所有 Docker 部署配置和 SearXNG 配置
+- ❌ **删除 agent/migration/ 目录** - 包含架构迁移历史文档
 
 ### 推荐做法
 - ✅ 定期备份所有 agent/workspace-xxx/ 目录
-- ✅ 特别备份 agent/deployment-2026-03-08/ 目录（包含所有部署脚本）
+- ✅ 特别备份 agent/migration/ 目录（包含迁移指南和配置模板）
 - ✅ 在 agent/workspace-guantang/agent-configs/ 中维护和更新技术规范
 - ✅ 保持工作台目录结构清晰
 - ✅ 及时更新 README.md 工作流程说明
-- ✅ 使用 Git 管理 deployment-2026-03-08/ 目录（排除敏感配置）
+- ✅ 使用 Git 管理 migration/ 目录（记录架构演进历史）
 - ✅ 定期清理 tasks/inbox/和tasks/outbox/中的已完成任务
 
 ---
@@ -877,5 +796,5 @@ docker-compose down
 **祝团队合作愉快！开始创造伟大的产品吧！** 🚀
 
 *维护者：灌汤 PM*  
-*更新日期：2026-03-10*
-*备注：添加完整监控系统 (零成本、飞行记录仪式 MEMORY、灾难现场保护)*
+*更新日期：2026-03-11*
+*备注：全面清理 Docker 相关引用，切换到本地化运行模式架构文档*
