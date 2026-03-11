@@ -1,0 +1,11 @@
+{
+  "from": "guantang",
+  "to": "jiangrou",
+  "action": "testConnection",
+  "data": {
+    "message": "连接测试 - 灌汤发送",
+    "project_id": "BLOG_20260310_001",
+    "test_id": "TEST_001"
+  },
+  "timestamp": "2026-03-10T23:14:00+08:00"
+}

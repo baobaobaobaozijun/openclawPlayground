@@ -1,0 +1,11 @@
+﻿{
+    "timestamp":  "2026-03-11T20:47:51.4251493+08:00",
+    "from":  "guantang",
+    "to":  "jiangrou",
+    "data":  {
+                 "message":  "消息队列测试 #2 - 配置修复后",
+                 "test_id":  "TEST2-20260311-204751",
+                 "timeout":  60
+             },
+    "action":  "heartbeatTest"
+}

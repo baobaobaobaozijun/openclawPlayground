@@ -1,0 +1,11 @@
+{
+  "from": "guantang",
+  "to": "suancai",
+  "action": "testConnection",
+  "data": {
+    "message": "连接测试 - 灌汤发送，请回复确认收到",
+    "project_id": "BLOG_20260310_001",
+    "test_id": "TEST_002"
+  },
+  "timestamp": "2026-03-11T00:11:00+08:00"
+}

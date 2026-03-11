@@ -142,14 +142,16 @@ git pull --rebase origin {branch}
 git push origin {branch}
 ```
 
-### 步骤 9: 生成日志记录
+### 步骤 9: 生成日志记录并更新序列号
 
-在 `agent/workinglog/` 目录下创建 push 记录：
+在 `agent/workinglog/` 目录下创建 push 记录，并更新 Git Push 序列号：
+
 ```markdown
-# Auto Push 记录 - {yyyyMMdd-HHmmss}
+# Auto Push 记录 - {yyyyMMdd-HHmmss} - #{序列号}
 
 ## 基本信息
 - **执行时间**: {开始时间} - {结束时间}
+- **Git Push 序列号**: #{自动生成的序号，如 #001, #002}
 - **触发原因**: {修改的文件或功能}
 - **提交哈希**: {git commit hash}
 - **涉及文件**: 
@@ -183,6 +185,56 @@ git push origin {branch}
 ## 备注
 {其他需要说明的信息}
 ```
+
+## 序列号管理机制
+
+### 序列号文件
+
+**文件位置**: `agent/workinglog/.push-sequence.json`
+
+**文件格式**:
+```json
+{
+  "sequence": 0,
+  "lastUpdated": "yyyyMMdd-HHmmss",
+  "history": [
+   {
+     "sequence": 1,
+     "timestamp": "yyyyMMdd-HHmmss",
+     "commitHash": "abc123"
+   }
+  ]
+}
+```
+
+### 序列号生成流程
+
+1. **读取序列号文件**
+  - 如果文件不存在，创建并初始化 sequence 为 0
+  - 如果文件存在，读取当前 sequence 值
+
+2. **递增序列号**
+  - sequence = sequence +1
+  - 格式化为 3 位数字：`#001`, `#002`, `#003` ...
+
+3. **更新序列号文件**
+  - 更新 sequence 值
+  - 更新 lastUpdated 时间戳
+  - 添加历史记录到 history 数组
+
+4. **应用到日志文档**
+  - 在文档标题和基本信息中包含序列号
+  - 便于追踪和引用
+
+### 序列号重置规则
+
+**可选的重置场景**:
+- 每天重置：序列号格式 `YYYYMMDD-001`, `YYYYMMDD-002`
+- 每周重置：适合周报总结
+- 每月重置：适合月度统计
+- 不重置：连续累加，简单直接
+
+**默认规则**: 不重置，连续累加
 
 ## 特殊场景处理
 

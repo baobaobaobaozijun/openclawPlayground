@@ -1,0 +1,36 @@
+{
+  "from": "guantang",
+  "to": "jiangrou",
+  "action": "allocateTask",
+  "data": {
+    "project_id": "BLOG_20260310_001",
+    "task_id": "TASK-20260311-001",
+    "task_name": "初始化后端 Git 仓库",
+    "description": "初始化博客系统后端 Git 仓库，创建基本文件结构",
+    "priority": "high",
+    "estimated_effort": "1 小时",
+    "due_date": "2026-03-11",
+    "deliverables": [
+      {
+        "name": "Git 仓库初始化",
+        "path": "F:\\openclaw\\code\\backend\\"
+      },
+      {
+        "name": "基本文件结构",
+        "path": "F:\\openclaw\\code\\backend\\src\\main\\java\\com\\openclaw\\"
+      }
+    ],
+    "requirements": [
+      "创建 .gitignore 文件（Java/Spring Boot 模板）",
+      "创建 README.md 项目说明",
+      "创建 pom.xml Maven 配置",
+      "创建 src/main/java/com/openclaw/ 目录结构",
+      "创建 src/main/resources/ 配置目录",
+      "创建 src/test/ 测试目录",
+      "创建 application.yml 配置文件模板",
+      "初始化 Git 仓库并提交初始版本",
+      "推送到 GitHub: https://github.com/baobaobaobaozijun/openclaw-backend"
+    ]
+  },
+  "timestamp": "2026-03-11T00:27:00+08:00"
+}

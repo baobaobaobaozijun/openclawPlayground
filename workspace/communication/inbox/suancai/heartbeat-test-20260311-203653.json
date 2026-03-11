@@ -1,0 +1,11 @@
+﻿{
+    "timestamp":  "2026-03-11T20:36:53.6250225+08:00",
+    "from":  "guantang",
+    "to":  "suancai",
+    "data":  {
+                 "message":  "消息队列测试 - 请在 1 分钟内回复",
+                 "test_id":  "TEST-20260311-203653",
+                 "timeout":  60
+             },
+    "action":  "heartbeatTest"
+}
