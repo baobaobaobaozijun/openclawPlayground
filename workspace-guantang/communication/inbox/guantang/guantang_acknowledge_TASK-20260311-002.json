@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260310_018",
+  "from": {
+    "agent": "酱肉",
+    "role": "backend-engineer"
+  },
+  "to": {
+    "agent": "灌汤",
+    "role": "pm"
+  },
+  "action": "acknowledgeTask",
+  "priority": "high",
+  "data": {
+    "task_id": "TASK-20260311-002",
+    "status": "accepted",
+    "estimated_start": "2026-03-10T16:37:00Z",
+    "notes": "已接收文章管理模块任务，请提供详细需求文档（API 接口列表、数据模型、业务规则等）"
+  },
+  "timestamp": "2026-03-10T16:37:00Z"
+}

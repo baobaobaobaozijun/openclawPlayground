@@ -1,0 +1,28 @@
+{
+  "task": {
+    "id": "TASK-20260311-002",
+    "title": "文章管理模块 - 测试与部署",
+    "description": "完成文章管理模块的单元测试、集成测试、Docker 部署配置",
+    "status": "IN_PROGRESS",
+    "priority": "HIGH",
+    "assignee": "suancai",
+    "created_at": "2026-03-10T16:39:00Z",
+    "started_at": "2026-03-10T16:39:00Z"
+  },
+  "requirements": [
+    "编写文章管理模块单元测试",
+    "配置集成测试环境",
+    "编写 Docker 部署配置",
+    "配置 CI/CD 流水线集成",
+    "添加监控指标埋点"
+  ],
+  "deliverables": [
+    "单元测试代码 (覆盖率≥80%)",
+    "集成测试配置",
+    "Docker 部署脚本",
+    "测试报告"
+  ],
+  "dependencies": [
+    "TASK-20260311-001 (运维 Git 仓库)"
+  ]
+}

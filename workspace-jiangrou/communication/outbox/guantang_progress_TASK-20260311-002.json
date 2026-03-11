@@ -1,0 +1,39 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260310_019",
+  "from": {
+    "agent": "酱肉",
+    "role": "backend-engineer"
+  },
+  "to": {
+    "agent": "灌汤",
+    "role": "pm"
+  },
+  "action": "progressReport",
+  "priority": "high",
+  "data": {
+    "task_id": "TASK-20260311-002",
+    "status": "blocked",
+    "progress_percentage": 0,
+    "completed_work": "任务已确认，开发环境准备就绪",
+    "blockers": [
+      {
+        "type": "missing_requirements",
+        "severity": "high",
+        "title": "等待详细需求文档",
+        "description": "需要文章管理模块的详细需求说明才能开始开发",
+        "requested_at": "2026-03-10T16:37:00Z"
+      }
+    ],
+    "pending_items": [
+      "API 接口列表（文章 CRUD、分类、标签等）",
+      "数据模型定义（表结构、字段、关联关系）",
+      "业务规则说明（权限控制、状态流转等）",
+      "技术要求（搜索、缓存、异步处理等）"
+    ],
+    "remaining_work": "全部开发工作（待需求确认后进行工作量评估）",
+    "estimated_timeline": "收到需求后 1-2 个工作日完成核心功能",
+    "notes": "开发环境已准备就绪，收到需求文档后可立即开始实现"
+  },
+  "timestamp": "2026-03-10T16:46:00Z"
+}

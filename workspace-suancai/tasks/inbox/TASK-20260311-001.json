@@ -1,0 +1,26 @@
+{
+  "task": {
+    "id": "TASK-20260311-001",
+    "title": "初始化运维 Git 仓库",
+    "description": "创建运维基础设施代码仓库，包含 Docker、K8s、Jenkins 等配置模板",
+    "status": "IN_PROGRESS",
+    "priority": "HIGH",
+    "assignee": "suancai",
+    "created_at": "2026-03-10T16:32:00Z",
+    "started_at": "2026-03-10T16:32:00Z"
+  },
+  "requirements": [
+    "初始化 Git 仓库结构",
+    "创建 Docker 配置模板目录",
+    "创建 Kubernetes 配置模板目录",
+    "创建 Jenkins Pipeline 模板目录",
+    "创建监控配置模板目录",
+    "编写 README 文档",
+    "配置 .gitignore 文件"
+  ],
+  "deliverables": [
+    "完整的 Git 仓库结构",
+    "基础配置文件模板",
+    "README 使用文档"
+  ]
+}

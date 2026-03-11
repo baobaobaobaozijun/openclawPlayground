@@ -29,10 +29,11 @@ f:\openclaw/
 │   │
 │   ├── workspace-guantang/        # 📋 PM/项目经理工作台
 │   │   ├── .openclaw/             # 工作区状态配置
-│   │   ├── IDENTITY.md            # 【核心】灌汤身份认知
-│   │   ├── ROLE.md                # 【核心】灌汤职责规范
-│   │   ├── SOUL.md                # 【核心】灌汤行为准则
-│   │   ├── AGENTS.md              # 团队协作规范
+│   │   ├── IDENTITY.md           # 【核心】灌汤身份认知
+│   │   ├── ROLE.md               # 【核心】灌汤职责规范
+│   │   ├── SOUL.md               # 【核心】灌汤行为准则
+│   │   ├── MEMORY.md             # 【新增】PM 飞行记录仪式操作日志 ⭐
+│   │   ├── AGENTS.md             # 团队协作规范
 │   │   ├── BOOTSTRAP.md           # 启动指南
 │   │   ├── HEARTBEAT.md           # 心跳机制
 │   │   ├── TOOLS.md               # 工具使用
@@ -241,7 +242,6 @@ f:\openclaw/
 - **语言:** Java 21 (LTS)
 - **框架:** Spring Boot 3.2+
 - **数据库:** MySQL 8.0+
-- **缓存:** Redis 7.0+
 - **构建:** Maven 3.9+
 
 **工作流程:**
