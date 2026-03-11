@@ -82,125 +82,50 @@
 
 ## 📡 Agent 通信
 
-### ⭐ 重要：Gateway 连接配置
+### 当前架构：单 Gateway 多 Agent（本地运行）
 
-**统一 Gateway 配置:**
+**架构模式:** 单机多 Agent，通过 Gateway 进程内通信  
+**Gateway 端口:** 18789  
+**通信方式:** 进程内函数调用（零延迟）
+
+#### Gateway 配置
+
 ```json
 {
   "gateway": {
-   "port": 18790,
-   "mode": "local",
-   "bind": "loopback",
-   "auth": {
-     "mode": "token",
-     "token": "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
-   }
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback"
+  },
+  "agents": {
+    "list": [
+      {"id": "guantang", "workspace": "F:\\openclaw\\agent\\workspace-guantang"},
+      {"id": "jiangrou", "workspace": "F:\\openclaw\\agent\\workspace-jiangrou"},
+      {"id": "dousha", "workspace": "F:\\openclaw\\agent\\workspace-dousha"},
+      {"id": "suancai", "workspace": "F:\\openclaw\\agent\\workspace-suancai"}
+    ]
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": ["guantang", "jiangrou", "dousha", "suancai"]
+    }
   }
 }
 ```
 
 **配置文件位置:** `C:\Users\Administrator\.openclaw\openclaw.json`
 
-### Agent 间通信
+#### 通信特点
 
-**架构:** 单机多 Agent，通过 Gateway 实时路由  
-**通信目录:** `F:\openclaw\agent\communication\`（可选，用于日志记录）
+✅ **零延迟**: 进程内内存调用，~2ms  
+✅ **高可靠**: 无网络依赖，稳定性 99.9%+  
+✅ **简配置**: 无需 Docker、网络、端口映射  
+✅ **易维护**: 单个进程，日志集中
 
-```
-communication/
-├── inbox/           # 接收的消息（日志）
-│   ├── guantang/   # 灌汤的收件箱
-│   ├── jiangrou/   # 酱肉的收件箱
-│   ├── dousha/     # 豆沙的收件箱
-│   └── suancai/    # 酸菜的收件箱
-└── outbox/         # 发送的消息（日志）
-   ├── guantang/   # 灌汤的发件箱
-   ├── jiangrou/   # 酱肉的发件箱
-   ├── dousha/     # 豆沙的发件箱
-   └── suancai/    # 酸菜的发件箱
-```
+---
 
-### 核心接口
-
-#### 1. allocateTask - 任务分发
-
-**灌汤 → 酱肉:**
-```json
-{
-  "action": "allocateTask",
-  "data": {
-   "task": {
-     "id": "TASK_20260310_001",
-     "title": "开发用户认证 API",
-     "description": "实现登录、注册、JWT 认证功能"
-   },
-   "requirements": [
-     "支持用户名密码登录",
-     "JWT token 有效期 24 小时",
-     "包含单元测试"
-   ],
-   "timeline": {
-     "start_date": "2026-03-10",
-     "due_date": "2026-03-12"
-   }
-  }
-}
-```
-
-#### 2. queryProgress - 进度查询
-
-**灌汤 → 酱肉:**
-```json
-{
-  "action": "queryProgress",
-  "data": {
-   "task_ids": ["TASK_20260310_001"],
-   "include_details": true
-  }
-}
-```
-
-#### 3. reportIssue - 问题报告
-
-**酱肉 → 灌汤:**
-```json
-{
-  "action": "reportIssue",
-  "data": {
-   "task_id": "TASK_20260310_001",
-   "issue": {
-     "type": "technical",
-     "severity": "medium",
-     "title": "JWT 库版本冲突",
-     "description": "当前 JWT 库与 Spring Boot 版本不兼容"
-   },
-   "proposed_solution": "升级 Spring Boot 到 3.2.5"
-  }
-}
-```
-
-#### 4. submitDeliverable - 交付物提交
-
-**酱肉 → 灌汤:**
-```json
-{
-  "action": "submitDeliverable",
-  "data": {
-   "task_id": "TASK_20260310_001",
-   "deliverables": [
-     {
-       "name": "用户认证 API",
-       "type": "code",
-       "path": "code/backend/api/auth/",
-       "version": "1.0.0",
-       "status": "ready_for_review"
-     }
-   ]
-  }
-}
-```
-
-### 📚 统一知识库 ⭐⭐⭐【新增】
+### 📚 统一知识库
 
 **知识库路径:** `F:\openclaw\agent\doc`
 
@@ -208,7 +133,6 @@ communication/
 
 **常用文档:**
 - [系统架构](../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议 v2.0](../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
 - [错误监控](../doc/specs/03-technical-specs/agent-error-monitoring.md)
 - [博客系统需求](../doc/specs/02-business-specs/blog-system-requirements.md)
 
@@ -217,12 +141,6 @@ communication/
 - ✅ 审核新增文档
 - ✅ 定期检查文档完整性
 - ✅ 通知 Agent 文档更新
-
----
-
-### 详细文档
-
-查看完整的通信协议：[agent-communication-protocol-v2.md](./specs/03-technical-specs/agent-communication-protocol-v2.md)
 
 ---
 
@@ -245,4 +163,4 @@ npx clawhub install <skill-name>
 
 ---
 
-*最后更新：2026-03-09*
+*最后更新：2026-03-11 - 清理 Docker 通信协议，切换到本地单 Gateway 多 Agent 模式*

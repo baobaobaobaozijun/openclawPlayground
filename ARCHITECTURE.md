@@ -39,9 +39,9 @@
 
 ## 📝 项目概述
 
-**包子铺**是一个基于 **OpenClaw 框架**的多Agent 协作软件开发平台，采用**配置与代码分离、工作台独立、容器化部署**的现代化架构设计。
+**包子铺**是一个基于 **OpenClaw 框架**的多Agent协作软件开发平台，采用**配置与代码分离、工作台独立、本地化运行**的现代化架构设计。
 
-本项目支持通过 Docker Compose 快速部署多个 OpenClaw Agent 实例，每个 Agent 拥有独立的工作空间和配置文件，同时共享统一的代码工程目录。
+本项目使用单个 OpenClaw Gateway 进程运行多个 Agent 实例，每个 Agent 拥有独立的工作空间，通过进程内通信实现高效协作。
 
 ---
 
@@ -96,7 +96,6 @@ f:\openclaw/
 │   │   │   ├── simple-monitoring-guide.md    # 【新增】简化版监控指南 ⭐
 │   │   ├── specs/                # 规范文档
 │   │   │   ├── 03-technical-specs/
-│   │   │   │   ├── agent-communication-protocol-v2.md  # Agent 通信协议 v2.0
 │   │   │   │   └── agent-error-monitoring.md           # 【新增】错误监控与故障处理 ⭐
 │   │   │   └── ...
 │   │   ├── monitoring/             # 【新增】监控系统 ⭐
@@ -118,9 +117,6 @@ f:\openclaw/
 │   │   ├── tasks/                # 任务管理
 │   │   │   ├── inbox/
 │   │   │   └── outbox/
-│   │   ├── communication/        # 沟通记录
-│   │   │   ├── inbox/
-│   │   │   └── outbox/
 │   │   └── logs/                 # 工作日志
 │   │
 │   ├── workspace-dousha/          # 🍡 豆沙工作台 ⭐
@@ -134,9 +130,6 @@ f:\openclaw/
 │   │   │   ├── inbox/
 │   │   │   └── outbox/
 │   │   ├── designs/              # 设计资源
-│   │   ├── communication/        # 沟通记录
-│   │   │   ├── inbox/
-│   │   │   └── outbox/
 │   │   └── logs/                 # 工作日志
 │   │
 │   ├── workspace-suancai/         # 🥬 酸菜工作台 ⭐
@@ -149,28 +142,11 @@ f:\openclaw/
 │   │   ├── tasks/                # 任务管理
 │   │   │   ├── inbox/
 │   │   │   └── outbox/
-│   │   ├── communication/        # 沟通记录
-│   │   │   ├── inbox/
-│   │   │   └── outbox/
 │   │   └── logs/                 # 工作日志
 │   │
-│   └── deployment-2026-03-08/     # 🔧 Docker 部署配置
-│       ├── docker-compose/       # Docker Compose 编排
-│       │   ├── docker-compose.yml           # 单实例配置
-│       │   ├── docker-compose-agents.yml    # 三容器编排（推荐）
-│       │   └── docker-compose-searxng.yml   # SearXNG 搜索引擎
-│       ├── scripts/              # 初始化和测试脚本
-│       │   ├── init-docker-containers.py    # Python 初始化
-│       │   └── test-connectivity.ps1        # PowerShell 测试
-│       ├── searxng-configs/      # SearXNG 配置
-│       │   ├── dousha/           # 豆沙设计资源搜索
-│       │   ├── jiangrou/         # 酱肉技术调研搜索
-│       │   └── suancai/          # 酸菜运维知识搜索
-│       ├── json-files/           # JSON 配置文件
-│       │   ├── comm-config.json  # 通信配置
-│       │   ├── onboarding-*.json # 入职任务模板
-│       │   └── test-message.json # 测试消息
-│       └── RESTORE_COMPLETE.md   # 恢复报告
+│   └── migration/                 # 🔄 迁移文档（历史参考）
+│       ├── openclaw-integrated-single-gateway.json   # 单 Gateway 配置模板
+│       └── MIGRATION-GUIDE-to-single-gateway.md      # 迁移指南
 │
 ├── code/                           # 💻 实际工程项目
 │   ├── backend/                   # 后端工程（Java + Spring Boot）
@@ -179,7 +155,7 @@ f:\openclaw/
 │   │   │       ├── java/         # Java 代码
 │   │   │       └── resources/    # 配置文件
 │   │   ├── pom.xml               # Maven 配置
-│   │   ├── Dockerfile            # Docker 镜像
+│   │   ├── scripts/              # 脚本工具
 │   │   └── README.md             # 工程说明
 │   │
 │   ├── frontend/                  # 前端工程（Vue + TypeScript）
@@ -198,7 +174,7 @@ f:\openclaw/
 │   │   └── README.md             # 工程说明
 │   │
 │   ├── deploy/                    # 部署脚本
-│   │   ├── docker/               # Docker 配置
+│   │   ├── ops-infra/            # 运维基础设施
 │   │   ├── kubernetes/           # K8s 配置（可选）
 │   │   ├── scripts/              # 部署脚本
 │   │   ├── environments/         # 环境配置
@@ -341,11 +317,10 @@ f:\openclaw/
 - 日志管理
 
 **技术栈:**
-- **容器:** Docker + Docker Compose
 - **CI/CD:** GitHub Actions
-- **监控:** Prometheus + Grafana
+- **监控:** Prometheus + Grafana（或简化版 PowerShell 脚本）
 - **测试:** JUnit 5, Testcontainers, Gatling
-- **日志:** ELK Stack
+- **日志:** ELK Stack（或统一日志文件）
 
 **工作流程:**
 1. 在 `workspace-suancai/tasks/inbox/` 接收任务
@@ -391,8 +366,8 @@ Agent 接收任务
   ↓
 阅读任务文件，理解需求
   ↓
-需要沟通？
-  ├─ 是 → 在 agent/workspace-{agent}/communication/ 中记录
+- 需要沟通？
+  ├─ 是 → 通过 Gateway 进程内通信或直接交流
   └─ 否 → 开始工作
         ↓
         切换到 code/{backend|frontend|deploy|tests}
@@ -412,9 +387,9 @@ Agent 接收任务
 - **部署配置问题** → 开发 ↔ 运维沟通
 
 **沟通方式:**
-- 在 `agent/workspace-{agent}/communication/` 目录中创建 Markdown 文件
-- 记录问题、讨论过程、最终决策
-- 作为团队知识库永久保存
+- 通过 Gateway 的 `agentToAgent` 机制实时通信
+- 直接在代码目录中协作开发
+- 重大问题记录到工作日志 (`workspace-*/logs/`) 作为团队知识库永久保存
 
 ### 4. 完成验收阶段
 
@@ -443,16 +418,16 @@ Agent 接收任务
 - **位置:** `agent/` 目录下的独立子目录
 - **重要性:** 🔴 **核心中的核心，决定 Agent 能否正常启动和工作**
 - **特点:** 
-  - 每个 Agent 有自己的 inbox/outbox 任务管理系统和沟通记录
+  - 每个 Agent 有自己的 inbox/outbox 任务管理系统
   - **包含完整独立的技术文档 (TECHNICAL-DOCS.md)**
-  - Docker容器隔离运行，无法交叉访问其他 Agent 配置
+  - 本地运行，通过 Gateway 进程内通信
 
 #### 2. 技术规范中心 (`agent/workspace-guantang/agent-configs/`) - 可选参考
 - **用途:** 详细的技术栈说明、最佳实践、常见问题（历史文档，仅供参考）
 - **位置:** 灌汤工作区的子目录
 - **重要性:** 🟡 重要参考资料（但各 Agent 已有独立技术文档）
 - **特点:** 详尽完整，作为技术指导和知识库
-- **注意:** ⚠️ **由于 Docker容器隔离，各 Agent无法访问此目录，应优先使用各自工作区的TECHNICAL-DOCS.md**
+- **注意:** ⚠️ **各 Agent 优先使用各自工作区的 TECHNICAL-DOCS.md**
 
 #### 3. 工程项目 (`code/`)
 - **用途:** 实际的工程项目和代码产出
@@ -469,107 +444,50 @@ Agent 接收任务
 1. **工作区独立** - 每个 Agent 有自己的 inbox/outbox 任务管理系统
 2. **技术规范集中管理** - 避免重复，便于统一更新和维护
 3. **工程代码共享** - code 目录为所有 Agent 共享，便于协作
-4. **容器化部署** - 通过 Docker Compose 实现多实例隔离运行
+4. **本地化运行** - 单 Gateway 多 Agent 模式，高效简洁
 
 ---
 
-## 🔧 Docker 部署配置
+## 🚀 本地化运行模式
 
-### 部署目录结构
+### 当前架构
 
-**位置:** `agent/deployment-2026-03-08/`
+**运行方式:** 单个 OpenClaw Gateway 进程（端口 18789）  
+**Agent 数量:** 4 个（灌汤、酱肉、豆沙、酸菜）  
+**通信方式:** 进程内内存调用（~2ms 延迟）  
+**资源占用:** ~600MB 内存
 
-```
-deployment-2026-03-08/
-├── docker-compose/              # Docker Compose 编排配置
-│   ├── docker-compose.yml           # 单实例配置
-│   ├── docker-compose-agents.yml    # 三容器编排（推荐）⭐
-│   └── docker-compose-searxng.yml   # SearXNG 搜索引擎
-├── scripts/                     # 初始化和测试脚本
-│   ├── init-docker-containers.py    # Python 初始化脚本
-│   └── test-connectivity.ps1        # PowerShell 连接测试
-├── searxng-configs/             # SearXNG 搜索引擎配置
-│   ├── dousha/                  # 豆沙设计资源搜索
-│   ├── jiangrou/                # 酱肉技术调研搜索
-│   └── suancai/                 # 酸菜运维知识搜索
-├── json-files/                  # JSON 配置文件
-│   ├── comm-config.json         # Agent 通信配置
-│   ├── onboarding-1.json        # 入职任务模板 1
-│   ├── onboarding-2.json        # 入职任务模板 2
-│   ├── onboarding-3.json        # 入职任务模板 3
-│   └── test-message.json        # 测试消息模板
-└── RESTORE_COMPLETE.md          # 恢复报告
-```
+### 配置文件
 
-### Docker Compose 多实例部署
+**位置:** `C:\Users\Administrator\.openclaw\openclaw.json`
 
-**推荐配置:** `docker-compose-agents.yml` - 三容器编排
-
-```yaml
-services:
-  jiangrou:  # 酱肉 - 后端工程师
-    image: ghcr.io/openclaw/openclaw:latest
-    container_name: openclaw-instance-1
-    ports:
-      - "18791:18789"
-    environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
-      - INSTANCE_NAME=jiangrou
-      - INSTANCE_ROLE=backend-engineer
-    volumes:
-      - F:\openclaw\code\backend:/app/backend
-      - F:\openclaw\workspace-jiangrou:/app/workspace
-
-  dousha:  # 豆沙 - 前端工程师
-    image: ghcr.io/openclaw/openclaw:latest
-    container_name: openclaw-instance-2
-    ports:
-      - "18792:18789"
-    environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
-      - INSTANCE_NAME=dousha
-      - INSTANCE_ROLE=frontend-engineer
-    volumes:
-      - F:\openclaw\code\frontend:/app/frontend
-      - F:\openclaw\workspace-dousha:/app/workspace
-
-  suancai:  # 酸菜 - 运维工程师
-    image: ghcr.io/openclaw/openclaw:latest
-    container_name: openclaw-instance-3
-    ports:
-      - "18793:18789"
-    environment:
-      - OPENCLAW_MODEL=qwen3-coder-plus
-      - INSTANCE_NAME=suancai
-      - INSTANCE_ROLE=devops-engineer
-    volumes:
-      - F:\openclaw\code\deploy:/app/deploy
-      - F:\openclaw\code\tests:/app/tests
-      - F:\openclaw\workspace-suancai:/app/workspace
+```json
+{
+  "agents": {
+    "list": [
+      {"id": "guantang", "workspace": "F:\\openclaw\\agent\\workspace-guantang"},
+      {"id": "jiangrou", "workspace": "F:\\openclaw\\agent\\workspace-jiangrou"},
+      {"id": "dousha", "workspace": "F:\\openclaw\\agent\\workspace-dousha"},
+      {"id": "suancai", "workspace": "F:\\openclaw\\agent\\workspace-suancai"}
+    ]
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": ["guantang", "jiangrou", "dousha", "suancai"]
+    }
+  }
+}
 ```
 
-### SearXNG 搜索引擎配置
+### 启动方式
 
-为每个 Agent 配置独立的 SearXNG 搜索引擎实例：
+```powershell
+# 直接启动 OpenClaw Gateway
+openclaw gateway
 
-- **酱肉 (jiangrou):** 技术调研、代码问题搜索
-- **豆沙 (dousha):** 设计资源、UI 灵感搜索
-- **酸菜 (suancai):** 运维知识、故障排查搜索
-
-### 快速启动
-
-```bash
-# 进入部署目录
-cd agent/deployment-2026-03-08/scripts
-
-# 运行初始化脚本（Windows PowerShell）
-.\test-connectivity.ps1
-
-# 或使用 Python 初始化
-python init-docker-containers.py
-
-# 使用 Docker Compose 启动所有服务
-docker-compose -f docker-compose/docker-compose-agents.yml up -d
+# 或通过 PM2 等工具管理
+pm2 start openclaw --name "baozipu"
 ```
 
 ### 访问地址

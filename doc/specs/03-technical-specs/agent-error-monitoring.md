@@ -103,32 +103,30 @@
 
 ---
 
-### 2. Docker 容器错误 🔴
+### 2. 进程运行错误 🔴
 
-#### 容器宕机
+#### 进程异常退出
 
 **检测方式:**
 ```powershell
 # PowerShell 监控脚本
-$containers = docker ps --filter "name=openclaw-instance" --format "{{.Names}}\t{{.Status}}"
-foreach ($container in $containers) {
-    if ($container -notmatch "healthy") {
-        # 发送告警
-        Send-Alert "容器异常：$container"
-    }
+$process = Get-Process | Where-Object { $_.ProcessName -like "*openclaw*" }
+if ($null -eq $process) {
+    # 发送告警
+    Send-Alert "OpenClaw Gateway 进程已退出"
 }
 ```
 
 **监控指标:**
-- 容器状态不是 "healthy"
-- 容器退出码非 0
-- 容器重启次数过多
+- Gateway 进程不存在
+- 进程 CPU 使用率异常
+- 进程内存泄漏
 
 **检测频率:** 每 1 分钟检查一次
 
 ---
 
-#### 容器资源耗尽
+#### 进程资源耗尽
 
 **监控指标:**
 - CPU 使用率 > 90%
@@ -136,8 +134,8 @@ foreach ($container in $containers) {
 - 磁盘空间不足
 
 **检测命令:**
-```bash
-docker stats openclaw-instance-1 --no-stream --format "{{.CPUPerc}}\t{{.MemPerc}}"
+```powershell
+Get-Process openclaw | Select-Object CPU,WorkingSet,Handles
 ```
 
 ---

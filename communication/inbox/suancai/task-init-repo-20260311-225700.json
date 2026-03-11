@@ -1,0 +1,46 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260311_225700_003",
+  "from": {
+    "agent": "灌汤",
+    "role": "pm",
+    "instance_id": "guantang-local"
+  },
+  "to": {
+    "agent": "酸菜",
+    "role": "devops-engineer",
+    "instance_id": "suancai-local"
+  },
+  "action": "allocateTask",
+  "priority": "high",
+  "data": {
+    "task": {
+      "id": "TASK-20260311-005",
+      "title": "运维代码仓库初始化",
+      "description": "完成 code/deploy/ 和 code/tests/ 目录的 Git 初始化和项目结构搭建"
+    },
+    "requirements": [
+      "初始化 Git 仓库（如未初始化）",
+      "创建 Docker 部署配置文件结构",
+      "创建自动化测试目录结构",
+      "提交初始代码到 Git",
+      "推送到远程仓库",
+      "报告 Git 状态和提交 hash"
+    ],
+    "timeline": {
+      "start_date": "2026-03-11",
+      "due_date": "2026-03-11 23:30"
+    },
+    "deliverables": [
+      "Git 仓库初始化完成",
+      "首次 commit 完成",
+      "远程仓库同步完成"
+    ]
+  },
+  "metadata": {
+    "timestamp": "2026-03-11T22:57:00+08:00",
+    "ttl": 3600,
+    "requires_ack": true,
+    "correlation_id": "TASK-20260311-005"
+  }
+}
