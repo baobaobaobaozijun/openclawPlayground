@@ -1,0 +1,40 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260312_005200_001",
+  "from": {
+    "agent": "灌汤",
+    "role": "pm",
+    "instance_id": "guantang-local"
+  },
+  "to": {
+    "agent": "酱肉",
+    "role": "backend-engineer",
+    "instance_id": "jiangrou-local"
+  },
+  "action": "allocateTask",
+  "priority": "high",
+  "data": {
+    "task": {
+      "id": "PHASE1-TASK-BACKEND",
+      "title": "第一阶段：文章模块后端开发",
+      "description": "完成 Spring Boot 后端开发和文章 API 实现"
+    },
+    "timeline": {
+      "start_date": "2026-03-12",
+      "due_date": "2026-03-14"
+    },
+    "deliverables": [
+      "Spring Boot 项目初始化",
+      "文章 CRUD API 实现",
+      "数据库表结构创建",
+      "API 文档 (Swagger)"
+    ],
+    "plan_document": "doc/guides/01-getting-started/phase1-plan.md"
+  },
+  "metadata": {
+    "timestamp": "2026-03-12T00:52:00+08:00",
+    "ttl": 86400,
+    "requires_ack": true,
+    "correlation_id": "PHASE1-20260312"
+  }
+}
