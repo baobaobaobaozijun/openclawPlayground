@@ -34,7 +34,7 @@
 ❌ "OpenClaw 需要开发用户认证功能" (混淆)
 ```
 
-**详细文档:** [docs/naming-convention.md](./docs/naming-convention.md)
+**详细文档:** 参见 [doc/](./doc/) 统一知识库
 
 ---
 
@@ -309,8 +309,7 @@ f:\openclaw/
 - [SOUL.md](./workspace-suancai/SOUL.md) - 行为准则
 
 **核心职责:**
-- 系统部署与容器化
-- CI/CD流程建设
+- 系统部署与运维
 - 监控告警配置
 - 自动化测试
 - 日志管理
@@ -334,15 +333,11 @@ f:\openclaw/
 
 ### 🔧 程序员 (Programmer) - 预留角色
 
-**工作空间:** `agent/workspace-programmer/`
+**工作空间:** `agent/workspace-programmer/` **（预留，尚未创建）**
 
-这是一个预留的工作空间，目前包含基础的模板文件：
-- [IDENTITY.md](./workspace-programmer/IDENTITY.md) - 身份认知模板
-- [AGENTS.md](./workspace-programmer/AGENTS.md) - 团队协作
-- [BOOTSTRAP.md](./workspace-programmer/BOOTSTRAP.md) - 启动指南
-- [HEARTBEAT.md](./workspace-programmer/HEARTBEAT.md) - 心跳机制
+这是一个预留的工作空间，用于未来扩展特定角色的工作台。
 
-可以根据需要扩展为特定角色的工作台。
+**当前状态:** ⚠️ **暂无实际需求，文件未创建**
 
 ---
 ---
@@ -519,13 +514,15 @@ pm2 start openclaw --name "baozipu"
 
 ### 运维/测试技术栈（酸菜负责）
 
+**测试工具:**
 | 组件 | 技术 | 用途 |
 |------|------|------|
 | **单元测试** | JUnit 5 + Mockito | Java 单元测试 |
-| **集成测试** | Testcontainers | 容器化集成测试 |
+| **集成测试** | JUnit 5 + Mockito | 单元测试和集成测试 |
 | **性能测试** | Gatling / JMeter | 负载和压力测试 |
 | **E2E 测试** | Playwright | 端到端浏览器自动化 |
-| **日志** | ELK Stack | 日志收集和分析 |
+
+**日志管理:** Journalctl + 文件日志
 
 ---
 
@@ -798,4 +795,4 @@ pm2 stop baozipu
 
 *维护者：灌汤 PM*  
 *更新日期：2026-03-11*
-*备注：全面清理 Docker 相关引用，切换到本地化运行模式架构文档*
+*备注：全面清理 Docker 相关引用，切换到本地化运行模式；添加轻量级架构设计*
