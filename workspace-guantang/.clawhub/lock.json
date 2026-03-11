@@ -12,6 +12,14 @@
     "moltguard": {
       "version": "6.8.16",
       "installedAt": 1773244571449
+    },
+    "task-decomposer": {
+      "version": "1.0.0",
+      "installedAt": 1773246260395
+    },
+    "todo-skill": {
+      "version": "1.0.0",
+      "installedAt": 1773246378556
     }
   }
 }
