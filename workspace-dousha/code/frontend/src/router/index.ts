@@ -7,7 +7,11 @@ import type { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/article'
+    name: 'Home',
+    component: () => import('@/views/HomeView.vue'),
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/article',
@@ -52,12 +56,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // 设置页面标题
   if (to.meta.title) {
-    document.title = `${to.meta.title} - 博客管理系统`
+    document.title = `${to.meta.title} - 包子铺博客`
   }
   
   // 检查登录状态（示例）
   const token = localStorage.getItem('access_token')
-  const publicPages = ['/login', '/register']
+  const publicPages = ['/', '/login', '/register', '/article']
   const authRequired = !publicPages.includes(to.path)
   
   if (authRequired && !token) {

@@ -39,6 +39,7 @@ export const useArticleStore = defineStore('article', () => {
 
   // 计算属性
   const hasArticles = computed(() => articles.value.length > 0)
+  const total = computed(() => pagination.value.total)
 
   // Actions
   /**
@@ -229,6 +230,7 @@ export const useArticleStore = defineStore('article', () => {
     pagination,
     // Getters
     hasArticles,
+    total,
     // Actions
     fetchArticleList,
     fetchArticleDetail,

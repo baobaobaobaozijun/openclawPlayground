@@ -1,10 +1,10 @@
-<!-- Last Modified: 2026-03-10 -->
+<!-- Last Modified: 2026-03-12 -->
 
 # MEMORY.md - 酱肉的工作记忆
 
 **Agent:**酱肉 (Jiangrou)  
 **角色:**后端工程师 / 系统架构师  
-**最后更新:**2026-03-12 01:00:00
+**最后更新:**2026-03-12 19:00:00
 
 ---
 
@@ -14,7 +14,7 @@
 - **状态:** IN_PROGRESS 🟡
 - **开始时间:** 2026-03-12 00:50:00
 - **截止时间:** 2026-03-14 (3 天)
-- **当前进度:** Day 1 完成 (30%)
+- **当前进度:** Day 2 已完成 (85%)
 - **优先级:** HIGH
 
 **任务描述:**
@@ -28,6 +28,26 @@
 - ✅ Category、Tag、User 实体类创建
 - ✅ 所有 Mapper 接口创建
 - ✅ MyBatis-Plus 自动填充配置
+
+**Day 2 进展 (03-12 19:00 更新):**
+- ✅ Service 层开发：已完成 (19:00)
+  - ArticleService 接口创建
+  - ArticleServiceImpl 实现类创建
+  - 功能：CRUD、分页查询、按作者查询、按状态查询
+- ✅ Controller 层开发：已完成 (19:00)
+  - ArticleController 创建（8 个 RESTful API 端点）
+  - 统一响应格式 Result<T> 创建
+  - 全局异常处理器创建
+- ✅ DTO 类创建：已完成
+  - ArticleCreateDTO
+  - ArticleUpdateDTO
+  - ArticleResponseDTO
+- ✅ 异常处理：已完成
+  - BusinessException
+  - ResourceNotFoundException
+  - GlobalExceptionHandler
+- 🔄 Git 提交：已完成本地提交，推送中（网络问题）
+- 📄 PRD 已确认阅读（03-12 18:50）
 
 **Day 2 计划:**
 - 创建 Service 层（接口 + 实现）
@@ -47,6 +67,12 @@
   - 7 张表已创建 (users, articles, tags, categories, article_tags, article_categories, comments)
   - 管理员账号：admin / admin123
   - 可以立即开始开发！
+
+**问题和风险:**
+- ⚠️ 状态更新滞后：MEMORY.md 和工作日志 17 小时未更新（已收到 PM 提醒，立即改正）
+- ✅ 无技术风险，开发按计划推进
+
+**预计完成时间:** 2026-03-14 18:00
 
 ---
 
@@ -99,6 +125,63 @@
 ---
 
 ## 🕐 详细执行日志 (按时间倒序)
+
+### 2026-03-12 19:00:00 - Day 2 Service 层和 Controller 层开发完成
+**任务:** PHASE1-TASK-BACKEND (Day 2)
+**状态:** ✅ COMPLETED
+**进度:** 100% (Day 2 开发任务)
+**操作:**
+- 创建 DTO 类（3 个）：ArticleCreateDTO, ArticleUpdateDTO, ArticleResponseDTO
+- 创建统一响应格式：Result.java
+- 创建异常处理（3 个）：BusinessException, ResourceNotFoundException, GlobalExceptionHandler
+- 创建 Service 层（2 个）：ArticleService 接口，ArticleServiceImpl 实现
+- 创建 Controller 层（1 个）：ArticleController（8 个 RESTful API 端点）
+- 本地 Git 提交完成：`feat: implement Service layer, Controller layer, DTOs and exception handling`
+- 工作日志已记录：`workinglog/jiangrou/20260312-185131-jiangrou-service-controller-development.md`
+
+**API 端点列表:**
+- POST /api/articles - 创建文章
+- GET /api/articles/{id} - 获取文章详情
+- GET /api/articles - 获取所有文章
+- GET /api/articles/page - 分页获取文章
+- PUT /api/articles/{id} - 更新文章
+- DELETE /api/articles/{id} - 删除文章
+- GET /api/articles/author/{authorId} - 按作者查询
+- GET /api/articles/status/{status} - 按状态查询
+
+**代码统计:** 10 个文件，745 行代码
+
+**问题:**
+- ⚠️ Git push 遇到网络问题（GitHub 连接超时），稍后重试
+
+**下一步:**
+- 等待网络恢复后推送代码
+- 准备 Day 3 的打包和部署工作
+
+---
+
+### 2026-03-12 18:50:00 - Day 2 状态更新（PM 提醒）
+**任务:** PHASE1-TASK-BACKEND (Day 2)
+**状态:** 🟡 IN_PROGRESS
+**进度:** 45%
+**操作:**
+- 收到 PM 灌汤的紧急状态更新提醒
+- 更新 MEMORY.md（17 小时未更新，已改正）
+- 补录工作日志
+- 确认 PRD 文档阅读
+- 发送状态回复给 PM
+
+**PRD 确认:**
+1. ✅ 已阅读 PRD 文档（`doc/01-core/prd/博客系统-PRD.md`）
+2. ✅ 已知晓负责的功能模块（用户认证、文章管理、权限控制、日志自动化）
+3. ✅ 已知晓文档链接
+
+**下一步:**
+- 继续 Service 层开发
+- 完成 Controller 层开发
+- 今晚 22:00 前提交代码
+
+---
 
 ### 2026-03-12 01:00:00 - Day 1 任务完成
 **任务:** PHASE1-TASK-BACKEND (Day 1)
