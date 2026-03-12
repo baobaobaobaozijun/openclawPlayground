@@ -1,6 +1,6 @@
 ---
 name: working-logger
-description: "工作日志记录器。每次修改 F:\\openclaw\\agent 文件夹内容时自动记录工作日志到 workinglog 目录。"
+description: "工作日志记录器。每次 F:\\openclaw 文件内容更改后强制编写工作日志到 workinglog 目录。"
 metadata:
   openclaw:
     emoji: 📝
@@ -12,7 +12,7 @@ metadata:
 
 ## 用途
 
-每次修改 `F:\openclaw\agent` 文件夹下的内容时，自动记录工作日志。
+**强制触发:** 每次 `F:\openclaw` 文件夹下的内容发生更改时，必须自动记录工作日志。
 
 ## 日志格式
 
@@ -24,7 +24,7 @@ metadata:
 20260309-230000-guantang-add-new-feature.md
 ```
 
-**存储位置:** `F:\openclaw\agent\workinglog\`
+**存储位置:** `F:\openclaw\agent\workinglog\{agent}\`
 
 ## 日志内容模板
 
@@ -73,25 +73,24 @@ npx working-logger complete --files "modified-file-1.md,modified-file-2.md"
 ## 工作流程
 
 ```
-1. 用户发起修改请求
+1. 检测到 F:\openclaw 文件更改
    ↓
-2. 记录修改前的状态
+2. 强制触发日志记录
    ↓
-3. 执行修改操作
+3. 生成工作日志文件
    ↓
-4. 生成工作日志文件
+4. 通知相关 Agent (如修改了对方配置)
    ↓
-5. 通知相关 Agent (如修改了对方配置)
-   ↓
-6. 触发 GitHub push
+5. 触发 Git 提交和推送
 ```
 
 ## 注意事项
 
-1. **必须记录**: 任何对 `F:\openclaw\agent` 的修改都要记录
-2. **及时通知**: 修改其他 Agent 配置后必须通知对方
-3. **格式统一**: 严格按照文件名格式生成
-4. **内容清晰**: 日志内容要详细、可追溯
+1. **强制记录**: 任何对 `F:\openclaw` 的修改都必须记录日志
+2. **统一路径**: 日志必须保存到 `F:\openclaw\agent\workinglog\{agent}\`
+3. **及时通知**: 修改其他 Agent 配置后必须通知对方
+4. **格式统一**: 严格按照文件名格式生成
+5. **内容清晰**: 日志内容要详细、可追溯
 
 ---
 

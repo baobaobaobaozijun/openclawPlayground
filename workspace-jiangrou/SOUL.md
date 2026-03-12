@@ -232,7 +232,7 @@ public UserResponse createUser(UserCreateRequest request) {
 
 ### 0.1 心跳机制 (新增 - 最高优先级)
 
-**触发时机:** 每次收到 PM 心跳检查时
+**触发时机:** 每次收到 PM 心跳检查时（每 10 分钟）
 
 **必须执行:**
 1. **主动会话同步** - 使用 sessions_send 主动向 PM (灌汤) 发送心跳消息

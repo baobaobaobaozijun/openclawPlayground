@@ -1,6 +1,6 @@
 ---
 name: auto-github-push
-description: "自动推送代码到 GitHub。每次更新完 F:\\openclaw\\agent 文件夹内容后，自动 commit 并 push 到 GitHub 仓库。"
+description: "自动推送代码到 GitHub。每次 F:\\openclaw 文件内容更改后强制 commit 并 push 到 GitHub 仓库。"
 metadata:
   openclaw:
     emoji: 🚀
@@ -12,7 +12,7 @@ metadata:
 
 ## 用途
 
-每次更新完 `F:\openclaw\agent` 文件夹内容后，自动 commit 并 push 到 GitHub 仓库。
+**强制触发:** 每次 `F:\openclaw` 文件夹下的内容发生更改后，必须自动 commit 并 push 到 GitHub 仓库。
 
 ## 仓库信息
 
@@ -24,7 +24,7 @@ metadata:
 
 ### 自动触发
 
-修改文件后自动调用：
+**强制调用:** 检测到 F:\openclaw 文件更改后自动执行：
 
 ```bash
 npx auto-github-push --message "feat: 更新配置"
@@ -46,19 +46,21 @@ npx auto-github-push --dry-run
 ## 工作流程
 
 ```
-1. 检查工作空间状态 (git status)
+1. 检测到 F:\openclaw 文件更改
    ↓
-2. 添加所有更改的文件 (git add .)
+2. 强制触发 Git 提交
    ↓
-3. 生成提交信息 (自动或手动指定)
+3. 添加所有更改的文件 (git add .)
    ↓
-4. 提交更改 (git commit)
+4. 生成提交信息 (自动或手动指定)
    ↓
-5. 拉取最新代码 (git pull)
+5. 提交更改 (git commit)
    ↓
-6. 推送到 GitHub (git push)
+6. 拉取最新代码 (git pull --rebase)
    ↓
-7. 记录推送日志
+7. 推送到 GitHub (git push)
+   ↓
+8. 记录推送日志
 ```
 
 ## 提交信息规范
