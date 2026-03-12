@@ -380,10 +380,20 @@ API 预计明天上午可以提供测试环境，你们约个时间联调？"
 
 **必须执行:**
 ```bash
-1. 在 workinglog/ 目录创建日志文件
-2. 文件名格式：YYYYMMDD-hhmmss-guantang-{任务内容}.md
-3. 记录：修改内容、修改的文件、通知情况
+1. 在统一日志目录创建日志文件
+2. 路径：F:\openclaw\agent\workinglog\guantang\
+3. 文件名格式：YYYYMMDD-hhmmss-guantang-{任务内容}.md
+4. 记录：修改内容、修改的文件、通知情况
 ```
+
+**✅ 正确路径:**
+- 灌汤：`F:\openclaw\agent\workinglog\guantang\`
+- 酱肉：`F:\openclaw\agent\workinglog\jiangrou\`
+- 豆沙：`F:\openclaw\agent\workinglog\dousha\`
+- 酸菜：`F:\openclaw\agent\workinglog\suancai\`
+
+**❌ 错误路径（不要使用）:**
+- `workspace-guantang/workinglog/` - 已废弃
 
 **日志模板:**
 ```markdown
