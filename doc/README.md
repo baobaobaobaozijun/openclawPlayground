@@ -1,252 +1,268 @@
-<!-- Last Modified: 2026-03-11 -->
+# 📚 统一知识库文档索引
 
-# 包子铺知识库
-
-**版本:** v1.0  
-**创建日期:** 2026-03-11  
-**维护者:** 灌汤 (PM)  
-**状态:** ✅ 已建立
+**最后更新:** 2026-03-12  
+**维护者:** 灌汤 (PM)
 
 ---
 
-## 📋 概述
+## 🎯 6 大核心文档
 
-这是包子铺项目的统一知识库，基于 **OpenClaw 框架**构建，为所有 Agent 提供共享的知识资源。
-
-**知识库目标:**
-- ✅ 统一管理项目文档和技术规范
-- ✅ 支持 Agent 间的知识共享
-- ✅ 提供完整的参考资料索引
-- ✅ 便于新人快速上手
+| # | 文档 | 主要目的 | 受众 | 是否必须 | 模板位置 |
+|---|------|----------|------|----------|----------|
+| 1 | **PRD（需求文档）** | 让全员理解"要做什么 & 为什么做" | 前端/后端/测试/运维 | ⭐ 必须 | `templates/PRD 模板.md` |
+| 2 | **API & 技术方案** | 保证前后端协同一致、减少返工 | 后端、前端、测试 | ⭐ 必须 | `templates/API 技术方案模板.md` |
+| 3 | **原型/交互稿** | 消除前端和产品理解偏差 | 前端、测试 | ⭐ 必须 | `templates/原型交互稿模板.md` |
+| 4 | **测试用例/计划** | 让测试知道怎么测、测什么 | 测试 | ⭐ 必须 | `templates/测试用例模板.md` |
+| 5 | **上线方案** | 运维和开发知道怎么上线、如何回滚 | 后端、运维、测试 | ⭐ 必须 | `templates/上线方案模板.md` |
+| 6 | **项目进度计划** | 控制节奏、跟踪状态、风险预警 | 所有人 | ⭐ 必须 | `templates/项目进度计划模板.md` |
 
 ---
 
-## 📁 知识库结构
+## 📁 文档目录结构
 
 ```
-doc/                           # 📚 统一知识库
+F:\openclaw\agent\doc\
 │
-├── specs/                     # 📋 规范文档
-│   ├── 01-architecture/      # 架构设计
-│   │   └── system-architecture.md
-│   │
-│   ├── 02-business-specs/    # 业务需求
-│   │   ├── blog-system-requirements.md
-│   │   └── blog-system-database-design.md
-│   │
-│   ├── 03-technical-specs/   # 技术规范
-│   │   ├── agent-communication-protocol-v2.md
-│   │   ├── agent-protocol.md
-│   │   └── agent-error-monitoring.md
-│   │
-│   └── 04-processes/         # 流程规范
-│       ├── command-specification.md
-│       └── logging-audit.md
+├── README.md                      # 本文件 - 文档索引
 │
-├── guides/                    # 📖 使用指南
-│   ├── 01-getting-started/   # 入门指南
-│   ├── 02-deployment/        # 部署指南
-│   └── 03-agent-guides/      # Agent 指南
+├── templates/                     # 📝 文档模板
+│   ├── PRD 模板.md
+│   ├── API 技术方案模板.md
+│   ├── 原型交互稿模板.md
+│   ├── 测试用例模板.md
+│   ├── 上线方案模板.md
+│   └── 项目进度计划模板.md
 │
-├── knowledge/                 # 💡 知识库
-│   ├── 01-domain/            # 领域知识
-│   └── 02-best-practices/    # 最佳实践
-│       └── lightweight-mode.md
+├── prd/                           # 📋 需求文档
+│   └── {项目名}-PRD.md
 │
-└── logs/                      # 📝 日志索引
-    └── index.md
-```
-
----
-
-## 📚 文档分类说明
-
-### 1️⃣ 规范文档 (specs/)
-
-**用途:** 项目和技术规范的标准文档
-
-#### 01-architecture/ - 架构设计
-- [system-architecture.md](./specs/01-architecture/system-architecture.md) - 系统架构总览
-  - 整体架构图
-  - 核心组件说明
-  - 技术选型
-
-#### 02-business-specs/ - 业务需求
-- [blog-system-requirements.md](./specs/02-business-specs/blog-system-requirements.md) - 博客系统需求
-  - 功能需求
-  - 用户需求
-  - 业务规则
-
-- [blog-system-database-design.md](./specs/02-business-specs/blog-system-database-design.md) - 数据库设计
-  - ER 图
-  - 表结构
-  - 索引设计
-
-#### 03-technical-specs/ - 技术规范
-- [agent-communication-protocol-v2.md](./specs/03-technical-specs/agent-communication-protocol-v2.md) - Agent 通信协议 v2.0
-  - 通信架构
-  - 消息格式
-  - 接口定义
-  - Gateway 配置
-
-- [agent-protocol.md](./specs/03-technical-specs/agent-protocol.md) - Agent 协议（轻量版）
-  - 简化 RPC 调用
-  - 文件系统通信
-  - 消息示例
-
-- [agent-error-monitoring.md](./specs/03-technical-specs/agent-error-monitoring.md) - Agent 错误监控
-  - 监控指标
-  - 告警机制
-  - 故障处理
-
-#### 04-processes/ - 流程规范
-- [command-specification.md](./specs/04-processes/command-specification.md) - 命令规范
-  - 命名规范
-  - 参数约定
-  - 错误处理
-
-- [logging-audit.md](./specs/04-processes/logging-audit.md) - 日志审计
-  - 日志格式
-  - 审计要求
-  - 安全规范
-
----
-
-### 2️⃣ 使用指南 (guides/)
-
-**用途:** 各类操作指南和教程
-
-#### 01-getting-started/ - 入门指南
-- 快速开始
-- 环境配置
-- 基础教程
-
-#### 02-deployment/ - 部署指南
-- 本地化运行
-- 本地开发
-- 生产环境
-
-#### 03-agent-guides/ - Agent 指南
-- 灌汤使用指南
-- 酱肉开发指南
-- 豆沙前端指南
-- 酸菜运维指南
-
----
-
-### 3️⃣ 知识库 (knowledge/)
-
-**用途:** 领域知识和最佳实践
-
-#### 01-domain/ - 领域知识
-- 包子铺业务知识
-- 行业背景
-- 专业术语
-
-#### 02-best-practices/ - 最佳实践
-- [lightweight-mode.md](./knowledge/02-best-practices/lightweight-mode.md) - 轻量级模式
-  - 简化配置
-  - 快速启动
-  - 适用场景
-
----
-
-## 🔗 Agent 引用指南
-
-### 各 Agent 如何引用知识库
-
-所有 Agent 都应该在各自的 TOOLS.md 或 README.md 中添加知识库引用：
-
-```markdown
-## 📚 参考资料
-
-**统一知识库:** [../../doc/README.md](../../doc/README.md)
-
-**常用文档:**
-- [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
-- [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
+├── tech/                          # 🔧 技术方案
+│   └── {项目名}-技术方案.md
+│
+├── design/                        # 🎨 设计稿
+│   └── {项目名}-原型交互稿.md
+│
+├── test/                          # ✅ 测试文档
+│   ├── {项目名}-测试计划.md
+│   └── {项目名}-测试用例.md
+│
+├── deploy/                        # 🚀 部署文档
+│   ├── {项目名}-上线方案.md
+│   ├── 部署指南.md
+│   └── 服务器运维指南.md
+│
+├── plan/                          # 📅 项目计划
+│   └── {项目名}-项目计划.md
+│
+├── guides/                        # 📖 使用指南
+│   ├── agent-协作机制.md
+│   └── 博客系统 - 开发计划.md
+│
+├── progress/                      # 📊 进度跟踪
+│   ├── project-dashboard.md      # 项目进度仪表板
+│   └── agent-heartbeat-dashboard.md # Agent 心跳看板
+│
+└── meetings/                      # 📝 会议纪要
+    └── standup-{YYYYMMDD}.md
 ```
 
 ---
 
-## 📊 文档统计
+## 📖 文档使用指南
 
-| 分类 | 文档数 | 说明 |
-|------|--------|------|
-| **架构设计** | 1 | 系统架构 |
-| **业务需求** | 2 | 需求 + 数据库设计 |
-| **技术规范** | 3 | 通信协议 + 监控 |
-| **流程规范** | 2 | 命令 + 日志 |
-| **最佳实践** | 1 | 轻量级模式 |
-| **总计** | 9 | 核心文档 |
+### 1. PRD（需求文档）
 
----
+**何时使用:** 有新功能/项目启动时
 
-## 🎯 知识库管理
+**负责人:** 灌汤 (PM)
 
-### 文档添加流程
+**流程:**
+```
+1. 复制模板 → doc/prd/{项目名}-PRD.md
+2. 填写需求内容
+3. 组织需求评审
+4. 定稿后通知全员
+```
 
-1. **创建文档** → 放到对应分类目录
-2. **更新索引** → 修改本文件的文档列表
-3. **通知 Agent** → 通过 Gateway 发送消息
-4. **Git 提交** → commit & push
-
-### 文档分类原则
-
-- **架构设计** - 影响整体的技术决策
-- **业务需求** - 包子铺的业务逻辑
-- **技术规范** - OpenClaw 框架相关
-- **流程规范** - 工作流程和标准
-- **最佳实践** - 经验总结和优化建议
-
-### 维护责任
-
-- **灌汤 (PM)** - 知识库整体维护
-- **所有 Agent** - 各自负责领域的文档更新
-- **鲜肉** - 检查和监督完整性
+**关键内容:**
+- 业务背景和目标
+- 需求列表和优先级
+- 用户故事
+- 功能详情
+- 验收标准
 
 ---
 
-## 📝 迁移记录
+### 2. API & 技术方案
 
-### 2026-03-11 - 知识库建立
+**何时使用:** PRD 评审通过后
 
-**从 workspace-guantang/specs/ 迁移:**
+**负责人:** 酱肉 (后端)
 
-| 原文档 | 新位置 | 分类 |
-|--------|--------|------|
-| system-architecture.md | specs/01-architecture/ | 架构设计 |
-| blog-system-requirements.md | specs/02-business-specs/ | 业务需求 |
-| blog-system-database-design.md | specs/02-business-specs/ | 业务需求 |
-| agent-communication-protocol-v2.md | specs/03-technical-specs/ | 技术规范 |
-| agent-protocol.md | specs/03-technical-specs/ | 技术规范 |
-| agent-error-monitoring.md | specs/03-technical-specs/ | 技术规范 |
-| command-specification.md | specs/04-processes/ | 流程规范 |
-| logging-audit.md | specs/04-processes/ | 流程规范 |
-| lightweight-mode.md | knowledge/02-best-practices/ | 最佳实践 |
+**流程:**
+```
+1. 复制模板 → doc/tech/{项目名}-技术方案.md
+2. 设计技术架构
+3. 定义 API 接口
+4. 组织技术评审
+5. 定稿后开始开发
+```
 
-**目的:**
-- ✅ 统一知识库管理
-- ✅ 便于所有 Agent 访问
-- ✅ 清晰的文档分类
-- ✅ 避免重复和混乱
+**关键内容:**
+- 技术选型
+- 系统架构
+- API 设计
+- 数据库设计
+- 前端设计
 
 ---
 
-## ✅ 检查清单
+### 3. 原型/交互稿
 
-在添加新文档时，请确认:
+**何时使用:** PRD 评审通过后
 
-- [ ] 文档放在正确的分类目录
-- [ ] 更新了本索引文件
-- [ ] 文档命名符合规范
-- [ ] 包含必要的元数据（版本、日期等）
-- [ ] 通知了相关 Agent
-- [ ] Git 提交并推送
+**负责人:** 豆沙 (前端)
+
+**流程:**
+```
+1. 复制模板 → doc/design/{项目名}-原型交互稿.md
+2. 设计页面原型（Figma/墨刀）
+3. 编写交互说明
+4. 组织设计评审
+5. 定稿后开始开发
+```
+
+**关键内容:**
+- 页面布局
+- 交互说明
+- 组件设计
+- 响应式设计
+- 动效设计
 
 ---
 
-**下次审查:** 2026-03-18  
-**维护者签名:** 灌汤 (Guantang)  
-**知识库状态:** ✅ 运行中
+### 4. 测试用例/计划
+
+**何时使用:** 技术方案评审通过后
+
+**负责人:** 测试负责人
+
+**流程:**
+```
+1. 复制模板 → doc/test/{项目名}-测试用例.md
+2. 编写测试用例
+3. 组织测试评审
+4. 执行测试
+5. 输出测试报告
+```
+
+**关键内容:**
+- 测试策略
+- 测试用例
+- 测试数据
+- 缺陷管理
+- 测试报告
+
+---
+
+### 5. 上线方案
+
+**何时使用:** 测试完成后，上线前
+
+**负责人:** 酸菜 (运维)
+
+**流程:**
+```
+1. 复制模板 → doc/deploy/{项目名}-上线方案.md
+2. 编写上线步骤
+3. 准备回滚方案
+4. 组织上线评审
+5. 执行上线
+```
+
+**关键内容:**
+- 上线步骤
+- 回滚方案
+- 监控告警
+- 应急预案
+- 上线验证
+
+---
+
+### 6. 项目进度计划
+
+**何时使用:** 项目启动时
+
+**负责人:** 灌汤 (PM)
+
+**流程:**
+```
+1. 复制模板 → doc/plan/{项目名}-项目计划.md
+2. 分解任务（WBS）
+3. 估算工期
+4. 制定里程碑
+5. 跟踪进度
+```
+
+**关键内容:**
+- 阶段划分
+- 任务分解（WBS）
+- 甘特图
+- 资源计划
+- 风险管理
+- 进度跟踪
+
+---
+
+## 🎯 文档质量标准
+
+### 完整性
+- [ ] 所有必填章节已填写
+- [ ] 验收标准明确
+- [ ] 责任人明确
+- [ ] 时间节点明确
+
+### 准确性
+- [ ] 技术描述准确
+- [ ] 数据准确
+- [ ] 链接有效
+- [ ] 图表清晰
+
+### 可读性
+- [ ] 结构清晰
+- [ ] 用词准确
+- [ ] 排版美观
+- [ ] 无错别字
+
+### 可操作性
+- [ ] 步骤清晰
+- [ ] 可执行
+- [ ] 有验收标准
+- [ ] 有风险应对
+
+---
+
+## 📊 文档状态跟踪
+
+| 文档类型 | 项目数 | 已完成 | 进行中 | 未开始 |
+|----------|--------|--------|--------|--------|
+| PRD | - | - | - | - |
+| 技术方案 | - | - | - | - |
+| 原型交互稿 | - | - | - | - |
+| 测试用例 | - | - | - | - |
+| 上线方案 | - | - | - | - |
+| 项目计划 | - | - | - | - |
+
+---
+
+## 🔗 相关文档
+
+- [Agent 协作机制](guides/agent-协作机制.md)
+- [博客系统开发计划](guides/博客系统 - 开发计划.md)
+- [项目进度仪表板](progress/project-dashboard.md)
+- [Agent 心跳看板](progress/agent-heartbeat-dashboard.md)
+
+---
+
+**文档位置:** `F:\openclaw\agent\doc\README.md`  
+**维护:** 由 PM 负责维护和更新
