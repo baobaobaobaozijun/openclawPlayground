@@ -38,8 +38,7 @@
 
 ## 📚 统一知识库 ⭐⭐⭐【新增】
 
-**知识库路径:** `/app/doc` (Docker 容器内)  
-**本地路径:** `F:\openclaw\agent\doc`
+**知识库路径:** `F:\openclaw\agent\doc`
 
 **知识库索引:** [../../doc/README.md](../../doc/README.md)
 
