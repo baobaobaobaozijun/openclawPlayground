@@ -167,20 +167,20 @@ catch {
 
 **知识库路径:** `F:\openclaw\agent\doc`
 
-**知识库索引:** [../../doc/README.md](../../doc/README.md)
+**知识库索引:** [../doc/README.md](../doc/README.md)
 
 **常用文档:**
-- [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [错误监控](../../doc/specs/03-technical-specs/agent-error-monitoring.md)
-- [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
-- [轻量级模式](../../doc/knowledge/02-best-practices/lightweight-mode.md)
+- [系统架构](../doc/specs/01-architecture/system-architecture.md)
+- [错误监控](../doc/specs/03-technical-specs/agent-error-monitoring.md)
+- [博客系统需求](../doc/specs/02-business-specs/blog-system-requirements.md)
+- [轻量级模式](../doc/knowledge/02-best-practices/lightweight-mode.md)
 
 ---
 
 ## 📖 参考资料
 
-**架构文档:** [ARCHITECTURE.md](../ARCHITECTURE.md)
-**轻量级架构:** [doc/ARCHITECTURE-LITE.md](../../doc/ARCHITECTURE-LITE.md)
+**架构文档:** [../ARCHITECTURE.md](../ARCHITECTURE.md)
+**轻量级架构:** [../doc/ARCHITECTURE-LITE.md](../doc/ARCHITECTURE-LITE.md)
 
 ---
 
