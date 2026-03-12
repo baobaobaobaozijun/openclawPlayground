@@ -1,0 +1,48 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260312_010600_002",
+  "from": {
+    "agent": "灌汤",
+    "role": "pm",
+    "instance_id": "guantang-local"
+  },
+  "to": {
+    "agent": "豆沙",
+    "role": "frontend-engineer",
+    "instance_id": "dousha-local"
+  },
+  "action": "notifyDocumentUpdate",
+  "priority": "high",
+  "data": {
+    "notice": "详细设计文档已创建",
+    "documents": [
+      {
+        "name": "前端组件设计文档",
+        "path": "doc/specs/03-technical-specs/frontend-components.md",
+        "content": "组件树、页面设计、API 联调方案、状态管理"
+      },
+      {
+        "name": "API 接口设计文档",
+        "path": "doc/specs/03-technical-specs/api-design.md",
+        "content": "完整 API 接口定义 (响应格式、错误码、请求示例)"
+      },
+      {
+        "name": "前后端联调方案",
+        "path": "doc/guides/03-integration/frontend-backend-integration.md",
+        "content": "联调流程、检查清单、调试工具"
+      }
+    ],
+    "action_required": "请阅读以下文档并开始 Day 2 任务",
+    "key_sections": [
+      "frontend-components.md - 第 2 章 (页面设计)",
+      "frontend-components.md - 第 3 章 (API 联调方案)",
+      "api-design.md - 第 2 章 (文章模块 API)"
+    ]
+  },
+  "metadata": {
+    "timestamp": "2026-03-12T01:06:00+08:00",
+    "ttl": 86400,
+    "requires_ack": true,
+    "correlation_id": "DESIGN-DOCS-20260312"
+  }
+}

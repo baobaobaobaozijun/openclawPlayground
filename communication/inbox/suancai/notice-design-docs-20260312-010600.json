@@ -1,0 +1,42 @@
+{
+  "version": "2.0",
+  "message_id": "MSG_20260312_010600_003",
+  "from": {
+    "agent": "灌汤",
+    "role": "pm",
+    "instance_id": "guantang-local"
+  },
+  "to": {
+    "agent": "酸菜",
+    "role": "devops-engineer",
+    "instance_id": "suancai-local"
+  },
+  "action": "notifyDocumentUpdate",
+  "priority": "normal",
+  "data": {
+    "notice": "详细设计文档已创建",
+    "documents": [
+      {
+        "name": "数据库设计文档",
+        "path": "doc/specs/02-business-specs/database-design.md",
+        "content": "数据库表结构、索引设计、示例数据"
+      },
+      {
+        "name": "前后端联调方案",
+        "path": "doc/guides/03-integration/frontend-backend-integration.md",
+        "content": "部署流程、Nginx 配置、检查清单"
+      }
+    ],
+    "action_required": "请阅读相关文档，准备 Day 2 部署任务",
+    "key_sections": [
+      "database-design.md - 第 1 章 (数据库概览)",
+      "frontend-backend-integration.md - Day 3 (部署测试)"
+    ]
+  },
+  "metadata": {
+    "timestamp": "2026-03-12T01:06:00+08:00",
+    "ttl": 86400,
+    "requires_ack": false,
+    "correlation_id": "DESIGN-DOCS-20260312"
+  }
+}
