@@ -44,7 +44,7 @@
 
 **常用文档:**
 - [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议 v2.0](../../doc/specs/03-technical-specs/agent-communication-protocol-v2.md)
+- [API 设计](../../doc/specs/03-technical-specs/api-design.md)
 - [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
 - [数据库设计](../../doc/specs/02-business-specs/blog-system-database-design.md)
 - [错误监控](../../doc/specs/03-technical-specs/agent-error-monitoring.md)
@@ -65,9 +65,8 @@ doc/
 
 ## 📖 参考资料
 
-**完整通信协议:** [agent-communication-protocol-v2.md](../workspace-guantang/specs/03-technical-specs/agent-communication-protocol-v2.md)
-
 **架构说明:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+**轻量级架构:** [doc/ARCHITECTURE-LITE.md](../../doc/ARCHITECTURE-LITE.md)
 
 ---
 

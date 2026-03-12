@@ -164,7 +164,7 @@ catch {
 
 **常用文档:**
 - [系统架构](../../doc/specs/01-architecture/system-architecture.md)
-- [Agent 通信协议](../../doc/specs/03-technical-specs/agent-protocol.md)
+- [前端组件设计](../../doc/specs/03-technical-specs/frontend-components.md)
 - [博客系统需求](../../doc/specs/02-business-specs/blog-system-requirements.md)
 - [轻量级模式](../../doc/knowledge/02-best-practices/lightweight-mode.md)
 
