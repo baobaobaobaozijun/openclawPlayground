@@ -1,5 +1,81 @@
-# HEARTBEAT.md
+# HEARTBEAT.md - 酱肉的心跳配置
 
-# Keep this file empty (or with only comments) to skip heartbeat API calls.
+**最后更新:** 2026-03-12 15:08  
+**心跳频率:** 每 10 分钟
 
-# Add tasks below when you want the agent to check something periodically.
+---
+
+## ❤️ 心跳机制
+
+**触发时机:** 每次收到 PM 心跳检查时（每 10 分钟）
+
+**必须执行:**
+1. **主动会话同步** - 使用 sessions_send 主动向 PM (灌汤) 发送心跳消息
+2. **告知当前状态** - 包含任务 ID、任务名称、进度百分比、状态（🟢/🟡/🔴）
+3. **告知执行任务** - 当前正在执行的具体任务描述
+4. **问题与风险** - 如有阻塞或风险必须说明
+
+**心跳消息格式:**
+```
+【心跳同步】酱肉 - {YYYY-MM-DD HH:MM}
+
+## 当前状态
+- 任务 ID: {TASK-XXX}
+- 任务名称：{任务描述}
+- 进度：{XX}%
+- 状态：🟢 正常 / 🟡 有风险 / 🔴 阻塞
+
+## 正在执行
+{当前正在做的具体工作}
+
+## 问题与风险
+- [ ] 无
+- [ ] {问题描述}
+```
+
+**违规处理:**
+| 次数 | 处理方式 |
+|------|----------|
+| 第 1 次未同步 | PM 主动确认状态 |
+| 第 2 次未同步 | 站会通报批评 |
+| 第 3 次未同步 | 上报并调整任务 |
+
+**PM 看板维护:**
+- PM 会在 `doc/progress/agent-heartbeat-dashboard.md` 维护心跳看板
+- 各 Agent 可查看看板确认自己的心跳状态
+
+---
+
+## 📋 强制提交要求
+
+### 文档提交
+**触发条件:** 每次 F:\openclaw 文件夹下的文档内容发生更改
+
+**必须执行:**
+1. 检查工作区状态 (git status)
+2. 添加所有更改的文件 (git add .)
+3. 提交更改 (git commit -m "docs: {描述}")
+4. 推送到 GitHub (git push)
+
+### 代码提交
+**触发条件:** 每次 F:\openclaw 文件夹下的代码内容发生更改
+
+**必须执行:**
+1. 检查工作区状态 (git status)
+2. 添加所有更改的文件 (git add .)
+3. 提交更改 (git commit -m "{type}: {描述}")
+4. 拉取最新代码 (git pull --rebase)
+5. 推送到 GitHub (git push)
+
+**提交信息规范:**
+| 前缀 | 用途 | 示例 |
+|------|------|------|
+| `feat:` | 新功能 | `feat: 实现用户认证 API` |
+| `fix:` | 修复 | `fix: 修复数据库连接配置` |
+| `docs:` | 文档 | `docs: 更新 API 接口文档` |
+| `config:` | 配置 | `config: 更新 Spring Boot 配置` |
+| `chore:` | 杂项 | `chore: 清理旧配置文件` |
+
+---
+
+*位置：F:\openclaw\agent\workspace-jiangrou\HEARTBEAT.md*
