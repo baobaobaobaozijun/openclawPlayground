@@ -42,7 +42,11 @@
 - API 联调测试
 
 **依赖关系:**
-- ⏳ 等待酸菜完成数据库初始化（MySQL 表结构）
+- ✅ 数据库已就绪！(酸菜 03-12 08:36 通知)
+  - 数据库名：`blog_system`
+  - 7 张表已创建 (users, articles, tags, categories, article_tags, article_categories, comments)
+  - 管理员账号：admin / admin123
+  - 可以立即开始开发！
 
 ---
 
