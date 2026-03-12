@@ -335,8 +335,8 @@ function Send-Alert {
         message = $Message
     }
     
-    # 写入告警文件
-    $alert | ConvertTo-Json | Add-Content "F:\openclaw\agent\communication\inbox\guantang\alerts\$((Get-Date).ToString('yyyyMMdd-HHmmss')).json"
+    # 通过 Gateway 对话直接报告
+    Write-Output "🚨 告警：$Message"
     
     # 如果是紧急告警，立即通知
     if ($Level -eq "critical") {
@@ -502,17 +502,14 @@ function Handle-GatewayOffline {
 
 ### 告警通知渠道
 
-#### 1. 工作空间告警 (所有级别)
+#### 1. Gateway 对话告警（所有级别）
 
-**路径:** `F:\openclaw\agent\communication\inbox\guantang\alerts\`
+**方式:** 通过 Gateway 对话界面直接报告
 
-**文件格式:**
-```json
-{
-  "alert_id": "ALERT_20260310_001",
-  "timestamp": "2026-03-10T14:30:00Z",
-  "level": "high",
-  "agent": "酱肉",
+**说明:**
+- ✅ 告警直接在对话中显示
+- ✅ 无需文件系统路径
+- ✅ 实时通知，即时响应
   "type": "token_exhausted",
   "message": "酱肉 Token 已耗尽，正在使用备用 Token",
   "action_taken": "已自动切换到备用 Token",
@@ -680,10 +677,6 @@ docker exec openclaw-instance-1 ping host.docker.internal
 ```
 
 #### 查看消息队列
-```bash
-dir F:\openclaw\agent\communication\outbox /s
-```
-
 ---
 
 ## 📊 监控指标汇总

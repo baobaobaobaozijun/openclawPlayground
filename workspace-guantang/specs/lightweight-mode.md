@@ -97,42 +97,18 @@
 
 ## 轻量级运行模式
 
-### 文件系统通信
+### 对话式通信 ⭐
 
-避免重量级的消息队列，采用文件共享方式：
+**通信方式:** 直接通过 Gateway 对话界面
 
-```yaml
-通信目录：F:\openclaw\workspace\communication\
-  ├── inbox\           # 接收的消息
-  ├── outbox\          # 发送的消息
-  └── archive\         # 历史消息归档
+**特点:**
+- ✅ 无需文件系统通信
+- ✅ 无需轮询机制
+- ✅ 实时交互，自然高效
+- ✅ 所有沟通在对话中完成
 
-消息文件格式 (.json):
-{
-  "from": "灌汤",
-  "to": "酱肉",
-  "action": "allocateTask",
-  "data": {...},
-  "timestamp": "2026-03-07T10:30:00Z"
-}
-```
-
-### 轮询机制
-
-每个 Agent 定期检查自己的收件箱：
-
-```python
-# 伪代码示例
-def check_inbox():
-    inbox_path = f"communication/inbox/{agent_name}/"
-    messages = os.listdir(inbox_path)
-    for msg in messages:
-        process_message(msg)
-        move_to_archive(msg)
-    
-    # 每 5 分钟检查一次
-    schedule.every(5).minutes.do(check_inbox)
-```
+**资源占用:** 低  
+**运行模式:** 按需激活
 
 ## 日志优化
 

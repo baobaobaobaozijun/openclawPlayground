@@ -11,7 +11,9 @@
 
 ## 📡 Gateway 通信配置 ⭐⭐⭐
 
-### 本地运行配置
+### 对话式通信
+
+**通信方式:** 直接通过 Gateway 对话界面
 
 **Gateway 连接:**
 - **URL:** `http://localhost:18790`
@@ -24,29 +26,11 @@
 
 **工作空间:** `F:\openclaw\agent\workspace-suancai`
 
----
-
-## 📨 通信目录
-
-### 收件箱 (Inbox)
-
-**路径:** `F:\openclaw\agent\workspace-suancai\communication\inbox\`
-
 **说明:**
-- 接收来自灌汤的部署任务
-- 接收来自酱肉的测试请求
-- 接收来自豆沙的前端测试请求
-
-### 发件箱 (Outbox)
-
-**路径:** `F:\openclaw\agent\workspace-suancai\communication\outbox\`
-
-**说明:**
-- 向灌汤报告部署状态
-- 向酱肉/豆沙发送测试报告
-- 向所有人发送监控告警
-
----
+- ✅ 不再使用文件系统的 inbox/outbox 机制
+- ✅ 所有沟通直接通过 Gateway 对话界面进行
+- ✅ 任务分配、测试报告、监控告警都在对话中完成
+- ✅ 更自然、更可靠、更高效
 
 ## 🔧 核心接口
 
