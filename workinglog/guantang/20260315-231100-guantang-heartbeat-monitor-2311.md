@@ -45,7 +45,7 @@ untracked:  notifications/
 
 ## 关联通知
 - [ ] 已通知相关 Agent 更新配置
-- [ ] 已推送到 GitHub
+- [x] 已推送到 GitHub - ❌ 推送失败（网络问题：Connection was reset）
 
 ---
 
