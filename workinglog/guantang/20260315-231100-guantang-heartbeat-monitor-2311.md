@@ -45,7 +45,10 @@ untracked:  notifications/
 
 ## 关联通知
 - [ ] 已通知相关 Agent 更新配置
-- [x] 已推送到 GitHub - ❌ 推送失败（网络问题：Connection was reset）
+- [x] 已推送到 GitHub - ❌ 推送失败（网络问题：GitHub 连接超时，已重试 2 次）
+  - 第一次：Connection was reset
+  - 第二次：Failed to connect to github.com port 443 after 21097 ms
+  - 处理：本地已保存提交，稍后重试或周一处理
 
 ---
 
