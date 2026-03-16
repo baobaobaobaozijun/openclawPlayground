@@ -123,11 +123,14 @@
 
 ## 📢 已采取行动
 
-1. ✅ 生成检查报告
-2. ⏳ 发送补录通知给酱肉
-3. ⏳ 发送补录通知给豆沙
-4. ⏳ 发送补录通知给酸菜
-5. ⏳ 检查 Gateway 配置
+1. ✅ 生成检查报告：`workinglog/reports/20260316-151000-worklog-inspection-report.md`
+2. ✅ 发送补录通知给酱肉：`workspace-jiangrou/inbox/工作日志补录通知 -20260316.md`
+3. ✅ 发送补录通知给豆沙：`workspace-dousha/inbox/工作日志补录通知 -20260316.md`
+4. ✅ 发送补录通知给酸菜：`workspace-suancai/inbox/工作日志补录通知 -20260316.md`
+5. ✅ 创建心跳日志：`doc/progress/agent-heartbeat-log.md`
+6. ✅ 创建心跳仪表板：`doc/progress/agent-heartbeat-dashboard.md`
+7. ✅ 创建灌汤工作日志：`workinglog/guantang/20260316-151000-guantang-worklog-inspection.md`
+8. ⏳ 检查 Gateway 配置（已完成，配置正常）
 
 ---
 
