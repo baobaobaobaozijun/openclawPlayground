@@ -1,27 +1,31 @@
 # HEARTBEAT.md - 灌汤的心跳配置
 
-**最后更新:** 2026-03-12  
-**心跳频率:** 每 10 分钟（Cron 自动触发） ⭐⭐⭐
+**最后更新:** 2026-03-16 15:06  
+**心跳频率:** 每 10 分钟（Cron 自动触发 + subagent 唤醒） ⭐⭐⭐
 
 ---
 
 ## ❤️ 心跳监控机制 (PM 职责)
 
-**触发方式:** Cron 定时任务（每 10 分钟自动执行） ⭐
-**配置文件:** `.openclaw/crons/agent-monitoring.yml`
+**触发方式:** Cron 定时任务（每 10 分钟自动执行） + subagent 主动唤醒 ⭐  
+**配置文件:** `.openclaw/crons/agent-monitoring.yml`  
+**机制文档:** [doc/guides/agent-heartbeat-mechanism.md](../doc/guides/agent-heartbeat-mechanism.md)
 
 **核心职责:**
 1. **主动检查** - 通过 Cron 每 10 分钟自动检查各 Agent 状态
-2. **识别空闲** - 发现无任务或长时间未活动的 Agent
-3. **分配任务** - 为空闲 Agent 立即分配新任务
-4. **维护看板** - 更新 `doc/progress/agent-heartbeat-dashboard.md`
-5. **协调协作** - 确保所有 Agent 都有明确任务并持续工作
+2. **识别失联** - 发现最后活动 > 60 分钟的 Agent
+3. **subagent 唤醒** - 使用 sessions_spawn 直接调用失联 Agent 要求汇报
+4. **分配任务** - 为空闲 Agent 立即分配新任务
+5. **维护看板** - 更新 `doc/progress/agent-heartbeat-dashboard.md`
+6. **协调协作** - 确保所有 Agent 都有明确任务并持续工作
 
 **检查渠道:**
 - 📂 workspace-{agent}/tasks/inbox/ - 待处理任务
 - 📂 workspace-{agent}/logs/ - 最新工作日志
 - 📂 workspace-{agent}/code/ - 代码最后修改时间
+- 📂 workinglog/{agent}/ - 工作日志（统一目录）
 - 💬 对话历史 - Agent 活动记录
+- 🔁 subagent 会话 - 失联 Agent 唤醒回复
 
 ---
 
@@ -157,6 +161,48 @@
    - 记录每个 Agent 的最后活动时间
    - 标记当前任务和状态
    - 记录本次检查采取的行动
+
+### 失联判定标准
+
+**满足任一条件即判定为失联:**
+- ❌ 最后活动时间 > 60 分钟（workinglog 无新日志）
+- ❌ 代码目录 > 120 分钟无修改
+- ❌ subagent 唤醒后 10 分钟无回复
+- ❌ 对话历史 > 120 分钟无发言
+
+**失联唤醒流程:**
+```
+发现失联 Agent
+  ↓
+使用 sessions_spawn 直接调用
+  ↓
+要求 10 分钟内汇报：
+1. 当前任务及进度
+2. 最后活动时间及内容
+3. 是否有技术阻碍
+4. 预计下次汇报时间
+  ↓
+等待回复
+  ↓
+有回复 → 检查工作日志 → 分配任务
+  ↓
+无回复 → 第二次唤醒（紧急）→ 记录风险 → 人工介入
+```
+
+**subagent 唤醒模板:**
+```
+【心跳检查 - 立即汇报】🔴
+
+灌汤 PM 心跳检查发现你已失联超过 X 小时。
+
+请立即汇报：
+1. 当前任务及进度
+2. 最后活动时间及内容
+3. 是否有技术阻碍
+4. 预计下次汇报时间
+
+⏰ 限时 10 分钟内回复
+```
 
 ### 空闲判定标准
 
