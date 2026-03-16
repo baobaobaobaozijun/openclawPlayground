@@ -1,10 +1,10 @@
-<!-- Last Modified: 2026-03-12 -->
+<!-- Last Modified: 2026-03-16 -->
 
 # MEMORY.md - 灌汤的工作记忆
 
 **Agent:** 灌汤 (Guantang)  
 **角色:** PM / 项目经理  
-**最后更新:** 2026-03-12 15:21:00
+**最后更新:** 2026-03-16 08:54:00
 
 ---
 
@@ -58,6 +58,41 @@
 ---
 
 ## 🕐 详细执行日志
+
+### 2026-03-16 08:54:00 - 执行架构文档自动维护（定时任务）
+**操作:** 执行每天凌晨 3 点的 ARCHITECTURE.md 自动维护任务
+
+**维护内容:**
+1. ✅ 检查 ARCHITECTURE.md 完整性 - 文档结构完整
+2. ✅ 验证链接地址 - 发现并修复 4 处相对链接路径错误
+   - 修复前：`../../code/backend/README.md` → 修复后：`../code/backend/README.md`
+   - 修复前：`../../code/frontend/README.md` → 修复后：`../code/frontend/README.md`
+   - 修复前：`../../code/deploy/README.md` → 修复后：`../code/deploy/README.md`
+   - 修复前：`../../code/tests/README.md` → 修复后：`../code/tests/README.md`
+3. ✅ 统一更新日期 - 从 2026-03-11/12 统一为 2026-03-16
+4. ✅ 提交到 GitHub - commit: b2983d2
+
+**链接验证结果:**
+| 链接目标 | 状态 | 说明 |
+|---------|------|------|
+| workspace-guantang/IDENTITY.md | ✅ 存在 | PM 身份认知 |
+| workspace-jiangrou/IDENTITY.md | ✅ 存在 | 酱肉身份认知 |
+| workspace-dousha/IDENTITY.md | ✅ 存在 | 豆沙身份认知 |
+| workspace-suancai/IDENTITY.md | ✅ 存在 | 酸菜身份认知 |
+| agent-configs/jiangrou/README.md | ✅ 存在 | 酱肉技术规范 |
+| code/backend/README.md | ✅ 存在 | 后端工程说明（路径已修复） |
+| code/frontend/README.md | ✅ 存在 | 前端工程说明（路径已修复） |
+
+**Agent 通知状态:**
+- ⚠️ 酱肉/豆沙/酸菜 - 无活跃会话，通知暂无法送达
+- ✅ 已记录到 MEMORY.md，各 Agent 激活时会自动读取最新架构
+
+**Git 提交:**
+- Commit: `b2983d2`
+- Message: `docs: 更新架构文档（自动维护）- 修复相对链接路径，统一更新日期`
+- 推送状态：✅ 成功 (master -> origin/master)
+
+**下次维护时间:** 2026-03-17 03:00:00
 
 ### 2026-03-12 15:21:00 - 创建架构文档维护定时任务
 **操作:** 创建每天凌晨 3 点执行的定时任务，维护 ARCHITECTURE.md
