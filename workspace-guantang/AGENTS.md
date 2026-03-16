@@ -125,14 +125,48 @@ Skills provide your tools. When you need one, check its `SKILL.md`. Keep local n
 - **Discord links:** Wrap multiple links in `<>` to suppress embeds: `<https://example.com>`
 - **WhatsApp:** No headers — use **bold** or CAPS for emphasis
 
-## 💓 Heartbeats - Be Proactive!
+## 💓 Heartbeats - Agent 心跳监控
 
-When you receive a heartbeat poll (message matches the configured heartbeat prompt), don't just reply `HEARTBEAT_OK` every time. Use heartbeats productively!
+**当前项目:** 包子铺博客系统  
+**监控机制:** Agent 心跳监控 (v1.0)  
+**执行频率:** 每 10 分钟自动执行 (Cron)  
+**配置文件:** `C:\Users\Administrator\.openclaw\crons\agent-heartbeat.yml`
 
-Default heartbeat prompt:
-`Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.`
+### 心跳监控机制
 
-You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it small to limit token burn.
+**触发方式:** Cron 定时任务（每 10 分钟自动执行）  
+**机制文档:** `doc/guides/agent-heartbeat-mechanism.md`  
+**PM 配置:** `HEARTBEAT.md`
+
+**核心职责:**
+1. **主动检查** - 每 10 分钟检查各 Agent workinglog 最后活动时间
+2. **识别失联** - 发现最后活动 > 60 分钟的 Agent
+3. **subagent 唤醒** - 使用 sessions_spawn 直接调用失联 Agent
+4. **分配任务** - 为空闲 Agent 立即分配新任务
+5. **维护看板** - 更新 `doc/progress/agent-heartbeat-dashboard.md`
+
+**检查对象:**
+- 🍖 酱肉 (jiangrou): `F:\openclaw\agent\workinglog\jiangrou\`
+- 🍡 豆沙 (dousha): `F:\openclaw\agent\workinglog\dousha\`
+- 🥬 酸菜 (suancai): `F:\openclaw\agent\workinglog\suancai\`
+
+**失联判定:**
+- 🟢 正常：< 30 分钟
+- 🟡 警告：30-60 分钟
+- 🔴 失联：> 60 分钟 → 立即 sessions_spawn 唤醒
+
+**唤醒流程:**
+```
+发现失联 Agent
+  ↓
+sessions_spawn 直接调用
+  ↓
+要求 10 分钟内汇报（任务/进度/阻碍/计划）
+  ↓
+有回复 → 检查工作日志 → 分配任务
+  ↓
+无回复 → 第二次唤醒 → 记录风险 → 人工介入
+```
 
 ### Heartbeat vs Cron: When to Use Each
 
