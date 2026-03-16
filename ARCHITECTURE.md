@@ -1,5 +1,5 @@
-<!-- Last Modified: 2026-03-12 -->
-<!-- Last Modified (CN): 2026-03-12 -->
+<!-- Last Modified: 2026-03-16 -->
+<!-- Last Modified (CN): 2026-03-16 -->
 
 # 包子铺项目架构总览
 
@@ -607,22 +607,22 @@ pm2 start openclaw --name "baozipu"
 ### 工程文档
 
 **后端工程:**
-- [工程说明](../../code/backend/README.md)
+- [工程说明](../code/backend/README.md)
 - 源代码：`code/backend/src/`
 - 构建配置：`code/backend/pom.xml`
 
 **前端工程:**
-- [工程说明](../../code/frontend/README.md)
+- [工程说明](../code/frontend/README.md)
 - 源代码：`code/frontend/src/`
 - 构建配置：`code/frontend/package.json`
 
 **部署脚本:**
-- [部署说明](../../code/deploy/README.md)
+- [部署说明](../code/deploy/README.md)
 - 运维基础设施：`code/deploy/ops-infra/`
 - 部署脚本：`code/deploy/scripts/`
 
 **测试脚本:**
-- [测试说明](../../code/tests/README.md)
+- [测试说明](../code/tests/README.md)
 - 单元测试：`code/tests/unit/`
 - 集成测试：`code/tests/integration/`
 - 性能测试：`code/tests/performance/`
@@ -795,5 +795,5 @@ pm2 stop baozipu
 **祝团队合作愉快！开始创造伟大的产品吧！** 🚀
 
 *维护者：灌汤 PM*  
-*更新日期：2026-03-11*
-*备注：全面清理 Docker 相关引用，切换到本地化运行模式；添加轻量级架构设计*
+*更新日期：2026-03-16*
+*备注：全面清理 Docker 相关引用，切换到本地化运行模式；添加轻量级架构设计；修复工程文档相对链接路径*
