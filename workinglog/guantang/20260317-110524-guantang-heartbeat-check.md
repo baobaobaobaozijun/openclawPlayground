@@ -58,6 +58,12 @@
 - [ ] 飞书通知失败 (需要 target 参数配置)
 - [ ] 等待用户人工介入检查 Agent 进程
 
+## Git 操作
+
+- [x] git add . ✅
+- [x] git commit -m "chore: 更新 Agent 心跳检查报告" ✅
+- [ ] git push ❌ 失败 (网络连接问题 - 无法连接 github.com:443)
+
 ---
 
 ## 待跟进事项
