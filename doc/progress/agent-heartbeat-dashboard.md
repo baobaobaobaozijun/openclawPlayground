@@ -144,9 +144,27 @@
 
 ## 📞 通知状态
 
-- [ ] 已通知用户检查 Gateway
-- [ ] 已发送飞书群消息
+- [x] 已检查 Gateway 状态 (✅ 运行正常，Port 18789)
+- [x] 已更新检查报告
+- [ ] 已发送飞书群消息 (需要 target 参数)
 - [ ] 已记录到 MEMORY.md
+
+## 🔧 Gateway 状态检查
+
+**检查时间:** 2026-03-17 11:02  
+**状态:** ✅ 运行中  
+**端口:** 18789  
+**绑定:** 127.0.0.1 (loopback)  
+**RPC Probe:** OK  
+**Dashboard:** http://127.0.0.1:18789/
+
+**配置警告:**
+- ⚠️ feishu-openclaw-plugin: plugin id mismatch (manifest uses "feishu-openclaw-plugin", entry hints "openclaw-lark")
+
+**分析:** Gateway 正常运行，但 Agent 无响应，可能是：
+1. Agent 进程未启动或已崩溃
+2. Agent 与 Gateway 连接断开
+3. 消息路由配置问题
 
 ---
 
