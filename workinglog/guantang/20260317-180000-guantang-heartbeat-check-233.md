@@ -32,9 +32,9 @@
 - `F:\openclaw\agent\doc\05-progress\agent-heartbeat-dashboard.md` - 更新第 233 轮心跳检查结果
 
 ## 关联通知
-- [ ] 已通知酱肉分配 Day4 任务
-- [ ] 已通知豆沙处理 TASK-008 延误和 Git 提交
-- [ ] 已通知酸菜确认今日工作安排
+- ✅ 已通知酱肉分配 Day4 任务（session: agent:jiangrou:subagent:a4e339ee-66e3-435a-81c2-8a5514311afd）
+- ✅ 已通知豆沙处理 TASK-008 延误和 Git 提交（session: agent:dousha:subagent:f65441c8-6bdd-4b28-bd3f-ab4c1994123f）
+- ✅ 已通知酸菜确认今日工作安排（session: agent:suancai:subagent:e528c2a2-bd20-4f56-8ee4-ba0c0c254ed6）
 
 ---
 
