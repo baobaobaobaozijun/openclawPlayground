@@ -45,11 +45,11 @@
 - `F:\openclaw\agent\workinglog\guantang\20260318-091600-guantang-pm-hourly-check.md` - 本日志
 
 ## 关联通知
-- [ ] 已通知酱肉提交 Git 更改
-- [ ] 已通知豆沙提交 Git 更改
-- [ ] 已通知酸菜提交 Git 更改
-- [ ] 已协调 API 联调时间
-- [ ] 已验收登录页面
+- ✅ 已通知酱肉提交 Git 更改（inbox/git-commit-notify-20260318-0917.md）
+- ✅ 已通知豆沙提交 Git 更改（inbox/git-commit-notify-20260318-0917.md）
+- ✅ 已通知酸菜提交 Git 更改（inbox/git-commit-notify-20260318-0917.md）
+- ✅ 已协调 API 联调时间（doc/coordination/api-integration-20260318-0917.md）
+- [ ] 已验收登录页面（待豆沙 Git 提交后进行）
 
 ---
 
