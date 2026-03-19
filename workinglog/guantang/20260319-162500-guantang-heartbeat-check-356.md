@@ -43,8 +43,9 @@
 - `doc/progress/agent-heartbeat-dashboard.md` - 更新
 
 ## 关联通知
-- [ ] 已通知相关 Agent 更新配置
-- [ ] 已推送到 GitHub（待执行）
+- [x] 已通知相关 Agent 更新配置（inbox 文件）
+- [x] Git 提交本地：`2776dad`
+- [ ] Git 推送到 GitHub：⚠️ 失败（GitHub 认证问题，待重试）
 
 ---
 
