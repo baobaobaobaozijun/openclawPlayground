@@ -497,7 +497,7 @@ pm2 start openclaw --name "baozipu"
 | **安全** | Spring Security | 6.x | 认证授权 |
 | **ORM** | Hibernate / MyBatis-Plus | 6.x / 3.5+ | 对象关系映射 |
 | **数据库** | MySQL | 8.0+ | 主数据库 |
-| **缓存** | Caffeine | 3.x | 本地缓存（替代 Redis） |
+| **缓存** | Caffeine | 3.x | 本地缓存 |
 | **构建** | Maven | 3.9+ | 项目构建和管理 |
 
 ### 前端技术栈（豆沙负责）
