@@ -36,8 +36,13 @@
 
 ## 关联通知
 - [x] 已通知酸菜更新配置 (sessions_spawn 唤醒)
-- [ ] 待酸菜响应后更新看板
-- [ ] Git 提交待执行
+- [x] 已更新心跳看板
+- [x] Git 提交完成 (commit: 23944fe)
+- [ ] Git Push 失败 (凭证问题，需手动 gh auth login)
+
+## Git 状态
+- Commit: 23944fe - "chore: 更新心跳看板第 372 轮检查 (酸菜失联唤醒)"
+- Push: ❌ 失败 (GitHub 凭证存储问题)
 
 ---
 
