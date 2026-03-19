@@ -29,7 +29,9 @@
 
 ## 关联通知
 - [ ] 已通知相关 Agent 更新配置
-- [ ] 已推送到 GitHub
+- [x] 已尝试推送到 GitHub（失败：需要 gh auth login 认证）
+
+**备注:** Git push 因 GitHub 认证问题失败，需要执行 `gh auth login` 重新认证。
 
 ---
 
