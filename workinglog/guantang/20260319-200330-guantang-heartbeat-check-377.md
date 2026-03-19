@@ -35,9 +35,9 @@
 
 ## Git 状态
 - ✅ git add 完成
-- ✅ git commit 完成 (ad90d32)
-- ❌ git push 失败 - 网络连接问题 (Failed to connect to github.com port 443)
-- 备注：GitHub 连接问题持续存在，需手动处理或等待网络恢复
+- ✅ git commit 完成 (ad90d32 → cd686fd)
+- ❌ git push 失败 - GitHub 认证问题 (credential store / prompt script)
+- 备注：需手动执行 `gh auth login` 修复认证，或等待网络/凭证问题恢复
 
 ---
 
