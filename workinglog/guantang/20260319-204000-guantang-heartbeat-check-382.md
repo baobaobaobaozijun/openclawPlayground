@@ -27,7 +27,8 @@
 ## 关联通知
 - [x] 已更新心跳看板
 - [ ] 酱肉豆沙 sessions_spawn 唤醒进行中
-- [ ] 待 Git 提交推送
+- [x] Git 提交完成 (本地)
+- [ ] Git Push 失败 (GitHub 认证问题，需手动 gh auth login)
 
 ---
 
