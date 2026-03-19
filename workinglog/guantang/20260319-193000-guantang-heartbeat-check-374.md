@@ -36,6 +36,8 @@
 ## 关联通知
 - [x] 已唤醒失联 Agent (sessions_spawn)
 - [ ] 等待 Agent 响应中（10 分钟窗口）
+- [x] Git 提交完成 (commit: dfe0903)
+- [ ] Git Push 失败 - GitHub 认证问题（需手动 gh auth login）
 - [ ] 下次检查时间：19:40
 
 ---
