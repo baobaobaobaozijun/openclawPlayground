@@ -1,5 +1,5 @@
-<!-- Last Modified: 2026-03-18 -->
-<!-- Last Modified (CN): 2026-03-18 -->
+<!-- Last Modified: 2026-03-19 -->
+<!-- Last Modified (CN): 2026-03-19 -->
 
 # 包子铺项目架构总览
 
@@ -562,7 +562,7 @@ pm2 start openclaw --name "baozipu"
 **【新增】监控与故障处理**:
 - [错误监控与故障处理机制](./workspace-guantang/specs/03-technical-specs/agent-error-monitoring.md) ⭐
 - [实时监控仪表板](./workspace-guantang/monitoring/dashboard.md) ⭐
-- [监控脚本](./workspace-guantang/scripts/simple-monitor.ps1) ⭐
+- [工作报告检查脚本](./workspace-guantang/scripts/check-work-report.ps1) ⭐
 
 **技术规范**（参考资料）
 - [酱肉技术规范](./workspace-guantang/agent-configs/jiangrou/README.md)
@@ -572,7 +572,7 @@ pm2 start openclaw --name "baozipu"
 **使用指南:**
 - **[快速启动指南](./workspace-guantang/guides/quick-start.md)** ⭐ 新手必读
 - **[本地化运行指南](./workspace-guantang/guides/local-run-guide.md)** ⭐ 运行配置
-- [GitHub 上传指南](./workspace-guantang/guides/github-upload-guide.md)
+- [工作报告审查清单](./workspace-guantang/guides/work-report-audit-checklist.md)
 
 **规范文档:**
 - [Agent 协议](./workspace-guantang/specs/agent-protocol.md)
@@ -795,5 +795,5 @@ pm2 stop baozipu
 **祝团队合作愉快！开始创造伟大的产品吧！** 🚀
 
 *维护者：灌汤 PM*  
-*更新日期：2026-03-18*
+*更新日期：2026-03-19*
 *备注：全面清理 Docker 相关引用，切换到本地化运行模式；添加轻量级架构设计；修复工程文档相对链接路径*
