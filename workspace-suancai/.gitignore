@@ -39,3 +39,8 @@ docker-compose.override.yml
 *.key
 *.pem
 .secrets/
+
+# Local config (sensitive)
+.local/
+*.local.md
+
