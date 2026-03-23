@@ -6,6 +6,47 @@
 
 ---
 
+## 2026-03-20 心跳日志
+
+### 09:50 检查 (第 385 轮)
+
+| Agent | 最后活动 | 状态 | 行动 |
+|-------|---------|------|------|
+| 酱肉 | 03-19 20:21 (809m) | 🔴 失联 | 已唤醒 (sessions_spawn) |
+| 豆沙 | 03-19 20:21 (809m) | 🔴 失联 | 已唤醒 (sessions_spawn) |
+| 酸菜 | 03-19 21:01 (769m) | 🔴 失联 | 已唤醒 (sessions_spawn) |
+
+**行动记录:**
+- 09:50 - 执行第 385 轮心跳检查
+- 09:50 - 全员失联超过 12 小时（隔夜），已达到严重失联阈值
+- 09:50 - 已使用 sessions_spawn 唤醒全部 3 个 Agent：
+  - 酱肉：sessionKey=agent:jiangrou:subagent:36c96bab-978b-4d4d-b989-166c3f5869da
+  - 豆沙：sessionKey=agent:dousha:subagent:2ed89c98-8c59-49e9-aee0-bccaceac0282
+  - 酸菜：sessionKey=agent:suancai:subagent:72b10278-8208-46ee-8d00-1544880e671e
+- 09:50 - 更新心跳看板 doc/05-progress/agent-heartbeat-dashboard.md
+- 09:50 - 记录工作日志并提交 Git
+
+**唤醒任务:**
+```
+【心跳检查 - 立即汇报】
+灌汤 PM 心跳检查发现你已失联 {X} 分钟（约 13.5 小时）。
+当前时间：03-20 09:50
+请立即汇报：
+1. 当前任务及进度
+2. 最后活动时间及内容
+3. 是否有技术阻碍
+4. 预计下次汇报时间
+限时 10 分钟内回复。
+```
+
+**遗留问题:**
+- 🔴 酱肉唤醒响应待确认（10 分钟时限， sessionKey: agent:jiangrou:subagent:36c96bab-978b-4d4d-b989-166c3f5869da）
+- 🔴 豆沙唤醒响应待确认（10 分钟时限，sessionKey: agent:dousha:subagent:2ed89c98-8c59-49e9-aee0-bccaceac0282）
+- 🔴 酸菜唤醒响应待确认（10 分钟时限，sessionKey: agent:suancai:subagent:72b10278-8208-46ee-8d00-1544880e671e）
+- 🌙 需确认是否配置夜间休眠策略，避免误报
+
+---
+
 ## 2026-03-17 心跳日志
 
 ### 23:50 检查 (第 267 轮)

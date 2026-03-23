@@ -1,5 +1,5 @@
-<!-- Last Modified: 2026-03-19 -->
-<!-- Last Modified (CN): 2026-03-19 -->
+<!-- Last Modified: 2026-03-23 -->
+<!-- Last Modified (CN): 2026-03-23 -->
 
 # 包子铺项目架构总览
 
@@ -94,7 +94,6 @@ f:\openclaw/
 │   │   │
 │   │   ├── config-samples/       # 配置示例备份
 │   │   ├── guides/               # 使用指南
-│   │   │   ├── simple-monitoring-guide.md    # 【新增】简化版监控指南 ⭐
 │   │   ├── specs/                # 规范文档
 │   │   │   ├── 03-technical-specs/
 │   │   │   │   └── agent-error-monitoring.md           # 【新增】错误监控与故障处理 ⭐
@@ -102,7 +101,7 @@ f:\openclaw/
 │   │   ├── monitoring/             # 【新增】监控系统 ⭐
 │   │   │   └── dashboard.md      # 实时监控仪表板
 │   │   ├── scripts/                # 【新增】自动化脚本 ⭐
-│   │   │   └── simple-monitor.ps1  # 简化版监控脚本 (每 5 分钟检查)
+│   │   │   └── check-work-report.ps1  # 工作报告检查脚本
 │   │   ├── disasters/              # 【新增】灾难现场保护 ⭐
 │   │   │   ├── monitor-log.txt     # 监控日志
 │   │   │   └── disaster-*/         # 灾难现场目录
@@ -795,5 +794,5 @@ pm2 stop baozipu
 **祝团队合作愉快！开始创造伟大的产品吧！** 🚀
 
 *维护者：灌汤 PM*  
-*更新日期：2026-03-20*
+*更新日期：2026-03-23*
 *备注：全面清理 Docker 相关引用，切换到本地化运行模式；添加轻量级架构设计；修复工程文档相对链接路径*
