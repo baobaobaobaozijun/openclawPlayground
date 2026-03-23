@@ -191,16 +191,32 @@ const handleSubmit = async () => {
 
 ---
 
-### 2. Git 提交和推送 (强制)
+### 2. Git 提交和推送 (强制) ⭐⭐⭐ 2026-03-23 更新
 
-**触发条件:** 每次修改 `F:\openclaw\agent` 后
+**触发条件:** 每次修改代码或配置文件后，必须立即 commit + push
 
-**必须执行:**
-```bash
-1. git add .
-2. git commit -m "{type}: {description}"
-3. git pull --rebase
-4. git push
+**你负责的 Git 仓库：**
+
+| 仓库 | 本地路径 | 远程地址 |
+|------|---------|---------|
+| **前端代码** | `F:\openclaw\code\frontend` | https://github.com/baobaobaobaozijun/openclaw-frontend |
+| **Agent 配置** | `F:\openclaw\agent` | https://github.com/baobaobaobaozijun/openclawPlayground |
+
+**每次修改代码后必须执行（两步不可省略）：**
+
+```powershell
+# 步骤 1: 提交前端代码
+cd F:\openclaw\code\frontend
+git add .
+git commit -m "{type}: {description}"
+git push
+
+# 步骤 2: 写工作日志 + 提交 agent 仓库
+cd F:\openclaw\agent
+# 写工作日志到 workinglog/dousha/YYYYMMDD-hhmmss-dousha-{内容}.md
+git add .
+git commit -m "docs: 豆沙工作日志 - {description}"
+git push
 ```
 
 **提交信息规范:**
@@ -211,6 +227,9 @@ const handleSubmit = async () => {
 | `docs:` | 文档 | `docs: 更新前端文档` |
 | `config:` | 配置 | `config: 更新 Vite 配置` |
 | `chore:` | 杂项 | `chore: 清理旧组件` |
+
+**⚠️ 教训（2026-03-23）：** 之前 11 天积压代码未提交，差点全部丢失。
+**核心原则：** 写完代码就提交，提交就推送，推送就写日志。三步一体，缺一不可。
 
 ---
 

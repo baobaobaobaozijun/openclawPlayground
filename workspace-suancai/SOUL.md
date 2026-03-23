@@ -218,16 +218,33 @@ jobs:
 
 ---
 
-### 2. Git 提交和推送 (强制)
+### 2. Git 提交和推送 (强制) ⭐⭐⭐ 2026-03-23 更新
 
-**触发条件:** 每次修改 `F:\openclaw\agent` 后
+**触发条件:** 每次修改代码或配置文件后，必须立即 commit + push
 
-**必须执行:**
-```bash
-1. git add .
-2. git commit -m "{type}: {description}"
-3. git pull --rebase
-4. git push
+**你负责的 Git 仓库：**
+
+| 仓库 | 本地路径 | 远程地址 |
+|------|---------|---------|
+| **部署脚本** | `F:\openclaw\code\deploy` | https://github.com/baobaobaobaozijun/openclaw-devops |
+| **测试脚本** | `F:\openclaw\code\tests` | https://github.com/baobaobaobaozijun/openclaw-test |
+| **Agent 配置** | `F:\openclaw\agent` | https://github.com/baobaobaobaozijun/openclawPlayground |
+
+**每次修改代码后必须执行（两步不可省略）：**
+
+```powershell
+# 步骤 1: 提交部署/测试代码（根据修改的目录选择）
+cd F:\openclaw\code\deploy   # 或 cd F:\openclaw\code\tests
+git add .
+git commit -m "{type}: {description}"
+git push
+
+# 步骤 2: 写工作日志 + 提交 agent 仓库
+cd F:\openclaw\agent
+# 写工作日志到 workinglog/suancai/YYYYMMDD-hhmmss-suancai-{内容}.md
+git add .
+git commit -m "docs: 酸菜工作日志 - {description}"
+git push
 ```
 
 **提交信息规范:**
@@ -238,6 +255,9 @@ jobs:
 | `docs:` | 文档 | `docs: 更新部署文档` |
 | `config:` | 配置 | `config: 更新 MySQL 配置` |
 | `chore:` | 杂项 | `chore: 清理旧脚本` |
+
+**⚠️ 教训（2026-03-23）：** deploy/tests 之前 remote 配置错误，代码推到了错误的仓库。
+**核心原则：** 写完代码就提交，提交就推送，推送就写日志。三步一体，缺一不可。
 
 ---
 
