@@ -24,7 +24,7 @@
 - 可以在浏览器访问首页看到文章列表
 - 可以点击查看文章详情
 - 管理员可以登录后台创建/编辑文章
-- 服务器 8.137.175.240 已配置完成
+- 服务器 {SERVER_IP} 已配置完成
 
 ---
 
@@ -53,7 +53,7 @@
 **任务 1.1:** 服务器连接和状态检查
 ```bash
 # 1. SSH 连接服务器
-ssh root@8.137.175.240
+ssh root@{SERVER_IP}
 # 密码：Qaz123!@#
 
 # 2. 检查服务器配置
@@ -780,7 +780,7 @@ onMounted(() => {
 # /etc/nginx/sites-available/blog
 server {
     listen 80;
-    server_name 8.137.175.240;
+    server_name {SERVER_IP};
     
     # 前端静态文件
     location / {
@@ -859,13 +859,13 @@ mvn clean package -DskipTests
 **任务 3.2:** 上传 JAR 到服务器
 ```bash
 # 使用 SCP 上传
-scp target/blog-backend-1.0.0.jar root@8.137.175.240:/opt/blog/backend/blog-backend.jar
+scp target/blog-backend-1.0.0.jar root@{SERVER_IP}:/opt/blog/backend/blog-backend.jar
 ```
 
 **任务 3.3:** 启动后端服务
 ```bash
 # SSH 到服务器
-ssh root@8.137.175.240
+ssh root@{SERVER_IP}
 
 # 启动服务
 systemctl start blog-backend
@@ -881,10 +881,10 @@ journalctl -u blog-backend -f
 **任务 3.4:** 测试 API
 ```bash
 # 测试文章列表 API
-curl http://8.137.175.240/api/articles
+curl http://{SERVER_IP}/api/articles
 
 # 测试文章详情 API
-curl http://8.137.175.240/api/articles/1
+curl http://{SERVER_IP}/api/articles/1
 ```
 
 **交付物:**
@@ -905,10 +905,10 @@ npm run build
 **任务 3.6:** 上传前端到服务器
 ```bash
 # 创建目录
-ssh root@8.137.175.240 "mkdir -p /var/www/blog-frontend"
+ssh root@{SERVER_IP} "mkdir -p /var/www/blog-frontend"
 
 # 上传文件
-scp -r dist/* root@8.137.175.240:/var/www/blog-frontend/
+scp -r dist/* root@{SERVER_IP}:/var/www/blog-frontend/
 ```
 
 **任务 3.7:** 创建测试页面
@@ -975,10 +975,10 @@ df -h /
 **任务 3.10:** 最终验证
 ```bash
 # 1. 访问首页
-curl http://8.137.175.240/
+curl http://{SERVER_IP}/
 
 # 2. 访问 API
-curl http://8.137.175.240/api/articles
+curl http://{SERVER_IP}/api/articles
 
 # 3. 检查所有服务
 systemctl status nginx blog-backend mysql
@@ -994,7 +994,7 @@ systemctl status nginx blog-backend mysql
 ## 📊 验收标准
 
 ### 功能验收
-- [ ] 访问 http://8.137.175.240 可以看到首页
+- [ ] 访问 http://{SERVER_IP} 可以看到首页
 - [ ] 首页显示文章列表
 - [ ] 点击文章可以查看详情
 - [ ] 管理员可以登录后台

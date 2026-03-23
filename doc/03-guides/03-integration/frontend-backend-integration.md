@@ -19,7 +19,7 @@
 - ✅ 可以查看文章详情
 - ✅ 管理员可以登录后台
 - ✅ 后台可以创建/编辑文章
-- ✅ 服务器 8.137.175.240 可访问
+- ✅ 服务器 {SERVER_IP} 可访问
 
 ---
 
@@ -59,7 +59,7 @@
 ```
 ┌─────────────────┐
 │   服务器         │
-│  8.137.175.240  │
+│  {SERVER_IP}  │
 │                 │
 │  Nginx          │
 │  Port: 80       │
@@ -367,13 +367,13 @@ mvn clean package -DskipTests
 
 **2. 上传到服务器**
 ```bash
-scp target/blog-backend-1.0.0.jar root@8.137.175.240:/opt/blog-system/app/
+scp target/blog-backend-1.0.0.jar root@{SERVER_IP}:/opt/blog-system/app/
 ```
 
 **3. 启动服务**
 ```bash
 # SSH 到服务器
-ssh root@8.137.175.240
+ssh root@{SERVER_IP}
 
 # 启动服务
 java -Xms600m -Xmx600m -jar /opt/blog-system/app/blog-backend-1.0.0.jar &
@@ -399,14 +399,14 @@ npm run build
 
 **2. 上传到服务器**
 ```bash
-scp -r dist/* root@8.137.175.240:/var/www/blog-frontend/
+scp -r dist/* root@{SERVER_IP}:/var/www/blog-frontend/
 ```
 
 **3. 配置 Nginx**
 ```nginx
 server {
     listen 80;
-    server_name 8.137.175.240;
+    server_name {SERVER_IP};
     
     # 前端静态文件
     location / {
@@ -426,10 +426,10 @@ server {
 **4. 验证访问**
 ```bash
 # 访问首页
-curl http://8.137.175.240/
+curl http://{SERVER_IP}/
 
 # 访问 API
-curl http://8.137.175.240/api/articles
+curl http://{SERVER_IP}/api/articles
 ```
 
 ---

@@ -21,7 +21,7 @@
 cat .local/server-config.md | grep "主机 IP"
 
 # 2. SSH 连接验证
-ssh root@8.137.175.240
+ssh root@{SERVER_IP}
 
 # 3. 确认部署目标
 pwd  # 应该在服务器上，不是本地
@@ -80,6 +80,50 @@ pwd  # 应该在服务器上，不是本地
 | 豆沙 push 前端代码后 | npm run build 构建成功 | 验证结果 |
 | 部署更新后 | curl 测试 API 端点 | 测试报告 |
 | PM 分配测试任务 | 编写测试脚本 | tests/scripts/ |
+
+---
+
+### 0e. SSH 操作标准模板 ⭐⭐⭐ 新增
+
+**每次 SSH 操作必须使用此模板：**
+
+```powershell
+Import-Module Posh-SSH
+$pass = ConvertTo-SecureString '{密码}' -AsPlainText -Force
+$cred = New-Object System.Management.Automation.PSCredential('{用户}', $pass)
+$session = New-SSHSession -ComputerName {IP} -Credential $cred -AcceptKey
+$result = Invoke-SSHCommand -SessionId $session.SessionId -Command '{命令}'
+Write-Output $result.Output
+Remove-SSHSession -SessionId $session.SessionId
+```
+
+**注意：** 服务器连接信息从 PM 的任务消息中获取，不要写入任何文件。
+
+### 0f. 敏感信息管控 ⭐⭐⭐
+
+**绝对禁止上传到 Git 的信息：**
+- 服务器 IP、SSH 用户名、SSH 密码
+- 数据库连接字符串、密码
+- Redis 密码、API Key、Token
+
+**正确做法：**
+- 敏感信息只存放在 `.local/` 目录（已加入 .gitignore）
+- 脚本中使用变量占位符，不硬编码密码
+- 部署脚本从 .local/server-config.md 读取配置
+
+**违规后果：** 服务器被入侵、数据泄露，严重安全事故。
+
+### 0g. 运维职责细化
+
+| 职责 | 内容 | 工具 |
+|------|------|------|
+| 服务器管理 | SSH 连接、检查状态、重启服务 | Posh-SSH 模板 |
+| 环境维护 | MySQL/Redis/Nginx/Java | SSH 命令 |
+| 部署执行 | 运行部署脚本、验证部署 | deploy-to-server.ps1 |
+| 监控巡检 | 检查服务健康、日志分析 | SSH + curl |
+| 测试执行 | 编写测试脚本、冒烟测试 | write + exec |
+| 配置管理 | 维护 .local/server-config.md | write |
+| 备份恢复 | 备份数据库、回滚部署 | SSH |
 
 **强制要求:**
 
