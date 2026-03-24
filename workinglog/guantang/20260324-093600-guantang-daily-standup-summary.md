@@ -64,14 +64,25 @@
 
 1. **[P1] MySQL init.sql 缺少业务表** — deploy/mysql/init.sql 只有 system_config 表，缺少 users/articles/categories/tags 等核心业务表的 DDL
 2. **[P1] 后端缺少 schema.sql** — backend/src/main/resources/db/ 目录不存在
-3. **[P2] Redis 配置缺失** — application.yml 没有 Redis 连接配置
-4. **[P2] 豆沙重复唤醒** — 豆沙被分配了两个任务（基础架构 + 开发环境），应合并
+3. **[P1] Redis 未运行** — 系统有 Redis 5.0.9（`F:\program\Redis-x64-5.0.9\`），但服务未启动
+4. **[P2] Redis 配置缺失** — application.yml 没有 Redis 连接配置
+5. **[P2] MySQL 版本偏低** — 当前 MySQL 5.7.27，计划要求 8.0+（暂不阻塞）
+
+### 🏗️ 实际环境状态（PM 验证）
+
+| 组件 | 状态 | 详情 |
+|------|------|------|
+| MySQL | ✅ 运行中 | v5.7.27, openclaw 库已创建（空表） |
+| Redis | ❌ 未运行 | Redis 5.0.9 已安装在 F:\program\Redis-x64-5.0.9\，服务未启动 |
+| Java | ✅ 已配置 | JAVA_HOME 已设置 |
+| 端口 8080 | ✅ 空闲 | 无冲突 |
 
 ### 🎯 下一步行动
 
 | 优先级 | 行动 | 负责人 | 截止 |
 |--------|------|--------|------|
 | P1 | 创建完整的 schema.sql（5张业务表） | 酱肉 | 03-24 12:00 |
+| P1 | 启动 Redis 服务（已有安装，需启动） | 酸菜 | 03-24 12:00 |
 | P1 | 更新 deploy/mysql/init.sql 包含业务表 | 酸菜 | 03-24 14:00 |
 | P2 | application.yml 添加 Redis 配置 | 酱肉 | 03-24 14:00 |
 | P2 | 前端 Header/Footer/Sidebar 布局组件 | 豆沙 | 03-25 18:00 |
