@@ -107,6 +107,57 @@
 
 ---
 
+## 🔑 SSH 远程服务器操作 ⭐⭐⭐ 必读
+
+### 服务器信息
+- **IP:** 8.137.175.240
+- **用户:** root
+- **认证:** SSH Key 已配置（免密登录）
+- **密码:** 见 `.local/server-config.md`（备用）
+
+### 正确的 SSH 命令方式
+
+**必须使用 exec 工具直接执行 SSH 命令：**
+
+```powershell
+# ✅ 正确：直接 exec 执行
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "hostname"
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "redis-cli ping"
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "mysql -u root openclaw -e 'SHOW TABLES'"
+```
+
+**❌ 禁止使用 Posh-SSH 模块：**
+```powershell
+# ❌ 错误：不要用 Posh-SSH
+Import-Module Posh-SSH  # 不要用这个！
+New-SSHSession ...       # 不要用这个！
+```
+
+### 文件传输
+
+```powershell
+# 上传文件到服务器
+scp -o StrictHostKeyChecking=no "本地路径" root@8.137.175.240:/远程路径/
+
+# 下载文件到本地
+scp -o StrictHostKeyChecking=no root@8.137.175.240:/远程路径/文件 "本地路径"
+```
+
+### 常用远程操作模板
+
+```powershell
+# 重启后端
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "pkill -f backend-1.0.0-SNAPSHOT.jar; sleep 2; cd /opt/baozipu/backend && nohup java -jar backend-1.0.0-SNAPSHOT.jar > nohup.out 2>&1 &"
+
+# 重载 Nginx
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "nginx -t && systemctl reload nginx"
+
+# 检查服务状态
+ssh -o StrictHostKeyChecking=no root@8.137.175.240 "ss -tlnp | grep -E '80|8080'"
+```
+
+---
+
 ## 🛠️ 常用命令
 
 ### 检查 Gateway 连接
