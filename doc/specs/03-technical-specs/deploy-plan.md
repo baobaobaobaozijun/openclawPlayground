@@ -15,6 +15,20 @@
 
 ## 部署流程
 
+### 0. 部署前备份（必须）
+
+```bash
+# 备份当前后端版本
+mkdir -p /opt/baozipu/backup
+cp /opt/baozipu/backend/backend-*.jar /opt/baozipu/backup/backend-previous.jar
+
+# 备份当前前端版本
+cp -r /opt/baozipu/frontend/dist/ /opt/baozipu/backup/dist-$(date +%Y%m%d)/
+
+# 备份数据库
+mysqldump -u root -p baoziblog > /opt/baozipu/backup/db-$(date +%Y%m%d).sql
+```
+
 ### 1. 后端部署流程
 
 #### 1.1 JAR打包
@@ -95,21 +109,6 @@ server {
         proxy_pass http://localhost:8081/health;
     }
 }
-
-# 为API服务创建单独的server块（可选）
-server {
-    listen 8081;
-    server_name _;
-    
-    # 防止直接访问8081端口（内部使用）
-    location / {
-        proxy_pass http://localhost:8081;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
 ```
 
 启用站点配置：
@@ -123,14 +122,14 @@ systemctl reload nginx
 
 #### 3.1 执行schema.sql
 ```bash
-# 假设schema.sql位于部署包中
-mysql -u root -p openclaw < /opt/baozipu/database/schema.sql
+# schema.sql 内部已包含 CREATE DATABASE baoziblog 和 USE baoziblog
+mysql -u root -p < /opt/baozipu/database/schema.sql
 ```
 
 #### 3.2 初始化数据
 ```bash
 # 如有初始数据脚本
-mysql -u root -p openclaw < /opt/baozipu/database/init-data.sql
+mysql -u root -p baoziblog < /opt/baozipu/database/init-data.sql
 ```
 
 ### 4. 服务管理脚本
@@ -233,7 +232,7 @@ nginx -t && systemctl reload nginx
 ```bash
 # 回滚到上一个版本
 # 1. 恢复数据库备份
-mysql -u root -p openclaw < /opt/baozipu/database/backup/schema-backup-$(date +%Y%m%d).sql
+mysql -u root -p baoziblog < /opt/baozipu/database/backup/schema-backup-$(date +%Y%m%d).sql
 ```
 
 ### 6. 部署验证
