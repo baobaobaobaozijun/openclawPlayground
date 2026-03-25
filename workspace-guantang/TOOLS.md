@@ -146,19 +146,35 @@
 
 ## 🔧 常用命令
 
+### PM 工具脚本（解决 PowerShell $_ 转义问题）
+
+```bash
+# 查看今日全员工作日志
+powershell -ExecutionPolicy Bypass -File "F:\openclaw\agent\workspace-guantang\_tools.ps1" worklogs all
+
+# 查看某个 agent 最近 3 条日志
+powershell -ExecutionPolicy Bypass -File "F:\openclaw\agent\workspace-guantang\_tools.ps1" latest jiangrou 3
+
+# 验证文件存在 + 包含关键词
+powershell -ExecutionPolicy Bypass -File "F:\openclaw\agent\workspace-guantang\_tools.ps1" verify "文件路径" "关键词1,关键词2"
+
+# 检查所有仓库 git 状态
+powershell -ExecutionPolicy Bypass -File "F:\openclaw\agent\workspace-guantang\_tools.ps1" gitstatus
+```
+
+### ⚠️ PowerShell 注意事项
+
+**禁止在 exec 命令中直接使用 `$_`、`$_.Name` 等变量**——会被吞掉导致错误。
+所有含 `$_` 的逻辑一律写入 .ps1 脚本文件再执行。
+
+### 其他
+
 ```bash
 # GitHub 认证
 gh auth login
 
-# 检查 git 状态
-cd F:\openclaw\agent && git status
-
 # 手动推送
 cd F:\openclaw\agent && git add . && git commit -m "message" && git push
-
-# 安装 skill
-cd F:\openclaw\agent\workspace-guantang
-npx clawhub install <skill-name>
 ```
 
 ---
