@@ -1,42 +1,42 @@
-# Plan Manager - 列出计划
-# 用法：.\list-plans.ps1 [-状态 "in-progress"] [-优先级 "P0"]
+# Plan Manager - List Plans
+# Usage: .\list-plans.ps1 [-Status "in-progress"] [-Priority "P0"]
 
 param(
     [ValidateSet("pending", "in-progress", "completed", "failed", "timeout")]
-    [string]$状态 = "",
+    [string]$Status = "",
     
     [ValidateSet("P0", "P1", "P2")]
-    [string]$优先级 = ""
+    [string]$Priority = ""
 )
 
 $ErrorActionPreference = "Stop"
 $basePath = "F:\openclaw\agent\tasks\01-plans"
 
-Write-Host "`n计划列表" -ForegroundColor Cyan
-Write-Host "========`n" -ForegroundColor Cyan
+Write-Host "`nPlan List" -ForegroundColor Cyan
+Write-Host "=========`n" -ForegroundColor Cyan
 
-# 获取所有计划文件夹
+# Get all plan folders
 $plans = Get-ChildItem $basePath -Directory | Sort-Object Name
 
 if ($plans.Count -eq 0) {
-    Write-Host "暂无计划" -ForegroundColor Yellow
+    Write-Host "No plans found" -ForegroundColor Yellow
     exit 0
 }
 
-# 输出表格头部
+# Output table header
 $header = "{0,-10} | {1,-20} | {2,-8} | {3,-8} | {4,-10} | {5,-8}" -f `
-    "计划 ID", "计划名称", "优先级", "轮次", "状态", "进度"
+    "Plan ID", "Name", "Priority", "Rounds", "Status", "Progress"
 $separator = "{0,-10}-+-{1,-20}-+-{2,-8}-+-{3,-8}-+-{4,-10}-+-{5,-8}" -f `
     "----------", "--------------------", "--------", "--------", "----------", "--------"
 
 Write-Host $header
 Write-Host $separator
 
-# 遍历所有计划
+# Iterate all plans
 foreach ($plan in $plans) {
     $planName = $plan.Name
     
-    # 解析计划信息
+    # Parse plan info
     if ($planName -match "plan-(\d{3})-p(\d)-(.+)") {
         $id = $matches[1]
         $priority = "P" + $matches[2]
@@ -45,50 +45,50 @@ foreach ($plan in $plans) {
         continue
     }
     
-    # 过滤条件
-    if ($状态 -and $planName -notmatch $状态) { continue }
-    if ($优先级 -and $priority -ne $优先级) { continue }
+    # Filter conditions
+    if ($Status -and $planName -notmatch $Status) { continue }
+    if ($Priority -and $priority -ne $Priority) { continue }
     
-    # 读取计划文件获取状态
+    # Read plan file to get status
     $planFile = Join-Path $plan.FullName "00-plan.md"
     if (Test-Path $planFile) {
         $content = Get-Content $planFile -Raw
         
-        # 提取轮次信息
+        # Extract total rounds
         $totalRounds = 5
         if ($content -match "总轮次:\s*(\d+)") {
             $totalRounds = [int]$matches[1]
         }
         
-        # 计算完成轮次
+        # Count completed rounds
         $completedRounds = ([regex]::Matches($content, "✅")).Count
         
-        # 提取状态
-        $planStatus = "⏳ 等待"
+        # Extract status
+        $planStatus = "Waiting"
         if ($content -match "状态:\s*(pending|in-progress|completed|failed|timeout)") {
             $statusMap = @{
-                "pending" = "⏳ 等待"
-                "in-progress" = "🟢 进行中"
-                "completed" = "✅ 完成"
-                "failed" = "❌ 失败"
-                "timeout" = "🔴 超时"
+                "pending" = "Waiting"
+                "in-progress" = "Running"
+                "completed" = "Done"
+                "failed" = "Failed"
+                "timeout" = "Timeout"
             }
             $planStatus = $statusMap[$matches[1]]
         }
         
-        # 计算进度
+        # Calculate progress
         $progress = "{0:P0}" -f ($completedRounds / $totalRounds)
     } else {
-        $planStatus = "⏳ 等待"
+        $planStatus = "Waiting"
         $progress = "0%"
         $completedRounds = 0
     }
     
-    # 输出行
+    # Output row
     $row = "{0,-10} | {1,-20} | {2,-8} | {3,-8} | {4,-10} | {5,-8}" -f `
         $id, $name, $priority, "$completedRounds/$totalRounds", $planStatus, $progress
     Write-Host $row
 }
 
-Write-Host "`n提示：使用 --状态 和 --优先级 参数过滤结果" -ForegroundColor Gray
-Write-Host "示例：npx plan-manager 列出计划 --状态 in-progress" -ForegroundColor Gray
+Write-Host "`nTip: Use -Status and -Priority parameters to filter results" -ForegroundColor Gray
+Write-Host "Example: .\list-plans.ps1 -Status in-progress" -ForegroundColor Gray
