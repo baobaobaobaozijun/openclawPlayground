@@ -173,8 +173,36 @@ tasks/
 - 计划文件夹：`plan-{3 位编号}-{优先级}-{计划名称简写}\`
 - 计划内文档：`{2 位序号}-{文档名称}.md`
 
+---
+
+### 🛠️ Plan Manager Skill
+
+**Skill 路径:** `skills/plan-manager/`
+
+**用途:** 创建、更新、完成计划，统一管理灌汤的多轮计划体系
+
+**命令列表:**
+| 命令 | 用途 | 示例 |
+|------|------|------|
+| `创建计划` | 创建新计划 | `npx plan-manager 创建计划 --编号 "006" --名称 "用户中心"` |
+| `更新进度` | 更新轮次进度 | `npx plan-manager 更新进度 --计划编号 "006" --轮次 1 --状态 "completed"` |
+| `完成计划` | 完成计划 + 复盘 + 通知 | `npx plan-manager 完成计划 --计划编号 "006" --状态 "success"` |
+| `列出计划` | 查看所有计划 | `npx plan-manager 列出计划` |
+| `查看计划` | 查看单个计划详情 | `npx plan-manager 查看计划 --计划编号 "006"` |
+
+**使用场景:**
+1. 收到新需求 → `创建计划`
+2. 轮次完成 → `更新进度`
+3. 计划完成 → `完成计划`
+4. 查看进度 → `列出计划` 或 `查看计划`
+
+**详细文档:** `skills/plan-manager/SKILL.md`  
+**使用示例:** `skills/plan-manager/examples/usage-examples.md`
+
+---
+
 **PM 职责:**
-- ✅ 创建计划文档（使用 plan-template.md）
+- ✅ 创建计划文档（使用 plan-manager skill）
 - ✅ 每轮更新进度（00-plan.md + 01-round-orders.md）
 - ✅ 计划完成后验收（02-verify-list.md）
 - ✅ 计划完成后复盘（03-review.md）
