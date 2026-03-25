@@ -1,10 +1,12 @@
-﻿<!-- Last Updated: 2026-03-25 09:33 -->
-# Agent 心跳看板
+<!-- Last Modified: 2026-03-25 -->
+# Agent Heartbeat Dashboard
+> Auto-updated: 2026-03-25 10:00 CST
 
-| Agent | 状态 | 最后活动 | 备注 |
-|-------|------|----------|------|
-| 🍖 酱肉 | 🔴 失联 | 2026-03-24 22:03 | >11h 无活动，已唤醒 |
-| 🍡 豆沙 | 🔴 失联 | 2026-03-24 23:02 | >10h 无活动，已唤醒 |
-| 🥬 酸菜 | 🔴 失联 | 2026-03-24 22:03 | >11h 无活动，已唤醒 |
+| Agent | Status | Last Activity | Last Log |
+|-------|--------|--------------|----------|
+| jiangrou | :red_circle: LOST (719min) | 2026-03-24 22:03 | 20260324-220300-jiangrou-heartbeat-check.md |
+| dousha | :green_circle: OK (12min) | 2026-03-25 09:51 | 20260325-095100-dousha-frontend.md |
+| suancai | :green_circle: OK (12min) | 2026-03-25 09:50 | 20260325-0950-suancai-environment-verification.md |
 
-**检查时间:** 2026-03-25 09:33
+## Actions Taken
+- jiangrou: sessions_spawn wake-up sent (lost >12h)
