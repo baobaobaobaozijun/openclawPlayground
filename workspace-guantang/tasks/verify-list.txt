@@ -1,4 +1,4 @@
-# 第2轮批量验证清单
-TASK-031|F:\openclaw\code\frontend\src\views\RegisterView.vue|username,email,password,handleRegister
-TASK-032|F:\openclaw\code\backend\src\main\java\com\openclaw\service\impl\CategoryServiceImpl.java|@Service,listTree,parentId
-TASK-033|F:\openclaw\code\deploy\scripts\start.sh|java -jar,backend-1.0.0-SNAPSHOT,8081
+# 第3轮批量验证清单
+TASK-034|F:\openclaw\code\backend\src\main\java\com\openclaw\config\CorsConfig.java|@Configuration,CorsFilter,localhost
+TASK-035|F:\openclaw\code\frontend\src\router\index.ts|beforeEach,token,/login,requiresAuth
+TASK-036|F:\openclaw\code\deploy\scripts\init-db.sh|mysql,schema.sql,openclaw
