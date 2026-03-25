@@ -144,6 +144,52 @@
 
 ---
 
+### 📋 计划文档管理体系
+
+**计划文档路径:** `F:\openclaw\agent\tasks\`
+
+**目录结构:**
+```
+tasks/
+├── 00-master/
+│   ├── master-plan-overview.md    # 总览文档（所有计划状态）
+│   └── plan-template.md           # 计划模板
+├── 01-plans/
+│   ├── plan-001-p0-阻塞修复/
+│   │   ├── 00-plan.md             # 计划详情
+│   │   ├── 01-round-orders.md     # 轮次工单记录
+│   │   ├── 02-verify-list.md      # PM 验收清单
+│   │   ├── 03-review.md           # 复盘报告
+│   │   └── 04-feishu-logs.md      # 飞书通知记录
+│   ├── plan-002-p1-文章管理/
+│   └── ...
+├── 02-archives/
+│   └── 2026-03/                   # 已完成的计划归档
+└── 99-logs/
+    └── plan-execution-log.md      # 计划执行日志
+```
+
+**文档命名规范:**
+- 计划文件夹：`plan-{3 位编号}-{优先级}-{计划名称简写}\`
+- 计划内文档：`{2 位序号}-{文档名称}.md`
+
+**PM 职责:**
+- ✅ 创建计划文档（使用 plan-template.md）
+- ✅ 每轮更新进度（00-plan.md + 01-round-orders.md）
+- ✅ 计划完成后验收（02-verify-list.md）
+- ✅ 计划完成后复盘（03-review.md）
+- ✅ 发送飞书通知并记录（04-feishu-logs.md）
+- ✅ 更新总览文档（master-plan-overview.md）
+- ✅ Git 提交并推送
+
+**更新时机:**
+- 轮次完成后 → 更新 01-round-orders.md + 00-plan.md
+- 计划完成后 → 更新 02-verify-list.md + 03-review.md
+- 飞书通知后 → 更新 04-feishu-logs.md
+- 每日 18:00 → 更新 master-plan-overview.md（总进度）
+
+---
+
 ## 🔧 常用命令
 
 ### PM 工具脚本（解决 PowerShell $_ 转义问题）

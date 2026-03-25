@@ -1,456 +1,433 @@
-# 博客系统代码与文档差异分析报告
+<!-- Last Modified: 2026-03-25 23:15 -->
 
-**生成日期:** 2026-03-25  
-**分析人:** Lingma  
-**状态:** 待处理  
-**文档位置:** `agent/doc/07-logs/code-document-gap-analysis.md`
+# 代码与文档差异分析报告
 
----
-
-## 📋 执行摘要
-
-经过对 `code/` 目录代码与 `doc/` 文档的详细对比，发现以下主要问题：
-
-### 矛盾与缺失概览
-
-| 类别 | 数量 | 优先级 |
-|------|------|--------|
-| **数据库表缺失** | 1 个 | P0 |
-| **实体类字段不匹配** | 3 处 | P0 |
-| **未实现的核心功能** | 4 个 | P1 |
-| **技术栈不一致** | 2 处 | P1 |
-| **包名混乱** | 1 处 | P2 |
+**文档类型:** 第三方审阅报告  
+**版本:** v1.0  
+**创建日期:** 2026-03-25 23:15  
+**负责人:** 灌汤 (PM)  
+**审阅范围:** 后端代码 + 前端代码 vs 需求文档 + 技术文档 + API 设计
 
 ---
 
-## 🔴 P0 - 严重问题（必须修复）
+## 📊 总体概览
 
-### 1. 数据库表缺失 - `log_submissions` 表
+| 类别 | 数量 | 占比 |
+|------|------|------|
+| 🔴 实现偏离设计 | 5 项 | 31% |
+| 🟡 文档过时 | 4 项 | 25% |
+| 🟢 功能缺失 | 4 项 | 25% |
+| ✅ 实现与文档一致 | 3 项 | 19% |
+
+**总计:** 16 项差异
+
+---
+
+## 🔴 实现偏离设计（需要修正代码）
+
+### 1. 认证方式偏离
+
+| 项目 | 文档要求 | 实际实现 | 偏离程度 |
+|------|---------|---------|---------|
+| 登录方式 | 手机号登录（无需密码） | username + password 登录 | 🔴 严重 |
+| 注册逻辑 | 登录时自动判断注册 | 独立注册接口 | 🔴 严重 |
+| 登录参数 | `{ phone: "13800138000" }` | `{ username, password }` | 🔴 严重 |
+
+**影响:** 
+- 用户体验不一致（文档承诺手机号一键登录，实际需要输入密码）
+- 数据库 phone 字段未使用
+- 自动注册逻辑缺失
+
+**建议:** 
+- 方案 A（推荐）：修改代码实现手机号登录（符合 PRD 轻量级定位）
+- 方案 B：修改文档，说明当前采用传统账号密码登录
+
+**优先级:** P0（核心功能）
+
+---
+
+### 2. 登录接口路径不一致
+
+| 项目 | 文档要求 | 实际实现 |
+|------|---------|---------|
+| 基础 URL | `/api` | 未确认（前端 request.ts 未配置 baseURL） |
+| 登录接口 | `POST /api/auth/login` | `POST /auth/login`（auth.ts） |
+| 注册接口 | `POST /api/auth/register` | `POST /auth/register`（auth.ts） |
+
+**影响:** API 网关/反向代理配置可能不匹配
+
+**建议:** 统一为 `/api` 前缀（修改前端 request.ts 或后端 @RequestMapping）
+
+**优先级:** P1
+
+---
+
+### 3. 用户信息字段缺失
+
+| 字段 | 数据库设计 | 前端 UserInfo | 状态 |
+|------|-----------|-------------|------|
+| id | ✅ | ✅ | 一致 |
+| username | ✅ | ✅ | 一致 |
+| email | ✅ | ✅ | 一致 |
+| phone | ✅ | ❌ 缺失 | 🔴 缺失 |
+| avatar | ✅ | ✅（auth.ts）/ ❌（stores/auth.ts） | ⚠️ 不一致 |
+| role | ✅ | ❌ 缺失 | 🔴 缺失 |
+| createdAt | ✅ | ✅（stores/auth.ts） | ⚠️ 文档未定义 |
+| updatedAt | ✅ | ✅（stores/auth.ts） | ⚠️ 文档未定义 |
+
+**影响:** 前端无法展示用户角色、手机号等信息
+
+**建议:** 统一 UserInfo 接口定义（建议包含：id, username, email, phone, avatar, role）
+
+**优先级:** P1
+
+---
+
+### 4. Token 响应格式不一致
+
+| 项目 | 文档要求 | 实际实现 |
+|------|---------|---------|
+| 响应结构 | `{ code, message, data, timestamp }` | `{ code, message, data }`（Result.java 无 timestamp） |
+| Token 字段 | `data.token` | `data.accessToken` + `data.refreshToken` |
+| 用户信息 | `data.user` | 未确认 |
+
+**影响:** 前端解析可能失败
+
+**建议:** 
+- 方案 A：在 Result.java 中添加 timestamp 字段
+- 方案 B：修改文档，移除 timestamp 要求
+
+**优先级:** P2
+
+---
+
+### 5. 后端 Controller 缺失
+
+| 模块 | 文档要求 | 实际实现 | 状态 |
+|------|---------|---------|------|
+| AuthController | ✅ 必需 | ❌ 不存在（仅今天创建过，已删除） | 🔴 缺失 |
+| ArticleController | ✅ 必需 | ❌ 不存在 | 🔴 缺失 |
+| CategoryController | ✅ 必需 | ❌ 不存在 | 🔴 缺失 |
+| TagController | ✅ 必需 | ❌ 不存在 | 🔴 缺失 |
+
+**影响:** 后端仅有 Service 层，无 Controller 层，API 无法访问
+
+**建议:** 立即创建所有必需的 Controller
+
+**优先级:** P0（阻塞）
+
+---
+
+## 🟡 文档过时（只需更新文档）
+
+### 1. 前端组件树与实际不一致
+
+| 项目 | 文档描述 | 实际实现 |
+|------|---------|---------|
+| Header.vue | 独立组件 | 未见（可能集成在 Layout.vue 中） |
+| ArticleList.vue | 独立组件 | Articles.vue（命名不一致） |
+| Sidebar.vue | 独立组件 | 未见 |
+| Footer.vue | 独立组件 | 未见 |
+| LoginModal.vue | 全局组件 | 未见（使用 Login.vue 页面） |
+
+**判断:** 前端采用更简化的组件结构，文档过于复杂
+
+**建议:** 更新前端组件设计文档，反映实际架构
+
+**优先级:** P2
+
+---
+
+### 2. 路由设计与实际不一致
+
+| 路由 | 文档要求 | 实际实现 | 状态 |
+|------|---------|---------|------|
+| 首页 | `/` | `/` | ✅ 一致 |
+| 登录 | `/login` | `/login` | ✅ 一致 |
+| 注册 | `/register` | `/register` | ✅ 一致 |
+| 文章列表 | `/articles` | `/articles` | ✅ 一致 |
+| 文章详情 | `/article/:id` | `/article/:id` | ✅ 一致 |
+| 分类页 | `/category/:slug` | `/category`（无 slug 参数） | ⚠️ 不一致 |
+| 标签页 | `/tag/:slug` | 未见 | ❌ 缺失 |
+| 关于页 | `/about` | 未见 | ❌ 缺失 |
+| 管理后台 | `/admin/*` | 未见 | ❌ 缺失 |
+
+**判断:** 实际路由更简化，文档包含未实现功能
+
+**建议:** 更新路由设计文档，移除未实现功能
+
+**优先级:** P2
+
+---
+
+### 3. 数据库表字段文档过时
+
+| 表 | 文档字段 | 实际状态 |
+|----|---------|---------|
+| users | 12 个字段（含 phone, avatar, role 等） | 表未创建，仅文档设计 |
+| articles | 17 个字段（含 slug, content_html, access_level 等） | 表未创建，仅文档设计 |
+| categories | 8 个字段 | 表未创建，仅文档设计 |
+| tags | 6 个字段 | 表未创建，仅文档设计 |
+
+**判断:** 数据库设计文档已完成，但实际未建表
+
+**建议:** 
+1. 优先创建 users 表（核心功能依赖）
+2. 更新文档状态为"待实施"
+
+**优先级:** P0（阻塞）
+
+---
+
+### 4. API 接口详细设计与实际不一致
+
+**文档描述的接口（部分未实现）:**
+
+| 接口 | 文档描述 | 实际状态 |
+|------|---------|---------|
+| POST /api/auth/login | 手机号登录 | ❌ 未实现（实现的是 username/password） |
+| POST /api/auth/register | 自动注册 | ❌ 未实现（独立注册接口） |
+| GET /api/articles | 文章列表（分页） | ❌ 未实现 |
+| GET /api/articles/:id | 文章详情 | ❌ 未实现 |
+| POST /api/articles | 创建文章 | ❌ 未实现 |
+| PUT /api/articles/:id | 更新文章 | ❌ 未实现 |
+| DELETE /api/articles/:id | 删除文章 | ❌ 未实现 |
+| GET /api/categories | 分类列表 | ❌ 未实现 |
+| GET /api/tags | 标签列表 | ❌ 未实现 |
+
+**判断:** API 设计文档过于超前，实际实现滞后
+
+**建议:** 
+1. 标记文档状态为"设计稿"
+2. 按优先级逐步实现（Auth > Article > Category > Tag）
+
+**优先级:** P0
+
+---
+
+## 🟢 功能缺失（需要开发）
+
+### 1. 工作日志自动提交（FR-6）
 
 **文档要求:**
-- 位置：`blog-system-database-design.md` 第 6 节
-- 用途：记录 Agent 工作日志自动提交历史
-- 字段：`id`, `agent_name`, `log_date`, `article_id`, `status`, `error_message`, `submitted_at`
+- 每日 18:00 自动抓取 Agent 工作日志
+- 发布为博客文章
+- 记录提交日志
 
-**代码现状:**
-- ❌ 无对应实体类
-- ❌ 无对应 Mapper
-- ❌ 无对应 Service
-- ❌ 定时任务功能未实现
+**实际状态:** ❌ 完全未实现
 
-**影响:**
-- FR-6 工作日志自动提交功能无法实现
-- 无法追踪日志提交历史
+**影响:** 核心差异化功能缺失
 
----
+**建议:** 
+1. 创建定时任务（Spring @Scheduled）
+2. 实现日志解析逻辑
+3. 调用文章创建 API
+4. 配置 Cron 表达式 `0 0 18 * * ?`
 
-### 2. User 实体字段不匹配
-
-**文档要求 (`blog-system-database-design.md`):**
-```sql
-phone VARCHAR(11) NOT NULL        -- 手机号（登录凭证）
-nickname VARCHAR(50)              -- 昵称
-role VARCHAR(20)                  -- 角色：user/author/admin
-access_level TINYINT              -- 访问级别：0/1/2
-last_login_at DATETIME            -- 最后登录时间
-```
-
-**代码现状 (`User.java`):**
-```java
-private String username;          // ❌ 应改为 nickname
-private String password;          // ❌ 手机号登录无需密码字段
-private String email;             // ❌ 需求中无需邮箱
-private String role;              // ✅ 但类型应为枚举
-// ❌ 缺少 access_level 字段
-// ❌ 缺少 last_login_at 字段
-// ❌ 缺少 nickname 字段
-```
-
-**影响:**
-- 无法支持手机号登录（FR-1）
-- 权限控制无法正常工作（FR-8）
+**优先级:** P1（核心特色功能）
 
 ---
 
-### 3. Article 实体字段不完整
+### 2. Agent 状态展示（FR-7）
 
 **文档要求:**
-```sql
-slug VARCHAR(200) UNIQUE          -- URL 别名
-cover_image VARCHAR(255)          -- 封面图
-like_count INT                    -- 点赞数
-published_at DATETIME             -- 发布时间
-```
+- 前端每 30s 轮询状态 API
+- 展示 4 个 Agent 实时工作状态
+- 进度条显示
 
-**代码现状 (`Article.java`):**
-- ✅ `contentHtml` 已实现
-- ✅ `accessLevel` 已实现  
-- ❌ 缺少 `slug` 字段
-- ❌ 缺少 `coverImage` 字段
-- ❌ 缺少 `likeCount` 字段
-- ❌ 缺少 `publishedAt` 字段
+**实际状态:** ❌ 完全未实现
 
-**影响:**
-- 文章 SEO 友好 URL 无法实现
-- 文章列表展示不完整
-- 点赞功能无法实现
+**影响:** 团队状态透明度功能缺失
+
+**建议:** 
+1. 后端创建 `GET /api/agent/status` 接口
+2. 前端创建 AgentStatus 组件
+3. 使用 setInterval 轮询
+
+**优先级:** P1（核心特色功能）
 
 ---
 
-### 4. Category 实体字段不完整
+### 3. Markdown 编辑器集成（FR-4）
 
 **文档要求:**
-```sql
-sort_order INT                    -- 排序
-```
+- Editor.md 1.5.0
+- 实时预览
+- 支持.md 文件导入
 
-**代码现状 (`Category.java`):**
-- ❌ 缺少 `sortOrder` 字段
+**实际状态:** ⚠️ 部分实现
+- ArticleEditor.vue 已创建
+- MarkdownRenderer.vue 已创建
+- 但未确认是否使用 Editor.md 或自研
 
-**影响:**
-- 分类无法自定义排序
+**建议:** 确认技术选型，更新文档
+
+**优先级:** P1
 
 ---
 
-## 🟡 P1 - 重要功能缺失
-
-### 1. 文章标签关联功能完全缺失
+### 4. 分类标签管理（FR-5）
 
 **文档要求:**
-- 表：`article_tags` (多对多关联)
-- 实体类：`ArticleTag.java`
-- 功能：一篇文章可关联多个标签
+- 分类支持多级结构
+- 标签支持多对多关联
+- 自动生成 slug
 
-**代码现状:**
-- ❌ 无 `ArticleTag` 实体类
-- ❌ 无 `ArticleTagMapper`
-- ❌ 无标签关联 API
+**实际状态:** ❌ 完全未实现
 
-**影响:**
-- FR-5 分类标签管理功能不完整
-- 文章无法打标签
+**建议:** 按优先级延后实施（在文章管理之后）
+
+**优先级:** P2
 
 ---
 
-### 2. 工作日志自动提交定时任务未实现
+## ✅ 实现与文档一致
 
-**文档要求 (`blog-system-requirements.md` FR-6):**
-```
-每日 18:00 自动抓取 Agent 工作日志并发布为博客文章
-Cron 表达式：0 0 18 * * ?
-```
+### 1. 路由守卫逻辑
 
-**代码现状:**
-- ❌ 无 scheduler 目录
-- ❌ 无定时任务实现
-- ❌ 无日志解析逻辑
+**文档要求:**
+- 未登录用户访问受限内容 → 跳转登录
+- 已登录用户访问登录/注册页 → 跳转首页
 
-**影响:**
-- 核心自动化功能缺失
-- 需要手动发布工作日志
+**实际实现:** router/index.ts 中 beforeEach 逻辑完全符合
+
+**状态:** ✅ 一致
 
 ---
 
-### 3. Markdown 渲染功能未实现
+### 2. JWT Token 存储
 
-**文档要求 (`blog-system-requirements.md` NFR-4):**
-- 使用 `commonmark-java` 渲染 Markdown
-- 后端存储 Markdown 原文和渲染后的 HTML
+**文档要求:**
+- Token 存储在 localStorage
+- 有效期 2 小时
 
-**代码现状:**
-- ✅ `pom.xml` 已添加 `commonmark` 依赖 (v0.27.0)
-- ❌ 但代码中未见渲染工具类
-- ❌ `ArticleService` 中未见渲染逻辑
+**实际实现:** 
+- auth.ts 使用 localStorage.setItem('token')
+- UserServiceImpl 设置 expiresIn: 7200
 
-**影响:**
-- 文章详情无法正确展示
-- 前端需要自行渲染 Markdown
+**状态:** ✅ 一致
 
 ---
 
-### 4. 评论功能完全缺失
+### 3. 统一响应格式（部分）
 
-**文档要求 (`blog-system-database-design.md`):**
-```sql
-CREATE TABLE comments (
-    id BIGINT PRIMARY KEY,
-    article_id BIGINT,
-    user_id BIGINT,
-    content TEXT,
-    parent_id BIGINT,  -- 支持回复
-    status VARCHAR(20)
-);
-```
+**文档要求:**
+- { code, message, data }
 
-**代码现状:**
-- ❌ 无 `Comment` 实体类
-- ❌ 无评论相关 API
+**实际实现:**
+- Result.java 包含 code, message, data
 
-**备注:** PRD 中标注评论系统为"阶段 2",但数据库设计中有此表
+**状态:** ✅ 基本一致（缺少 timestamp）
 
 ---
 
-## 🟠 P1 - 技术栈不一致
+## 📋 行动建议
 
-### 1. Redis 依赖问题
+### 立即执行（P0 - 阻塞）
 
-**文档要求 (`ARCHITECTURE-LITE.md`):**
-```
-❌ 不使用 Redis（用 Caffeine 本地缓存）
-```
+| 任务 | 负责人 | 预计耗时 |
+|------|--------|---------|
+| 1. 创建 AuthController（实现 username/password 登录） | 酱肉 | 30 分钟 |
+| 2. 创建 users 数据库表 | 酱肉 | 10 分钟 |
+| 3. 统一 API 基础路径（/api） | 酱肉 + 豆沙 | 15 分钟 |
+| 4. 修正认证方式决策（手机号 or 账号密码） | PM | 10 分钟 |
 
-**代码现状 (`pom.xml`):**
-- ❌ 未添加 Redis 依赖（符合轻量架构）
-- ⚠️ 但也未添加 Caffeine 缓存依赖
+### 本周完成（P1 - 核心功能）
 
-**建议:**
-- 明确是否需要缓存功能
-- 如需缓存，添加 Caffeine 依赖
+| 任务 | 负责人 | 预计耗时 |
+|------|--------|---------|
+| 1. 创建 ArticleController + 文章表 | 酱肉 | 2 小时 |
+| 2. 工作日志自动提交定时任务 | 酱肉 + 酸菜 | 1 小时 |
+| 3. Agent 状态展示 API + 前端组件 | 酱肉 + 豆沙 | 1.5 小时 |
+| 4. 统一 UserInfo 接口定义 | 酱肉 + 豆沙 | 30 分钟 |
 
----
+### 下周完成（P2 - 完善功能）
 
-### 2. 前端 UI 库缺失
-
-**文档要求 (`blog-system-requirements.md`):**
-```
-UI 组件：Element Plus 2.x
-Markdown 编辑器：Editor.md 1.5.0
-```
-
-**代码现状 (`frontend/package.json`):**
-```json
-"dependencies": {
-  "vue": "^3.4.0",
-  "vue-router": "^4.2.5",
-  "pinia": "^2.1.7"
-}
-// ❌ 缺少 Element Plus
-// ❌ 缺少 Editor.md
-```
-
-**影响:**
-- 前端缺少 UI 组件库
-- 无法实现 Markdown 编辑器功能
+| 任务 | 负责人 | 预计耗时 |
+|------|--------|---------|
+| 1. 分类标签管理 | 酱肉 + 豆沙 | 2 小时 |
+| 2. Markdown 编辑器确认 | 豆沙 | 30 分钟 |
+| 3. 更新所有过时文档 | PM | 1 小时 |
+| 4. 添加 timestamp 到 Result.java | 酱肉 | 10 分钟 |
 
 ---
 
-## 🟢 P2 - 代码规范问题
+## 📊 差异原因分析
 
-### 1. 包名混乱
+### 为什么会出现偏离？
 
-**现状:**
-- 大部分代码使用 `com.openclaw.*`
-- 部分新代码使用 `com.baozipu.*`
+1. **需求理解不一致**
+   - PRD 明确手机号登录，但实现为账号密码登录
+   - 可能原因：开发者习惯传统模式，未仔细阅读 PRD
 
-**发现的文件:**
-```
-main/java/com/baozipu/common/Result.java
-main/java/com/baozipu/service/UserService.java
-```
+2. **文档更新滞后**
+   - 前端组件已简化，但文档仍保持复杂设计
+   - 可能原因：开发过程中迭代，未同步更新文档
 
-**建议:**
-- 统一使用 `com.baozipu` (项目名称)
-- 或统一使用 `com.openclaw` (框架名称)
+3. **功能优先级变化**
+   - Agent 状态展示、日志自动提交等核心特色功能未实现
+   - 可能原因：优先实现基础 CRUD，特色功能延后
 
----
-
-## 📊 功能完成度统计
-
-### 后端功能完成度
-
-| 模块 | 文档要求 | 已完成 | 完成率 |
-|------|---------|--------|--------|
-| **用户认证** | 登录/注册/JWT | 部分 ✅ | 60% |
-| **文章管理** | CRUD/分页/搜索 | 部分 ✅ | 70% |
-| **分类管理** | CRUD/树形结构 | 部分 ✅ | 50% |
-| **标签管理** | CRUD/多对多关联 | 部分 ✅ | 40% |
-| **权限控制** | 访问级别控制 | ❌ | 20% |
-| **日志自动提交** | 定时任务 | ❌ | 0% |
-| **Markdown 渲染** | 后端渲染 | ❌ | 0% |
-| **评论系统** | 评论/回复 | ❌ | 0% |
-
-**总体完成率:** ~30%
+4. **代码管理问题**
+   - AuthController 曾创建但被删除
+   - 可能原因：重构或误操作，未保留备份
 
 ---
 
-### 前端功能完成度
+## 🎯 改进建议
 
-| 模块 | 文档要求 | 已完成 | 完成率 |
-|------|---------|--------|--------|
-| **页面路由** | 首页/详情/分类/标签 | 部分 ✅ | 60% |
-| **用户认证** | 登录/注册 | ✅ | 80% |
-| **文章展示** | 列表/详情 | ✅ | 70% |
-| **文章编辑** | Markdown 编辑器 | 部分 ✅ | 40% |
-| **管理后台** | 文章/分类/标签管理 | ❌ | 20% |
-| **Agent 状态页** | 实时状态展示 | ❌ | 0% |
+### 流程改进
 
-**总体完成率:** ~45%
+1. **文档评审前置**
+   - 开发前必须评审 PRD + 技术文档
+   - 开发者签字确认理解需求
 
----
+2. **代码审查检查清单**
+   - 添加"与文档一致性"检查项
+   - PR 必须关联需求文档章节
 
-## 🔧 修复建议优先级
+3. **文档版本管理**
+   - 文档头部添加"最后验证日期"
+   - 每次代码变更后验证相关文档
 
-### 第一阶段（立即修复 - P0）
+4. **定期差异扫描**
+   - 每周执行一次代码 vs 文档差异分析
+   - 生成报告并分配修复任务
 
-1. **修正 User 实体类**
-   - 删除 `password`、`email`、`username` 字段
-   - 添加 `nickname`、`accessLevel`、`lastLoginAt` 字段
-   - 修改 `role` 为枚举类型
+### 工具建议
 
-2. **补充 Article 实体字段**
-   - 添加 `slug`、`coverImage`、`likeCount`、`publishedAt`
+1. **API 文档自动化**
+   - 使用 Swagger/OpenAPI 自动生成 API 文档
+   - 代码即文档，避免手动维护
 
-3. **创建 LogSubmission 实体类**
-   - 实现日志提交记录功能
+2. **数据库版本管理**
+   - 使用 Flyway/Liquibase 管理数据库迁移
+   - 建表脚本纳入版本控制
 
-4. **创建 ArticleTag 关联实体**
-   - 实现文章标签多对多关系
-
----
-
-### 第二阶段（核心功能 - P1）
-
-1. **实现定时任务**
-   - 创建 `scheduler/LogSubmissionScheduler.java`
-   - 实现每日 18:00 自动提交逻辑
-
-2. **实现 Markdown 渲染工具**
-   - 创建 `util/MarkdownRenderer.java`
-   - 在 `ArticleService` 中集成渲染逻辑
-
-3. **完善权限控制**
-   - 实现基于 `access_level` 的拦截器
-   - 更新所有查询接口增加权限检查
-
-4. **补充前端依赖**
-   - 添加 Element Plus
-   - 添加 Editor.md 或替代方案
+3. **组件文档生成**
+   - 使用 Storybook/VuePress 生成组件文档
+   - 代码注释即文档
 
 ---
 
-### 第三阶段（优化改进 - P2）
+## 📝 结论
 
-1. **统一包名**
-   - 决定使用 `com.baozipu` 或 `com.openclaw`
-   - 批量重构所有文件
+**当前状态:** 项目处于早期开发阶段，基础架构已搭建，但核心功能实现与文档存在较大差异。
 
-2. **添加 Caffeine 缓存**
-   - 如需要缓存，添加相应配置
+**主要问题:**
+1. 认证方式偏离 PRD（最严重）
+2. Controller 层缺失（阻塞）
+3. 数据库未创建（阻塞）
+4. 特色功能未实现（可延后）
 
-3. **完善测试用例**
-   - 补充单元测试
-   - 达到 80% 覆盖率要求
+**建议策略:**
+1. **立即修正** P0 问题（认证方式、Controller、数据库）
+2. **本周完成** P1 功能（文章管理、日志自动提交、Agent 状态）
+3. **文档同步** 更新过时文档，标记未实现功能
 
----
-
-## 📝 关键文件清单
-
-### 需要创建的 files
-
-```
-backend/src/main/java/com/baozipu/
-├── entity/
-│   ├── ArticleTag.java           # 新建
-│   └── LogSubmission.java        # 新建
-├── mapper/
-│   ├── ArticleTagMapper.java     # 新建
-│   └── LogSubmissionMapper.java  # 新建
-├── service/
-│   └── impl/
-│       └── LogSubmissionServiceImpl.java  # 新建
-├── scheduler/
-│   └── LogSubmissionScheduler.java        # 新建
-└── util/
-    └── MarkdownRenderer.java              # 新建
-```
-
-### 需要修改的 files
-
-```
-backend/src/main/java/com/baozipu/
-├── entity/
-│   ├── User.java                 # 重大修改
-│   ├── Article.java              # 补充字段
-│   └── Category.java             # 补充字段
-└── service/impl/
-    └── ArticleServiceImpl.java   # 增加权限检查
-
-frontend/package.json             # 补充依赖
-```
+**预计修复时间:** 4-6 小时（P0+P1）
 
 ---
 
-## ✅ 验证方法
-
-### 后端验证
-
-1. **编译检查**
-   ```bash
-   cd code/backend
-   mvn clean compile
-   ```
-
-2. **运行测试**
-   ```bash
-   mvn test
-   ```
-
-3. **启动应用**
-   ```bash
-   mvn spring-boot:run
-   ```
-
-4. **检查 Swagger 文档**
-   ```
-   http://localhost:8080/swagger-ui.html
-   ```
-
----
-
-### 前端验证
-
-1. **安装依赖**
-   ```bash
-   cd code/frontend
-   npm install
-   ```
-
-2. **启动开发服务器**
-   ```bash
-   npm run dev
-   ```
-
-3. **检查页面**
-   ```
-   http://localhost:3000
-   ```
-
----
-
-## 📌 总结
-
-当前代码实现与文档存在显著差异，主要体现在：
-
-1. **数据库设计不一致** - 缺少关键表和字段
-2. **核心功能未实现** - 定时任务、标签关联、Markdown 渲染
-3. **技术栈不完整** - 前端缺少必要依赖
-4. **代码规范问题** - 包名混乱
-
-**建议先暂停新功能开发，优先修复 P0 级别问题，确保数据模型一致后再继续开发。**
-
----
-
-## 📎 参考文档
-
-- [博客系统需求文档](../02-specs/02-business-specs/blog-system-requirements.md)
-- [数据库设计文档](../02-specs/02-business-specs/blog-system-database-design.md)
-- [轻量级架构文档](./ARCHITECTURE-LITE.md)
-
----
-
-**下一步行动:**
-- [ ] 确认修复优先级
-- [ ] 创建缺失的实体类和表
-- [ ] 修正现有实体类字段
-- [ ] 实现定时任务功能
-- [ ] 补充前端依赖
+*报告生成时间：2026-03-25 23:15*  
+*下次审阅：2026-03-26 18:00（修复后验证）*
