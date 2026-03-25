@@ -1,0 +1,4 @@
+# Round 2 验证清单
+TASK-040|F:\openclaw\code\frontend\src\views\ArticleCreate.vue|articleApi,title,content,handleSubmit
+TASK-041|F:\openclaw\code\deploy\scripts\deploy-all.sh|scp,backend-1.0.0-SNAPSHOT,nginx,8081
+TASK-042|F:\openclaw\code\backend\src\main\java\com\openclaw\service\impl\TagServiceImpl.java|@Service,TagMapper
