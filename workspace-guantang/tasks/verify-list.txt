@@ -1,6 +1,5 @@
-# 批量验证清单示例
+# 批量验证清单 - 第二轮工单
 # 格式: TASK-ID|文件路径|关键词1,关键词2
-# 用法: _tools.ps1 batch-verify tasks/verify-list.txt
-TASK-025|F:\openclaw\code\backend\src\main\java\com\openclaw\service\impl\ArticleQueryServiceImpl.java|@Service,findPublished,QueryWrapper
-TASK-026|F:\openclaw\code\frontend\src\api\auth.ts|username,password,email,token
-TASK-027|F:\openclaw\code\backend\Dockerfile|eclipse-temurin,EXPOSE 8081,app.jar
+TASK-028|F:\openclaw\code\frontend\src\views\LoginView.vue|username,password,handleLogin
+TASK-029|F:\openclaw\code\backend\src\main\java\com\openclaw\controller\UserController.java|@RestController,@GetMapping,getUserInfo
+TASK-030|F:\openclaw\code\deploy\nginx\baozipu.conf|proxy_pass,8081,server_name
