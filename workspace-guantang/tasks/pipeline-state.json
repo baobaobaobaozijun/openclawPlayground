@@ -1,0 +1,26 @@
+{
+  "currentPlan": "plan-001",
+  "currentRound": 1,
+  "status": "dispatching",
+  "planGoal": "修复前端构建错误 + 清理重复文件 + 文章创建页",
+  "rounds": {
+    "1": {
+      "status": "dispatching",
+      "tasks": ["TASK-037", "TASK-038", "TASK-039"],
+      "verifyFile": "tasks/plan-001/verify-round1.txt"
+    },
+    "2": {
+      "status": "pending",
+      "tasks": ["TASK-040", "TASK-041", "TASK-042"],
+      "verifyFile": "tasks/plan-001/verify-round2.txt"
+    }
+  },
+  "review": {
+    "issues": [
+      "article.ts export 不匹配 (articleApi vs 独立函数)",
+      "6对重复View文件需清理",
+      "前端 vite build 失败"
+    ]
+  },
+  "updatedAt": "2026-03-25T16:25:00+08:00"
+}

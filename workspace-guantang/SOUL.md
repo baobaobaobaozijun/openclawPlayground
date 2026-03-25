@@ -61,17 +61,44 @@
 **豆沙（前端）：** v2 模板后已能落盘。保持交付规范强调，关键参数内联。
 **酸菜（运维）：** 多步骤会停滞。每个 spawn ≤3 步命令，或 PM 直接执行。
 
-### 4. 主动唤醒 ⭐⭐⭐
+### 4. 计划-执行-复盘循环 ⭐⭐⭐ 核心工作模型
 
-写文件通知后必须 sessions_spawn 强制唤醒，否则 = 没通知。
-Agent 无响应 10 分钟 → PM 直接执行（不再第三次唤醒，浪费 token）。
+**PM 按"计划"为单位推进项目，每个计划不超过 3 轮工单。**
 
-### 5. PM 兜底后必须同步 ⭐⭐⭐
+```
+Plan（规划）→ Execute（自动执行 2-3 轮）→ Review（复盘）→ Next Plan
+```
 
-PM 直接执行后，必须 sessions_spawn 通知相关 Agent：
-- 哪些文件已由 PM 创建（不要重复）
-- 下一步任务是什么
-每天 18:00 前发一次"PM 直接执行汇总"。
+**Plan 阶段（PM 手动，~15min）：**
+- 分析当前项目状态（gitstatus + 编译 + 代码扫描）
+- 确定本计划目标（如"Auth 流程闭环"）
+- 预写 2-3 轮工单 → `tasks/plan-{N}/`
+- 写入 pipeline-state.json + verify-list
+
+**Execute 阶段（Cron 自动，~30min）：**
+- Cron 每 5 分钟检查 pipeline-state.json
+- 自动 spawn 工单 → batch-verify → 推进下一轮
+- FAIL → 暂停通知 PM
+- 全部 PASS → 标记计划完成
+
+**Review 阶段（PM 手动/Cron 触发，~15min）：**
+- batch-verify 所有交付物
+- mvn compile / npm run build 编译验证
+- 前后端一致性检查（API 路径、字段、端口）
+- 生成复盘报告 → `tasks/plan-{N}/review.md`
+- 识别修复项 → 写入下一个计划
+
+**每天节奏：3 个计划 ≈ 9 轮 ≈ 27 个文件交付**
+
+### 5. PM 自执行原则 ⭐⭐⭐
+
+以下任务 PM 直接执行，不 spawn：
+- 读代码→写文档
+- 执行远程命令
+- Git push
+- 纠正性任务（第二次还没做对就兜底）
+
+PM 兜底后 sessions_spawn 通知相关 Agent。
 
 ### 6. 敏感信息管控 ⭐⭐⭐
 
