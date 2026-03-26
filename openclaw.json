@@ -1,0 +1,478 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-17T08:07:46.991Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-07T10:38:29.438Z",
+    "lastRunVersion": "2026.3.2",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "qwen-portal:default": {
+        "provider": "qwen-portal",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "bailian": {
+        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
+        "apiKey": "sk-sp-6b3c18bc29ac489fac112b0d756c82b0",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3.5-plus",
+            "name": "qwen3.5-plus",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 1000000,
+            "maxTokens": 65536
+          },
+          {
+            "id": "qwen3-max-2026-01-23",
+            "name": "qwen3-max-2026-01-23",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 65536
+          },
+          {
+            "id": "qwen3-coder-next",
+            "name": "qwen3-coder-next",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 65536
+          },
+          {
+            "id": "qwen3-coder-plus",
+            "name": "qwen3-coder-plus",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 1000000,
+            "maxTokens": 65536
+          },
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax-M2.5",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 196608,
+            "maxTokens": 32768
+          },
+          {
+            "id": "glm-5",
+            "name": "glm-5",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 202752,
+            "maxTokens": 16384
+          },
+          {
+            "id": "glm-4.7",
+            "name": "glm-4.7",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 202752,
+            "maxTokens": 16384
+          },
+          {
+            "id": "kimi-k2.5",
+            "name": "kimi-k2.5",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "models": {
+        "bailian/qwen3.5-plus": {},
+        "bailian/qwen3-max-2026-01-23": {},
+        "bailian/qwen3-coder-next": {},
+        "bailian/qwen3-coder-plus": {},
+        "bailian/MiniMax-M2.5": {},
+        "bailian/glm-5": {},
+        "bailian/glm-4.7": {},
+        "bailian/kimi-k2.5": {}
+      },
+      "workspace": "F:\\openclaw\\agent\\workspace-guantang",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8,
+        "maxSpawnDepth": 2
+      }
+    },
+    "list": [
+      {
+        "id": "guantang",
+        "default": true,
+        "name": "灌汤",
+        "workspace": "F:\\openclaw\\agent\\workspace-guantang",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\guantang\\agent",
+        "model": "bailian/qwen3.5-plus",
+        "subagents": {
+          "allowAgents": [
+            "jiangrou",
+            "dousha",
+            "suancai"
+          ]
+        },
+        "tools": {
+          "profile": "full",
+          "deny": [
+            "feishu_get_user",
+            "feishu_search_user",
+            "feishu_chat",
+            "feishu_chat_members",
+            "feishu_calendar_calendar",
+            "feishu_calendar_event",
+            "feishu_calendar_event_attendee",
+            "feishu_calendar_freebusy",
+            "feishu_task_task",
+            "feishu_task_tasklist",
+            "feishu_task_subtask",
+            "feishu_task_comment",
+            "feishu_create_doc",
+            "feishu_update_doc",
+            "feishu_fetch_doc",
+            "feishu_doc_comments",
+            "feishu_doc_media",
+            "feishu_drive_file",
+            "feishu_search_doc_wiki",
+            "feishu_sheet",
+            "feishu_bitable_app",
+            "feishu_bitable_app_table",
+            "feishu_bitable_app_table_field",
+            "feishu_bitable_app_table_record",
+            "feishu_bitable_app_table_view",
+            "feishu_wiki_space",
+            "feishu_wiki_space_node"
+          ]
+        }
+      },
+      {
+        "id": "jiangrou",
+        "name": "酱肉",
+        "workspace": "F:\\openclaw\\agent\\workspace-jiangrou",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\jiangrou\\agent",
+        "model": "bailian/qwen3-coder-plus",
+        "tools": {
+          "profile": "full",
+          "deny": [
+            "feishu_bitable_app",
+            "feishu_bitable_app_table",
+            "feishu_bitable_app_table_field",
+            "feishu_bitable_app_table_record",
+            "feishu_bitable_app_table_view",
+            "feishu_calendar_calendar",
+            "feishu_calendar_event",
+            "feishu_calendar_event_attendee",
+            "feishu_calendar_freebusy",
+            "feishu_create_doc",
+            "feishu_doc_comments",
+            "feishu_doc_media",
+            "feishu_drive_file",
+            "feishu_fetch_doc",
+            "feishu_get_user",
+            "feishu_search_doc_wiki",
+            "feishu_search_user",
+            "feishu_sheet",
+            "feishu_task_comment",
+            "feishu_task_subtask",
+            "feishu_task_task",
+            "feishu_task_tasklist",
+            "feishu_update_doc",
+            "feishu_wiki_space",
+            "feishu_wiki_space_node",
+            "feishu_oauth",
+            "feishu_oauth_batch_auth"
+          ]
+        }
+      },
+      {
+        "id": "dousha",
+        "name": "豆沙",
+        "workspace": "F:\\openclaw\\agent\\workspace-dousha",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\dousha\\agent",
+        "model": "bailian/qwen3-coder-plus",
+        "tools": {
+          "profile": "full",
+          "deny": [
+            "feishu_bitable_app",
+            "feishu_bitable_app_table",
+            "feishu_bitable_app_table_field",
+            "feishu_bitable_app_table_record",
+            "feishu_bitable_app_table_view",
+            "feishu_calendar_calendar",
+            "feishu_calendar_event",
+            "feishu_calendar_event_attendee",
+            "feishu_calendar_freebusy",
+            "feishu_create_doc",
+            "feishu_doc_comments",
+            "feishu_doc_media",
+            "feishu_drive_file",
+            "feishu_fetch_doc",
+            "feishu_get_user",
+            "feishu_search_doc_wiki",
+            "feishu_search_user",
+            "feishu_sheet",
+            "feishu_task_comment",
+            "feishu_task_subtask",
+            "feishu_task_task",
+            "feishu_task_tasklist",
+            "feishu_update_doc",
+            "feishu_wiki_space",
+            "feishu_wiki_space_node",
+            "feishu_oauth",
+            "feishu_oauth_batch_auth"
+          ]
+        }
+      },
+      {
+        "id": "suancai",
+        "name": "酸菜",
+        "workspace": "F:\\openclaw\\agent\\workspace-suancai",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\suancai\\agent",
+        "model": "bailian/qwen3-coder-plus",
+        "tools": {
+          "profile": "full",
+          "deny": [
+            "feishu_bitable_app",
+            "feishu_bitable_app_table",
+            "feishu_bitable_app_table_field",
+            "feishu_bitable_app_table_record",
+            "feishu_bitable_app_table_view",
+            "feishu_calendar_calendar",
+            "feishu_calendar_event",
+            "feishu_calendar_event_attendee",
+            "feishu_calendar_freebusy",
+            "feishu_create_doc",
+            "feishu_doc_comments",
+            "feishu_doc_media",
+            "feishu_drive_file",
+            "feishu_fetch_doc",
+            "feishu_get_user",
+            "feishu_search_doc_wiki",
+            "feishu_search_user",
+            "feishu_sheet",
+            "feishu_task_comment",
+            "feishu_task_subtask",
+            "feishu_task_task",
+            "feishu_task_tasklist",
+            "feishu_update_doc",
+            "feishu_wiki_space",
+            "feishu_wiki_space_node",
+            "feishu_oauth",
+            "feishu_oauth_batch_auth"
+          ]
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "full",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "kimi",
+        "maxResults": 5,
+        "timeoutSeconds": 15,
+        "kimi": {
+          "apiKey": "sk-zJlzWAb33PnAE62mlz3oXN58rmSJq0twd9L7GZsctos2VRPD",
+          "baseUrl": "https://api.moonshot.cn/v1",
+          "model": "moonshot-v1-8k"
+        }
+      },
+      "fetch": {
+        "enabled": true,
+        "maxChars": 50000,
+        "maxCharsCap": 100000,
+        "maxRedirects": 20
+      }
+    },
+    "links": {
+      "maxLinks": 3,
+      "timeoutSeconds": 3
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "guantang",
+        "jiangrou",
+        "dousha",
+        "suancai"
+      ]
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "cli_a93b25f989f8dbc2",
+      "appSecret": "itjG2QTA2dqjoIlMEyPAoeM7lFDMujJR",
+      "domain": "feishu",
+      "connectionMode": "websocket",
+      "requireMention": true,
+      "dmPolicy": "allowlist",
+      "groupPolicy": "open",
+      "allowFrom": [
+        "ou_1324c7a95ee6675b9ec21f7758f76fe2",
+        "ou_2582f0d104a800bec8417c4f6e799c81"
+      ],
+      "groupAllowFrom": []
+    }
+  },
+  "gateway": {
+    "port": 18790,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "4aa59ed646303abc8fdeb18147ab277c8f17b2ddff626a39"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "skills": {
+    "entries": {
+      "feishu-bitable": {
+        "enabled": false
+      }
+    }
+  },
+  "plugins": {
+    "allow": [
+      "qwen-portal-auth",
+      "feishu-openclaw-plugin"
+    ],
+    "entries": {
+      "qwen-portal-auth": {
+        "enabled": true
+      },
+      "feishu": {
+        "enabled": false
+      },
+      "feishu-openclaw-plugin": {
+        "enabled": true
+      }
+    },
+    "installs": {
+      "feishu-openclaw-plugin": {
+        "source": "npm",
+        "spec": "@larksuite/openclaw-lark",
+        "installPath": "C:\\Users\\Administrator\\.openclaw\\extensions\\feishu-openclaw-plugin",
+        "version": "2026.3.10",
+        "resolvedName": "@larksuite/openclaw-lark",
+        "resolvedVersion": "2026.3.10",
+        "resolvedSpec": "@larksuite/openclaw-lark@2026.3.10",
+        "integrity": "sha512-5XCPcEch2Bab2g284odCkxRCaRMerBezy9Qc6eUfnsO4HvLrqxR406DefTn1mr/ibPVNa3sGxKvjTg3rFXM4mg==",
+        "shasum": "2ce8efc9bb8814aaa5d6019d2eee4ed856712756",
+        "resolvedAt": "2026-03-11T16:35:20.450Z",
+        "installedAt": "2026-03-11T16:35:24.060Z"
+      }
+    }
+  }
+}
