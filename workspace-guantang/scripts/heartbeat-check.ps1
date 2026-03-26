@@ -8,11 +8,18 @@ $ErrorActionPreference = "Stop"
 # ============================================
 # 配置
 # ============================================
-$dbHost = "localhost"
-$dbPort = "3306"
-$dbName = "baozipu"
-$dbUser = "root"
-$dbPass = "root123"  # TODO: 从 .local 配置读取
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$localConfig = "F:\openclaw\agent\.local\pipeline-db-config.ps1"
+
+if (Test-Path $localConfig) {
+    . $localConfig
+} else {
+    $dbHost = "localhost"
+    $dbPort = "3306"
+    $dbName = "baozipu"
+    $dbUser = "root"
+    $dbPass = "root123"
+}
 
 $heartbeatThreshold = 60  # 失联阈值（分钟）
 $workspaceBase = "F:\openclaw\agent"
