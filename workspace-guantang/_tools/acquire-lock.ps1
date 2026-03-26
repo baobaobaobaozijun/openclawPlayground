@@ -15,7 +15,7 @@ $dbPassword = ""
 $dbName = "openclaw"
 
 # 构建 MySQL 命令
-$mysqlCmd = "mysql -h$dbHost -P$dbPort -u$dbUser"
+$mysqlCmd = "mysql -h $dbHost -P $dbPort -u $dbUser"
 if ($dbPassword) {
     $mysqlCmd += " -p$dbPassword"
 }
