@@ -1,22 +1,27 @@
 # HEARTBEAT.md - 灌汤的心跳配置
 
-**最后更新:** 2026-03-25 21:30  
-**心跳频率:** 每 10 分钟（Cron 兜底） + 回调驱动（主力） ⭐⭐⭐
+**最后更新:** 2026-03-26 12:00（机制 v2.0）  
+**心跳频率:** 每 10 分钟（Cron 监控）  
+**机制版本:** v2.0（数据库锁机制）
 
 ---
 
 ## ❤️ 心跳监控机制 (PM 职责)
 
-**驱动模式:** 回调驱动（主力）+ Cron 兜底（每 10 分钟）⭐⭐⭐  
-**配置文件:** `.openclaw/crons/agent-monitoring.yml`  
-**机制文档:** [doc/guides/agent-heartbeat-mechanism.md](../doc/guides/agent-heartbeat-mechanism.md)
+**驱动模式:** 回调驱动（主力）+ Cron 监控（仅失联唤醒）⭐⭐⭐  
+**配置文件:** `.openclaw/crons/agent-heartbeat.yml`  
+**机制文档:** [doc/01-core/plan-database-mechanism.md](../doc/01-core/plan-database-mechanism.md)
+
+**⚠️ 机制 v2.0 重要变更：**
+- ❌ **心跳不再派发任务** - 任务派发由主会话回调驱动负责
+- ✅ **心跳仅监控失联** - 发现 >60 分钟无活动的 Agent 立即 sessions_spawn 唤醒
+- ✅ **数据库锁机制** - 所有派发通过 acquire-lock.ps1 获取锁，防止多会话冲突
 
 **核心职责:**
-1. **回调即派发** — subagent 完成回调时，立即验证 + 立即派发下一轮 ⭐ 最高优先
-2. **心跳兜底** — Cron 每 10 分钟检查，仅处理回调遗漏或失联情况
-3. **日志自动检查** — 回调时自动 Test-Path 检查日志文件
-4. **失联唤醒** — 发现 >60 分钟无活动的 Agent 立即 sessions_spawn
-5. **维护看板** — 更新 `doc/05-progress/agent-heartbeat-dashboard.md`
+1. **数据库查询** — 查询 `step_execution` 表，找出 dispatched_at > 60min 的记录
+2. **失联唤醒** — 发现失联 Agent → sessions_spawn 唤醒（不派发任务）
+3. **通知主会话** — 唤醒后通知主会话分配任务
+4. **维护看板** — 更新 `doc/05-progress/agent-heartbeat-dashboard.md`
 
 ---
 

@@ -61,15 +61,30 @@ WHERE plan_id = '$planId';
 }
 
 try {
+    # 开启事务
+    Invoke-Expression "$mysqlCmd `"START TRANSACTION;`""
+    
     # 执行更新 SQL
     Invoke-Expression "$mysqlCmd `"$updateStepSql`""
     if ($status -eq "completed") {
         Invoke-Expression "$mysqlCmd `"$updatePlanSql`""
     }
-    Write-Output "Plan progress updated successfully"
+    
+    # 提交事务
+    Invoke-Expression "$mysqlCmd `"COMMIT;`""
+    
+    Write-Output "Plan progress updated successfully (transaction committed)"
     exit 0
 }
 catch {
+    # 回滚事务
+    try {
+        Invoke-Expression "$mysqlCmd `"ROLLBACK;`""
+        Write-Warning "Transaction rolled back due to error"
+    }
+    catch {
+        Write-Warning "Failed to rollback transaction"
+    }
     Write-Error "Error updating plan progress: $($_.Exception.Message)"
     exit 1
 }
