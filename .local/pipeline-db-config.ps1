@@ -1,6 +1,4 @@
-# Agent 流水线数据库配置
-# 敏感信息 - 禁止上传到 Git
-
+﻿# Database Config
 $dbHost = "localhost"
 $dbPort = "3306"
 $dbName = "baozipu"
