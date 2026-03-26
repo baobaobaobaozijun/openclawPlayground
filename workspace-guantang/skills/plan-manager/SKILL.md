@@ -269,12 +269,32 @@ npx plan-manager 查看计划 --计划编号 "006"
 
 ## 📊 与现有机制整合
 
-| 现有 Skill | 整合方式 |
-|-----------|---------|
-| `working-logger` | 内部调用，自动记录日志 |
-| `feishu-im-user-message` | `完成计划` 命令调用，发送通知 |
-| `sessions_spawn` | 创建计划后自动派发第 1 轮 |
-| `auto-github-push` | 每次更新后自动 commit + push |
+| 现有 Skill | 整合方式 | 状态 |
+|-----------|---------|------|
+| `working-logger` | 内部调用，自动记录日志 | ✅ 已整合 |
+| `feishu-im-user-message` | `完成计划` 命令调用，发送通知 | ✅ 已整合 |
+| `sessions_spawn` | 创建计划后自动派发第 1 轮 | ✅ 已整合 |
+| `auto-github-push` | 每次更新后自动 commit + push | ✅ 已整合 |
+| **Pipeline v3.0** | **双写机制（文件 + 数据库）** | 📝 **规划中** |
+
+---
+
+## 🔄 Pipeline v3.0 整合计划
+
+**详细迁移指南:** `MIGRATION-v3.md`
+
+**整合目标:**
+1. 计划创建时同步写入 `pipeline_plans` 表
+2. 进度更新时同步更新 `pipeline_rounds` 表
+3. 计划完成时同步更新 `pipeline_state_history` 表
+
+**预期收益:**
+- ✅ 数据库持久化（关机不丢失）
+- ✅ 自动恢复能力
+- ✅ 实时查询和可视化
+- ✅ 审计追溯增强
+
+**实施时间:** 2026-03-26 起（分 3 阶段）
 
 ---
 
