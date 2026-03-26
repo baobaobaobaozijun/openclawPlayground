@@ -1,8 +1,60 @@
 # HEARTBEAT.md - 灌汤的心跳配置
 
-**最后更新:** 2026-03-26 15:00（机制 v3.0）  
+**最后更新:** 2026-03-26 22:05（机制 v3.1 幂等版）  
 **心跳频率:** 每 10 分钟（Cron 兜底） + 回调驱动（主力） ⭐⭐⭐  
-**机制版本:** v3.0 (数据库 + 回调驱动 + 心跳兜底)
+**机制版本:** v3.1 (数据库驱动 + 幂等保证 + 回调驱动 + 心跳兜底)
+
+---
+
+## 🔑 v3.1 核心改进（幂等性保证）
+
+**问题:** v3.0 机制未真正使用数据库，系统重启后无法保证幂等性，可能重复派发任务。
+
+**解决方案 (v3.1):**
+1. ✅ **数据库是唯一真实来源** - workinglog 仅作参考
+2. ✅ **派发前幂等检查** - `check-idempotency.ps1`
+3. ✅ **数据库唯一键约束** - `uk_plan_round_agent` 防止重复插入
+4. ✅ **恢复脚本** - `restore-pipeline.ps1` 系统启动后自动恢复
+5. ✅ **状态机完整** - 所有状态变更写入数据库
+
+---
+
+## 🛡️ 幂等性保证机制
+
+### 1. 派发前检查（必须）
+
+```powershell
+# 派发前调用
+.\check-idempotency.ps1 -planId "plan-006" -roundId 1 -agentId "jiangrou"
+
+# 返回结果：
+# - CanDispatch = $true  → 可以派发
+# - CanDispatch = $false → 跳过（任务已完成/执行中）
+```
+
+### 2. 数据库唯一约束
+
+```sql
+-- pipeline_agent_tasks 唯一键
+ALTER TABLE pipeline_agent_tasks
+ADD UNIQUE KEY uk_plan_round_agent (plan_id, round_id, agent_id);
+
+-- 使用 INSERT ... ON DUPLICATE KEY UPDATE
+INSERT INTO pipeline_agent_tasks (...)
+VALUES (...)
+ON DUPLICATE KEY UPDATE status='assigned', assigned_at=NOW();
+```
+
+### 3. 状态机保证
+
+| 状态 | 含义 | 能否派发 |
+|------|------|---------|
+| pending | 未开始 | ✅ 可以 |
+| assigned | 已分配 | ⚠️ 检查超时 |
+| executing | 执行中 | ⚠️ 检查超时 |
+| completed | 已完成 | ❌ 跳过（检查交付物） |
+| failed | 失败 | ⚠️ 检查重试次数 |
+| unknown | 未知（失联） | ✅ 可以（重做） |
 
 ---
 
