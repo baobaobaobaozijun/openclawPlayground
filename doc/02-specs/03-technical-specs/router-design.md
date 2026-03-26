@@ -1,45 +1,19 @@
-# 路由设计（实际实现）
+# 路由设计文档
 
-**路由模式:** Vue Router 4 + History Mode
+## 已实现的路由（标记 ✅）
 
-## 路由表
+- / - 首页 ✅ (对应组件: views/Home.vue)
+- /login - 登录页 ✅ (对应组件: views/Login.vue)
+- /register - 注册页 ✅ (对应组件: views/Register.vue)
+- /articles - 文章列表页 ✅ (对应组件: views/Articles.vue)
+- /article/:id - 文章详情页 ✅ (对应组件: views/ArticleDetail.vue)
+- /article/new - 发布文章页 ✅ (对应组件: views/ArticleCreate.vue)
+- /article/edit/:id - 文章编辑页 ✅ (对应组件: views/ArticleEdit.vue)
+- /:pathMatch(.*)* - 404页面 ✅ (对应组件: views/NotFound.vue)
 
-| 路径 | 组件 | 名称 | 需要认证 | 说明 |
-|------|------|------|---------|------|
-| `/` | Home.vue | Home | ❌ | 首页（文章列表） |
-| `/login` | Login.vue | Login | ❌ | 登录页 |
-| `/register` | Register.vue | Register | ❌ | 注册页 |
-| `/articles` | Articles.vue | Articles | ❌ | 文章列表页 |
-| `/article/:id` | ArticleDetail.vue | ArticleDetail | ❌ | 文章详情页 |
-| `/article/new` | ArticleCreate.vue | ArticleCreate | ✅ | 创建文章 |
-| `/article/edit/:id` | ArticleEdit.vue | ArticleEdit | ✅ | 编辑文章 |
-| `/:pathMatch(.*)*` | NotFound.vue | NotFound | ❌ | 页面未找到 |
+## 未实现的路由（标记 ⏳）
 
-## 路由守卫
-
-```ts
-router.beforeEach((to, from, next) => {
-  const title = (to.meta.title as string) || 'OpenClaw Blog'
-  document.title = title
-  
-  const token = localStorage.getItem('token')
-  
-  // 检查是否需要认证
-  if (to.meta.requiresAuth && !token) {
-    next('/login')
-  } 
-  // 已登录用户访问登录或注册页面，重定向到首页
-  else if (token && (to.path === '/login' || to.path === '/register')) {
-    next('/')
-  }
-  // 其他情况正常通行
-  else {
-    next()
-  }
-})
-```
-
-## 已移除路由
-- ~~`/about`~~ - 关于页（未实现）
-- ~~`/admin/*`~~ - 管理后台（未实现）
-- ~~`/category/:id`~~ - 分类页（未实现）
+- /category - 分类页 ⏳
+- /tag - 标签页 ⏳
+- /admin - 管理后台 ⏳
+- /profile - 个人中心 ⏳
