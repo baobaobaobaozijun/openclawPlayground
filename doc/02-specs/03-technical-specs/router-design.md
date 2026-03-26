@@ -13,23 +13,33 @@
 | `/article/:id` | ArticleDetail.vue | ArticleDetail | ❌ | 文章详情页 |
 | `/article/new` | ArticleCreate.vue | ArticleCreate | ✅ | 创建文章 |
 | `/article/edit/:id` | ArticleEdit.vue | ArticleEdit | ✅ | 编辑文章 |
-| `/category/:id` | CategoryView.vue | Category | ❌ | 分类页（Plan-04 新增） |
+| `/:pathMatch(.*)*` | NotFound.vue | NotFound | ❌ | 页面未找到 |
 
 ## 路由守卫
 
 ```ts
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
-  const requiresAuth = ['ArticleCreate', 'ArticleEdit'].includes(to.name as string)
+  const title = (to.meta.title as string) || 'OpenClaw Blog'
+  document.title = title
   
-  if (requiresAuth && !token) {
+  const token = localStorage.getItem('token')
+  
+  // 检查是否需要认证
+  if (to.meta.requiresAuth && !token) {
     next('/login')
-  } else {
+  } 
+  // 已登录用户访问登录或注册页面，重定向到首页
+  else if (token && (to.path === '/login' || to.path === '/register')) {
+    next('/')
+  }
+  // 其他情况正常通行
+  else {
     next()
   }
 })
 ```
 
-## 未实现路由（已移除）
-- ~~`/about`~~ - 关于页（暂未实现）
-- ~~`/admin/*`~~ - 管理后台（暂未实现）
+## 已移除路由
+- ~~`/about`~~ - 关于页（未实现）
+- ~~`/admin/*`~~ - 管理后台（未实现）
+- ~~`/category/:id`~~ - 分类页（未实现）
