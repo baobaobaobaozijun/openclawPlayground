@@ -1,0 +1,18 @@
+{
+  "name": "plan-manager-v2",
+  "version": "2.0.0",
+  "description": "Plan Manager v2 - Pipeline v3.0 整合版（数据库双写）",
+  "bin": {
+    "plan-manager-v2": "./bin/plan-manager-v2.js"
+  },
+  "scripts": {
+    "创建计划": "powershell -ExecutionPolicy Bypass -File ./commands/create-plan.ps1",
+    "更新进度": "powershell -ExecutionPolicy Bypass -File ./commands/update-progress.ps1",
+    "完成计划": "powershell -ExecutionPolicy Bypass -File ../plan-manager/commands/complete-plan.ps1",
+    "查询计划": "powershell -ExecutionPolicy Bypass -File ./commands/query-plan.ps1",
+    "列出计划": "powershell -ExecutionPolicy Bypass -File ../plan-manager/commands/list-plans.ps1"
+  },
+  "keywords": ["plan", "manager", "pipeline"],
+  "author": "灌汤 (Guantang)",
+  "license": "MIT"
+}
