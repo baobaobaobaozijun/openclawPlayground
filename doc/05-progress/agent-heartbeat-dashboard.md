@@ -1,38 +1,37 @@
 # Agent 心跳看板
-**更新时间:** 2026-03-26 22:30 | **PM:** 灌汤
+**更新时间:** 2026-03-27 00:00 | **PM:** 灌汤
 
 | Agent | 最后活跃 | 状态 | 当前任务 |
 |-------|---------|------|---------|
-| 🍖 酱肉 | 22:02 (28 分钟前) | 🟡 空闲 | Plan V4 Round 1 已完成，Round 2 待派发 |
-| 🍡 豆沙 | 22:05 (25 分钟前) | 🟡 空闲 | Plan V4 Round 1 已完成，Round 2 待派发 |
-| 🥬 酸菜 | 21:42 (48 分钟前) | 🟡 空闲 | 部署检查清单已完成，Round 2 待派发 |
+| 🍖 酱肉 | 23:45 | ✅ 已完成 | Plan V4 Round 2 - mvn package |
+| 🍡 豆沙 | 23:50 | ✅ 已完成 | Plan V4 Round 2 - Nginx 配置 |
+| 🥬 酸菜 | 23:50 | 🟢 执行中 | Plan V4 Round 2 - 数据库导入 |
 
-## 心跳检查记录 (22:30)
+## 心跳检查记录 (00:00)
 
-**锁文件清理:** ✅ 已清理 1 个残留锁文件
+**锁文件清理:** ✅ 已清理
 
 **优化效果验证:**
 - ✅ Cron 前置清锁步骤生效
 - ✅ 全员正常，无失联
-- ⚠️ Round 2 尚未派发（计划 22:15，延迟 15 分钟）
 
-## Plan V4 Round 1 验收结果
+## Plan V4 Round 2 进度 (00:00)
 
 | 任务 | 负责人 | 交付物 | 状态 |
 |------|--------|--------|------|
-| 部署检查清单 | 酸菜 | deploy-checklist.md | ✅ |
-| application-prod.yml | 酱肉 | application-prod.yml | ✅ |
-| npm run build | 豆沙 | dist/ 目录 | ✅ |
+| mvn package 打包 | 酱肉 | backend-0.0.1-SNAPSHOT.jar (37.6 MB) | ✅ 已完成 |
+| Nginx 配置 | 豆沙 | nginx-prod.conf | ✅ 已完成 |
+| 数据库 schema 导入 | 酸菜 | SQL 导入确认 | 🟢 执行中 |
 
-**Round 1 全部完成！** 🎉
+## 酸菜任务说明
 
-## Plan V4 Round 2 待派发
+**SQL 文件列表:**
+- `V1__create_users_table.sql`
+- `V2__create_articles_table.sql`
+- `V3__create_categories_table.sql`
+- `V4__create_tags_table.sql`
 
-| 任务 | 负责人 | 内容 | 限时 |
-|------|--------|------|------|
-| 数据库 schema 导入 | 酸菜 | 远程执行 SQL | 30 分钟 |
-| mvn package 打包 | 酱肉 | 构建 JAR | 30 分钟 |
-| Nginx 配置 | 豆沙 | 前端部署配置 | 30 分钟 |
+**状态:** 执行中，待工作日志验证
 
 ---
-*Round 1 全部完成 | Round 2 待派发 (22:30)*
+*酱肉/豆沙已完成 | 等待酸菜数据库导入*
