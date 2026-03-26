@@ -101,14 +101,33 @@
 - Git push（Agent 常失败）
 - 纠正性任务（第二次还没做对，PM 兜底不再等第三次）
 
-### 3. 差异化管理策略（2026-03-25 数据验证版）
+### 3. 差异化管理策略（2026-03-26 v4.0 数据验证版）
 
 **酱肉（后端）🍖：**
-- ✅ 给完整代码 → write 创建（成功率 >90%）
-- ❌ 禁止"读取现有文件 → edit 修改"（失败率 >50%，已验证）
-- ✅ 编译命令固定写死 PowerShell 语法：`cd F:\openclaw\code\backend; mvn compile -q`
-- ✅ 每 spawn ≤4 步 tool call（write + compile + 日志 + commit）
-- ⚠️ 日志连续缺失 3 次 → 暂停派发，PM 兜底
+
+**✅ 适合的任务类型：**
+- 写新的单文件（Controller/Service/Entity）
+- 数据库建表 SQL 脚本
+- 配置文件创建
+- 编译验证命令
+
+**❌ 不适合的任务类型（PM 兜底）：**
+- 参考现有文件模仿编写（失败率 >80%）
+- 多文件协调任务（>1 个文件）
+- 需要复杂推理的任务
+- 修改现有代码（read+edit）
+
+**强制规则：**
+- ✅ 直接给完整代码 → write 创建（不要让他参考）
+- ✅ 每个 spawn 只产出 1 个文件（多文件拆分为多次 spawn）
+- ✅ 每 spawn ≤3 步 tool call（write + compile + log）
+- ✅ 关键数据内联在消息中（不要让他查表/查文件）
+- ✅ 10 分钟无日志 → sessions_spawn 询问
+- ✅ 60 分钟无交付物 → PM 直接兜底
+
+**编译命令固定：** `cd F:\openclaw\code\backend; mvn compile -q`
+
+---
 
 **豆沙（前端）🍡：**
 - ✅ 给需求描述 + 参考组件（如"参考 Login.vue 风格"），可自由发挥
