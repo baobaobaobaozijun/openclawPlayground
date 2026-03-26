@@ -720,6 +720,12 @@ CREATE TABLE users (
 
 ---
 
+## 2026-03-26 机制更新确认
+
+- [x] 已阅读 pipeline-v3-migration-notice.md
+- [x] 理解 Pipeline v3.0 机制
+- [x] 理解 Plan Manager v2 使用方式
+
 ## 📊 2026-03-20 状态汇报
 
 ### 1. 当前任务及进度
@@ -753,5 +759,15 @@ CREATE TABLE users (
 - 12:00 - 完成本日开发任务
 
 ---
+
+## 2026-03-26 机制更新确认
+
+- [x] 已阅读 pipeline-v3-migration-notice.md
+- [x] 理解 Pipeline v3.0 机制
+- [x] 理解 Plan Manager v2 使用方式
+- [x] 确认无需操作数据库
+- [x] 确认无需修改代码
+
+**确认时间:** 2026-03-26 16:12
 
 
