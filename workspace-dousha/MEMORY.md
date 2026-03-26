@@ -1,4 +1,4 @@
-﻿<!-- Last Modified: 2026-03-17 08:49 -->
+<!-- Last Modified: 2026-03-17 08:49 -->
 
 # MEMORY.md - 豆沙的工作记忆
 
@@ -114,7 +114,7 @@
 - **最后更新:** 2026-03-16 15:00:00
 
 **任务描述:**
-设计并实现博客首页，包括文章列表、作者信息、响应式布局
+Design and implement the blog homepage, including article list, author information, responsive layout
 
 **完成活动:**
 - 03-16 15:00 - 任务完成，Git 提交并推送 ✅
@@ -348,3 +348,14 @@
 **下次更新:**每 2 小时或完成任务时  
 **最后同步:**2026-03-23 08:56:00
 
+---
+
+## 2026-03-26 机制更新确认
+
+- [x] 已阅读 pipeline-v3-migration-notice.md
+- [x] 理解 Pipeline v3.0 机制
+- [x] 理解 Plan Manager v2 使用方式
+- [x] 确认无需操作数据库
+- [x] 确认无需修改代码
+
+**确认时间:** 2026-03-26 16:12
