@@ -10,4 +10,4 @@
 
 ### 时间：2026-03-27 10:17
 
-TASK-045 | PASS | deploy.sh,baozipu-backend.service,baozipu-nginx.conf,deploy-manual.md | {commit hash}
+**TASK-045 | PASS | deploy.sh,baozipu-backend.service,baozipu-nginx.conf,deploy-manual.md | b830d4c**
