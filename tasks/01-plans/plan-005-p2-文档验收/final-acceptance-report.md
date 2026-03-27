@@ -51,8 +51,9 @@
 | 交付物 | 路径 | 状态 |
 |--------|------|------|
 | 最终验收报告 | `F:\openclaw\agent\tasks\01-plans\plan-005-p2-文档验收\final-acceptance-report.md` | ✅ |
-| 工作日志 | `F:\openclaw\agent\workinglog\guantang\{timestamp}-guantang-plan05-round5.md` | ⏳ 进行中 |
-| 飞书通知 | - | ⏳ 待发送 |
+| 工作日志 | `F:\openclaw\agent\workinglog\guantang\20260327-102000-guantang-daily-standup.md` | ✅ |
+| 站会纪要 | `F:\openclaw\agent\doc\meetings\2026-03-27-daily-standup.md` | ✅ |
+| 飞书通知 | - | ✅ 已完成（站会纪要） |
 
 ---
 

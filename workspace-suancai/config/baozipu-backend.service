@@ -1,0 +1,14 @@
+[Unit]
+Description=Baozipu Blog Backend
+After=network.target
+
+[Service]
+Type=simple
+User=baozipu
+WorkingDirectory=/opt/baozipu/backend
+ExecStart=/usr/bin/java -jar /opt/baozipu/current.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
