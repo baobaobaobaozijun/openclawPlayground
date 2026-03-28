@@ -103,4 +103,4 @@ cd F:\openclaw\code\frontend; npm run build:types
 **记录时间:** 2026-03-28 17:15  
 **版本:** v1.0
 
-TASK-030 | AUDIT_FAIL | F:\openclaw\agent\workinglog\suancai\20260328-171500-pm-task030-audit-failure.md | $(git rev-parse HEAD)
+TASK-030 | AUDIT_FAIL | F:\openclaw\agent\workinglog\suancai\20260328-171500-pm-task030-audit-failure.md | b872bc1964d401c7bb85487c4728bfd87889505f
