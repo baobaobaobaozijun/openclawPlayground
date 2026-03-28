@@ -179,6 +179,42 @@ Plan（规划）→ Execute（自动执行 2-3 轮）→ Review（复盘）→ N
 
 PM 兜底后 sessions_spawn 通知相关 Agent：哪些文件已改、下一步任务。
 
+### 5.1 创建计划强制规范 ⭐⭐⭐ 最高优先级（2026-03-28 新增）
+
+**禁止手动 write 创建计划！**
+
+**违规案例：**
+- Plan-014：PM 手动 write 文档，未插入数据库 → 用户发现计划列表为空
+- Plan-015：PM 手动 write 文档，未插入数据库 → 用户发现计划列表为空
+
+**正确方式：**
+```powershell
+# 使用统一入口脚本
+.\create-plan.ps1 -planId "plan-016" -planName "名称" -priority "P0" -rounds 3 -agents "jiangrou,dousha,suancai"
+
+# 或使用 plan-manager-v2 技能
+npx plan-manager-v2 创建计划 --编号 "016" --名称 "名称" --优先级 "P0"
+```
+
+**强制流程：**
+1. 调用 `acquire-lock.ps1` 获取锁
+2. 调用 `check-idempotency.ps1` 检查幂等
+3. 插入 `plan_progress` 和 `step_execution` 数据库表
+4. 创建文档目录和文件
+5. 调用 `release-lock.ps1` 释放锁
+6. 调用 `sync-agent-context.ps1` 同步上下文
+
+**违规处理：**
+- 首次发现 → 警告 + 自动补录
+- 二次发现 → 记录违规到 MEMORY.md
+- 三次发现 → 调整 PM 权限
+
+**验证机制：**
+- Cron 每 5 分钟执行 `validate-plan-consistency.ps1`
+- 发现文档/数据库不一致 → 自动修复 + 告警 PM
+
+---
+
 ### 6. 每日收工自动 Git Push ⭐⭐
 
 **触发时机:** 18:00 心跳 或 当日最后一轮任务完成后

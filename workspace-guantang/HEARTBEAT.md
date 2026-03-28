@@ -1,8 +1,8 @@
 # HEARTBEAT.md - 灌汤的心跳配置
 
-**最后更新:** 2026-03-26 22:05（机制 v3.1 幂等版）  
+**最后更新:** 2026-03-28 00:39（机制 v4.0 状态过滤版）  
 **心跳频率:** 每 10 分钟（Cron 兜底） + 回调驱动（主力） ⭐⭐⭐  
-**机制版本:** v3.1 (数据库驱动 + 幂等保证 + 回调驱动 + 心跳兜底)
+**机制版本:** v4.0 (状态过滤 + 数据库驱动 + 回调驱动)
 
 ---
 
@@ -58,26 +58,72 @@ ON DUPLICATE KEY UPDATE status='assigned', assigned_at=NOW();
 
 ---
 
-## ❤️ 心跳监控机制 (PM 职责)
+## ❤️ 心跳监控机制 (PM 职责) - v4.0 状态过滤版
 
 **驱动模式:** 回调驱动（主力）+ Cron 兜底（每 10 分钟） ⭐⭐⭐  
 **配置文件:** `.openclaw/crons/agent-heartbeat.yml`  
-**机制文档:** [doc/guides/agent-pipeline-mechanism-v3.md](../doc/guides/agent-pipeline-mechanism-v3.md)  
+**机制文档:** [doc/guides/agent-pipeline-mechanism-v4.md](../doc/guides/agent-pipeline-mechanism-v4.md)  
 **数据库 Schema:** [doc/guides/init-pipeline-db.sql](../doc/guides/init-pipeline-db.sql)
 
-**⚠️ 机制 v3.0 重要变更：**
-- ✅ **状态持久化** - 从文件改为 MySQL 数据库（6 张表）
-- ✅ **自动恢复** - 系统重启后自动续做/重做（restore-pipeline.ps1）
-- ✅ **心跳监控** - Agent 主动上报 (5min) + PM 被动检查 (10min)
-- ✅ **审计追溯** - 所有状态变更写入 pipeline_state_history
-- ❌ **心跳不再派发任务** - 任务派发由主会话回调驱动负责
-- ✅ **心跳仅监控失联** - 发现 >60 分钟无心跳的 Agent 立即 sessions_spawn 唤醒
+### ⚠️ 机制 v4.1 重要变更（2026-03-28 自动启动）
+
+**心跳检查 = 监控失联 + 自动分配任务！**
+
+| 计划状态 | 心跳检查 | 说明 |
+|---------|---------|------|
+| `waiting` | ✅ 检查 | 等待执行的计划，**自动启动** |
+| `processing` | ✅ 检查 | 执行中的计划，重点监控 |
+| `draft` | ❌ 不检查 | 草稿计划，无需监控 |
+| `finished` | ❌ 不检查 | 已完成，无需监控 |
+| `delete` | ❌ 不检查 | 已作废，无需监控 |
 
 **核心职责:**
-1. **数据库查询** — 查询 `step_execution` 表，找出 dispatched_at > 60min 的记录
-2. **失联唤醒** — 发现失联 Agent → sessions_spawn 唤醒（不派发任务）
-3. **通知主会话** — 唤醒后通知主会话分配任务
-4. **维护看板** — 更新 `doc/05-progress/agent-heartbeat-dashboard.md`
+1. **数据库查询** — 查询 `pipeline_plans` 表，找出 `status IN ('waiting', 'processing')` 的计划
+2. **Agent 状态检查** — 查询各 Agent 是否有活跃任务
+3. **自动分配** — 发现空闲 Agent + waiting 计划 → 自动启动并派发任务 ⭐ 新增
+4. **失联唤醒** — 发现失联 Agent → sessions_spawn 唤醒
+5. **维护看板** — 更新 `doc/05-progress/agent-heartbeat-dashboard.md`
+
+**SQL 查询示例:**
+```sql
+-- 查询 waiting 状态的计划（可启动）
+SELECT plan_id, plan_name, status, current_round, total_rounds
+FROM pipeline_plans
+WHERE status = 'waiting';
+
+-- 查询 processing 状态的计划（监控中）
+SELECT plan_id, plan_name, status, current_round, total_rounds
+FROM pipeline_plans
+WHERE status = 'processing';
+
+-- 查询 Agent 的活跃任务
+SELECT agent_id, COUNT(*) as active_tasks
+FROM pipeline_agent_tasks
+WHERE status IN ('assigned', 'executing')
+GROUP BY agent_id;
+
+-- 查询空闲 Agent（无活跃任务）
+SELECT a.agent_id
+FROM agents a
+LEFT JOIN pipeline_agent_tasks t ON a.agent_id = t.agent_id 
+  AND t.status IN ('assigned', 'executing')
+WHERE t.agent_id IS NULL;
+```
+
+**自动分配逻辑:**
+```
+心跳检查（每 10 分钟）
+    ↓
+查询 waiting 状态的计划
+    ↓
+查询空闲 Agent（无活跃任务）
+    ↓
+发现匹配 → 自动启动计划
+    ↓
+派发第 1 轮任务
+    ↓
+更新计划状态：waiting → processing
+```
 
 ---
 
