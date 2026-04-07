@@ -18,7 +18,7 @@
 | 1.4 UserController 扩展 | `/api/user/profile` 接口 | ⏳ pending | - |
 | 1.5 单元测试 | UserProfile 测试类 | ⏳ pending | - |
 
-**工单派发时间:** -  
+**工单派发时间:** 18:15 (酱肉已 sessions_spawn 唤醒)  
 **工单完成时间:** -
 
 ---
